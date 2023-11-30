@@ -3,9 +3,8 @@ const morgan = require('morgan');
 
 const app = express();
 
-// const product = require('./routes/product');
+const product = require('./routes/productRoutes');
 
-// 1. Middleware
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -16,6 +15,7 @@ app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
 // app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/products', product);
 
 // 4. Start Server
 module.exports = app;

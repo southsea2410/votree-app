@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('./userModel'); // Import your existing user model
-const Product = require('./productModel'); // Import your existing product model
+const User = require('./userModel'); // Import existing user model
 
 // Extend the user schema for seller-specific attributes
 const sellerSchema = User.schema.clone();

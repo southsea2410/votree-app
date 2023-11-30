@@ -1,6 +1,6 @@
-const express = require('express');
-const sellerController = require('./../controllers/sellerController');
+// const express = require('express');
+// const sellerController = require('./../controllers/sellerController');
 
-const router = express.Router();
+// const router = express.Router();
 
-module.exports = router;
+// module.exports = router;
