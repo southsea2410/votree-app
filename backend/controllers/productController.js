@@ -68,6 +68,37 @@ exports.getProduct = async (req, res) => {
   }
 };
 
+exports.updateProduct = async (req, res) => {
+  const updates = Object.keys(req.body);
+  const allowedUpdates = [
+    'name',
+    'price',
+    'discountPrice',
+    'quantity',
+    'description',
+    'active',
+  ];
+  const isValidOperation = updates.every((update) =>
+    allowedUpdates.includes(update),
+  );
+  if (!isValidOperation) {
+    return res.status(400).send({ error: 'Invalid updates!' });
+  }
+
+  try{
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).send();
+    }
+
+    updates.forEach((update) => (product[update] = req.body[update]));
+    await product.save();
+    res.send(product);
+  }catch(err){
+    res.status(400).send(err);
+  }
+};
+
 exports.deleteProduct = async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
