@@ -1,6 +1,6 @@
-const catchAsync = require('./../utils/catchAsync');
-const AppError = require('./../utils/appError');
-const APIFeatures = require('./../utils/apiFeatures');
+const catchAsync = require('../utils/catchAsync.js');
+const AppError = require('../utils/appError.js');
+const APIFeatures = require('../utils/apiFeatures.js');
 
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
@@ -67,9 +67,8 @@ exports.getOne = (Model, popOptions) =>
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
-    // To allow for nested GET reviews on tour (hack)
     let filter = {};
-    if (req.params.tourId) filter = { tour: req.params.tourId };
+    if (req.params.id) filter = { seller: req.params.id };
 
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
@@ -78,7 +77,6 @@ exports.getAll = (Model) =>
       .paginate();
     // const doc = await features.query.explain();
     const doc = await features.query;
-
     // SEND RESPONSE
     res.status(200).json({
       status: 'success',

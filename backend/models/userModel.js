@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please provide your email'],
     unique: true,
     lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email'],
+    // validate: [validator.isEmail, 'Please provide a valid email'],
   },
   phoneNumber: {
     type: String,
@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    required: [true, 'An user must have an avatar'],
+    // required: [true, 'An user must have an avatar'],
   },
   password: {
     type: String,
@@ -113,8 +113,6 @@ userSchema.methods.createPasswordResetToken = function () {
     .createHash('sha256')
     .update(resetToken)
     .digest('hex');
-
-  // console.log({ resetToken }, this.passwordResetToken);
 
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
