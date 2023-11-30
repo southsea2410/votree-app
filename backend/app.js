@@ -14,7 +14,6 @@ app.use(express.json());
 
 app.use(express.static(`${__dirname}/public`));
 
-// app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/products', product);
 
 // 4. Start Server
