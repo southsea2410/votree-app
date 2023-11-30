@@ -17,7 +17,8 @@ const postSchema = new mongoose.Schema({
     trim: true,
   },
   authorId: {
-    type: String,
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
     required: [true, 'A post must have an author'],
   },
   createdAt: {
