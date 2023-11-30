@@ -45,7 +45,7 @@ exports.createProduct = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: 'Invalid data sent!',
+      message: err,
     });
   }
 };
@@ -53,7 +53,6 @@ exports.createProduct = async (req, res) => {
 exports.getProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-
     res.status(200).json({
       status: 'success',
       data: {
@@ -63,39 +62,48 @@ exports.getProduct = async (req, res) => {
   } catch (err) {
     res.status(404).json({
       status: 'fail',
-      message: 'Invalid data sent!',
+      message: err,
     });
   }
 };
 
 exports.updateProduct = async (req, res) => {
-  const updates = Object.keys(req.body);
-  const allowedUpdates = [
-    'name',
-    'price',
-    'discountPrice',
-    'quantity',
-    'description',
-    'active',
-  ];
-  const isValidOperation = updates.every((update) =>
-    allowedUpdates.includes(update),
-  );
-  if (!isValidOperation) {
-    return res.status(400).send({ error: 'Invalid updates!' });
-  }
-
-  try{
-    const product = await Product.findById(req.params.id);
-    if (!product) {
-      return res.status(404).send();
+  try {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = [
+      'name',
+      'price',
+      'discountPrice',
+      'quantity',
+      'description',
+      'active',
+      'type',
+      'suitEnvironment',
+      'suitClimate',
+    ];
+    const isValidOperation = updates.every((update) =>
+      allowedUpdates.includes(update),
+    );
+    if (!isValidOperation) {
+      return res.status(400).send({ error: 'Invalid updates!' });
     }
 
-    updates.forEach((update) => (product[update] = req.body[update]));
-    await product.save();
-    res.send(product);
-  }catch(err){
-    res.status(400).send(err);
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        product,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err,
+    });
   }
 };
 

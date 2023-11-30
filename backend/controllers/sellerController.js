@@ -2,8 +2,8 @@
 // const factory = require('./handlerFactory');
 // const AppError = require('./../utils/appError');
 
-const Seller = require('./models/sellerModel'); // Adjust the path as per your project structure
-const Product = require('./models/productModel'); // Assuming you have a Product model
+const Seller = require('../models/sellerModel'); // Adjust the path as per your project structure
+const Product = require('../models/productModel'); // Assuming you have a Product model
 
 exports.createSeller = async (req, res, next) => {
   try {
