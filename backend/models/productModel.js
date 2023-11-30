@@ -60,14 +60,14 @@ const productSchema = new mongoose.Schema(
       default: true,
       select: false,
     },
-    image: {
-      type: String,
-      required: [true, 'A product must have an image'],
-    },
-    video: {
-      type: String,
-      required: [true, 'A product must have a video'],
-    },
+    // image: {
+    //   type: String,
+    //   required: [true, 'A product must have an image'],
+    // },
+    // video: {
+    //   type: String,
+    //   required: [true, 'A product must have a video'],
+    // },
     ratingsAverage: {
       type: Number,
       default: 4.5,
@@ -79,11 +79,11 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    sellerId: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'User',
-      required: [true, 'A product must belong to a seller'],
-    },
+    // sellerId: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: 'User',
+    //   required: [true, 'A product must belong to a seller'],
+    // },
   },
   {
     toJSON: { virtuals: true },
