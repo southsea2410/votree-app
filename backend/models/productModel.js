@@ -88,7 +88,7 @@ const productSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  },
 );
 
 const Product = mongoose.model('Product', productSchema);
