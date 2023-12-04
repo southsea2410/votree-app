@@ -1,9 +1,5 @@
-// const catchAsync = require('./../utils/catchAsync');
-// const factory = require('./handlerFactory');
-// const AppError = require('./../utils/appError');
-
-const Seller = require('../models/sellerModel'); // Adjust the path as per your project structure
-const Product = require('../models/productModel'); // Assuming you have a Product model
+const Seller = require('../models/sellerModel'); 
+const Product = require('../models/productModel');
 
 exports.createSeller = async (req, res, next) => {
   try {
@@ -144,7 +140,7 @@ exports.updateSeller = async (req, res, next) => {
   }
 };
 
-exports.deleteSeller = async (req, res, next) => {
+exports.deleteSeller = async (req, res) => {
   try {
     const seller = await Seller.findByIdAndDelete(req.params.id);
     if (!seller) {
