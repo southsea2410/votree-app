@@ -79,11 +79,11 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    // sellerId: {
-    //   type: mongoose.Schema.ObjectId,
-    //   ref: 'User',
-    //   required: [true, 'A product must belong to a seller'],
-    // },
+    sellerId: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: [true, 'A product must belong to a seller'],
+    },
   },
   {
     toJSON: { virtuals: true },

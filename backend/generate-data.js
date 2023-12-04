@@ -18,9 +18,15 @@ const sellers = Array.from(
   () => new Seller(generateData.generateSellerData()),
 );
 
+// get random seller id from sellers array
+const getRandomSellerId = () => {
+  const randomIndex = Math.floor(Math.random() * sellers.length);
+  return sellers[randomIndex]._id;
+};
+
 const products = Array.from(
   { length: 10 },
-  () => new Product(generateData.generateProductData()),
+  () => new Product(generateData.generateProductData(getRandomSellerId())),
 );
 
 const sellersData = JSON.stringify(sellers);

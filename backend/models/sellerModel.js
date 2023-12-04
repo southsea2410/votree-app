@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./userModel'); // Import existing user model
+const Order = require('./orderModel');
 
 // Extend the user schema for seller-specific attributes
 const sellerSchema = User.schema.clone();
@@ -28,25 +29,23 @@ sellerSchema.virtual('products', {
 //   return product;
 // };
 
-// // Method to calculate total sales of the seller
-// sellerSchema.methods.calculateTotalSales = async function () {
-//   const sales = await Product.aggregate([
-//     { $match: { sellerId: this.id } },
-//     { $group: { _id: null, totalSales: { $sum: '$price' } } },
-//   ]);
+sellerSchema.methods.calculateTotalSales = async function () {
+  const sales = await Order.aggregate([
+    { $match: { sellerId: this._id, status: 'delivered' } },
+    { $group: { _id: null, totalSales: { $sum: '$totalAmount' } } },
+  ]);
 
-//   return sales[0] ? sales[0].totalSales : 0;
-// };
+  return sales[0] ? sales[0].totalSales : 0;
+};
 
-// // Method to get average rating of the seller (Assuming you have a rating field in your product model)
-// sellerSchema.methods.calculateAverageRating = async function () {
-//   const result = await Product.aggregate([
-//     { $match: { sellerId: this.id } },
-//     { $group: { id: null, averageRating: { $avg: '$rating' } } },
-//   ]);
+sellerSchema.methods.calculateAverageRating = async function () {
+  const result = await Product.aggregate([
+    { $match: { sellerId: this._id } },
+    { $group: { _id: null, averageRating: { $avg: '$ratingsAverage' } } },
+  ]);
 
-//   return result[0] ? result[0].averageRating : 0;
-// };
+  return result[0] ? result[0].averageRating : 0;
+};
 
 // Compile the model from the schema
 const Seller = mongoose.model('Seller', sellerSchema);
