@@ -60,14 +60,14 @@ const productSchema = new mongoose.Schema(
       default: true,
       select: false,
     },
-    // image: {
-    //   type: String,
-    //   required: [true, 'A product must have an image'],
-    // },
-    // video: {
-    //   type: String,
-    //   required: [true, 'A product must have a video'],
-    // },
+    image: {
+      type: String,
+      required: [true, 'A product must have an image'],
+    },
+    video: {
+      type: String,
+      required: [true, 'A product must have a video'],
+    },
     ratingsAverage: {
       type: Number,
       default: 4.5,
@@ -91,6 +91,6 @@ const productSchema = new mongoose.Schema(
   },
 );
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model('products', productSchema);
 
 module.exports = Product;

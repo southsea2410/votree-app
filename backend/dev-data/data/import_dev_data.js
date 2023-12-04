@@ -2,6 +2,8 @@ const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const User = require('./../../models/userModel');
+const Seller = require('./../../models/sellerModel');
+const Product = require('./../../models/productModel');
 
 dotenv.config({ path: './config.env' });
 
@@ -19,18 +21,23 @@ mongoose
   .then(() => console.log('DB connection successful!'));
 
 // READ JSON FILE
-// const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`, 'utf-8'));
-const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
-// const reviews = JSON.parse(
-//   fs.readFileSync(`${__dirname}/reviews.json`, 'utf-8')
-// );
+const users = JSON.parse(
+  fs.readFileSync(`${__dirname}/users-test.json`, 'utf-8'),
+);
+const sellers = JSON.parse(
+  fs.readFileSync(`${__dirname}/sellers-test.json`, 'utf-8'),
+);
+const products = JSON.parse(
+  fs.readFileSync(`${__dirname}/products-test.json`, 'utf-8'),
+);
 
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
-    // await Tour.create(tours);
     await User.create(users, { validateBeforeSave: false });
-    // await Review.create(reviews);
+    await Seller.create(sellers, { validateBeforeSave: false });
+    await Product.create(products, { validateBeforeSave: false });
+
     console.log('Data successfully loaded!');
   } catch (err) {
     console.log(err);
@@ -41,9 +48,10 @@ const importData = async () => {
 // DELETE ALL DATA FROM DB
 const deleteData = async () => {
   try {
-    // await Tour.deleteMany();
     await User.deleteMany();
-    // await Review.deleteMany();
+    await Seller.deleteMany();
+    await Product.deleteMany();
+
     console.log('Data successfully deleted!');
   } catch (err) {
     console.log(err);

@@ -53,6 +53,7 @@ exports.createProduct = async (req, res) => {
 exports.getProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
+    
     res.status(200).json({
       status: 'success',
       data: {
@@ -110,7 +111,7 @@ exports.updateProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
-
+    
     res.status(204).json({
       status: 'success',
       data: null,
