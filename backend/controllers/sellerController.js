@@ -21,10 +21,14 @@ exports.createSeller = async (req, res, next) => {
 // Adding a product to a seller
 exports.addProduct = async (req, res, next) => {
   try {
-    const product = await Product.create(req.body);
     const seller = await Seller.findById(req.params.sellerId);
-    seller.products.push(product.id);
+    // Add seller id to req.body
+    req.body.sellerId = seller._id;
+    const product = await Product.create(req.body);
+
+    await seller.products.push(product._id);
     await seller.save();
+
     res.status(201).json({
       status: 'success',
       data: {
@@ -65,9 +69,12 @@ exports.deleteSellerProduct = async (req, res, next) => {
     const seller = await Seller.findById(req.params.sellerId);
     const product = await Product.findByIdAndDelete(req.params.productId);
     if (!product) {
-      return res.status(404).send();
+      return res.status(404).json({
+        status: 'fail',
+        message: 'No product found with that ID',
+      });
     }
-    seller.products.pull(product.id);
+    seller.products.pull(product._id);
     await seller.save();
     res.send(product);
   } catch (error) {
