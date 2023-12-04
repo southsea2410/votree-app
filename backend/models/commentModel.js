@@ -40,7 +40,7 @@ const commentSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  },
 );
 
 const Comment = mongoose.model('Comment', commentSchema);
