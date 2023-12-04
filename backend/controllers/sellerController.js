@@ -1,4 +1,4 @@
-const Seller = require('../models/sellerModel'); 
+const Seller = require('../models/sellerModel');
 const Product = require('../models/productModel');
 
 exports.createSeller = async (req, res, next) => {
@@ -40,15 +40,16 @@ exports.addProduct = async (req, res, next) => {
 };
 
 // Get all products of a seller
-exports.getSellerProducts = async (req, res, next) => {
+exports.getAllSellerProducts = async (req, res, next) => {
   try {
-    const seller = await Seller.findById(req.params.sellerId).populate(
-      'products',
-    );
+    const seller = await Seller.findById(req.params.sellerId);
+    const products = await Product.find({ sellerId: seller._id });
+
     res.status(200).json({
       status: 'success',
+      results: products.length,
       data: {
-        seller,
+        products,
       },
     });
   } catch (err) {

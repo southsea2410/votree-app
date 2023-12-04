@@ -17,7 +17,7 @@ router
 router
   .route('/:sellerId/products')
   .post(sellerController.addProduct)
-  .get(sellerController.getSellerProducts);
+  .get(sellerController.getAllSellerProducts);
 
 router
   .route('/:sellerId/products/:productId')

@@ -10,10 +10,12 @@ sellerSchema.add({
   storeLocation: { type: String, required: true },
   storeEmail: { type: String, required: true },
   storePhoneNumber: { type: String, required: true },
+
+  products: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
 });
 
 // Virtual for seller's products
-sellerSchema.virtual('products', {
+sellerSchema.virtual('Product', {
   ref: 'Product',
   foreignField: 'sellerId',
   localField: 'id',

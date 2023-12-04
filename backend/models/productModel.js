@@ -81,7 +81,7 @@ const productSchema = new mongoose.Schema(
     },
     sellerId: {
       type: mongoose.Schema.ObjectId,
-      ref: 'User',
+      ref: 'Seller',
       required: [true, 'A product must belong to a seller'],
     },
   },
@@ -91,6 +91,6 @@ const productSchema = new mongoose.Schema(
   },
 );
 
-const Product = mongoose.model('products', productSchema);
+const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
