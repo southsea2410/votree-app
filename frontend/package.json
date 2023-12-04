@@ -5,7 +5,8 @@
   "description": "A platform for user and to share their experiences on botanical plants; A marketplace to implement business on botanical products",
   "scripts": {
     "test": "vitest",
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
