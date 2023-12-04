@@ -67,5 +67,6 @@ exports.generateProductData = (sellerId) => {
     video: faker.image.imageUrl(),
     rating: faker.random.number({ min: 1, max: 5 }),
     createdAt: faker.date.past(),
+    sellerId: sellerId,
   };
 };

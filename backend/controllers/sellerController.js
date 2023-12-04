@@ -1,4 +1,4 @@
-const Seller = require('../models/sellerModel'); 
+const Seller = require('../models/sellerModel');
 const Product = require('../models/productModel');
 
 exports.createSeller = async (req, res, next) => {
@@ -21,10 +21,14 @@ exports.createSeller = async (req, res, next) => {
 // Adding a product to a seller
 exports.addProduct = async (req, res, next) => {
   try {
-    const product = await Product.create(req.body);
     const seller = await Seller.findById(req.params.sellerId);
-    seller.products.push(product.id);
+    // Add seller id to req.body
+    req.body.sellerId = seller._id;
+    const product = await Product.create(req.body);
+
+    await seller.products.push(product._id);
     await seller.save();
+
     res.status(201).json({
       status: 'success',
       data: {
@@ -40,15 +44,16 @@ exports.addProduct = async (req, res, next) => {
 };
 
 // Get all products of a seller
-exports.getSellerProducts = async (req, res, next) => {
+exports.getAllSellerProducts = async (req, res, next) => {
   try {
-    const seller = await Seller.findById(req.params.sellerId).populate(
-      'products',
-    );
+    const seller = await Seller.findById(req.params.sellerId);
+    const products = await Product.find({ sellerId: seller._id });
+
     res.status(200).json({
       status: 'success',
+      results: products.length,
       data: {
-        seller,
+        products,
       },
     });
   } catch (err) {
@@ -64,9 +69,12 @@ exports.deleteSellerProduct = async (req, res, next) => {
     const seller = await Seller.findById(req.params.sellerId);
     const product = await Product.findByIdAndDelete(req.params.productId);
     if (!product) {
-      return res.status(404).send();
+      return res.status(404).json({
+        status: 'fail',
+        message: 'No product found with that ID',
+      });
     }
-    seller.products.pull(product.id);
+    seller.products.pull(product._id);
     await seller.save();
     res.send(product);
   } catch (error) {
