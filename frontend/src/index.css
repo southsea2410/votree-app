@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900');
+
+:root {
+    font-family: 'Inter';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 112%;
+}
+
+body {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+h1 {
+    font-size: 28.83px;
+    font-weight: 800;
+    line-height: 112%; /* 32.29px */
+    letter-spacing: -0.2px;
+}
+
+h2 {
+    font-size: 22.78px;
+    font-weight: 500;
+    line-height: 112%; /* 25.514px */
+}
+
+h3 {
+    font-size: 20.25px;
+    font-weight: 500;
+    line-height: 112%; /* 22.68px */
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 112%; /* 20.16px */
+}
+
+h5 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 112%; /* 17.92px */
+}
+
+h6 {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 112%; /* 13.44px */
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.title {
+    font-size: 88px;
+    font-weight: 800;
+    line-height: 120%; /* 105.6px */
+    letter-spacing: -0.2px;
+}
+
+.subtitle-extra-bold {
+    font-size: 28.83px;
+    font-weight: 700;
+    line-height: 112%; /* 32.29px */
+    letter-spacing: -0.2px;
+}
+
+.subtitle-bold {
+    font-size: 28.83px;
+    font-weight: 700;
+    line-height: 112%; /* 32.29px */
+    letter-spacing: -0.2px;
+}
+
+.subtitle-semi-bold-28 {
+    font-size: 28.83px;
+    font-weight: 600;
+    line-height: 112%; /* 32.29px */
+    letter-spacing: -0.2px;
+}
+
+.subtitle-semi-bold-20 {
+    font-size: 20.3px;
+    font-weight: 600;
+    line-height: 112%; /* 32.29px */
+    letter-spacing: -0.2px;
+}
+
+.extra-medium {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 170%; /* 20.4px */
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.content-semi-bold-16 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 112%; /* 17.92px */
+}
+
+.content-semi-bold-14-22 {
+    font-size: 14.22px;
+    font-weight: 600;
+    line-height: 112%; /* 15.926px */
+}
+
+.content-medium-16 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 112%; /* 17.92px */
+}
+
+.content-medium-20-25 {
+    font-size: 20.25px;
+    font-weight: 500;
+    line-height: 120%; /* 24.3px */
+}
+
+.content-medium-14-22 {
+    font-size: 14.22px;
+    font-weight: 500;
+    line-height: 112%; /* 15.926px */
+}
+
+.content-regular-16 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+}
+
+.content-regular-14-22 {
+    font-size: 14.22px;
+    font-weight: 400;
+    line-height: 150%; /* 21.33px */
+}
+
+.content-regular-12 {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 150%; /* 18px */
+    letter-spacing: 0.1px;
+}
+
