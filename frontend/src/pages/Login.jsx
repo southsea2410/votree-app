@@ -1,5 +1,5 @@
 import { Button, Avatar, Divider } from "@mui/material";
-import { SearchBar, NavBar, SumProfile, ProductCard } from "../components";
+import { SearchBar, NavBar, SumProfile, ProductCard, ReactionBar } from "../components";
 // import Avatar_test from "../assets/images/index.js";
 // import { makeStyles } from "@mui/styles";
 import { LogoVoTree_primary } from "../assets/images";
@@ -12,12 +12,13 @@ export default function Login() {
     return (
         <div className="container">
             <NavBar />
+            <ReactionBar />
             <SumProfile />
             <ProductCard />
             {/* <Link style={{ fontColor: colors.green6 }}>Hi</Link> */}
             <h1>Welcome to Login Page</h1>
             <img src={LogoVoTree_primary} alt="logo" />
-            <Button variant="filled" color="secondary">
+            <Button variant="outline-green6">
                 Button
             </Button>
             <SearchBar></SearchBar>

@@ -65,6 +65,62 @@ const theme = createTheme({
                         }
                       }
                 },
+                {
+                    props: { variant: 'outline-success' },
+                    style: {
+                        background: colors.primary,
+                        border: '3px solid',
+                        borderColor: colors.success,
+                        height: 54,
+                        minWidth: 95,
+                        color: colors.success,
+                        '&:hover': {
+                          background: colors.primary,
+                        }
+                    }
+                },
+                {
+                    props: { variant: 'outline-pending' },
+                    style: {
+                        background: colors.primary,
+                        border: '3px solid',
+                        borderColor: colors.pending,
+                        height: 54,
+                        minWidth: 95,
+                        color: colors.pending,
+                        '&:hover': {
+                          background: colors.primary,
+                        }
+                    }
+                },
+                {
+                    props: { variant: 'outline-green6' },
+                    style: {
+                        background: colors.primary,
+                        border: '3px solid',
+                        borderColor: colors.green6,
+                        height: 54,
+                        minWidth: 179.881,
+                        color: colors.green6,
+                        '&:hover': {
+                          background: colors.primary,
+                        }
+                    }
+                },
+                {
+                    props: { variant: 'outline-green1' },
+                    style: {
+                        background: colors.primary,
+                        border: '3px solid',
+                        borderColor: colors.green1,
+                        height: 54,
+                        minWidth: 179.881,
+                        color: colors.green6,
+                        '&:hover': {
+                          background: colors.primary,
+                        }
+                    }
+                },
             ],
             styleOverrides: {
                 root: {
