@@ -26,8 +26,41 @@ const theme = createTheme({
         fontFamily: '"Inter"',
     },
     components: {
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+                    '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                          border: 'none', // Remove the border when the input is not focused
+                        },
+                        '&:hover fieldset': {
+                          border: 'none', // Remove the border on hover
+                        },
+                        '&.Mui-focused fieldset': {
+                          border: 'none', // Remove the border when focused
+                        },
+                    },
+                },
+            },
+        },
         MuiButton: {
             variants: [
+                {
+                    props: { variant: 'post' },
+                    style: {
+                        height: 75,
+                        borderRadius: 45,
+                        background: colors.green1,
+                        color: colors.green6,
+                        fontSize: '20.3px',
+                        fontWeight: 600,
+                        border: '0px',
+                        '&:hover': {
+                            background: colors.green1,
+                            color: colors.green6,
+                        }
+                    }
+                },
                 {
                     props: { variant: 'filled', color: 'primary' },
                     style: {
@@ -196,7 +229,19 @@ const theme = createTheme({
         MuiDivider: {
             variants: [
                 {
+                    props: { variant: 'white' },
+                    style: {
+                        backgroundColor: colors.primary,
+                    }
+                },
+                {
                     props: { variant: 'slighter' },
+                    style: {
+                        backgroundColor: colors.green5,
+                    }
+                },
+                {
+                    props: { variant: 'slightest' },
                     style: {
                         backgroundColor: colors.green1,
                     }

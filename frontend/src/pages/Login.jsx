@@ -1,5 +1,5 @@
-import { Button, Avatar, Divider } from "@mui/material";
-import { SearchBar, NavBar, SumProfile, ProductCard, ReactionBar } from "../components";
+import { Button, Avatar, Divider, Input } from "@mui/material";
+import { SearchBar, NavBar, SumProfile, ProductCard, ReactionBar, InputArticle, Footer } from "../components";
 // import Avatar_test from "../assets/images/index.js";
 // import { makeStyles } from "@mui/styles";
 import { LogoVoTree_primary } from "../assets/images";
@@ -11,7 +11,10 @@ export default function Login() {
     // const classes = useStyles();
     return (
         <div className="container">
+            <Footer />
             <NavBar />
+            <InputArticle />
+            <Button variant="post">How is your plan today, Prince Vegeta?</Button>
             <ReactionBar />
             <SumProfile />
             <ProductCard />
