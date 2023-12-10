@@ -1,14 +1,26 @@
-import React, { StrictMode } from 'react';
+import React, { StrictMode } from "react";
 import * as ReactDOM from "react-dom";
-import { createRoot } from 'react-dom/client';
-import { HomeIcon, UpvoteIcon, DownvoteIcon, SearchIcon, MarketIcon, NotiIcon, BasketIcon, StarIcon, WarningIcon, ImageIcon, VideoIcon } from './assets/icons';
+import { createRoot } from "react-dom/client";
+import {
+  HomeIcon,
+  UpvoteIcon,
+  DownvoteIcon,
+  SearchIcon,
+  MarketIcon,
+  NotiIcon,
+  BasketIcon,
+  StarIcon,
+  WarningIcon,
+  ImageIcon,
+  VideoIcon,
+} from "./assets/icons";
 
-import App from './App';
-import { ThemeProvider } from '@mui/material';
-import theme from './styles/theme';
+import App from "./App";
+import { ThemeProvider } from "@mui/material";
+import theme from "./styles/theme";
 import "./index.css";
-import { Route } from 'react-router-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +30,7 @@ ReactDOM.render(
       </Router>
     </ThemeProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root"),
 );
 
 // const root = createRoot(document.getElementById('root'));

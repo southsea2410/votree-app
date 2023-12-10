@@ -24,4 +24,30 @@ import FacebookIcon from "./facebookIcon";
 import InstaIcon from "./instaIcon";
 import LinkedInIcon from "./linkedInIcon";
 
-export { HomeIcon, UpvoteIcon, DownvoteIcon, SearchIcon, MarketIcon, NotiIcon, BasketIcon, StarIcon, WarningIcon, ImageIcon, VideoIcon, Basket, Noti, BasketClicked, NotiClicked, BackIcon, CloseIcon, MarketIconFill, LeafIcon, LocationIcon, PhoneIcon, MailIcon, FacebookIcon, InstaIcon, LinkedInIcon }
+export {
+  HomeIcon,
+  UpvoteIcon,
+  DownvoteIcon,
+  SearchIcon,
+  MarketIcon,
+  NotiIcon,
+  BasketIcon,
+  StarIcon,
+  WarningIcon,
+  ImageIcon,
+  VideoIcon,
+  Basket,
+  Noti,
+  BasketClicked,
+  NotiClicked,
+  BackIcon,
+  CloseIcon,
+  MarketIconFill,
+  LeafIcon,
+  LocationIcon,
+  PhoneIcon,
+  MailIcon,
+  FacebookIcon,
+  InstaIcon,
+  LinkedInIcon,
+};

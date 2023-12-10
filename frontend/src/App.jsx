@@ -1,12 +1,12 @@
-import React,  { useEffect } from "react";
+import React, { useEffect } from "react";
 import Login from "./pages/Login";
 import {
-Route,
-createBrowserRouter,
-createRoutesFromElements } from "react-router-dom";
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 
 function App() {
-
   // const router = createBrowserRouter(
   //   createRoutesFromElements(
   //     <Route path="/">
@@ -20,7 +20,7 @@ function App() {
     <React.Fragment>
       <Login></Login>
     </React.Fragment>
-  )
+  );
 }
 
 export default App;

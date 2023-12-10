@@ -7,4 +7,13 @@ import PostArticle from "./experiencePosts/postArticle";
 import InputArticle from "./experiencePosts/inputArticle";
 import Footer from "./common/footer";
 
-export { NavBar, SearchBar, SumProfile, ProductCard, ReactionBar, PostArticle, InputArticle, Footer }
+export {
+  NavBar,
+  SearchBar,
+  SumProfile,
+  ProductCard,
+  ReactionBar,
+  PostArticle,
+  InputArticle,
+  Footer,
+};
