@@ -3,10 +3,12 @@
 # dependencies
 node_modules/
 
+*/package-lock.json
+
 # compiled output
-/dist
-/tmp
-/out-tsc
+dist/
+tmp/
+out-tsc/
 
 # Runtime data
 pids
@@ -91,3 +93,5 @@ lerna-debug.log
 # System Files
 .DS_Store
 Thumbs.db
+
+.github/workflows
