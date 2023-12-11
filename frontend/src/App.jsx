@@ -1,25 +1,23 @@
 import React, { useEffect } from "react";
 import Login from "./pages/Login";
 import {
+  BrowserRouter as Router,
+  Routes,
   Route,
-  createBrowserRouter,
-  createRoutesFromElements,
+  useLocation,
 } from "react-router-dom";
 
+import HomePage from "./pages/HomePage";
 function App() {
-  // const router = createBrowserRouter(
-  //   createRoutesFromElements(
-  //     <Route path="/">
-  //       <Route element={<Navigate to="/login" />} index />
-  //       <Route element={<Login />} path="/login" loader={loginLoader} />
-  //     </Route>
-  //   )
-  // )
-
   return (
-    <React.Fragment>
-      <Login></Login>
-    </React.Fragment>
+    <Router>
+      <Routes>
+        <Route path="/">
+          <Route index element={<HomePage />} />
+          <Route path="login" element={<Login />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
