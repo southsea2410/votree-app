@@ -47,4 +47,3 @@ exports.deleteCartProduct = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
-

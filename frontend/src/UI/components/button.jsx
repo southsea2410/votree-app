@@ -1,5 +1,5 @@
-import colors from '../color';
-import Button from '@mui/material/Button';
+import colors from "../color";
+import Button from "@mui/material/Button";
 
 export default function VTButton(props) {
   const { children } = props;

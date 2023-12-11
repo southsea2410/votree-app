@@ -14,5 +14,5 @@ export default function Square() {
 }
 
 document
-  .getElementById('root')
-  .insertAdjacentHTML('afterend', '<p>helloworld</p>');
+  .getElementById("root")
+  .insertAdjacentHTML("afterend", "<p>helloworld</p>");
