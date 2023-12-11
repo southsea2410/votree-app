@@ -21,31 +21,60 @@ import {
   BackIcon,
   CloseIcon,
 } from "../assets/icons";
+import './../index.css';
+
+const containerStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  minHeight: '100vh', // Set the container to fill the viewport height
+};
+
+const contentStyle = {
+  flex: 1, // Allow the content to expand and fill the remaining space
+};
+
+const footerStyle = {
+  marginTop: 'auto', // Push the footer to the bottom of the container
+};
 
 export default function Login() {
-  // const classes = useStyles();
+
   return (
-    <div className="container">
-      <Footer />
-      <NavBar />
-      <InputArticle />
-      <Button variant="post">How is your plan today, Prince Vegeta?</Button>
-      <ReactionBar />
-      <SumProfile />
-      <ProductCard />
-      {/* <Link style={{ fontColor: colors.green6 }}>Hi</Link> */}
-      <h1>Welcome to Login Page</h1>
-      <img src={LogoVoTree_primary} alt="logo" />
-      <Button variant="outline-green6">Button</Button>
-      <SearchBar></SearchBar>
-      <Avatar variant="desktop-no-avt">N</Avatar>
-      <Basket />
-      <Noti />
-      <BasketClicked />
-      <NotiClicked />
-      <BackIcon />
-      <Divider variant="slighter" />
-      <CloseIcon />
+    <div className="containerStyle">
+      <div className="contentStyle" style={{ display: 'flex', padding: '100px 100px', justifyContent: 'space-between' }}>
+        <div>
+          <img src={LogoVoTree_primary} alt="" width="602" height="222" />
+        </div>
+        <div style={{ background: colors.green1, height: 487, width: 422 }}>
+          <div>
+            <div>Log in</div>
+            <div>Register</div>
+          </div>
+          <div>
+            <div>Email</div>
+            <div>Password</div>
+            <div>Forgot Password?</div>
+            <div>Don't have an account?</div>
+            <Button>
+              Login
+            </Button>
+          </div>
+          <Divider />
+          <div>
+            <div>
+              <div></div>
+              <Button>Google</Button>
+            </div>
+            <div>
+              <div></div>
+              <Button>Facebook</Button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <Footer className="footerStyle"/>
+      </div>
     </div>
   );
 }
