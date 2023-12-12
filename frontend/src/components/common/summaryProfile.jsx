@@ -5,9 +5,9 @@ import "./../../index.css";
 
 export default function SumProfile() {
   return (
-    <Box style={{ display: "flex", flexDirection: "row" }}>
+    <Box sx={{ display: "flex", flexDirection: "row" }}>
       <div style={{ display: "flex", alignItems: "center" }}>
-        <Avatar>N</Avatar>
+        <Avatar sx={{width: '50px', height:'50px'}} />
       </div>
       <div
         style={{ display: "flex", alignItems: "center", marginLeft: "15px" }}

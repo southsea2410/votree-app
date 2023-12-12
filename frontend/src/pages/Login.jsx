@@ -34,7 +34,7 @@ export default function Login() {
       <SumProfile />
       <ProductCard />
       {/* <Link style={{ fontColor: colors.green6 }}>Hi</Link> */}
-      <h1>Welcome to Login Page</h1>
+      <h1>Welcome to Login Page</h1>  
       <img src={LogoVoTree_primary} alt="logo" />
       <Button variant="outline-green6">Button</Button>
       <SearchBar></SearchBar>

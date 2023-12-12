@@ -22,17 +22,15 @@ import "./index.css";
 import { Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <StrictMode>
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById("root"),
+  </StrictMode>
 );
 
-// const root = createRoot(document.getElementById('root'));
-// root.render(
 //   <StrictMode>
 //     <App/>
 //     <HomeIcon></HomeIcon>
