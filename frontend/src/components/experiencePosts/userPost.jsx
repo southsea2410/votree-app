@@ -27,7 +27,7 @@ export default function UserPost(props) {
           <CardMedia
             component="img"
             image={props.image}
-            sx={{ minHeight: "500px",borderRadius: "7px" }}
+            sx={{ minHeight: "500px", borderRadius: "7px" }}
           />
           <ReactionBar />
         </CardContent>

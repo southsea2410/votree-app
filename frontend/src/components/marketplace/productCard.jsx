@@ -1,7 +1,6 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import { Product_test } from "../../assets/images";
@@ -11,7 +10,7 @@ import { colors } from "../../styles";
 
 const NUM_OF_STARS = 5;
 
-export default function ProductCard({variant = "product"}) {
+export default function ProductCard({ variant = "product" }) {
   const value = 3; // will update
 
   return (
@@ -46,8 +45,11 @@ export default function ProductCard({variant = "product"}) {
             justifyContent: "space-between",
           }}
         >
-          <div class="content-medium-14-22">17.000.000 VND</div>
-          <div class="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
+          <div className="content-medium-14-22">17.000.000 VND</div>
+          <div
+            className="subtitle-semi-bold-20"
+            style={{ color: colors.green4 }}
+          >
             Vegetable Name
           </div>
           <div>
@@ -59,14 +61,20 @@ export default function ProductCard({variant = "product"}) {
             ))}
           </div>
           <div style={{ display: "flex" }}>
-            <div class="content-regular-12" style={{ width: 51, height: 10 }}>
+            <div
+              className="content-regular-12"
+              style={{ width: 51, height: 10 }}
+            >
               Sold By:
             </div>
             <div>Peter Parker</div>
           </div>
         </div>
         <CardActions style={{ padding: 0 }}>
-          <Button variant="filled" color={variant === 'product' ? 'secondary' : 'primary'}>
+          <Button
+            variant="filled"
+            color={variant === "product" ? "secondary" : "primary"}
+          >
             + Add to Cart
           </Button>
         </CardActions>

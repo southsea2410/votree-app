@@ -266,7 +266,7 @@ const theme = createTheme({
           style: {
             maxWidth: 388,
             height: 353,
-            backgroundColor: colors.green1
+            backgroundColor: colors.green1,
           },
         },
       ],
