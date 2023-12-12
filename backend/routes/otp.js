@@ -1,8 +1,8 @@
-const express = require("express");
-const { sendOTP, verifyOTP } = require("../controllers/otp");
+const express = require('express');
+const { sendOTP, verifyOTP } = require('../controllers/otp');
 const router = express.Router();
 
-router.post("/verify", async (req, res) => {
+router.post('/verify', async (req, res) => {
   try {
     let { email, otp } = req.body;
 
@@ -13,7 +13,7 @@ router.post("/verify", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { email, subject, duration } = req.body;
 

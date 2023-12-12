@@ -30,7 +30,7 @@ const attachCookiesToResponse = ({ res, user, refreshToken }) => {
 };
 
 module.exports = {
-    createJWT,
-    isTokenValid,
-    attachCookiesToResponse,
+  createJWT,
+  isTokenValid,
+  attachCookiesToResponse,
 };

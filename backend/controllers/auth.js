@@ -2,27 +2,26 @@ const User = require('../models/userModel');
 const Token = require('../models/Authentication/Token');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
-const {
-  attachCookiesToResponse,
-  createTokenUser
-} = require('../utils');
+const { attachCookiesToResponse, createTokenUser } = require('../utils');
 const crypto = require('crypto');
 
 const register = async (req, res) => {
   const user = await User.create({ ...req.body });
   res
-    .status(StatusCodes.CREATED).json({
+    .status(StatusCodes.CREATED)
+    .json({
       user: { username: user.username },
-    }).message("Register successfully");
+    })
+    .message('Register successfully');
 };
 
 const login = async (req, res) => {
   const { account, password } = req.body;
 
   if (!account || !password) {
-    throw new BadRequestError("Please provide username/email and password");
+    throw new BadRequestError('Please provide username/email and password');
   }
-  
+
   // Tìm user theo username hoặc email
   const user = await User.findOne({
     $or: [{ username: account }, { email: account }],
@@ -83,5 +82,5 @@ const logout = async (req, res) => {
 module.exports = {
   register,
   login,
-  logout
+  logout,
 };

@@ -18,7 +18,7 @@ const handleFileUpload = (req, fieldName, folderName) => {
     const file = req.files[fieldName];
     const mainDirectory = path.resolve(__dirname, '..');
     const uploadPath = path.join(mainDirectory, folderName);
-    
+
     // Create the folder if it doesn't exist
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath, { recursive: true });

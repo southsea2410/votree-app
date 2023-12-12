@@ -1,6 +1,6 @@
-const User = require("../models/userModel");
-const { StatusCodes } = require("http-status-codes");
-const { BadRequestError, NotFoundError } = require("../errors");
+const User = require('../models/userModel');
+const { StatusCodes } = require('http-status-codes');
+const { BadRequestError, NotFoundError } = require('../errors');
 
 const getUserInfo = async (req, res) => {
   const {
@@ -10,7 +10,7 @@ const getUserInfo = async (req, res) => {
   try {
     const infoUser = await User.findOne({
       _id: userId,
-    }).select("fullName dateOfBirth email phone");
+    }).select('fullName dateOfBirth email phone');
 
     if (!infoUser) {
       throw new NotFoundError(`No user with id ${userId}`);
@@ -43,7 +43,7 @@ const updateUserInfo = async (req, res) => {
 
     res.status(StatusCodes.OK).json({ updatedUser });
   } catch (error) {
-    if (error.name === "ValidationError") {
+    if (error.name === 'ValidationError') {
       res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
     } else {
       res

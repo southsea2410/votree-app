@@ -1,7 +1,7 @@
-const User = require("../models/userModel");
-const { StatusCodes } = require("http-status-codes");
-const { BadRequestError, NotFoundError } = require("../errors");
-const { hashData } = require("../utils/hashData");
+const User = require('../models/userModel');
+const { StatusCodes } = require('http-status-codes');
+const { BadRequestError, NotFoundError } = require('../errors');
+const { hashData } = require('../utils/hashData');
 
 const updatePassword = async (req, res) => {
   const {
@@ -19,11 +19,11 @@ const updatePassword = async (req, res) => {
     const isPasswordCorrect = await user.comparePassword(currentPassword);
 
     if (!isPasswordCorrect) {
-      throw new BadRequestError("Incorrect current password");
+      throw new BadRequestError('Incorrect current password');
     }
 
     if (newPassword.length < 6) {
-      throw new BadRequestError("Password is too short!");
+      throw new BadRequestError('Password is too short!');
     }
 
     user.password = newPassword;
@@ -31,9 +31,9 @@ const updatePassword = async (req, res) => {
 
     res
       .status(StatusCodes.OK)
-      .json({ message: "Password updated successfully" });
+      .json({ message: 'Password updated successfully' });
   } catch (error) {
-    if (error.name === "ValidationError") {
+    if (error.name === 'ValidationError') {
       res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
     } else {
       res

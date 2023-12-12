@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const moment = require("moment");
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const moment = require('moment');
 
 const userSchema = new mongoose.Schema({
   id: {
@@ -22,9 +22,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     validate: {
       validator: function (value) {
-        return moment(value, "DD/MM/YYYY", true).isValid();
+        return moment(value, 'DD/MM/YYYY', true).isValid();
       },
-      message: "Invalid date format. Please use DD/MM/YYYY.",
+      message: 'Invalid date format. Please use DD/MM/YYYY.',
     },
   },
   role: {
@@ -38,22 +38,21 @@ const userSchema = new mongoose.Schema({
     unique: true,
     match: [
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      "Please provide a valid email",
+      'Please provide a valid email',
     ],
-    unique: [true, "Email already exists"],
+    unique: [true, 'Email already exists'],
   },
   phoneNumber: {
     type: String,
-    required: [true, 'An user must have a phone number'],
   },
   avatar: {
-    image: [{ type: String }],
+    type: String,
     // required: [true, 'An user must have an avatar'],
   },
   password: {
     type: String,
-    required: [true, "Please provide password"],
-    minLength: [ 6, "Password must be at least 6 characters long"],
+    required: [true, 'Please provide password'],
+    minLength: [6, 'Password must be at least 6 characters long'],
   },
 
   active: {
@@ -61,12 +60,15 @@ const userSchema = new mongoose.Schema({
     default: true,
     select: false,
   },
+});
 
-  }
+userSchema.pre(/^find/, function (next) {
+  // this points to the current query
+  this.find({ active: { $ne: false } });
+  next();
+});
 
-);
-
-userSchema.pre("save", async function () {
+userSchema.pre('save', async function () {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
@@ -85,7 +87,6 @@ userSchema.methods.comparePassword = async function (canditatePassword) {
   const isMatch = await bcrypt.compare(canditatePassword, this.password);
   return isMatch;
 };
-
 
 const User = mongoose.model('User', userSchema);
 

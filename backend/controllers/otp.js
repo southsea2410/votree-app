@@ -1,16 +1,16 @@
-const OTP = require("../models/Authentication/Otp");
-const generateOTP = require("../utils/generateOTP");
-const { hashData, verifyHashedData } = require("../utils/hashData");
-const sendEmail = require("../utils/sendEmail");
-// const fs = require("fs").promises;
-const path = require("path");
+const OTP = require('../models/Authentication/Otp');
+const generateOTP = require('../utils/generateOTP');
+const { hashData, verifyHashedData } = require('../utils/hashData');
+const sendEmail = require('../utils/sendEmail');
+const fs = require("fs").promises;
+const path = require('path');
 
 const { AUTH_EMAIL } = process.env;
 
 const verifyOTP = async ({ email, otp }) => {
   try {
     if (!(email && otp)) {
-      throw Error("Provide values for email, otp");
+      throw Error('Provide values for email, otp');
     }
 
     const matchedOTPRecord = await OTP.findOne({
@@ -18,14 +18,14 @@ const verifyOTP = async ({ email, otp }) => {
     });
 
     if (!matchedOTPRecord) {
-      throw Error("No otp records found.");
+      throw Error('No otp records found.');
     }
 
     const { expiresAt } = matchedOTPRecord;
 
     if (expiresAt < Date.now()) {
       await OTP.deleteOne({ email });
-      throw Error("Code has expired. Request for a new one.");
+      throw Error('Code has expired. Request for a new one.');
     }
 
     const hashedOTP = matchedOTPRecord.otp;
@@ -39,7 +39,7 @@ const verifyOTP = async ({ email, otp }) => {
 const sendOTP = async ({ email, subject, duration = 5 }) => {
   try {
     if (!(email && subject)) {
-      throw Error("Provide values for email, subject");
+      throw Error('Provide values for email, subject');
     }
 
     await OTP.deleteOne({ email });
@@ -47,11 +47,11 @@ const sendOTP = async ({ email, subject, duration = 5 }) => {
     const generatedOTP = await generateOTP();
 
     const htmlContent = await fs.readFile(
-      path.join(__dirname, "../public/html/mailContent.html"),
-      "utf8",
+      path.join(__dirname, '../public/html/mailContent.html'),
+      'utf8',
     );
 
-    const replacedHTML = htmlContent.replace("{{generatedOTP}}", generatedOTP);
+    const replacedHTML = htmlContent.replace('{{generatedOTP}}', generatedOTP);
 
     const mailOptions = {
       from: AUTH_EMAIL,
