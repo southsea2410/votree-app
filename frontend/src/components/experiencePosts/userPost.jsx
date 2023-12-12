@@ -9,14 +9,12 @@ import ReactionBar from "./reactionBar";
 const cardStyle = {
   width: "822px",
   borderRadius: "7px",
-  rowGap: "19px",
 };
 
 const cardContentStyle = {
   display: "flex",
   flexDirection: "column",
   rowGap: "10px",
-  alignItems: "stretch",
 };
 
 export default function UserPost(props) {
@@ -29,7 +27,7 @@ export default function UserPost(props) {
           <CardMedia
             component="img"
             image={props.image}
-            sx={{ minHeight: "600px" }}
+            sx={{ minHeight: "500px",borderRadius: "7px" }}
           />
           <ReactionBar />
         </CardContent>

@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
+import Marketplace from "./pages/marketplace";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/">
           <Route index element={<HomePage />} />
           <Route path="login" element={<Login />} />
+          <Route path="marketplace" element={<Marketplace />} />
         </Route>
       </Routes>
     </Router>

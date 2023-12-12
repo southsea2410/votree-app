@@ -69,8 +69,8 @@ const theme = createTheme({
             fontSize: "20.3px",
             fontWeight: 600,
             "&:hover": {
-              background: colors.green1,
-              color: colors.green6,
+              background: colors.ratings,
+              color: colors.green4,
             },
           },
         },
@@ -230,25 +230,25 @@ const theme = createTheme({
         {
           props: { variant: "white" },
           style: {
-            backgroundColor: colors.primary,
+            borderColor: colors.primary,
           },
         },
         {
           props: { variant: "slighter" },
           style: {
-            backgroundColor: colors.green5,
+            borderColor: colors.green5,
           },
         },
         {
           props: { variant: "slightest" },
           style: {
-            backgroundColor: colors.green1,
+            borderColor: colors.green1,
           },
         },
       ],
       styleOverrides: {
         root: {
-          backgroundColor: colors.green6,
+          borderColor: colors.green6,
         },
       },
     },
@@ -259,6 +259,14 @@ const theme = createTheme({
           style: {
             maxWidth: 388,
             height: 353,
+          },
+        },
+        {
+          props: { variant: "hotpick" },
+          style: {
+            maxWidth: 388,
+            height: 353,
+            backgroundColor: colors.green1
           },
         },
       ],

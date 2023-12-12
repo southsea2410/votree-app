@@ -4,7 +4,6 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import { Product_test } from "../../assets/images";
 import { StarIcon } from "../../assets/icons";
 import "./../../index.css";
@@ -12,12 +11,12 @@ import { colors } from "../../styles";
 
 const NUM_OF_STARS = 5;
 
-export default function ProductCard() {
+export default function ProductCard({variant = "product"}) {
   const value = 3; // will update
 
   return (
     <Card
-      variant="product"
+      variant={variant}
       style={{
         boxShadow:
           "0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.20)",
@@ -34,7 +33,7 @@ export default function ProductCard() {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          width: 348,
+          // width: 348,
           height: 93,
           padding: "7px 20px",
         }}
@@ -67,7 +66,7 @@ export default function ProductCard() {
           </div>
         </div>
         <CardActions style={{ padding: 0 }}>
-          <Button variant="filled" color="secondary">
+          <Button variant="filled" color={variant === 'product' ? 'secondary' : 'primary'}>
             + Add to Cart
           </Button>
         </CardActions>
