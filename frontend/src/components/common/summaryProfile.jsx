@@ -7,7 +7,7 @@ export default function SumProfile() {
   return (
     <Box sx={{ display: "flex", flexDirection: "row" }}>
       <div style={{ display: "flex", alignItems: "center" }}>
-        <Avatar sx={{width: '50px', height:'50px'}} />
+        <Avatar sx={{ width: "50px", height: "50px" }} />
       </div>
       <div
         style={{ display: "flex", alignItems: "center", marginLeft: "15px" }}

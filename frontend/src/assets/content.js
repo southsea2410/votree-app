@@ -1,4 +1,5 @@
-const content = 'Digging in the dirt, sowing seeds of nourishment. Fresh and sustainable, straight from my garden. Cultivating a delicious and fruitful vegetable patch.';
+const content =
+  "Digging in the dirt, sowing seeds of nourishment. Fresh and sustainable, straight from my garden. Cultivating a delicious and fruitful vegetable patch.";
 
 const contentLong = `Như vậy, Luật 2018 đã bỏ quy định người có chức vụ, quyền hạn không được thành lập, tham
   gia quản lý, điều hành hợp tác xã, bệnh viện tư,

@@ -22,13 +22,13 @@ import "./index.css";
 import { Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
-const root = createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
     <ThemeProvider theme={theme}>
       <App />
     </ThemeProvider>
-  </StrictMode>
+  </StrictMode>,
 );
 
 //   <StrictMode>
