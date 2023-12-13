@@ -69,7 +69,7 @@ const theme = createTheme({
                         fontSize: '20.3px',
                         fontWeight: 600,
                         '&:hover': {
-                            background: colors.ratings,
+                            background: colors.primary,
                             color: colors.green4
                         }
                     }

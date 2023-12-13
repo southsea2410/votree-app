@@ -9,7 +9,8 @@ import { colors } from '../styles';
 const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: '92px'
 };
 
 const hotSalesContainer = {
