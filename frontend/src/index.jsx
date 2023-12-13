@@ -1,19 +1,6 @@
 import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
-import {
-    HomeIcon,
-    UpvoteIcon,
-    DownvoteIcon,
-    SearchIcon,
-    MarketIcon,
-    NotiIcon,
-    BasketIcon,
-    StarIcon,
-    WarningIcon,
-    ImageIcon,
-    VideoIcon
-} from './assets/icons';
 
 import App from './App';
 import { ThemeProvider } from '@mui/material';

@@ -4,7 +4,7 @@ import { colors } from '../styles';
 
 // Dummy data
 import { Post_test } from '../assets/images';
-import { content, contentLong } from '../assets/content';
+import { content, contentLong } from '../assets/contents/content';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 
 const homePageStyle = {

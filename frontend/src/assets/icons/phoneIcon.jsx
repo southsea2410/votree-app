@@ -1,5 +1,4 @@
 import SvgIcon from '@mui/material/SvgIcon';
-import { colors } from '../../styles';
 
 export default function PhoneIcon(props) {
     const { color, ...otherProps } = props;
