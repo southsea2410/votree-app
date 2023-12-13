@@ -1,6 +1,9 @@
 require('express-async-errors');
 const express = require('express');
 const morgan = require('morgan');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const app = express();
 
@@ -29,10 +32,20 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+// Set security HTTP headers
+app.use(helmet());
+
 app.use(express.json());
-app.use('/public', express.static(`${__dirname}/public`));
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(fileUpload());
+
+// Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// Data sanitization against XSS
+app.use(xss());
+
+app.use('/public', express.static(`${__dirname}/public`));
 
 app.use('/api/v1/marketplace/products', productRouter);
 app.use('/api/v1/sellers', sellerRouter);
