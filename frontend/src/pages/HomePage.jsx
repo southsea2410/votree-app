@@ -4,6 +4,7 @@ import { NavBar, InputArticle, UserPost } from '../components';
 // Dummy data
 import { Post_test } from '../assets/images';
 import { content, contentLong } from '../assets/content';
+import { useNavBarHeight } from '../hooks/useNavBarHeight';
 
 const homePageStyle = {
     display: 'flex',
@@ -22,8 +23,10 @@ const postsStyle = {
 
 export default function HomePage() {
     return (
-        <Box id="homepage" sx={homePageStyle}>
-            <NavBar className="navbar" />
+        <Box id="homepage" sx={homePageStyle} style={{ paddingTop: useNavBarHeight() }}>
+            <div className="navbar" >
+                <NavBar/>
+            </div>
             <Box sx={{ alignSelf: 'center' }}>
                 <InputArticle />
             </Box>
