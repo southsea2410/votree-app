@@ -2,12 +2,13 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
 
 import SumProfile from '../common/summaryProfile';
 import ReactionBar from './reactionBar';
 
 const cardStyle = {
-    width: '822px',
+    width: '818px',
     borderRadius: '7px'
 };
 

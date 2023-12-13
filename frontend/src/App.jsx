@@ -25,22 +25,3 @@ function App() {
 }
 
 export default App;
-
-// export default function App() {
-//   return (
-//     <>
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//     </>
-//   );
-// }
-
-// document
-//   .getElementById('root')
-//   .insertAdjacentHTML('afterend', '<p>helloworld</p>');

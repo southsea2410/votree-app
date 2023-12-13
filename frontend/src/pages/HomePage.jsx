@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { NavBar, InputArticle, UserPost } from '../components';
+import { colors } from '../styles';
 
 // Dummy data
 import { Post_test } from '../assets/images';
@@ -23,10 +24,10 @@ const postsStyle = {
 
 export default function HomePage() {
     return (
-        <Box id="homepage" sx={homePageStyle} style={{ paddingTop: useNavBarHeight() }}>
-            <div className="navbar" >
+        <Box id="homepage" sx={homePageStyle} style={{ paddingTop: useNavBarHeight(), background: colors.secondary }}>
+            <Box className="navbar" >
                 <NavBar/>
-            </div>
+            </Box>
             <Box sx={{ alignSelf: 'center' }}>
                 <InputArticle />
             </Box>

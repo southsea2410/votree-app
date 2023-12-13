@@ -30,31 +30,3 @@ root.render(
         </ThemeProvider>
     </StrictMode>
 );
-
-//   <StrictMode>
-//     <App/>
-//     <HomeIcon></HomeIcon>
-//     <UpvoteIcon></UpvoteIcon>
-//     <DownvoteIcon></DownvoteIcon>
-//     <SearchIcon></SearchIcon>
-//     <MarketIcon></MarketIcon>
-//     <NotiIcon></NotiIcon>
-//     <BasketIcon></BasketIcon>
-//     <StarIcon></StarIcon>
-//     <WarningIcon></WarningIcon>
-//     <ImageIcon></ImageIcon>
-//     <VideoIcon></VideoIcon>
-//   </StrictMode>,
-// );
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   React.createElement(
-//     React.StrictMode,
-//     null,
-//     React.createElement(
-//       ThemeProvider,
-//       { theme: theme },
-//       React.createElement(App)
-//     )
-//   )
-// );
