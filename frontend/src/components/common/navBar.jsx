@@ -149,8 +149,6 @@ export default function NavBar({ className }) {
                             flexDirection: 'row',
                             alignItems: 'center'
                         }}
-                        // firstChild={true}
-                        float="left"
                     >
                         <ImageContainer>
                             <img

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Login from './pages/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -22,22 +22,3 @@ function App() {
 }
 
 export default App;
-
-// export default function App() {
-//   return (
-//     <>
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//       <button className="square">X</button>;
-//     </>
-//   );
-// }
-
-// document
-//   .getElementById('root')
-//   .insertAdjacentHTML('afterend', '<p>helloworld</p>');

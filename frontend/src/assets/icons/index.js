@@ -23,6 +23,8 @@ import MailIcon from './mailIcon';
 import FacebookIcon from './facebookIcon';
 import InstaIcon from './instaIcon';
 import LinkedInIcon from './linkedInIcon';
+import GoogleIcon from './googleIcon';
+import FBIcon from './fbIcon';
 
 export {
     HomeIcon,
@@ -49,5 +51,7 @@ export {
     MailIcon,
     FacebookIcon,
     InstaIcon,
-    LinkedInIcon
+    LinkedInIcon,
+    GoogleIcon,
+    FBIcon
 };

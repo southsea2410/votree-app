@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Divider, IconButton } from '@mui/material';
 import PostArticle from './postArticle';
@@ -34,8 +33,8 @@ export default function InputArticle() {
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Check for small screen
 
-    const modalWidth = isSmallScreen ? '90%' : 900; // Define width based on screen size
-    const modalHeight = isSmallScreen ? '60%' : 600; // Define height based on screen size
+    const modalWidth = isSmallScreen ? '90%' : 900;
+    const modalHeight = isSmallScreen ? '60%' : 600;
 
     return (
         <div>

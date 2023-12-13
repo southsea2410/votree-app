@@ -1,5 +1,4 @@
 import SvgIcon from '@mui/material/SvgIcon';
-import { colors } from '../../styles';
 
 export default function SearchIcon(props) {
     return (

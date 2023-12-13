@@ -1,5 +1,4 @@
 import SvgIcon from '@mui/material/SvgIcon';
-import { colors } from '../../styles';
 
 export default function ImageIcon(props) {
     const { color, ...otherProps } = props;

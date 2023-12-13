@@ -31,13 +31,13 @@ const theme = createTheme({
                 root: {
                     '& .MuiOutlinedInput-root': {
                         '& fieldset': {
-                            border: 'none' // Remove the border when the input is not focused
+                            border: 'none'
                         },
                         '&:hover fieldset': {
-                            border: 'none' // Remove the border on hover
+                            border: 'none'
                         },
                         '&.Mui-focused fieldset': {
-                            border: 'none' // Remove the border when focused
+                            border: 'none'
                         }
                     }
                 }
@@ -69,8 +69,21 @@ const theme = createTheme({
                         fontSize: '20.3px',
                         fontWeight: 600,
                         '&:hover': {
-                            background: colors.primary,
-                            color: colors.green4
+                            background: colors.green1,
+                            color: colors.green6
+                        }
+                    }
+                },
+                {
+                    props: { variant: 'filled', color: 'facebook' },
+                    style: {
+                        background: colors.facebook,
+                        color: colors.primary,
+                        fontSize: '20.3px',
+                        fontWeight: 600,
+                        '&:hover': {
+                            background: colors.green1,
+                            color: colors.green6
                         }
                     }
                 },
@@ -230,25 +243,25 @@ const theme = createTheme({
                 {
                     props: { variant: 'white' },
                     style: {
-                        borderColor: colors.primary
+                        backgroundColor: colors.primary
                     }
                 },
                 {
                     props: { variant: 'slighter' },
                     style: {
-                        borderColor: colors.green5
+                        backgroundColor: colors.green5
                     }
                 },
                 {
                     props: { variant: 'slightest' },
                     style: {
-                        borderColor: colors.green1
+                        backgroundColor: colors.green1
                     }
                 }
             ],
             styleOverrides: {
                 root: {
-                    borderColor: colors.green6
+                    backgroundColor: colors.green6
                 }
             }
         },
@@ -259,14 +272,6 @@ const theme = createTheme({
                     style: {
                         maxWidth: 388,
                         height: 353
-                    }
-                },
-                {
-                    props: { variant: 'hotpick' },
-                    style: {
-                        maxWidth: 388,
-                        height: 353,
-                        backgroundColor: colors.green1
                     }
                 }
             ],

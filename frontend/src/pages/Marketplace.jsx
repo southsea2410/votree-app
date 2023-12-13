@@ -1,16 +1,16 @@
-import { Fragment } from 'react';
 import NavBar from '../components/common/navBar';
 import { Box, Container } from '@mui/material';
 import { ProductCard } from '../components';
 import { Divider } from '@mui/material';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import { colors } from '../styles';
+import { useNavBarHeight } from '../hooks/useNavBarHeight';
 
 const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: '92px'
+    padding: '0px 80px'
 };
 
 const hotSalesContainer = {
@@ -21,43 +21,44 @@ const hotSalesContainer = {
 
 const salePostsContainer = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(4, 388px)',
+    gridTemplateColumns: 'repeat(3, 388px)',
     gap: '20px'
-};
-
-const dividerStyle = {
-    width: '800px',
-    marginTop: '30px',
-    marginBottom: '15px'
 };
 
 export default function Marketplace() {
     return (
-        <Fragment>
-            <NavBar className="navbar" />
+        <div
+            style={{
+                paddingTop: useNavBarHeight(),
+                background: colors.secondary
+            }}
+        >
+            <div className="navbar">
+                <NavBar />
+            </div>
             <Container
                 disableGutters="true"
                 maxWidth="false"
                 sx={containerStyle}
             >
-                <Divider role="separator" variant="slighter" sx={dividerStyle}>
+                <div style={{ paddingBottom: '22px' }}>
                     <WhatshotIcon color="pending" fontSize="medium" />
                     <span
-                        className="subtitle-semi-bold-28"
-                        style={{ color: colors.green5 }}
+                        className="subtitle-extra-bold"
+                        style={{ color: colors.green5, paddingLeft: 10 }}
                     >
                         Hot picks
                     </span>
-                </Divider>
+                </div>
                 <Box sx={hotSalesContainer}>
                     <ProductCard variant="hotpick" />
                     <ProductCard variant="hotpick" />
                     <ProductCard variant="hotpick" />
                 </Box>
 
-                <Divider role="separator" variant="slighter" sx={dividerStyle}>
-                    <span className="subtitle-semi-bold-28">Products</span>
-                </Divider>
+                <div style={{ padding: '31px' }}>
+                    <Divider style={{ width: 658, height: 1 }} />
+                </div>
 
                 <Box sx={salePostsContainer}>
                     <ProductCard />
@@ -67,8 +68,9 @@ export default function Marketplace() {
                     <ProductCard />
                     <ProductCard />
                     <ProductCard />
+                    <ProductCard />
                 </Box>
             </Container>
-        </Fragment>
+        </div>
     );
 }

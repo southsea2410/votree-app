@@ -1,9 +1,11 @@
 import { Box } from '@mui/material';
 import { NavBar, InputArticle, UserPost } from '../components';
+import { colors } from '../styles';
 
 // Dummy data
 import { Post_test } from '../assets/images';
-import { content, contentLong } from '../assets/content';
+import { content, contentLong } from '../assets/contents/content';
+import { useNavBarHeight } from '../hooks/useNavBarHeight';
 
 const homePageStyle = {
     display: 'flex',
@@ -23,8 +25,17 @@ const postsStyle = {
 
 export default function HomePage() {
     return (
-        <Box id="homepage" sx={homePageStyle}>
-            <NavBar className="navbar" />
+        <Box
+            id="homepage"
+            sx={homePageStyle}
+            style={{
+                paddingTop: useNavBarHeight(),
+                background: colors.secondary
+            }}
+        >
+            <Box className="navbar">
+                <NavBar />
+            </Box>
             <Box sx={{ alignSelf: 'center' }}>
                 <InputArticle />
             </Box>

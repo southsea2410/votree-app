@@ -7,7 +7,7 @@ import SumProfile from '../common/summaryProfile';
 import ReactionBar from './reactionBar';
 
 const cardStyle = {
-    width: '822px',
+    width: '818px',
     borderRadius: '7px'
 };
 
