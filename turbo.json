@@ -7,7 +7,7 @@
     },
     "build": {
       "inputs": ["frontend/src/**"],
-      "outputs": ["frontend/dist/**"],
+      "outputs": ["frontend/dist/**"]
     },
     "lint": {},
     "pretty": {},
