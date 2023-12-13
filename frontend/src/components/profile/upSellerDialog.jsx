@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { colors } from '../../styles';
+import { LocationIcon, MailIcon, MarketIcon, PhoneIcon } from '../../assets/icons';
 
 export default function UpSellerDialog({ variant = 'filled', ...props }) {
     const [open, setOpen] = React.useState(false);
@@ -20,13 +21,18 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
     const handleClose = () => {
         setOpen(false);
     };
-
+    const dialogContentTextStyle = {
+        color: colors.green5,
+        display: 'flex',
+        alignItems: 'center',
+        columnGap: '15px'
+    };
     return (
         <React.Fragment>
             <Button variant={variant} onClick={handleClickOpen}>
                 {props.children}
             </Button>
-            <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+            <Dialog open={open} onClose={handleClose} PaperProps={{sx: {rowGap: '20px'}}} maxWidth="md" fullWidth>
                 <DialogTitle
                     sx={{
                         display: 'flex',
@@ -42,7 +48,7 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
                         aria-label="close"
                         onClick={handleClose}
                         className="extra-medium"
-                        sx={{ color: colors.green5 }}
+                        sx={dialogContentTextStyle}
                     >
                         <CloseIcon />
                     </IconButton>
@@ -50,8 +56,9 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
                 <DialogContent>
                     <DialogContentText
                         className="extra-medium"
-                        sx={{ color: colors.green5 }}
+                        sx={dialogContentTextStyle}
                     >
+                        <MarketIcon />
                         Store Name
                     </DialogContentText>
                     <TextField
@@ -66,8 +73,9 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
                 <DialogContent>
                     <DialogContentText
                         className="extra-medium"
-                        sx={{ color: colors.green5 }}
+                        sx={dialogContentTextStyle}
                     >
+                        <LocationIcon />
                         Store Location
                     </DialogContentText>
                     <TextField
@@ -82,8 +90,9 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
                 <DialogContent>
                     <DialogContentText
                         className="extra-medium"
-                        sx={{ color: colors.green5 }}
+                        sx={dialogContentTextStyle}
                     >
+                        <MailIcon />
                         Store Email
                     </DialogContentText>
                     <TextField
@@ -98,8 +107,9 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
                 <DialogContent>
                     <DialogContentText
                         className="extra-medium"
-                        sx={{ color: colors.green5 }}
+                        sx={dialogContentTextStyle}
                     >
+                        <PhoneIcon />
                         Store Phone Number
                     </DialogContentText>
                     <TextField
