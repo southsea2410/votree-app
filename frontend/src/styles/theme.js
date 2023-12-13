@@ -31,13 +31,13 @@ const theme = createTheme({
         root: {
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              border: "none", // Remove the border when the input is not focused
+              border: "none",
             },
             "&:hover fieldset": {
-              border: "none", // Remove the border on hover
+              border: "none",
             },
             "&.Mui-focused fieldset": {
-              border: "none", // Remove the border when focused
+              border: "none",
             },
           },
         },
@@ -66,6 +66,19 @@ const theme = createTheme({
           style: {
             background: colors.secondary,
             color: colors.green6,
+            fontSize: "20.3px",
+            fontWeight: 600,
+            "&:hover": {
+              background: colors.green1,
+              color: colors.green6,
+            },
+          },
+        },
+        {
+          props: { variant: "filled", color: "facebook" },
+          style: {
+            background: colors.facebook,
+            color: colors.primary,
             fontSize: "20.3px",
             fontWeight: 600,
             "&:hover": {

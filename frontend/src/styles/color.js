@@ -11,6 +11,7 @@ const colors = {
   pending: "#FD9900",
   decline: "#FE2712",
   ratings: "#FFFF00",
+  facebook: "#3B5998",
 };
 
 export default colors;
