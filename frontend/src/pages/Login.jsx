@@ -43,7 +43,7 @@ export default function Login() {
                 style={{
                     display: 'flex',
                     padding: '100px 100px',
-                    justifyContent: 'space-between',
+                    justifyContent: 'space-around',
                     alignItems: 'center'
                 }}
             >
