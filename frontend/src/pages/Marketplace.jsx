@@ -15,14 +15,18 @@ const containerStyle = {
 
 const hotSalesContainer = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(3, 388px)',
-    gap: '20px'
+    gridTemplateColumns: 'repeat(auto-fill, 388px)',
+    gap: '20px',
+    justifyContent: 'center',
+    width: '100%',
 };
 
 const salePostsContainer = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(3, 388px)',
-    gap: '20px'
+    gridTemplateColumns: 'repeat(auto-fill, 388px)',
+    gap: '20px',
+    justifyContent: 'center',
+    width: '100%',
 };
 
 export default function Marketplace() {
@@ -30,15 +34,12 @@ export default function Marketplace() {
         <div
             style={{
                 paddingTop: useNavBarHeight(),
-                background: colors.secondary
             }}
         >
-            <div className="navbar">
-                <NavBar />
-            </div>
+            <NavBar className="navbar"/>
             <Container
                 disableGutters="true"
-                maxWidth="false"
+                maxWidth="xl"
                 sx={containerStyle}
             >
                 <div style={{ paddingBottom: '22px' }}>
