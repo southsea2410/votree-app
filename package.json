@@ -23,7 +23,10 @@
     "pretty-fe": "turbo run pretty --filter frontend",
     "pretty-fix": "turbo run pretty-fix",
     "pretty-fix-be": "turbo run pretty-fix --filter backend",
-    "pretty-fix-fe": "turbo run pretty-fix --filter frontend"
+    "pretty-fix-fe": "turbo run pretty-fix --filter frontend",
+    "serve": "firebase serve",
+    "deploy": "firebase deploy",
+    "firebase": "firebase"
   },
   "author": "",
   "license": "ISC",

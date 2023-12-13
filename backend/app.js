@@ -7,6 +7,7 @@ const productRouter = require('./routes/productRoutes');
 const sellerRouter = require('./routes/sellerRoutes');
 const cartRouter = require('./routes/cartRoutes');
 const orderRouter = require('./routes/orderRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
 
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
@@ -21,6 +22,7 @@ app.use('/api/v1/marketplace/products', productRouter);
 app.use('/api/v1/sellers', sellerRouter);
 app.use('/api/v1/marketplace/carts', cartRouter);
 app.use('/api/v1/marketplace/orders', orderRouter);
+app.use('/api/v1/reviews', reviewRouter);
 
 // 4. Start Server
 module.exports = app;

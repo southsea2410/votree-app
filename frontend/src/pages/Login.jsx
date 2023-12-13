@@ -1,18 +1,18 @@
 import { Button, Avatar, Divider, Input, TextField } from "@mui/material";
 import {
-  SearchBar,
-  NavBar,
-  SumProfile,
-  ProductCard,
-  ReactionBar,
-  InputArticle,
-  Footer,
-} from "../components";
+    SearchBar,
+    NavBar,
+    SumProfile,
+    ProductCard,
+    ReactionBar,
+    InputArticle,
+    Footer
+} from '../components';
 // import Avatar_test from "../assets/images/index.js";
 // import { makeStyles } from "@mui/styles";
-import { LogoVoTree_primary } from "../assets/images";
-import { colors } from "../styles";
-import * as React from "react";
+import { LogoVoTree_primary } from '../assets/images';
+import { colors } from '../styles';
+import * as React from 'react';
 import {
   Basket,
   Noti,
