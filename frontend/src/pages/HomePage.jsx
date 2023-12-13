@@ -11,7 +11,8 @@ const homePageStyle = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'stretch',
-    rowGap: '19px'
+    rowGap: '19px',
+    paddingTop: '112px'
 };
 
 const postsStyle = {
@@ -19,7 +20,7 @@ const postsStyle = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    rowGap: '19px'
+    rowGap: '20px'
 };
 
 export default function HomePage() {

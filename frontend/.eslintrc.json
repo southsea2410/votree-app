@@ -24,6 +24,7 @@
     }
   },
   "plugins": ["react", "react-hooks"],
+  "ignorePatterns": ["dist/*"],
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",

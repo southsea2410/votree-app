@@ -29,7 +29,7 @@ const ImageContainer = styled('div')({
     justifyContent: 'center'
 });
 
-export default function NavBar() {
+export default function NavBar({ className }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const [value, setValue] = React.useState('recents');
@@ -133,7 +133,7 @@ export default function NavBar() {
     );
 
     return (
-        <Box sx={{ flexGrow: 0, color: colors.green2 }}>
+        <Box sx={{ flexGrow: 0, color: colors.green2 }} className={className}>
             <AppBar position="static" elevation={0}>
                 <Toolbar
                     sx={{ background: colors.green1 }}
@@ -220,7 +220,7 @@ export default function NavBar() {
                         sx={{
                             display: { xs: 'none', md: 'flex', gap: '19px' }
                         }}
-                        lastChild={true}
+                        // lastChild={true}
                         float="right"
                     >
                         {value === 1 ? <Basket /> : null}
