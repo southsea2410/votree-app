@@ -1,6 +1,12 @@
 const User = require('../models/userModel');
 const { StatusCodes } = require('http-status-codes');
 const { BadRequestError, NotFoundError } = require('../errors');
+const Token = require("../models/Authentication/Token");
+const crypto = require("crypto");
+const {
+  createTokenUser,
+  attachCookiesToResponse,
+} = require('../utils');
 
 const getUserInfo = async (req, res) => {
   const {
@@ -26,14 +32,16 @@ const getUserInfo = async (req, res) => {
 
 const updateUserInfo = async (req, res) => {
   const {
-    body: { fullName, dateOfBirth, email, phone },
+    body: { role },
     user: { userId },
   } = req;
+
+  const currentRole = User.findOne({ _id: userId }).select('role');
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
       { _id: userId },
-      { fullName, dateOfBirth, email, phone },
+      { role },
       { new: true, runValidators: true },
     );
 
@@ -41,7 +49,19 @@ const updateUserInfo = async (req, res) => {
       throw new NotFoundError(`No user with id ${userId}`);
     }
 
-    res.status(StatusCodes.OK).json({ updatedUser });
+    const tokenUser = createTokenUser(updatedUser);
+    if (currentRole !== updatedUser.role) {
+      refreshToken = crypto.randomBytes(40).toString('hex');
+      attachCookiesToResponse({ res, user: tokenUser, refreshToken });
+      // update Token in database
+      await Token.findOneAndUpdate(
+        { user: userId },
+        { refreshToken },
+        { new: true, runValidators: true },
+      );
+    }
+    res.status(StatusCodes.OK).json({ user: tokenUser });
+
   } catch (error) {
     if (error.name === 'ValidationError') {
       res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
