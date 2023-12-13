@@ -16,5 +16,6 @@ export {
     ReactionBar,
     InputArticle,
     UserPost,
-    Footer
+    Footer,
+    PostArticle
 };

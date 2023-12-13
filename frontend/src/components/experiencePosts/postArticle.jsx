@@ -27,7 +27,7 @@ export default function PostArticle({ onClick }) {
                     alignItems: 'center'
                 }}
             >
-                <Avatar variant='small'>N</Avatar>
+                <Avatar variant="small">N</Avatar>
                 <Button
                     variant="post"
                     style={{ gap: 15, padding: '0px 15px', height: 40 }}

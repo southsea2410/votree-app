@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import NavBar from '../components/common/navBar';
 import { Box, Container } from '@mui/material';
 import { ProductCard } from '../components';
@@ -26,17 +25,16 @@ const salePostsContainer = {
     gap: '20px'
 };
 
-const dividerStyle = {
-    width: '800px',
-    marginTop: '30px',
-    marginBottom: '15px'
-};
-
 export default function Marketplace() {
     return (
-        <div style={{ paddingTop: useNavBarHeight(), background: colors.secondary }}>
-            <div className="navbar" >
-                <NavBar/>
+        <div
+            style={{
+                paddingTop: useNavBarHeight(),
+                background: colors.secondary
+            }}
+        >
+            <div className="navbar">
+                <NavBar />
             </div>
             <Container
                 disableGutters="true"
@@ -59,7 +57,7 @@ export default function Marketplace() {
                 </Box>
 
                 <div style={{ padding: '31px' }}>
-                    <Divider style={{ width: 658, height: 1 }}/>
+                    <Divider style={{ width: 658, height: 1 }} />
                 </div>
 
                 <Box sx={salePostsContainer}>

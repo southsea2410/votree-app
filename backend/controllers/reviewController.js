@@ -7,4 +7,3 @@ exports.getAllReviews = factory.getAll(reviewModel);
 exports.getReview = factory.getOne(reviewModel);
 exports.updateReview = factory.updateOne(reviewModel);
 exports.deleteReview = factory.deleteOne(reviewModel);
-

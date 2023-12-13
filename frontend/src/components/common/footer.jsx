@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import { colors } from '../../styles';
 import { Divider } from '@mui/material';
 import { LogoVoTree_secondary } from '../../assets/images';

@@ -24,9 +24,16 @@ const postsStyle = {
 
 export default function HomePage() {
     return (
-        <Box id="homepage" sx={homePageStyle} style={{ paddingTop: useNavBarHeight(), background: colors.secondary }}>
-            <Box className="navbar" >
-                <NavBar/>
+        <Box
+            id="homepage"
+            sx={homePageStyle}
+            style={{
+                paddingTop: useNavBarHeight(),
+                background: colors.secondary
+            }}
+        >
+            <Box className="navbar">
+                <NavBar />
             </Box>
             <Box sx={{ alignSelf: 'center' }}>
                 <InputArticle />
