@@ -214,7 +214,7 @@ export default function Login() {
                             </div>
                         )}
                         {signUp ? (
-                            <div className="extra-medium">
+                            <div className="extra-medium" onClick={handleChangeToSignUp} style={fieldStyle}>
                                 Already have an account?
                             </div>
                         ) : (
@@ -222,7 +222,7 @@ export default function Login() {
                                 <div className="extra-medium">
                                     Forgot Password?
                                 </div>
-                                <div className="extra-medium">
+                                <div className="extra-medium" onClick={handleChangeToSignUp} style={fieldStyle}>
                                     Don&apos;t have an account?
                                 </div>
                             </div>
