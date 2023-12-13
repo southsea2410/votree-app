@@ -28,15 +28,13 @@ function UserCard({
                         display: 'flex',
                         flexDirection: 'column',
                         rowGap: '20px'
-                    }}
-                >
+                    }}>
                     <Box
                         sx={{
                             display: 'flex',
                             flexWrap: 'wrap',
                             justifyContent: 'space-between'
-                        }}
-                    >
+                        }}>
                         <SumProfile />
                         <UpSellerDialog variant="filled">
                             Up Seller
@@ -49,55 +47,47 @@ function UserCard({
                             flexWrap: 'wrap',
                             justifyContent: 'space-between',
                             alignItems: 'flex-start'
-                        }}
-                    >
+                        }}>
                         <Box
                             sx={{
                                 display: 'grid',
                                 gridTemplateColumns: '200px 400px',
                                 gridTemplateRows: 'repeat(6, 50px)',
                                 alignItems: 'center'
-                            }}
-                        >
+                            }}>
                             <p
                                 className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}
-                            >
+                                style={{ color: colors.green4 }}>
                                 Age
                             </p>
                             <p className="content-medium-20-25">{age}</p>
                             <p
                                 className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}
-                            >
+                                style={{ color: colors.green4 }}>
                                 Gender
                             </p>
                             <p className="content-medium-20-25">{gender}</p>
                             <p
                                 className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}
-                            >
+                                style={{ color: colors.green4 }}>
                                 Phone Number
                             </p>
                             <p className="content-medium-20-25">{phone}</p>
                             <p
                                 className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}
-                            >
+                                style={{ color: colors.green4 }}>
                                 Email
                             </p>
                             <p className="content-medium-20-25">{email}</p>
                             <p
                                 className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}
-                            >
+                                style={{ color: colors.green4 }}>
                                 Address
                             </p>
                             <p className="content-medium-20-25">{address}</p>
                             <p
                                 className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}
-                            >
+                                style={{ color: colors.green4 }}>
                                 Interest
                             </p>
                             <p className="content-medium-20-25">{interests}</p>
@@ -109,8 +99,7 @@ function UserCard({
                         sx={{
                             display: 'flex',
                             justifyContent: 'space-between'
-                        }}
-                    >
+                        }}>
                         <p className="subtitle-extra-bold">Posts</p>
                         <Button variant="filled">Activity History</Button>
                     </Box>

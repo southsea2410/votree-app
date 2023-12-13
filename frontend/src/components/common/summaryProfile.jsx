@@ -18,8 +18,7 @@ export default function SumProfile({
                     display: 'flex',
                     alignItems: 'center',
                     marginLeft: '15px'
-                }}
-            >
+                }}>
                 <div>
                     <div
                         className="subtitle-semi-bold-20"
@@ -28,8 +27,7 @@ export default function SumProfile({
                             height: '34px',
                             alignItems: 'center',
                             display: 'flex'
-                        }}
-                    >
+                        }}>
                         {username}
                     </div>
                     <div className="extra-medium">

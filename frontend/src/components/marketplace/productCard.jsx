@@ -19,8 +19,7 @@ export default function ProductCard({ variant = 'product' }) {
             style={{
                 boxShadow:
                     '0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.20)'
-            }}
-        >
+            }}>
             <CardMedia
                 variant="product"
                 image={Product_test}
@@ -35,21 +34,18 @@ export default function ProductCard({ variant = 'product' }) {
                     // width: 348,
                     height: 93,
                     padding: '7px 20px'
-                }}
-            >
+                }}>
                 <div
                     style={{
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '3px',
                         justifyContent: 'space-between'
-                    }}
-                >
+                    }}>
                     <div className="content-medium-14-22">17.000.000 VND</div>
                     <div
                         className="subtitle-semi-bold-20"
-                        style={{ color: colors.green4 }}
-                    >
+                        style={{ color: colors.green4 }}>
                         Vegetable Name
                     </div>
                     <div>
@@ -67,8 +63,7 @@ export default function ProductCard({ variant = 'product' }) {
                     <div style={{ display: 'flex' }}>
                         <div
                             className="content-regular-12"
-                            style={{ width: 51, height: 10 }}
-                        >
+                            style={{ width: 51, height: 10 }}>
                             Sold By:
                         </div>
                         <div>Peter Parker</div>
@@ -77,8 +72,7 @@ export default function ProductCard({ variant = 'product' }) {
                 <CardActions style={{ padding: 0 }}>
                     <Button
                         variant="filled"
-                        color={variant === 'product' ? 'secondary' : 'primary'}
-                    >
+                        color={variant === 'product' ? 'secondary' : 'primary'}>
                         + Add to Cart
                     </Button>
                 </CardActions>

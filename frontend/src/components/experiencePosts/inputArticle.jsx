@@ -43,16 +43,14 @@ export default function InputArticle() {
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
+                aria-describedby="modal-modal-description">
                 <Box
                     sx={style}
                     style={{
                         height: modalHeight,
                         width: modalWidth,
                         display: 'flex'
-                    }}
-                >
+                    }}>
                     <div
                         className="subtitle-extra-bold upper-case"
                         style={{
@@ -62,8 +60,7 @@ export default function InputArticle() {
                             textAlign: 'center',
                             height: 58,
                             marginBottom: 9
-                        }}
-                    >
+                        }}>
                         Create Article
                     </div>
                     <Divider variant="slighter" />
@@ -76,8 +73,7 @@ export default function InputArticle() {
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between'
-                        }}
-                    >
+                        }}>
                         <div style={{ marginTop: '25px', marginLeft: 64 }}>
                             <SumProfile />
                         </div>
@@ -86,8 +82,7 @@ export default function InputArticle() {
                                 maxWidth: '100%',
                                 border: 'none',
                                 margin: '17px 50px'
-                            }}
-                        >
+                            }}>
                             <TextField
                                 fullWidth
                                 placeholder="My plant is..."
@@ -103,8 +98,7 @@ export default function InputArticle() {
                             style={{
                                 display: 'flex',
                                 justifyContent: 'center'
-                            }}
-                        >
+                            }}>
                             <IconButton>
                                 <ImageIcon
                                     color={colors.green4}
@@ -123,13 +117,11 @@ export default function InputArticle() {
                                 paddingBottom: '25px',
                                 paddingLeft: '38px',
                                 paddingRight: '38px'
-                            }}
-                        >
+                            }}>
                             <Button
                                 variant="filled"
                                 color="green4"
-                                style={{ width: '100%' }}
-                            >
+                                style={{ width: '100%' }}>
                                 Post
                             </Button>
                         </div>

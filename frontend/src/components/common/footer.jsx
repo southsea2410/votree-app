@@ -22,22 +22,19 @@ export default function Footer() {
                 height: 250,
                 color: colors.primary,
                 padding: '30px 0px'
-            }}
-        >
+            }}>
             <div
                 style={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     padding: '0px 100px'
-                }}
-            >
+                }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 40 }}>
                     <div
                         style={{
                             display: 'flex',
                             justifyContent: 'space-between'
-                        }}
-                    >
+                        }}>
                         <img
                             src={LogoVoTree_secondary}
                             alt=""
@@ -54,14 +51,12 @@ export default function Footer() {
                                 display: 'flex',
                                 flexDirection: 'column',
                                 gap: 12
-                            }}
-                        >
+                            }}>
                             <div
                                 style={{
                                     display: 'flex',
                                     alignItems: 'center'
-                                }}
-                            >
+                                }}>
                                 <LocationIcon color={colors.green2} />
                                 <div style={{ marginLeft: 8 }}>
                                     227 Nguyen Van Cu, ward 10, district 5, HCM
@@ -72,8 +67,7 @@ export default function Footer() {
                                 style={{
                                     display: 'flex',
                                     alignItems: 'center'
-                                }}
-                            >
+                                }}>
                                 <PhoneIcon color={colors.green2} />
                                 <div style={{ marginLeft: 8 }}>0901234567</div>
                             </div>
@@ -81,8 +75,7 @@ export default function Footer() {
                                 style={{
                                     display: 'flex',
                                     alignItems: 'center'
-                                }}
-                            >
+                                }}>
                                 <MailIcon color={colors.green2} />
                                 <div style={{ marginLeft: 8 }}>
                                     se10votree@gmail.com
@@ -98,8 +91,7 @@ export default function Footer() {
                         gap: 40,
                         justifyContent: 'center',
                         color: colors.green2
-                    }}
-                >
+                    }}>
                     <div>Main screen</div>
                     <div>Sign in</div>
                     <div>Sign up</div>
@@ -114,8 +106,7 @@ export default function Footer() {
                     justifyContent: 'space-between',
                     padding: '0px 120px',
                     alignItems: 'center'
-                }}
-            >
+                }}>
                 <div style={{ color: colors.primary }}>
                     © 2023 SE_10 Group. All right reserved.
                 </div>

@@ -69,8 +69,7 @@ export default function NavBar({ className }) {
                 horizontal: 'right'
             }}
             open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
+            onClose={handleMenuClose}>
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
@@ -91,14 +90,12 @@ export default function NavBar({ className }) {
                 horizontal: 'right'
             }}
             open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-        >
+            onClose={handleMobileMenuClose}>
             <MenuItem>
                 <IconButton
                     size="large"
                     aria-label="show 4 new mails"
-                    color="inherit"
-                >
+                    color="inherit">
                     <Badge badgeContent={4} color="error">
                         <MailIcon />
                     </Badge>
@@ -109,8 +106,7 @@ export default function NavBar({ className }) {
                 <IconButton
                     size="large"
                     aria-label="show 17 new notifications"
-                    color="inherit"
-                >
+                    color="inherit">
                     <Badge badgeContent={17} color="error">
                         <NotificationsIcon />
                     </Badge>
@@ -123,8 +119,7 @@ export default function NavBar({ className }) {
                     aria-label="account of current user"
                     aria-controls="primary-search-account-menu"
                     aria-haspopup="true"
-                    color="inherit"
-                >
+                    color="inherit">
                     <AccountCircle />
                 </IconButton>
                 <p>Profile</p>
@@ -141,15 +136,13 @@ export default function NavBar({ className }) {
                         borderBottom: '1px solid',
                         borderColor: colors.green4,
                         justifyContent: 'space-between'
-                    }}
-                >
+                    }}>
                     <div
                         style={{
                             display: 'flex',
                             flexDirection: 'row',
                             alignItems: 'center'
-                        }}
-                    >
+                        }}>
                         <ImageContainer>
                             <img
                                 src={LogoVoTree_primary}
@@ -165,8 +158,7 @@ export default function NavBar({ className }) {
                             width: '200px',
                             marginLeft: '4%',
                             marginRight: 'auto'
-                        }}
-                    >
+                        }}>
                         <BottomNavigation value={value} onChange={handleChange}>
                             <BottomNavigationAction
                                 icon={
@@ -221,8 +213,7 @@ export default function NavBar({ className }) {
                             display: { xs: 'none', md: 'flex', gap: '19px' }
                         }}
                         // lastChild={true}
-                        float="right"
-                    >
+                        float="right">
                         {value === 1 ? <Basket /> : null}
                         <Noti />
                         <Avatar variant="small">N</Avatar>

@@ -18,7 +18,7 @@ const hotSalesContainer = {
     gridTemplateColumns: 'repeat(auto-fill, 388px)',
     gap: '20px',
     justifyContent: 'center',
-    width: '100%',
+    width: '100%'
 };
 
 const salePostsContainer = {
@@ -26,28 +26,22 @@ const salePostsContainer = {
     gridTemplateColumns: 'repeat(auto-fill, 388px)',
     gap: '20px',
     justifyContent: 'center',
-    width: '100%',
+    width: '100%'
 };
 
 export default function Marketplace() {
     return (
         <div
             style={{
-                paddingTop: useNavBarHeight(),
-            }}
-        >
-            <NavBar className="navbar"/>
-            <Container
-                disableGutters="true"
-                maxWidth="xl"
-                sx={containerStyle}
-            >
+                paddingTop: useNavBarHeight()
+            }}>
+            <NavBar className="navbar" />
+            <Container disableGutters="true" maxWidth="xl" sx={containerStyle}>
                 <div style={{ paddingBottom: '22px' }}>
                     <WhatshotIcon color="pending" fontSize="medium" />
                     <span
                         className="subtitle-extra-bold"
-                        style={{ color: colors.green5, paddingLeft: 10 }}
-                    >
+                        style={{ color: colors.green5, paddingLeft: 10 }}>
                         Hot picks
                     </span>
                 </div>

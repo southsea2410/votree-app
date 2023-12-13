@@ -31,8 +31,7 @@ export default function HomePage() {
             style={{
                 paddingTop: useNavBarHeight(),
                 background: colors.secondary
-            }}
-        >
+            }}>
             <Box className="navbar">
                 <NavBar />
             </Box>
