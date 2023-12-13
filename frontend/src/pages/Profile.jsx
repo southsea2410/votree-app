@@ -9,7 +9,7 @@ import {
     Divider
 } from '@mui/material';
 import { colors } from '../styles';
-import { content, contentLong } from '../assets/content';
+import { content, contentLong } from '../assets/contents/content';
 import UpSellerDialog from '../components/profile/UpSellerDialog';
 
 function UserCard({
