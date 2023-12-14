@@ -25,6 +25,8 @@ import InstaIcon from './instaIcon';
 import LinkedInIcon from './linkedInIcon';
 import GoogleIcon from './googleIcon';
 import FBIcon from './fbIcon';
+import CartIcon from './cartIcon';
+import Cart from './cart';
 
 export {
     HomeIcon,
@@ -53,5 +55,7 @@ export {
     InstaIcon,
     LinkedInIcon,
     GoogleIcon,
-    FBIcon
+    FBIcon,
+    CartIcon,
+    Cart
 };

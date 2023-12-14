@@ -42,7 +42,7 @@ export default function ResetPassword() {
                 style={{
                     display: 'flex',
                     padding: '100px 100px',
-                    justifyContent: 'space-around'
+                    justifyContent: 'space-around',
                 }}>
                 <div
                     style={{

@@ -192,6 +192,16 @@ const theme = createTheme({
         MuiAvatar: {
             variants: [
                 {
+                    props: { variant: 'big', color: 'green6' },
+                    style: {
+                        fontSize: 20.25,
+                        fontWeight: '50px',
+                        width: '80px',
+                        height: '80px',
+                        background: colors.green6
+                    }
+                },
+                {
                     props: { variant: 'small' },
                     style: {
                         fontSize: 20.25,
@@ -201,11 +211,19 @@ const theme = createTheme({
                     }
                 },
                 {
-                    props: { variant: 'icon' },
+                    props: { variant: 'icon', color: 'secondary' },
                     style: {
                         width: '50px',
                         height: '50px',
                         background: colors.secondary
+                    }
+                },
+                {
+                    props: { variant: 'icon', color: 'green6' },
+                    style: {
+                        width: '50px',
+                        height: '50px',
+                        background: colors.green6
                     }
                 },
                 {
@@ -278,7 +296,7 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     backgroundColor: colors.primary,
-                    borderRadius: '2%'
+                    borderRadius: '7px'
                 }
             }
         },
