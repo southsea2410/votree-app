@@ -9,7 +9,7 @@ const otpContainer = {
     flexDirection: 'row',
     columnGap: '15px',
     margin: 0
-}
+};
 
 const otpInput = {
     width: '45px',
@@ -18,45 +18,37 @@ const otpInput = {
     borderRadius: '5px',
     textAlign: 'center',
     background: colors.secondary,
-    color: colors.green6,
-}
-
-const otpInputContainer = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '8px',
-}
+    color: colors.green6
+};
 
 export default function OtpInput({ value, valueLength, onChange }) {
     const valueItems = useMemo(() => {
         const valueArray = value.split('');
         const items = [];
-      
+
         for (let i = 0; i < valueLength; i++) {
             const char = valueArray[i];
-        
+
             if (RE_DIGIT.test(char)) {
                 items.push(char);
             } else {
                 items.push('');
             }
         }
-      
+
         return items;
     }, [value, valueLength]);
 
     const focusToNextInput = (target) => {
         const nextElementSibling = target.nextElementSibling;
-    
+
         if (nextElementSibling) {
             nextElementSibling.focus();
         }
-      };
-      const focusToPrevInput = (target) => {
-        const previousElementSibling =
-            target.previousElementSibling;
-    
+    };
+    const focusToPrevInput = (target) => {
+        const previousElementSibling = target.previousElementSibling;
+
         if (previousElementSibling) {
             previousElementSibling.focus();
         }
@@ -82,12 +74,15 @@ export default function OtpInput({ value, valueLength, onChange }) {
         const targetValueLength = targetValue.length;
 
         if (targetValueLength === 1) {
-            const newValue = value.substring(0, index) + targetValue + value.substring(index + 1);
+            const newValue =
+                value.substring(0, index) +
+                targetValue +
+                value.substring(index + 1);
 
             onChange(newValue);
 
             if (!isTargetValueDigit) {
-                return
+                return;
             }
 
             focusToNextInput(target);
@@ -157,7 +152,7 @@ export default function OtpInput({ value, valueLength, onChange }) {
                     pattern="\d{1}"
                     maxLength={valueLength}
                     style={otpInput}
-                    className='subtitle-bold-28'
+                    className="subtitle-bold-28"
                     value={digit}
                     onChange={(e) => inputOnChange(e, index)}
                     onKeyDown={inputOnKeyDown}
