@@ -11,7 +11,7 @@ const textBoxStyle = {
     borderRadius: 8,
     border: '1px solid',
     boderColor: colors.green6,
-    width: 363
+    width: '100%'
 };
 
 const textBoxClusterStyle = {

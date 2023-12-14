@@ -7,6 +7,7 @@ import UserPost from './experiencePosts/userPost';
 import PostArticle from './experiencePosts/postArticle';
 import InputArticle from './experiencePosts/inputArticle';
 import Footer from './common/footer';
+import OtpInput from './auth/otpInput';
 
 export {
     NavBar,
@@ -17,5 +18,6 @@ export {
     InputArticle,
     UserPost,
     Footer,
-    PostArticle
+    PostArticle,
+    OtpInput
 };

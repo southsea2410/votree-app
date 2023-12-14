@@ -69,8 +69,15 @@ h6 {
     letter-spacing: -0.2px;
 }
 
-.subtitle-bold {
+.subtitle-bold-28 {
     font-size: 28.83px;
+    font-weight: 700;
+    line-height: 112%; /* 32.29px */
+    letter-spacing: -0.2px;
+}
+
+.subtitle-bold-12 {
+    font-size: 12px;
     font-weight: 700;
     line-height: 112%; /* 32.29px */
     letter-spacing: -0.2px;
