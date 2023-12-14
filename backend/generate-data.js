@@ -8,10 +8,10 @@ const path = require('path');
 
 const generateData = require('./dev-data/generate-data/generate-data-functions');
 
-// const users = Array.from(
-//   { length: 10 },
-//   () => new User(generateData.generateUserData()),
-// );
+const users = Array.from(
+  { length: 10 },
+  () => new User(generateData.generateUserData()),
+);
 
 const sellers = Array.from(
   { length: 10 },
@@ -38,13 +38,13 @@ const productsDataPath = path.join(
   'dev-data/data/products-test.json',
 );
 
-// const usersData = JSON.stringify(users);
-// const usersDataPath = path.join(__dirname, 'dev-data/data/users-test.json');
+const usersData = JSON.stringify(users);
+const usersDataPath = path.join(__dirname, 'dev-data/data/users-test.json');
 
-// fs.writeFile(usersDataPath, usersData, (err) => {
-//   if (err) throw err;
-//   console.log('Users data written to file');
-// });
+fs.writeFile(usersDataPath, usersData, (err) => {
+  if (err) throw err;
+  console.log('Users data written to file');
+});
 
 fs.writeFile(sellersDataPath, sellersData, (err) => {
   if (err) throw err;

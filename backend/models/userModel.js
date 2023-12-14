@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-// const validator = require('validator');
 const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const moment = require('moment');
 
 const userSchema = new mongoose.Schema({
   id: {
@@ -16,6 +16,16 @@ const userSchema = new mongoose.Schema({
   userName: {
     type: String,
     required: [true, 'An user must have a username'],
+    unique: true,
+  },
+  dateOfBirth: {
+    type: String,
+    validate: {
+      validator: function (value) {
+        return moment(value, 'DD/MM/YYYY', true).isValid();
+      },
+      message: 'Invalid date format. Please use DD/MM/YYYY.',
+    },
   },
   role: {
     type: String,
@@ -26,12 +36,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide your email'],
     unique: true,
-    lowercase: true,
-    // validate: [validator.isEmail, 'Please provide a valid email'],
+    match: [
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      'Please provide a valid email',
+    ],
+    unique: [true, 'Email already exists'],
   },
   phoneNumber: {
     type: String,
-    required: [true, 'An user must have a phone number'],
   },
   avatar: {
     type: String,
@@ -39,48 +51,15 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Please provide a password'],
-    minlength: 8,
-    select: false,
+    required: [true, 'Please provide password'],
+    minLength: [6, 'Password must be at least 6 characters long'],
   },
-  passwordConfirm: {
-    type: String,
-    required: [true, 'Please confirm your password'],
-    validate: {
-      // This only works on CREATE and SAVE!!!
-      validator: function (el) {
-        return el === this.password;
-      },
-      message: 'Passwords are not the same!',
-    },
-  },
-  passwordChangedAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
+
   active: {
     type: Boolean,
     default: true,
     select: false,
   },
-});
-
-userSchema.pre('save', async function (next) {
-  // Only run this function if password was actually modified
-  if (!this.isModified('password')) return next();
-
-  // Hash the password with cost of 12
-  this.password = await bcrypt.hash(this.password, 12);
-
-  // Delete passwordConfirm field
-  this.passwordConfirm = undefined;
-  next();
-});
-
-userSchema.pre('save', function (next) {
-  if (!this.isModified('password') || this.isNew) return next();
-
-  this.passwordChangedAt = Date.now() - 1000;
-  next();
 });
 
 userSchema.pre(/^find/, function (next) {
@@ -89,37 +68,24 @@ userSchema.pre(/^find/, function (next) {
   next();
 });
 
-userSchema.methods.correctPassword = async function (
-  candidatePassword,
-  userPassword,
-) {
-  return await bcrypt.compare(candidatePassword, userPassword);
+userSchema.pre('save', async function () {
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+userSchema.methods.createJWT = function () {
+  return jwt.sign(
+    { userId: this._id, username: this.username },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.JWT_LIFETIME,
+    },
+  );
 };
 
-userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
-  if (this.passwordChangedAt) {
-    const changedTimestamp = parseInt(
-      this.passwordChangedAt.getTime() / 1000,
-      10,
-    );
-
-    return JWTTimestamp < changedTimestamp;
-  }
-  // False means NOT changed
-  return false;
-};
-
-userSchema.methods.createPasswordResetToken = function () {
-  const resetToken = crypto.randomBytes(32).toString('hex');
-
-  this.passwordResetToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex');
-
-  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
-
-  return resetToken;
+userSchema.methods.comparePassword = async function (canditatePassword) {
+  const isMatch = await bcrypt.compare(canditatePassword, this.password);
+  return isMatch;
 };
 
 const User = mongoose.model('User', userSchema);

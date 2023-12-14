@@ -3,6 +3,8 @@ const express = require('express');
 
 const router = express.Router();
 
+router.get('/checkout-session/:cartId', orderController.getCheckoutSession);
+
 router
   .route('/')
   .post(orderController.createOrder)
