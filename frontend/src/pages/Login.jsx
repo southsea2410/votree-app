@@ -43,10 +43,9 @@ export default function Login() {
                 style={{
                     display: 'flex',
                     padding: '100px 100px',
-                    justifyContent: 'space-between',
+                    justifyContent: 'space-around',
                     alignItems: 'center'
-                }}
-            >
+                }}>
                 <div>
                     <img
                         src={LogoVoTree_primary}
@@ -61,8 +60,7 @@ export default function Login() {
                         height: signUp ? 587 : 487,
                         width: 422,
                         borderRadius: 7
-                    }}
-                >
+                    }}>
                     <div
                         style={{
                             display: 'flex',
@@ -70,16 +68,14 @@ export default function Login() {
                             paddingLeft: 30,
                             paddingBottom: 30,
                             paddingTop: 35
-                        }}
-                    >
+                        }}>
                         <div
                             className="subtitle-semi-bold-20"
                             style={{
                                 ...fieldStyle,
                                 opacity: signUp ? '15%' : '100%'
                             }}
-                            onClick={handleChangeToSignUp}
-                        >
+                            onClick={handleChangeToSignUp}>
                             Log in
                         </div>
                         <div
@@ -88,8 +84,7 @@ export default function Login() {
                                 ...fieldStyle,
                                 opacity: signUp ? '100%' : '15%'
                             }}
-                            onClick={handleChangeToSignUp}
-                        >
+                            onClick={handleChangeToSignUp}>
                             Register
                         </div>
                     </div>
@@ -99,8 +94,7 @@ export default function Login() {
                             flexDirection: 'column',
                             gap: 15,
                             padding: '0px 30px'
-                        }}
-                    >
+                        }}>
                         {signUp ? (
                             <div style={textBoxClusterStyle}>
                                 <TextField
@@ -214,7 +208,10 @@ export default function Login() {
                             </div>
                         )}
                         {signUp ? (
-                            <div className="extra-medium">
+                            <div
+                                className="extra-medium"
+                                onClick={handleChangeToSignUp}
+                                style={fieldStyle}>
                                 Already have an account?
                             </div>
                         ) : (
@@ -222,7 +219,10 @@ export default function Login() {
                                 <div className="extra-medium">
                                     Forgot Password?
                                 </div>
-                                <div className="extra-medium">
+                                <div
+                                    className="extra-medium"
+                                    onClick={handleChangeToSignUp}
+                                    style={fieldStyle}>
                                     Don&apos;t have an account?
                                 </div>
                             </div>
@@ -241,14 +241,12 @@ export default function Login() {
                             display: 'flex',
                             justifyContent: 'space-between',
                             padding: '0px 30px'
-                        }}
-                    >
+                        }}>
                         <div>
                             <Button
                                 variant="filled"
                                 color="primary"
-                                style={socialMediaButtonStyle}
-                            >
+                                style={socialMediaButtonStyle}>
                                 <GoogleIcon />
                                 Google
                             </Button>
@@ -257,8 +255,7 @@ export default function Login() {
                             <Button
                                 variant="filled"
                                 color="facebook"
-                                style={socialMediaButtonStyle}
-                            >
+                                style={socialMediaButtonStyle}>
                                 <FBIcon />
                                 Facebook
                             </Button>

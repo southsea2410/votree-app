@@ -3,7 +3,11 @@ import { Box } from '@mui/material';
 import { Avatar } from '@mui/material';
 import './../../index.css';
 
-export default function SumProfile() {
+export default function SumProfile({
+    username = 'Prince Vegeta',
+    role = 'user',
+    avatar = 'https://i.pinimg.com/originals/0a/0b/9a/0a0b9a5e1e2b6b6b6b6b6b6b6b6b6b6b.jpg'
+}) {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -14,8 +18,7 @@ export default function SumProfile() {
                     display: 'flex',
                     alignItems: 'center',
                     marginLeft: '15px'
-                }}
-            >
+                }}>
                 <div>
                     <div
                         className="subtitle-semi-bold-20"
@@ -24,13 +27,12 @@ export default function SumProfile() {
                             height: '34px',
                             alignItems: 'center',
                             display: 'flex'
-                        }}
-                    >
-                        Prince Vegeta
+                        }}>
+                        {username}
                     </div>
                     <div className="extra-medium">
                         <ul style={{ margin: '0', paddingLeft: '22px' }}>
-                            <li>user</li>
+                            <li>{role}</li>
                         </ul>
                     </div>
                 </div>

@@ -29,7 +29,7 @@ const ImageContainer = styled('div')({
     justifyContent: 'center'
 });
 
-export default function NavBar() {
+export default function NavBar({ className }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
     const [value, setValue] = React.useState('recents');
@@ -69,8 +69,7 @@ export default function NavBar() {
                 horizontal: 'right'
             }}
             open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
+            onClose={handleMenuClose}>
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
@@ -91,14 +90,12 @@ export default function NavBar() {
                 horizontal: 'right'
             }}
             open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
-        >
+            onClose={handleMobileMenuClose}>
             <MenuItem>
                 <IconButton
                     size="large"
                     aria-label="show 4 new mails"
-                    color="inherit"
-                >
+                    color="inherit">
                     <Badge badgeContent={4} color="error">
                         <MailIcon />
                     </Badge>
@@ -109,8 +106,7 @@ export default function NavBar() {
                 <IconButton
                     size="large"
                     aria-label="show 17 new notifications"
-                    color="inherit"
-                >
+                    color="inherit">
                     <Badge badgeContent={17} color="error">
                         <NotificationsIcon />
                     </Badge>
@@ -123,8 +119,7 @@ export default function NavBar() {
                     aria-label="account of current user"
                     aria-controls="primary-search-account-menu"
                     aria-haspopup="true"
-                    color="inherit"
-                >
+                    color="inherit">
                     <AccountCircle />
                 </IconButton>
                 <p>Profile</p>
@@ -133,7 +128,7 @@ export default function NavBar() {
     );
 
     return (
-        <Box sx={{ flexGrow: 0, color: colors.green2 }}>
+        <Box sx={{ flexGrow: 0, color: colors.green2 }} className={className}>
             <AppBar position="static" elevation={0}>
                 <Toolbar
                     sx={{ background: colors.green1 }}
@@ -141,15 +136,13 @@ export default function NavBar() {
                         borderBottom: '1px solid',
                         borderColor: colors.green4,
                         justifyContent: 'space-between'
-                    }}
-                >
+                    }}>
                     <div
                         style={{
                             display: 'flex',
                             flexDirection: 'row',
                             alignItems: 'center'
-                        }}
-                    >
+                        }}>
                         <ImageContainer>
                             <img
                                 src={LogoVoTree_primary}
@@ -165,8 +158,7 @@ export default function NavBar() {
                             width: '200px',
                             marginLeft: '4%',
                             marginRight: 'auto'
-                        }}
-                    >
+                        }}>
                         <BottomNavigation value={value} onChange={handleChange}>
                             <BottomNavigationAction
                                 icon={
@@ -220,9 +212,8 @@ export default function NavBar() {
                         sx={{
                             display: { xs: 'none', md: 'flex', gap: '19px' }
                         }}
-                        lastChild={true}
-                        float="right"
-                    >
+                        // lastChild={true}
+                        float="right">
                         {value === 1 ? <Basket /> : null}
                         <Noti />
                         <Avatar variant="small">N</Avatar>
