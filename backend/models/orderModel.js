@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-bookingSchema.pre(/^find/, function (next) {
+orderSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'cartId',
     select: 'userId',

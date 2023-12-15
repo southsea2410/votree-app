@@ -1,10 +1,10 @@
 const orderModel = require('../models/orderModel');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const Product = require('../models/productModel');
+// const Product = require('../models/productModel');
 const User = require('../models/userModel');
 const Cart = require('../models/cartModel');
 const catchAsync = require('../utils/catchAsync');
-const AppError = require('../utils/appError');
+// const AppError = require('../utils/appError');
 const factory = require('./handlerFactory');
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
@@ -82,8 +82,22 @@ exports.createOrderCheckout = catchAsync(async (req, res, next) => {
 //   });
 // };
 
+// exports.getOrderForSeller = catchAsync(async (req, res, next) => {
+//   const order = await orderModel
+//     .find({ seller: req.user.id })
+//     .populate('products');
+//   res.status(200).json({
+//     status: 'success',
+//     data: order,
+//   });
+
+
+// })
+
 exports.createOrder = factory.createOne(orderModel);
 exports.getAllOrders = factory.getAll(orderModel);
 exports.getOrder = factory.getOne(orderModel);
 exports.updateOrder = factory.updateOne(orderModel);
 exports.deleteOrder = factory.deleteOne(orderModel);
+
+
