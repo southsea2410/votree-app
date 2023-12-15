@@ -35,57 +35,56 @@ export default function Marketplace() {
 
     useEffect(() => {
         async function fetchData() {
-
             // Fetch data
-            let res = await fetch('/api/v1/marketplace/products', {headers: {'Content-Type': 'application/json'}})
+            let res = await fetch('/api/v1/marketplace/products', {
+                headers: { 'Content-Type': 'application/json' }
+            });
             let data = await res.json();
 
             // Check data
             console.log(data);
-            
+
             // Remove unnecessary data
             data = data.data.products;
 
             // Create list of products
             const products = data.map((product) => {
-                return <ProductCard {...product}/>
+                return <ProductCard key={product._id} {...product} />;
             });
 
             setList(products);
         }
         fetchData();
-    },[]);
+    }, []);
 
-
+    console.log('Test');
     return (
-    <div
-        style={{
-            paddingTop: useNavBarHeight()
-        }}>
-        <NavBar className="navbar" />
-        <Container disableGutters maxWidth="xl" sx={containerStyle}>
-            <div style={{ paddingBottom: '22px' }}>
-                <WhatshotIcon color="pending" fontSize="medium" />
-                <span
-                    className="subtitle-extra-bold"
-                    style={{ color: colors.green5, paddingLeft: 10 }}>
-                    Hot picks
-                </span>
-            </div>
-            <Box sx={hotSalesContainer}>
-                {/* <ProductCard />
-                <ProductCard />
-                <ProductCard /> */}
-            </Box>
+        <div
+            style={{
+                paddingTop: useNavBarHeight()
+            }}>
+            <NavBar className="navbar" />
+            <Container disableGutters maxWidth="xl" sx={containerStyle}>
+                <div style={{ paddingBottom: '22px' }}>
+                    <WhatshotIcon color="pending" fontSize="medium" />
+                    <span
+                        className="subtitle-extra-bold"
+                        style={{ color: colors.green5, paddingLeft: 10 }}>
+                        Hot picks
+                    </span>
+                </div>
+                <Box sx={hotSalesContainer}>
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
+                </Box>
 
-            <div style={{ padding: '31px' }}>
-                <Divider style={{ width: 658, height: 1 }} />
-            </div>
+                <div style={{ padding: '31px' }}>
+                    <Divider style={{ width: 658, height: 1 }} />
+                </div>
 
-            <Box sx={salePostsContainer}>
-                {list}
-            </Box>
-        </Container>
-    </div>
+                <Box sx={salePostsContainer}>{list}</Box>
+            </Container>
+        </div>
     );
 }

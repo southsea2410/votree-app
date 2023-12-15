@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/../dist`));
 
 app.use('/api/v1/marketplace/products', productRouter);
 app.use('/api/v1/sellers', sellerRouter);

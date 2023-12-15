@@ -8,9 +8,9 @@ import './index.css';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-    <StrictMode>
-        <ThemeProvider theme={theme}>
-            <App />
-        </ThemeProvider>
-    </StrictMode>
+    // <StrictMode>
+    <ThemeProvider theme={theme}>
+        <App />
+    </ThemeProvider>
+    /* </StrictMode> */
 );
