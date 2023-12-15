@@ -3,6 +3,9 @@ import colors from './color';
 
 const theme = createTheme({
     palette: {
+        background: {
+            default: colors.secondary
+        },
         primary: {
             main: colors.primary
         },

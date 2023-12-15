@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import { NavBar, InputArticle, UserPost } from '../components';
-import { colors } from '../styles';
 
 // Dummy data
 import { Post_test } from '../assets/images';
@@ -29,8 +28,7 @@ export default function HomePage() {
             id="homepage"
             sx={homePageStyle}
             style={{
-                paddingTop: useNavBarHeight(),
-                background: colors.secondary
+                paddingTop: useNavBarHeight()
             }}>
             <Box className="navbar">
                 <NavBar />

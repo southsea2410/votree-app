@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Button, GlobalStyles, TextField } from '@mui/material';
 import { Footer, OtpInput } from '../components';
 import { colors } from '../styles';
 import * as React from 'react';
@@ -38,6 +38,9 @@ export default function ResetPassword() {
 
     return (
         <div className="containerStyle">
+            <GlobalStyles
+                styles={{ '#root': { backgroundColor: '#FFFFFF' } }}
+            />
             <div
                 style={{
                     display: 'flex',

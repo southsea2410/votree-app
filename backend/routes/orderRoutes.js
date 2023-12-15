@@ -16,9 +16,8 @@ router
   // .patch(orderController.updateOrderForUser)
   .delete(orderController.deleteOrder);
 
-router
-  .route('/seller/:sellerId')
-  // .get(orderController.getOrdersForSeller)
-  // .patch(orderController.updateOrderForSeller);
+router.route('/seller/:sellerId');
+// .get(orderController.getOrdersForSeller)
+// .patch(orderController.updateOrderForSeller);
 
 module.exports = router;
