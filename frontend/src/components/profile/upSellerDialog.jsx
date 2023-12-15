@@ -40,7 +40,7 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
             <Dialog
                 open={open}
                 onClose={handleClose}
-                PaperProps={{ sx: { rowGap: '20px' } }}
+                PaperProps={{ sx: { rowGap: '15px' } }}
                 maxWidth="md"
                 fullWidth>
                 <DialogTitle

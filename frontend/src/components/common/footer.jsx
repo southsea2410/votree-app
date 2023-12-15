@@ -19,7 +19,7 @@ export default function Footer() {
             style={{
                 background: colors.green5,
                 width: '100%',
-                height: 250,
+                height: 300,
                 color: colors.primary,
                 padding: '30px 0px'
             }}>

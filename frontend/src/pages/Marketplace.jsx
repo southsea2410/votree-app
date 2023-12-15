@@ -1,17 +1,18 @@
 import NavBar from '../components/common/navBar';
 import { Box, Container } from '@mui/material';
-import { ProductCard } from '../components';
+import { ProductCard, Footer, CartList } from '../components';
 import { Divider } from '@mui/material';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import { colors } from '../styles';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
+import React, { useCallback } from 'react';
 import { useState, useEffect } from 'react';
 
 const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: '0px 80px'
+    padding: '0px 80px 100px'
 };
 
 const hotSalesContainer = {
@@ -31,6 +32,12 @@ const salePostsContainer = {
 };
 
 export default function Marketplace() {
+    const [plantInCart, setPlantInCart] = React.useState(0);
+
+    const handleAddPlantToCart = useCallback(() => {
+        setPlantInCart((plantInCart) => plantInCart + 1);
+    }, []);
+
     const [list, setList] = useState([]);
 
     useEffect(() => {
@@ -49,13 +56,17 @@ export default function Marketplace() {
 
             // Create list of products
             const products = data.map((product) => {
-                return <ProductCard key={product._id} {...product} />;
+                return (
+                    <div key={product._id} onClick={handleAddPlantToCart}>
+                        <ProductCard {...product} />
+                    </div>
+                );
             });
 
             setList(products);
         }
         fetchData();
-    }, []);
+    }, [handleAddPlantToCart]);
 
     console.log('Test');
     return (
@@ -63,7 +74,9 @@ export default function Marketplace() {
             style={{
                 paddingTop: useNavBarHeight()
             }}>
-            <NavBar className="navbar" />
+            <Box className="navbar">
+                <NavBar />
+            </Box>
             <Container disableGutters maxWidth="xl" sx={containerStyle}>
                 <div style={{ paddingBottom: '22px' }}>
                     <WhatshotIcon color="pending" fontSize="medium" />
@@ -74,9 +87,15 @@ export default function Marketplace() {
                     </span>
                 </div>
                 <Box sx={hotSalesContainer}>
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
+                    <div onClick={handleAddPlantToCart}>
+                        <ProductCard variant="hotpick" />
+                    </div>
+                    <div onClick={handleAddPlantToCart}>
+                        <ProductCard variant="hotpick" />
+                    </div>
+                    <div onClick={handleAddPlantToCart}>
+                        <ProductCard variant="hotpick" />
+                    </div>
                 </Box>
 
                 <div style={{ padding: '31px' }}>
@@ -85,6 +104,10 @@ export default function Marketplace() {
 
                 <Box sx={salePostsContainer}>{list}</Box>
             </Container>
+            {plantInCart ? <CartList /> : <></>}
+            <div>
+                <Footer className="footerStyle" />
+            </div>
         </div>
     );
 }

@@ -5,7 +5,7 @@ import { colors } from '../../styles';
 
 export default function Basket() {
     return (
-        <Avatar variant="icon">
+        <Avatar variant="icon" color="secondary">
             <BasketIcon color={colors.green2} style={{ fontSize: 32 }} />
         </Avatar>
     );

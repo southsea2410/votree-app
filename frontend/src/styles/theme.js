@@ -29,6 +29,43 @@ const theme = createTheme({
         fontFamily: '"Inter"'
     },
     components: {
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    color: colors.green5,
+                    '&.Mui-focused': {
+                        color: colors.green5 // Color when the Select is focused
+                    },
+                    '&.Mui-error': {
+                        color: colors.green5 // Color when an error occurs
+                    }
+                }
+            }
+        },
+        MuiSelect: {
+            styleOverrides: {
+                root: {
+                    width: '220px',
+                    height: '56px',
+                    borderRadius: '30px',
+                    color: colors.green5,
+                    '&.Mui-focused': {
+                        color: colors.green5
+                    }
+                },
+                select: {
+                    color: colors.green5,
+                    fontFamily: 'Inter',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: '500',
+                    lineHeight: '120%'
+                },
+                icon: {
+                    color: colors.green5
+                }
+            }
+        },
         MuiTextField: {
             styleOverrides: {
                 root: {
@@ -173,12 +210,13 @@ const theme = createTheme({
                 {
                     props: { variant: 'cart' },
                     style: {
-                        background: colors.secondary,
-                        color: colors.green6,
+                        background: colors.green1,
+                        color: colors.green4,
                         fontSize: '30px',
                         lineHeight: '40px',
-                        minWidth: '60px',
-                        minHeight: '60px',
+                        minWidth: '45px',
+                        minHeight: '45px',
+                        borderRadius: 7,
                         fontWeight: 300,
                         '&:hover': {
                             fontSize: '30px',
@@ -213,6 +251,16 @@ const theme = createTheme({
         MuiAvatar: {
             variants: [
                 {
+                    props: { variant: 'big', color: 'green6' },
+                    style: {
+                        fontSize: 20.25,
+                        fontWeight: '50px',
+                        width: '80px',
+                        height: '80px',
+                        background: colors.green6
+                    }
+                },
+                {
                     props: { variant: 'small' },
                     style: {
                         fontSize: 20.25,
@@ -222,11 +270,19 @@ const theme = createTheme({
                     }
                 },
                 {
-                    props: { variant: 'icon' },
+                    props: { variant: 'icon', color: 'secondary' },
                     style: {
                         width: '50px',
                         height: '50px',
                         background: colors.secondary
+                    }
+                },
+                {
+                    props: { variant: 'icon', color: 'green6' },
+                    style: {
+                        width: '50px',
+                        height: '50px',
+                        background: colors.green6
                     }
                 },
                 {
@@ -299,7 +355,7 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     backgroundColor: colors.primary,
-                    borderRadius: '2%'
+                    borderRadius: '7px'
                 }
             }
         },

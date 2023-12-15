@@ -32,7 +32,7 @@ const ImageContainer = styled('div')({
 export default function NavBar({ className }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    const [value, setValue] = React.useState('recents');
+    const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

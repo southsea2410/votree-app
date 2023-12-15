@@ -13,6 +13,7 @@ import { colors } from '../styles';
 import { content, contentLong } from '../assets/contents/content';
 import UpSellerDialog from '../components/profile/UpSellerDialog';
 import { useParams } from 'react-router-dom';
+import { useNavBarHeight } from '../hooks/useNavBarHeight';
 
 // const fields = {
 //     avatar: '',
@@ -69,7 +70,7 @@ function InfoTable() {
             setInfos(arr.data.seller);
         }
         fetchUserInfo();
-    }, []);
+    }, [id]);
 
     if (infos === undefined) return <p>User not found!!</p>;
     else
@@ -88,6 +89,7 @@ function InfoTable() {
                         infos[key] === undefined ||
                         key == '_id' ||
                         key == 'id' ||
+                        key == 'role' ||
                         key == 'password' ||
                         key == 'products' ||
                         key == '__v'
@@ -160,8 +162,7 @@ const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: '120px',
-    rowGap: '20px',
+    rowGap: '15px',
     backgroundColor: colors.secondary
 };
 
@@ -170,8 +171,10 @@ const containerStyle = {
 
 export default function UserProfile() {
     return (
-        <Fragment>
-            <NavBar className="navbar" />
+        <div style={{ paddingTop: useNavBarHeight() }}>
+            <Box className="navbar">
+                <NavBar />
+            </Box>
             <Container maxWidth="lg" sx={containerStyle}>
                 <UserCard />
                 <UserPost content={content} />
@@ -180,6 +183,6 @@ export default function UserProfile() {
                 <UserPost />
                 <UserPost />
             </Container>
-        </Fragment>
+        </div>
     );
 }
