@@ -8,20 +8,110 @@ import {
     Container,
     Divider
 } from '@mui/material';
+import { useState, useEffect } from 'react';
 import { colors } from '../styles';
 import { content, contentLong } from '../assets/contents/content';
 import UpSellerDialog from '../components/profile/UpSellerDialog';
+import { useParams } from 'react-router-dom';
 
-function UserCard({
-    age = 17,
-    gender = 'Male',
-    phone = '0123456789',
-    email = 'vegetable@gmail.com',
-    address = '123, Nguyen Van Linh, District 7, Ho Chi Minh City',
-    interests = 'Vegetable, Fruit, Meat'
-}) {
+// const fields = {
+//     avatar: '',
+//     email: '',
+//     fullName: '',
+//     address: '',
+//     password: '',
+//     phoneNumber: '',
+//     products: [],
+//     role: '',
+//     storeEmail: '',
+//     storeLocation: '',
+//     storeName: '',
+//     storePhoneNumber: '',
+// };
+
+const fieldNames = {
+    avatar: 'Avatar',
+    email: 'Email',
+    fullName: 'Full Name',
+    userName: 'User Name',
+    address: 'Address',
+    phoneNumber: 'Phone Number',
+    role: 'Role',
+    storeEmail: 'Store Email',
+    storeLocation: 'Store Location',
+    storeName: 'Store Name',
+    storePhoneNumber: 'Store Phone Number'
+};
+
+function InfoTable() {
+    const [infos, setInfos] = useState({
+        avatar: '',
+        email: '',
+        fullName: '',
+        userName: '',
+        address: '',
+        phoneNumber: '',
+        role: '',
+        storeEmail: '',
+        storeLocation: '',
+        storeName: '',
+        storePhoneNumber: ''
+    });
+    const { id } = useParams();
+
+    useEffect(() => {
+        async function fetchUserInfo() {
+            const data = await fetch('/api/v1/sellers/' + id, {
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const arr = await data.json();
+            console.log(arr);
+            setInfos(arr.data.seller);
+        }
+        fetchUserInfo();
+    }, []);
+
+    if (infos === undefined) return <p>User not found!!</p>;
+    else
+        return (
+            <Box
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: '200px 400px',
+                    gridAutoRows: 'minmax(50px, auto)',
+                    rowGap: '10px',
+                    columnGap: '15px',
+                    alignItems: 'center'
+                }}>
+                {Object.keys(infos).map((key) => {
+                    if (
+                        infos[key] === undefined ||
+                        key == '_id' ||
+                        key == 'id' ||
+                        key == 'password' ||
+                        key == 'products' ||
+                        key == '__v'
+                    ) {
+                        return null;
+                    }
+                    return (
+                        <Fragment key={key}>
+                            <p
+                                className="subtitle-semi-bold-20"
+                                style={{ color: colors.green4 }}>
+                                {fieldNames[key]}
+                            </p>
+                            <p className="content-medium-20-25">{infos[key]}</p>
+                        </Fragment>
+                    );
+                })}
+            </Box>
+        );
+}
+
+function UserCard() {
     return (
-        <Container maxWidth="false" disableGutters="true">
+        <Container maxWidth="false" disableGutters>
             <Card variant="outlined">
                 <CardContent
                     sx={{
@@ -35,7 +125,7 @@ function UserCard({
                             flexWrap: 'wrap',
                             justifyContent: 'space-between'
                         }}>
-                        <SumProfile />
+                        <SumProfile userName={'test'} />
                         <UpSellerDialog variant="filled">
                             Up Seller
                         </UpSellerDialog>
@@ -48,50 +138,7 @@ function UserCard({
                             justifyContent: 'space-between',
                             alignItems: 'flex-start'
                         }}>
-                        <Box
-                            sx={{
-                                display: 'grid',
-                                gridTemplateColumns: '200px 400px',
-                                gridTemplateRows: 'repeat(6, 50px)',
-                                alignItems: 'center'
-                            }}>
-                            <p
-                                className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}>
-                                Age
-                            </p>
-                            <p className="content-medium-20-25">{age}</p>
-                            <p
-                                className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}>
-                                Gender
-                            </p>
-                            <p className="content-medium-20-25">{gender}</p>
-                            <p
-                                className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}>
-                                Phone Number
-                            </p>
-                            <p className="content-medium-20-25">{phone}</p>
-                            <p
-                                className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}>
-                                Email
-                            </p>
-                            <p className="content-medium-20-25">{email}</p>
-                            <p
-                                className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}>
-                                Address
-                            </p>
-                            <p className="content-medium-20-25">{address}</p>
-                            <p
-                                className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}>
-                                Interest
-                            </p>
-                            <p className="content-medium-20-25">{interests}</p>
-                        </Box>
+                        <InfoTable />
                         <Button variant="filled">Edit Profile</Button>
                     </Box>
                     <Divider variant="slighter"></Divider>
@@ -117,6 +164,9 @@ const containerStyle = {
     rowGap: '20px',
     backgroundColor: colors.secondary
 };
+
+// 6577d9852aeaa934ac6173f4
+// 6577d9852aeaa934ac6173f5
 
 export default function UserProfile() {
     return (

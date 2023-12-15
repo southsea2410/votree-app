@@ -6,7 +6,8 @@ import './../../index.css';
 export default function SumProfile({
     username = 'Prince Vegeta',
     role = 'user',
-    avatar = 'https://i.pinimg.com/originals/0a/0b/9a/0a0b9a5e1e2b6b6b6b6b6b6b6b6b6b6b.jpg'
+    avatar = 'https://i.pinimg.com/originals/0a/0b/9a/0a0b9a5e1e2b6b6b6b6b6b6b6b6b6b6b.jpg',
+    ...props
 }) {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>

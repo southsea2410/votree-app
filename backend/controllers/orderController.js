@@ -91,7 +91,6 @@ exports.createOrderCheckout = catchAsync(async (req, res, next) => {
 //     data: order,
 //   });
 
-
 // })
 
 exports.createOrder = factory.createOne(orderModel);
@@ -99,5 +98,3 @@ exports.getAllOrders = factory.getAll(orderModel);
 exports.getOrder = factory.getOne(orderModel);
 exports.updateOrder = factory.updateOne(orderModel);
 exports.deleteOrder = factory.deleteOne(orderModel);
-
-

@@ -8,7 +8,6 @@ import {
 } from './pages';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-
 function App() {
     return (
         <Router>
@@ -18,7 +17,10 @@ function App() {
                     <Route path="login" element={<Login />} />
                     <Route path="marketplace" element={<Marketplace />} />
                     <Route path="resetpassword" element={<ResetPassword />} />
-                    <Route path="profile" element={<UserProfile />} />
+                    <Route path="profile">
+                        <Route index element={<UserProfile />} />
+                        <Route path=":id" element={<UserProfile />} />
+                    </Route>
                 </Route>
             </Routes>
         </Router>

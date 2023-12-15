@@ -48,7 +48,6 @@ app.use(express.static(`${__dirname}/../dist`));
 // Data sanitization against XSS
 app.use(xss());
 
-
 app.use('/api/v1/marketplace/products', productRouter);
 app.use('/api/v1/sellers', sellerRouter);
 app.use('/api/v1/marketplace/carts', cartRouter);
