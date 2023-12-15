@@ -9,7 +9,7 @@
       "cache": false,
       "persistent": true,
       "inputs": ["frontend/src/**"],
-      "outputs": ["frontend/dist/**"]
+      "outputs": ["dist/**"]
     },
     "lint": {},
     "pretty": {},

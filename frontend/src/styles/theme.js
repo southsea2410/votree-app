@@ -3,6 +3,9 @@ import colors from './color';
 
 const theme = createTheme({
     palette: {
+        background: {
+            default: colors.secondary
+        },
         primary: {
             main: colors.primary
         },
@@ -201,6 +204,24 @@ const theme = createTheme({
                         color: colors.green6,
                         '&:hover': {
                             background: colors.primary
+                        }
+                    }
+                },
+                {
+                    props: { variant: 'cart' },
+                    style: {
+                        background: colors.secondary,
+                        color: colors.green6,
+                        fontSize: '30px',
+                        lineHeight: '40px',
+                        minWidth: '60px',
+                        minHeight: '60px',
+                        fontWeight: 300,
+                        '&:hover': {
+                            fontSize: '30px',
+                            background: colors.green1,
+                            color: colors.green6,
+                            fontWeight: 400
                         }
                     }
                 }

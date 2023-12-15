@@ -19,6 +19,10 @@ router
   .post(sellerController.addProduct)
   .get(sellerController.getAllSellerProducts);
 
+// Equivalent
+router.route('/:sellerId/products').post(sellerController.addProduct);
+router.route('/:sellerId/products').get(sellerController.getAllSellerProducts);
+
 router
   .route('/:sellerId/products/:productId')
   .delete(sellerController.deleteSellerProduct);

@@ -19,9 +19,12 @@ function App() {
                     <Route path="login" element={<Login />} />
                     <Route path="marketplace" element={<Marketplace />} />
                     <Route path="resetpassword" element={<ResetPassword />} />
-                    <Route path="profile" element={<UserProfile />} />
+                    <Route path="profile">
+                        <Route index element={<UserProfile />} />
+                        <Route path=":id" element={<UserProfile />} />
                     <Route path="orderproducts" element={<OrderProducts />} />
                     <Route path="changepassword" element={<ChangePassword />} />
+                    </Route>
                 </Route>
             </Routes>
         </Router>
