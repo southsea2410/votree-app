@@ -7,16 +7,35 @@ import { Product_test } from '../../assets/images';
 import { StarIcon } from '../../assets/icons';
 import './../../index.css';
 import { colors } from '../../styles';
+import { useState } from 'react';
 
-const NUM_OF_STARS = 5;
+// const NUM_OF_STARS = 5;
 
-export default function ProductCard({ variant = 'product' }) {
+export default function ProductCard({ variant = 'product', ...props}) {
     const value = 3; // will update
+    const starsNum = parseInt(props.ratingsAverage) || 5;
+    const stars = [...Array(starsNum).keys()];
+
+    const [sellerName, setSellerName] = useState('Unknown');
+
+    async function fetchSellerName() {
+        // Fetch seller
+        const res = await fetch('api/v1/sellers/' + props.sellerId, {headers: {'Content-Type': 'application/json'}})
+        const data = await res.json();
+
+        const seller = data.data.seller;
+        console.log(seller);
+        setSellerName(seller.fullName);
+    }
+
+    fetchSellerName();
 
     return (
         <Card
             variant={variant}
             style={{
+                display: 'flex',
+                flexDirection: 'column',
                 boxShadow:
                     '0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.20)'
             }}>
@@ -32,7 +51,7 @@ export default function ProductCard({ variant = 'product' }) {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     // width: 348,
-                    height: 93,
+                    // height: 93,
                     padding: '7px 20px'
                 }}>
                 <div
@@ -42,14 +61,14 @@ export default function ProductCard({ variant = 'product' }) {
                         gap: '3px',
                         justifyContent: 'space-between'
                     }}>
-                    <div className="content-medium-14-22">17.000.000 VND</div>
+                    <div className="content-medium-14-22">{props.price && '$ '+props.price}</div>
                     <div
                         className="subtitle-semi-bold-20"
                         style={{ color: colors.green4 }}>
-                        Vegetable Name
+                        {props.name}
                     </div>
                     <div>
-                        {[...Array(NUM_OF_STARS)].map((_, index) => (
+                        {stars.map( (index) => (
                             <StarIcon
                                 key={index}
                                 color={
@@ -61,12 +80,12 @@ export default function ProductCard({ variant = 'product' }) {
                         ))}
                     </div>
                     <div style={{ display: 'flex' }}>
-                        <div
+                        <p
                             className="content-regular-12"
                             style={{ width: 51, height: 10 }}>
                             Sold By:
-                        </div>
-                        <div>Peter Parker</div>
+                        </p>
+                        <p>{sellerName}</p>
                     </div>
                 </div>
                 <CardActions style={{ padding: 0 }}>
