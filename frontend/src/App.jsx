@@ -22,9 +22,9 @@ function App() {
                     <Route path="profile">
                         <Route index element={<UserProfile />} />
                         <Route path=":id" element={<UserProfile />} />
+                    </Route>
                     <Route path="orderproducts" element={<OrderProducts />} />
                     <Route path="changepassword" element={<ChangePassword />} />
-                    </Route>
                 </Route>
             </Routes>
         </Router>

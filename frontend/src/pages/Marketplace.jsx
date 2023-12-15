@@ -5,14 +5,14 @@ import { Divider } from '@mui/material';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import { colors } from '../styles';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useState, useEffect } from 'react';
 
 const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: '0px 80px'
+    padding: '0px 80px 100px'
 };
 
 const hotSalesContainer = {
@@ -34,10 +34,10 @@ const salePostsContainer = {
 export default function Marketplace() {
     const [plantInCart, setPlantInCart] = React.useState(0);
 
-    const handleAddPlantToCart = () => {
-        setPlantInCart(plantInCart + 1);
-    }
-    
+    const handleAddPlantToCart = useCallback(() => {
+        setPlantInCart((plantInCart) => plantInCart + 1);
+    }, []);
+
     const [list, setList] = useState([]);
 
     useEffect(() => {
@@ -56,13 +56,17 @@ export default function Marketplace() {
 
             // Create list of products
             const products = data.map((product) => {
-                return <ProductCard key={product._id} {...product} />;
+                return (
+                    <div key={product._id} onClick={handleAddPlantToCart}>
+                        <ProductCard {...product} />
+                    </div>
+                );
             });
 
             setList(products);
         }
         fetchData();
-    }, []);
+    }, [handleAddPlantToCart]);
 
     console.log('Test');
     return (
@@ -70,7 +74,9 @@ export default function Marketplace() {
             style={{
                 paddingTop: useNavBarHeight()
             }}>
-            <NavBar className="navbar" />
+            <Box className="navbar">
+                <NavBar />
+            </Box>
             <Container disableGutters maxWidth="xl" sx={containerStyle}>
                 <div style={{ paddingBottom: '22px' }}>
                     <WhatshotIcon color="pending" fontSize="medium" />
@@ -98,12 +104,7 @@ export default function Marketplace() {
 
                 <Box sx={salePostsContainer}>{list}</Box>
             </Container>
-            {
-                plantInCart ? 
-                <CartList />
-                :
-                <></>
-            }
+            {plantInCart ? <CartList /> : <></>}
             <div>
                 <Footer className="footerStyle" />
             </div>

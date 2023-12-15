@@ -9,7 +9,7 @@ import InputArticle from './experiencePosts/inputArticle';
 import Footer from './common/footer';
 import OtpInput from './auth/otpInput';
 import CartList from './marketplace/cartList';
-import dropDownSelect from './common/dropDownSelect';
+import DropDownSelect from './common/dropDownSelect';
 
 export {
     NavBar,
@@ -23,5 +23,5 @@ export {
     PostArticle,
     OtpInput,
     CartList,
-    dropDownSelect
+    DropDownSelect
 };

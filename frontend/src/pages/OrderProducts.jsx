@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavBar, dropDownSelect } from '../components';
+import { NavBar, DropDownSelect } from '../components';
 import {
     Box,
     Button,
@@ -16,13 +16,13 @@ function OrderCard({
     field = 'Method',
     list = ['Cash', 'Banking', 'Momo', 'VNPay'],
     seller = 'King Vegeta',
-    customer = 'Prince Vegeta',
+    customer = 'Prince Vegeta'
 }) {
     const profileData = [
         { name: 'Hoa hoc phi', quantity: 3 },
         { name: 'Hoa hoc phi', quantity: 1 },
         { name: 'Hoa hoc phi', quantity: 2 },
-        { name: 'Hoa hoc phi', quantity: 5 },
+        { name: 'Hoa hoc phi', quantity: 5 }
     ]; // will update
 
     return (
@@ -34,10 +34,15 @@ function OrderCard({
                         flexDirection: 'column',
                         rowGap: '20px'
                     }}>
-                    <div>
-
-                    </div>
-                    <div className="subtitle-bold-28" color={colors.green6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div></div>
+                    <div
+                        className="subtitle-bold-28"
+                        color={colors.green6}
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
                         Invoice details
                     </div>
                     <Box
@@ -62,7 +67,9 @@ function OrderCard({
                         <p className="content-medium-20-25">{customer}</p>
                     </Box>
                     <Divider variant="slighter"></Divider>
-                    <Box className="subtitle-bold-28" color={colors.green2}>Products</Box>
+                    <Box className="subtitle-bold-28" color={colors.green2}>
+                        Products
+                    </Box>
                     <Box
                         sx={{
                             display: 'flex',
@@ -79,19 +86,23 @@ function OrderCard({
                             }}>
                             {profileData.map((data, index) => (
                                 <React.Fragment key={index}>
-                                <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
-                                    {data.name}
-                                </p>
-                                <p className="content-medium-20-25">{data.quantity}</p>
+                                    <p
+                                        className="subtitle-semi-bold-20"
+                                        style={{ color: colors.green4 }}>
+                                        {data.name}
+                                    </p>
+                                    <p className="content-medium-20-25">
+                                        {data.quantity}
+                                    </p>
                                 </React.Fragment>
                             ))}
                         </Box>
                     </Box>
                     <Divider variant="slighter"></Divider>
-                    <Box className="subtitle-bold-28" color={colors.green2}>Payment</Box>
-                    <div>
-                        {dropDownSelect({ field, list })}
-                    </div>
+                    <Box className="subtitle-bold-28" color={colors.green2}>
+                        Payment
+                    </Box>
+                    <div>{DropDownSelect({ field, list })}</div>
                     <Divider variant="slighter"></Divider>
                     <Box
                         sx={{
@@ -112,13 +123,16 @@ function OrderCard({
 
 export default function OrderProducts() {
     return (
-        <Box style={{ paddingTop: useNavBarHeight(), paddingBottom: '200px' }}>
-            <Box className='navbar'>
+        <Box style={{ paddingTop: useNavBarHeight(), paddingBottom: '80px' }}>
+            <Box className="navbar">
                 <NavBar />
             </Box>
             <Container maxWidth="lg">
                 <div>
-                    {OrderCard({ field: 'Method', list: ['Cash', 'Banking', 'Momo', 'VNPay'] })}
+                    {OrderCard({
+                        field: 'Method',
+                        list: ['Cash', 'Banking', 'Momo', 'VNPay']
+                    })}
                 </div>
             </Container>
         </Box>

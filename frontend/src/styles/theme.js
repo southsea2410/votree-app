@@ -34,12 +34,12 @@ const theme = createTheme({
                 root: {
                     color: colors.green5,
                     '&.Mui-focused': {
-                        color: colors.green5, // Color when the Select is focused
-                      },
+                        color: colors.green5 // Color when the Select is focused
+                    },
                     '&.Mui-error': {
-                        color: colors.green5, // Color when an error occurs
-                      },
-                },
+                        color: colors.green5 // Color when an error occurs
+                    }
+                }
             }
         },
         MuiSelect: {
@@ -50,8 +50,8 @@ const theme = createTheme({
                     borderRadius: '30px',
                     color: colors.green5,
                     '&.Mui-focused': {
-                        color: colors.green5,
-                    },
+                        color: colors.green5
+                    }
                 },
                 select: {
                     color: colors.green5,
@@ -59,11 +59,11 @@ const theme = createTheme({
                     fontSize: '16px',
                     fontStyle: 'normal',
                     fontWeight: '500',
-                    lineHeight: '120%',
+                    lineHeight: '120%'
                 },
                 icon: {
-                    color: colors.green5,
-                },
+                    color: colors.green5
+                }
             }
         },
         MuiTextField: {
@@ -210,12 +210,13 @@ const theme = createTheme({
                 {
                     props: { variant: 'cart' },
                     style: {
-                        background: colors.secondary,
-                        color: colors.green6,
+                        background: colors.green1,
+                        color: colors.green4,
                         fontSize: '30px',
                         lineHeight: '40px',
-                        minWidth: '60px',
-                        minHeight: '60px',
+                        minWidth: '45px',
+                        minHeight: '45px',
+                        borderRadius: 7,
                         fontWeight: 300,
                         '&:hover': {
                             fontSize: '30px',

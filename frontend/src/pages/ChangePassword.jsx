@@ -1,5 +1,5 @@
 import { Button, TextField } from '@mui/material';
-import { Footer, OtpInput } from '../components';
+import { Footer } from '../components';
 import { colors } from '../styles';
 import * as React from 'react';
 import './../index.css';
@@ -19,37 +19,21 @@ const clusterStyle = {
     gap: '45px'
 };
 
-const textBoxClusterStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 12
-};
-
 export default function ChangePassword() {
-    const [sentOTP, setSentOTP] = React.useState(0);
-    const [otp, setOtp] = React.useState('');
-    const otpLength = 6;
-
-    const handleSendOTP = () => {
-        setSentOTP(!sentOTP);
-    };
-
-    const onChange = (value) => setOtp(value);
-
     return (
         <div className="containerStyle">
             <div
                 style={{
                     display: 'flex',
                     padding: '100px 100px',
-                    justifyContent: 'space-around',
+                    justifyContent: 'space-around'
                 }}>
                 <div
                     style={{
                         width: 422,
                         height: 450,
                         border: '1px solid',
-                        borderRadius: 7,
+                        borderRadius: 7
                     }}>
                     <div style={{ ...clusterStyle, padding: '35px 35px' }}>
                         <div
@@ -58,62 +42,64 @@ export default function ChangePassword() {
                             Change Password
                         </div>
                         <div style={clusterStyle}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: 25, width: 364 }}>
-                            <TextField
-                                size="small"
-                                fullWidth
-                                placeholder="Old password"
-                                id="fullWidth"
-                                InputLabelProps={{
-                                    className: 'content-semi-bold-16'
-                                }}
-                                multiline
-                                rows={1}
-                                InputProps={{
-                                    textAlign: 'center'
-                                }}
-                                style={textBoxStyle}
-                            />
-                            <TextField
-                                size="small"
-                                fullWidth
-                                placeholder="New password"
-                                id="fullWidth"
-                                InputLabelProps={{
-                                    className: 'content-semi-bold-16'
-                                }}
-                                multiline
-                                rows={1}
-                                InputProps={{
-                                    textAlign: 'center'
-                                }}
-                                style={textBoxStyle}
-                            />
-                            <TextField
-                                size="small"
-                                fullWidth
-                                placeholder="Re-type new password"
-                                id="fullWidth"
-                                InputLabelProps={{
-                                    className: 'content-semi-bold-16'
-                                }}
-                                multiline
-                                rows={1}
-                                InputProps={{
-                                    textAlign: 'center'
-                                }}
-                                style={textBoxStyle}
-                            />
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: 25,
+                                    width: 364
+                                }}>
+                                <TextField
+                                    size="small"
+                                    fullWidth
+                                    placeholder="Old password"
+                                    id="fullWidth"
+                                    InputLabelProps={{
+                                        className: 'content-semi-bold-16'
+                                    }}
+                                    multiline
+                                    rows={1}
+                                    InputProps={{
+                                        textAlign: 'center'
+                                    }}
+                                    style={textBoxStyle}
+                                />
+                                <TextField
+                                    size="small"
+                                    fullWidth
+                                    placeholder="New password"
+                                    id="fullWidth"
+                                    InputLabelProps={{
+                                        className: 'content-semi-bold-16'
+                                    }}
+                                    multiline
+                                    rows={1}
+                                    InputProps={{
+                                        textAlign: 'center'
+                                    }}
+                                    style={textBoxStyle}
+                                />
+                                <TextField
+                                    size="small"
+                                    fullWidth
+                                    placeholder="Re-type new password"
+                                    id="fullWidth"
+                                    InputLabelProps={{
+                                        className: 'content-semi-bold-16'
+                                    }}
+                                    multiline
+                                    rows={1}
+                                    InputProps={{
+                                        textAlign: 'center'
+                                    }}
+                                    style={textBoxStyle}
+                                />
+                            </div>
+                            <Button style={{ width: '100%' }}>Confirm</Button>
                         </div>
-                        <Button
-                            style={{ width: '100%' }}
-                            onClick={handleSendOTP}>
-                            Confirm
-                        </Button>
                     </div>
                 </div>
             </div>
-        </div>
             <div>
                 <Footer className="footerStyle" />
             </div>
