@@ -4,7 +4,9 @@ import {
     HomePage,
     Marketplace,
     ResetPassword,
-    UserProfile
+    UserProfile,
+    OrderProducts,
+    ChangePassword
 } from './pages';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -18,6 +20,8 @@ function App() {
                     <Route path="marketplace" element={<Marketplace />} />
                     <Route path="resetpassword" element={<ResetPassword />} />
                     <Route path="profile" element={<UserProfile />} />
+                    <Route path="orderproducts" element={<OrderProducts />} />
+                    <Route path="changepassword" element={<ChangePassword />} />
                 </Route>
             </Routes>
         </Router>

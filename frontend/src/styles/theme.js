@@ -26,6 +26,43 @@ const theme = createTheme({
         fontFamily: '"Inter"'
     },
     components: {
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    color: colors.green5,
+                    '&.Mui-focused': {
+                        color: colors.green5, // Color when the Select is focused
+                      },
+                    '&.Mui-error': {
+                        color: colors.green5, // Color when an error occurs
+                      },
+                },
+            }
+        },
+        MuiSelect: {
+            styleOverrides: {
+                root: {
+                    width: '220px',
+                    height: '56px',
+                    borderRadius: '30px',
+                    color: colors.green5,
+                    '&.Mui-focused': {
+                        color: colors.green5,
+                    },
+                },
+                select: {
+                    color: colors.green5,
+                    fontFamily: 'Inter',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: '500',
+                    lineHeight: '120%',
+                },
+                icon: {
+                    color: colors.green5,
+                },
+            }
+        },
         MuiTextField: {
             styleOverrides: {
                 root: {

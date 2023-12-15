@@ -9,6 +9,7 @@ import InputArticle from './experiencePosts/inputArticle';
 import Footer from './common/footer';
 import OtpInput from './auth/otpInput';
 import CartList from './marketplace/cartList';
+import dropDownSelect from './common/dropDownSelect';
 
 export {
     NavBar,
@@ -21,5 +22,6 @@ export {
     Footer,
     PostArticle,
     OtpInput,
-    CartList
+    CartList,
+    dropDownSelect
 };
