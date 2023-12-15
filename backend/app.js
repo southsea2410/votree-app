@@ -1,6 +1,7 @@
 require('express-async-errors');
 const express = require('express');
 const morgan = require('morgan');
+
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -42,10 +43,11 @@ app.use(fileUpload());
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
+app.use(express.static(`${__dirname}/../dist`));
+
 // Data sanitization against XSS
 app.use(xss());
 
-app.use('/public', express.static(`${__dirname}/public`));
 
 app.use('/api/v1/marketplace/products', productRouter);
 app.use('/api/v1/sellers', sellerRouter);

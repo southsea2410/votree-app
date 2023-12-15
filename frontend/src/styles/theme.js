@@ -166,6 +166,24 @@ const theme = createTheme({
                             background: colors.primary
                         }
                     }
+                },
+                {
+                    props: { variant: 'cart' },
+                    style: {
+                        background: colors.secondary,
+                        color: colors.green6,
+                        fontSize: '30px',
+                        lineHeight: '40px',
+                        minWidth: '60px',
+                        minHeight: '60px',
+                        fontWeight: 300,
+                        '&:hover': {
+                            fontSize: '30px',
+                            background: colors.green1,
+                            color: colors.green6,
+                            fontWeight: 400
+                        }
+                    }
                 }
             ],
             styleOverrides: {

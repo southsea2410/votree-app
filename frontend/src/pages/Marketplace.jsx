@@ -5,6 +5,7 @@ import { Divider } from '@mui/material';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import { colors } from '../styles';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
+import { useState, useEffect } from 'react';
 
 const containerStyle = {
     display: 'flex',
@@ -30,13 +31,40 @@ const salePostsContainer = {
 };
 
 export default function Marketplace() {
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            // Fetch data
+            let res = await fetch('/api/v1/marketplace/products', {
+                headers: { 'Content-Type': 'application/json' }
+            });
+            let data = await res.json();
+
+            // Check data
+            console.log(data);
+
+            // Remove unnecessary data
+            data = data.data.products;
+
+            // Create list of products
+            const products = data.map((product) => {
+                return <ProductCard key={product._id} {...product} />;
+            });
+
+            setList(products);
+        }
+        fetchData();
+    }, []);
+
+    console.log('Test');
     return (
         <div
             style={{
                 paddingTop: useNavBarHeight()
             }}>
             <NavBar className="navbar" />
-            <Container disableGutters="true" maxWidth="xl" sx={containerStyle}>
+            <Container disableGutters maxWidth="xl" sx={containerStyle}>
                 <div style={{ paddingBottom: '22px' }}>
                     <WhatshotIcon color="pending" fontSize="medium" />
                     <span
@@ -46,25 +74,16 @@ export default function Marketplace() {
                     </span>
                 </div>
                 <Box sx={hotSalesContainer}>
-                    <ProductCard variant="hotpick" />
-                    <ProductCard variant="hotpick" />
-                    <ProductCard variant="hotpick" />
+                    <ProductCard />
+                    <ProductCard />
+                    <ProductCard />
                 </Box>
 
                 <div style={{ padding: '31px' }}>
                     <Divider style={{ width: 658, height: 1 }} />
                 </div>
 
-                <Box sx={salePostsContainer}>
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                </Box>
+                <Box sx={salePostsContainer}>{list}</Box>
             </Container>
         </div>
     );
