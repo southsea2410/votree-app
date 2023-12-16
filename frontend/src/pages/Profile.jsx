@@ -36,7 +36,6 @@ import { selectProfileInfo } from '../redux/features/profileInfoSlice';
 
 function InfoTable() {
     const profileInfo = useSelector(selectProfileInfo);
-    console.log(profileInfo);
 
     const [infos, setInfos] = useState({
         avatar: '',
@@ -85,7 +84,8 @@ function InfoTable() {
                         key == 'role' ||
                         key == 'password' ||
                         key == 'products' ||
-                        key == '__v'
+                        key == '__v' ||
+                        key == 'userName'
                     ) {
                         return null;
                     }
@@ -107,6 +107,8 @@ function InfoTable() {
 }
 
 function UserCard() {
+    const profileInfo = useSelector(selectProfileInfo);
+
     return (
         <Container maxWidth="false" disableGutters>
             <Card variant="outlined">
@@ -122,7 +124,7 @@ function UserCard() {
                             flexWrap: 'wrap',
                             justifyContent: 'space-between'
                         }}>
-                        <SumProfile userName={'test'} />
+                        <div>{SumProfile({ fullName: profileInfo['fullName'], role: profileInfo['role'] })}</div>
                         <UpSellerDialog variant="filled">
                             Up Seller
                         </UpSellerDialog>
