@@ -13,7 +13,7 @@
     "quantity": 9,
     "description": "You will receive the succulent arraignment that is in this picture. I will ship out with soil & pot. Easy to care for. Water once or twice weekly.",
     "price": 20,
-    "image": "../img/products/ASSORTED_SUCCULENT_ARRANGEMENT.jpeg",
+    "image": "../../public/img/products/ASSORTED_SUCCULENT_ARRANGEMENT.jpeg",
     "sellerId": "657d32d4590fea96403ee873"
   },
   {
@@ -30,7 +30,7 @@
     "quantity": 65,
     "description": "Only 3 available and it's in 1 people's basket",
     "price": 12,
-    "image": "../img/products/Autograph_Tree_Clusia_Rosea.jpeg",
+    "image": "../../public/img/products/Autograph_Tree_Clusia_Rosea.jpeg",
     "sellerId": "657d32d4590fea96403ee872"
   },
   {
@@ -47,7 +47,7 @@
     "quantity": 31,
     "description": "Chicago Lustre Arrowwood Viburnum, Viburnum dentatum Synnestvedt, is selected for its upright, rounded, dense habit and glossy, deep green foliage that turns red-purple in fall. They grow 8-10' tall mature..\nThe creamy white flowers bloom in June and mature into clusters of globe-shaped fruit. The fruit are deep porcelain blue to blue-purple, maturing in August and providing food for the birds.\nChicago Lustre is a medium-sized to large-sized ornamental shrub, that can grow even larger under optimum conditions. It has an upright, oval growth habit in youth, becoming arching, spreading, and suckering with age. It has a medium growth rate and prefers full sun to partial shade with moist, well-drained soils.\nThe foliage turns yellow and progresses through red into purple in autumn.",
     "price": 12,
-    "image": "../img/products/Chicago_Lustre_Viburnum.jpg",
+    "image": "../../public/img/products/Chicago_Lustre_Viburnum.jpg",
     "sellerId": "657d32d4590fea96403ee879"
   },
   {
@@ -64,7 +64,7 @@
     "quantity": 4,
     "description": "The Swiss cheese plant, or Mexican breadfruit (Monstera deliciosa), is a common houseplant with showy, glossy, perforated leaves slashed to the margins; numerous horticultural varieties have been developed. When fully ripe, its sweet scaly fruit is edible and tastes like a combination of pineapple and mango.",
     "price": 89,
-    "image": "../img/products/Monstera_Albo_Variegated.jpg",
+    "image": "../../public/img/products/Monstera_Albo_Variegated.jpg",
     "sellerId": "657d32d4590fea96403ee875"
   },
   {
@@ -81,7 +81,7 @@
     "quantity": 1,
     "description": "This dwarf Juniper from Japan is the most popular evergreen in the U.S. When we think of a traditional bonsai and what it should look like we think of a “Juniper Procumbens Nana”. They are very hardy, long-lived and tolerate many adverse conditions. Trained style.\n(23 years old, 13″ x 15″ x 11″ tall)",
     "price": 332.09,
-    "image": "../img/products/Juniper_Bonsai_Tree.jpg",
+    "image": "../../public/img/products/Juniper_Bonsai_Tree.jpg",
     "sellerId": "657d32d4590fea96403ee870"
   },
   {
@@ -98,7 +98,7 @@
     "quantity": 16,
     "description": "Incredibly architectural, award-winning Musa basjoo (Japanese Banana) is a fast-growing, suckering evergreen perennial boasting huge, arching, paddle-shaped leaves, up to 10 ft. long (3 m). Large cream to yellow flowers may appear in summer on mature plants.",
     "price": 19.99,
-    "image": "../img/products/Musa_basjoo_banana.jpg",
+    "image": "../../public/img/products/Musa_basjoo_banana.jpg",
     "sellerId": "657d32d4590fea96403ee873"
   },
   {
@@ -115,7 +115,7 @@
     "quantity": 87,
     "description": "Okinawan Sweet Potatoes are know for their white skin and vibrant purple flesh but, they are superior in their memorable sweet taste. Packed with Nutrients, antioxidants, and vitamins they are a no brainer for a staple in your diet. Delicious however they are cook, Okinawan sweet potatoes really stand out when cooked in traditional Hawaiian dishes.",
     "price": 23,
-    "image": "../img/products/okinawan_sweet_potato.jpg",
+    "image": "../../public/img/products/okinawan_sweet_potato.jpg",
     "sellerId": "657d32d4590fea96403ee873"
   },
   {
@@ -132,7 +132,7 @@
     "quantity": 14,
     "description": "Growing Queen Guava is a rewarding experience. Plant in a sunny spot with well-draining soil. Water consistently, allowing the soil to dry slightly between waterings. Prune to maintain shape and encourage fruiting.",
     "price": 135,
-    "image": "../img/products/oi_nu_hoang.jpeg",
+    "image": "../../public/img/products/oi_nu_hoang.jpeg",
     "sellerId": "657d32d4590fea96403ee871"
   },
   {
@@ -149,7 +149,7 @@
     "quantity": 45,
     "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
     "price": 424,
-    "image": "../img/products/dragon_fruit.jpeg",
+    "image": "../../public/img/products/dragon_fruit.jpeg",
     "sellerId": "657d32d4590fea96403ee870"
   },
   {
@@ -166,7 +166,7 @@
     "quantity": 19,
     "description": "“Variegated Hoya Assortment Set, Hindu Rope, Wayetii, Australis, Macrophylla, Krimson Princess, premium collector's gift, in 4 inch pots. These plants come in a plastic 4 inch pot.",
     "price": 118,
-    "image": "../img/products/variegated_hoya.jpg",
+    "image": "../../public/img/products/variegated_hoya.jpg",
     "sellerId": "657d32d4590fea96403ee878"
   }
 ]
