@@ -66,7 +66,7 @@ const productSchema = new mongoose.Schema(
     },
     video: {
       type: String,
-      required: [true, 'A product must have a video'],
+      // required: [true, 'A product must have a video'],
     },
     ratingsAverage: {
       type: Number,
