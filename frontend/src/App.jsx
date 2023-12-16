@@ -3,6 +3,7 @@ import {
     Login,
     HomePage,
     Marketplace,
+    Product,
     ResetPassword,
     UserProfile,
     OrderProducts,
@@ -17,7 +18,12 @@ function App() {
                 <Route path="/">
                     <Route index element={<HomePage />} />
                     <Route path="login" element={<Login />} />
-                    <Route path="marketplace" element={<Marketplace />} />
+                    <Route path="marketplace">
+                        <Route index element={<Marketplace />} />
+                        <Route path='product'>
+                            <Route path=":productId" element={<Product />} />
+                        </Route>
+                    </Route>
                     <Route path="resetpassword" element={<ResetPassword />} />
                     <Route path="profile">
                         <Route index element={<UserProfile />} />

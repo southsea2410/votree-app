@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,9 +6,16 @@ import { Product_test } from '../../assets/images';
 import { StarIcon } from '../../assets/icons';
 import './../../index.css';
 import { colors } from '../../styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // const NUM_OF_STARS = 5;
+
+
+const linkStyle = {
+    color: '#3366CC',
+    textDecoration: 'underline',
+    textDecorationColor: '#99CCFF'
+};
 
 export default function ProductCard({ variant = 'product', ...props }) {
     const value = 3; // will update
@@ -29,7 +35,9 @@ export default function ProductCard({ variant = 'product', ...props }) {
         setSellerName(seller.fullName);
     }
 
-    fetchSellerName();
+    useEffect(() => {
+        fetchSellerName();
+    }, []);
 
     return (
         <Card
@@ -78,13 +86,13 @@ export default function ProductCard({ variant = 'product', ...props }) {
                             />
                         ))}
                     </div>
-                    <div style={{ display: 'flex' }}>
+                    <div style={{ display: 'flex', columnGap: '8px' }}>
                         <p
                             className="content-regular-12"
-                            style={{ width: 51, height: 10 }}>
-                            Sold By:
+                            style={{height: 10 }}>
+                            Sold By: 
                         </p>
-                        <p>{sellerName}</p>
+                        <p className='content-semi-bold-16' style={linkStyle}>{' ' + sellerName}</p>
                     </div>
                 </div>
                 <CardActions style={{ padding: 0 }}>
