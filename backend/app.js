@@ -21,6 +21,7 @@ app.use(function (req, res, next) {
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept',
   );
+  res.header('Cross-Origin-Resource-Policy', 'same-site');
   next();
 });
 
@@ -52,7 +53,13 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Set security HTTP headers
-app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      imgSrc: ["'self'", 'http://localhost:5173'],
+    },
+  }),
+);
 
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
@@ -61,7 +68,7 @@ app.use(fileUpload());
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
-app.use(express.static(`${__dirname}/../dist`));
+app.use(express.static(`${__dirname}/public`));
 
 // Data sanitization against XSS
 app.use(xss());
