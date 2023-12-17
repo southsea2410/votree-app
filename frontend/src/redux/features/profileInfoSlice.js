@@ -15,7 +15,7 @@ const initialState = {
     storeEmail: '',
     storeLocation: '',
     storeName: '',
-    storePhoneNumber: '',
+    storePhoneNumber: ''
 };
 
 export const profileInfoSlice = createSlice({

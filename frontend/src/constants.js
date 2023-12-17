@@ -11,9 +11,12 @@ export const fieldNames = {
     email: 'Email',
     address: 'Address',
     interest: 'Interest',
+    storeDetails: 'Store Details'
+};
+
+export const storeFieldNames = {
     storeEmail: 'Store Email',
     storeLocation: 'Store Location',
     storeName: 'Store Name',
-    storePhoneNumber: 'Store Phone Number',
+    storePhoneNumber: 'Store Phone Number'
 };
-

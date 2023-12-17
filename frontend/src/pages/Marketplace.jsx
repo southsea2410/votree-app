@@ -80,9 +80,7 @@ export default function Marketplace() {
             <Container disableGutters maxWidth="xl" sx={containerStyle}>
                 <div style={{ paddingBottom: '22px' }}>
                     <WhatshotIcon color="pending" fontSize="medium" />
-                    <span
-                        className="subtitle-extra-bold"
-                        style={{ color: colors.green5, paddingLeft: 10 }}>
+                    <span className="subtitle-extra-bold" style={{ color: colors.green5, paddingLeft: 10 }}>
                         Hot picks
                     </span>
                 </div>

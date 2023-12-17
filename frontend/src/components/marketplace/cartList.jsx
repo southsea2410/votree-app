@@ -89,9 +89,7 @@ export default function CartList() {
                                     }}>
                                     Hoa học phí
                                 </Box>
-                                <Box
-                                    className="subtitle-extra-bold"
-                                    style={{ color: colors.success }}>
+                                <Box className="subtitle-extra-bold" style={{ color: colors.success }}>
                                     1
                                 </Box>
                             </Box>
@@ -116,9 +114,7 @@ export default function CartList() {
                                     }}>
                                     Hoa học phí
                                 </Box>
-                                <Box
-                                    className="subtitle-extra-bold"
-                                    style={{ color: colors.success }}>
+                                <Box className="subtitle-extra-bold" style={{ color: colors.success }}>
                                     4
                                 </Box>
                             </Box>
@@ -143,9 +139,7 @@ export default function CartList() {
                                     }}>
                                     Hoa học phí
                                 </Box>
-                                <Box
-                                    className="subtitle-extra-bold"
-                                    style={{ color: colors.success }}>
+                                <Box className="subtitle-extra-bold" style={{ color: colors.success }}>
                                     3
                                 </Box>
                             </Box>
@@ -170,9 +164,7 @@ export default function CartList() {
                                     }}>
                                     Hoa học phí
                                 </Box>
-                                <Box
-                                    className="subtitle-extra-bold"
-                                    style={{ color: colors.success }}>
+                                <Box className="subtitle-extra-bold" style={{ color: colors.success }}>
                                     5
                                 </Box>
                             </Box>
@@ -181,10 +173,7 @@ export default function CartList() {
                             </div>
                         </Box>
                     </div>
-                    <Button
-                        style={{ alignSelf: 'center', width: 155, height: 45 }}>
-                        Buy
-                    </Button>
+                    <Button style={{ alignSelf: 'center', width: 155, height: 45 }}>Buy</Button>
                 </Box>
             </Modal>
         </div>

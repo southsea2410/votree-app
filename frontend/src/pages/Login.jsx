@@ -50,16 +50,11 @@ export default function Login() {
         const formData = new FormData(form);
 
         try {
-            const response = await fetch(
-                'http://localhost:3000/api/v1/auth/login',
-                {
-                    method: 'POST',
-                    // header: {
-                    //     'Content-Type': 'application/json',
-                    // },
-                    body: formData
-                }
-            );
+            const response = await fetch('/api/v1/auth/login', {
+                method: 'POST',
+                body: formData,
+                credentials: 'include'
+            });
 
             console.log(response);
 
@@ -85,12 +80,7 @@ export default function Login() {
                     alignItems: 'center'
                 }}>
                 <div>
-                    <img
-                        src={LogoVoTree_primary}
-                        alt=""
-                        width="602"
-                        height="222"
-                    />
+                    <img src={LogoVoTree_primary} alt="" width="602" height="222" />
                 </div>
                 <div
                     style={{
@@ -249,30 +239,18 @@ export default function Login() {
                             </div>
                         )}
                         {signUp ? (
-                            <div
-                                className="extra-medium"
-                                onClick={handleChangeToSignUp}
-                                style={fieldStyle}>
+                            <div className="extra-medium" onClick={handleChangeToSignUp} style={fieldStyle}>
                                 Already have an account?
                             </div>
                         ) : (
                             <div>
-                                <div className="extra-medium">
-                                    Forgot Password?
-                                </div>
-                                <div
-                                    className="extra-medium"
-                                    onClick={handleChangeToSignUp}
-                                    style={fieldStyle}>
+                                <div className="extra-medium">Forgot Password?</div>
+                                <div className="extra-medium" onClick={handleChangeToSignUp} style={fieldStyle}>
                                     Don&apos;t have an account?
                                 </div>
                             </div>
                         )}
-                        {signUp ? (
-                            <Button>Register</Button>
-                        ) : (
-                            <Button type="submit">Login</Button>
-                        )}
+                        {signUp ? <Button>Register</Button> : <Button type="submit">Login</Button>}
                     </form>
                     <div style={{ padding: '31px' }}>
                         <Divider />
@@ -284,19 +262,13 @@ export default function Login() {
                             padding: '0px 30px'
                         }}>
                         <div>
-                            <Button
-                                variant="filled"
-                                color="primary"
-                                style={socialMediaButtonStyle}>
+                            <Button variant="filled" color="primary" style={socialMediaButtonStyle}>
                                 <GoogleIcon />
                                 Google
                             </Button>
                         </div>
                         <div>
-                            <Button
-                                variant="filled"
-                                color="facebook"
-                                style={socialMediaButtonStyle}>
+                            <Button variant="filled" color="facebook" style={socialMediaButtonStyle}>
                                 <FBIcon />
                                 Facebook
                             </Button>
