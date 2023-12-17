@@ -14,7 +14,7 @@ export const fetchUserInfo = async () => {
         const info = arr.userInfo;
         if (arr.userInfo) {
             const profile = {
-                role: info.role || '',
+                role: info.role.toLowerCase() || '',
                 avatar: info.avatar || '',
                 fullName: info.fullName || '',
                 dateOfBirth: info.dateOfBirth || '',

@@ -60,7 +60,7 @@ export default function UserProfile() {
                         dispatch(updateIsLoggedIn(true));
                         setIsLoggedIn(true);
                         setFullName(profile.fullName);
-                        setRole(profile.role);
+                        setRole(profile.role.toLowerCase());
                         setProfileInfo(profile);
                         if (store) {
                             setStoreInfo(store);
@@ -93,8 +93,9 @@ export default function UserProfile() {
                     setIsLoggedIn(true);
                     setProfileInfo(profile);
                     setFullName(profile.fullName);
-                    setRole(profile.role);
-                    if (profile.role === 'seller') {
+                    setRole(profile.role.toLowerCase());
+                    const roleName = profile.role;
+                    if (profile.role.toLowerCase() === 'seller') {
                         const store = {
                             storeEmail: info.sellerDetails.storeEmail || '',
                             storeLocation: info.sellerDetails.storeLocation || '',
@@ -132,7 +133,12 @@ export default function UserProfile() {
                                     justifyContent: 'space-between'
                                 }}>
                                 <div>{SumProfile({ fullName: fullName, role: role })}</div>
-                                <UpSellerDialog variant="filled">Up Seller</UpSellerDialog>
+                                {
+                                    role === 'seller' ?
+                                    <></>
+                                    :
+                                    <UpSellerDialog variant="filled">Up Seller</UpSellerDialog>
+                                }
                             </Box>
                             <Divider variant="slighter"></Divider>
                             <Box
