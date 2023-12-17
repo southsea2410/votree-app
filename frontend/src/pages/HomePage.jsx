@@ -23,7 +23,6 @@ const postsStyle = {
 };
 
 export default function HomePage() {
-
     return (
         <Box
             id="homepage"

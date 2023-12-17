@@ -14,8 +14,8 @@ export const storeInfoSlice = createSlice({
         updateStoreInfo: (state, action) => {
             return {
                 ...state,
-                ...action.payload,
-            }
+                ...action.payload
+            };
         }
     }
 });

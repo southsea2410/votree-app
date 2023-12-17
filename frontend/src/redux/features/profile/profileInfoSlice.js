@@ -9,7 +9,7 @@ const initialState = {
     phoneNumber: '',
     email: '',
     address: '',
-    interest: '',
+    interest: ''
 };
 
 export const profileInfoSlice = createSlice({
@@ -19,8 +19,8 @@ export const profileInfoSlice = createSlice({
         updateProfileInfo: (state, action) => {
             return {
                 ...state,
-                ...action.payload,
-            }
+                ...action.payload
+            };
         }
     }
 });

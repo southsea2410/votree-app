@@ -60,7 +60,7 @@ export default function Login() {
             const response = await fetch('/api/v1/auth/login', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: jsonData,
                 credentials: 'include'
@@ -68,7 +68,7 @@ export default function Login() {
 
             if (response.ok) {
                 console.log('Login successful');
-                
+
                 navigate('/profile'); // Homepage
 
                 const { profile, store } = await fetchUserInfo();
@@ -82,8 +82,6 @@ export default function Login() {
                     dispatch(updateStoreInfo(store));
                     dispatch(updateIsSeller(true));
                 }
-
-
             } else {
                 console.error('Login failed:', response.statusText);
             }

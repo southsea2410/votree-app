@@ -9,6 +9,6 @@ export default configureStore({
         profileInfo: profileInfoReducer,
         storeInfo: storeInfoReducer,
         isLoggedIn: isLoggedInReducer,
-        isSeller: isSellerReducer,
+        isSeller: isSellerReducer
     }
 });

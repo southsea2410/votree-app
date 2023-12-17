@@ -1,12 +1,11 @@
-
 export const fetchUserInfo = async () => {
     try {
         const data = await fetch('/api/v1/updateInfo', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            credentials: "include"
+            credentials: 'include'
         });
 
         // Update Redux
@@ -22,24 +21,23 @@ export const fetchUserInfo = async () => {
                 phoneNumber: info.phoneNumber || '',
                 email: info.email || '',
                 address: info.address || '',
-                interest: info.interest || '',
-            }
-            
+                interest: info.interest || ''
+            };
+
             let store = {};
             if (profile.role === 'seller') {
                 store = {
                     storeEmail: info.sellerDetails.storeEmail || '',
                     storeLocation: info.sellerDetails.storeLocation || '',
                     storeName: info.sellerDetails.storeName || '',
-                    storePhoneNumber: info.sellerDetails.storePhoneNumber || '',
-                }
+                    storePhoneNumber: info.sellerDetails.storePhoneNumber || ''
+                };
             }
 
             return { profile, store };
         }
 
         return {};
-
     } catch (error) {
         console.error('Error fetching user information:', error);
         return false;

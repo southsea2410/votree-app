@@ -50,6 +50,23 @@ export default function UserProfile() {
 
     const { id } = useParams();
 
+    const handleLogout = async () => {
+        try {
+            const response = await fetch('api/v1/auth/logout', {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                navigate('/');
+            } else {
+                console.error('Logout request failed:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors or exceptions that occur during the logout process
+            console.error('Error during logout:', error);
+        }
+    };
+
     useEffect(() => {
         async function fetchProfileInfo() {
             if (id === undefined || id === '') {
@@ -88,20 +105,19 @@ export default function UserProfile() {
                         phoneNumber: info.phoneNumber || '',
                         email: info.email || '',
                         address: info.address || '',
-                        interest: info.interest || '',
-                    }
+                        interest: info.interest || ''
+                    };
                     setIsLoggedIn(true);
                     setProfileInfo(profile);
                     setFullName(profile.fullName);
                     setRole(profile.role.toLowerCase());
-                    const roleName = profile.role;
                     if (profile.role.toLowerCase() === 'seller') {
                         const store = {
                             storeEmail: info.sellerDetails.storeEmail || '',
                             storeLocation: info.sellerDetails.storeLocation || '',
                             storeName: info.sellerDetails.storeName || '',
-                            storePhoneNumber: info.sellerDetails.storePhoneNumber || '',
-                        }
+                            storePhoneNumber: info.sellerDetails.storePhoneNumber || ''
+                        };
                         setStoreInfo(store);
                     }
                 } else {
@@ -117,6 +133,7 @@ export default function UserProfile() {
             <Box className="navbar">
                 <NavBar />
             </Box>
+            <Button onClick={handleLogout}>Log out</Button> {/* for testing logout */}
             <Container maxWidth="lg" sx={containerStyle}>
                 <Container maxWidth="false" disableGutters>
                     <Card variant="outlined">
@@ -133,12 +150,11 @@ export default function UserProfile() {
                                     justifyContent: 'space-between'
                                 }}>
                                 <div>{SumProfile({ fullName: fullName, role: role })}</div>
-                                {
-                                    role === 'seller' ?
+                                {role === 'seller' ? (
                                     <></>
-                                    :
+                                ) : (
                                     <UpSellerDialog variant="filled">Up Seller</UpSellerDialog>
-                                }
+                                )}
                             </Box>
                             <Divider variant="slighter"></Divider>
                             <Box
@@ -187,17 +203,16 @@ export default function UserProfile() {
                             </Box>
                             <Divider variant="slighter"></Divider>
                             <Box>
-                                {
-                                    role === 'seller' ? 
+                                {role === 'seller' ? (
                                     <Box
-                                    sx={{
-                                        display: 'grid',
-                                        gridTemplateColumns: '200px 400px',
-                                        gridAutoRows: 'minmax(50px, auto)',
-                                        rowGap: '10px',
-                                        columnGap: '15px',
-                                        alignItems: 'center'
-                                    }}>
+                                        sx={{
+                                            display: 'grid',
+                                            gridTemplateColumns: '200px 400px',
+                                            gridAutoRows: 'minmax(50px, auto)',
+                                            rowGap: '10px',
+                                            columnGap: '15px',
+                                            alignItems: 'center'
+                                        }}>
                                         {Object.keys(storeInfo).map((key) => {
                                             if (
                                                 storeInfo[key] === undefined ||
@@ -209,7 +224,9 @@ export default function UserProfile() {
 
                                             return (
                                                 <Fragment key={key}>
-                                                    <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
+                                                    <p
+                                                        className="subtitle-semi-bold-20"
+                                                        style={{ color: colors.green4 }}>
                                                         {storeFieldNames[key]}
                                                     </p>
                                                     <p className="content-medium-20-25">{storeInfo[key]}</p>
@@ -217,16 +234,11 @@ export default function UserProfile() {
                                             );
                                         })}
                                     </Box>
-                                    :
+                                ) : (
                                     <Box></Box>
-                                }
+                                )}
                             </Box>
-                            {
-                                role === 'seller' ?
-                                <Divider variant="slighter"></Divider>
-                                :
-                                <></>
-                            }
+                            {role === 'seller' ? <Divider variant="slighter"></Divider> : <></>}
                             <Box
                                 sx={{
                                     display: 'flex',
