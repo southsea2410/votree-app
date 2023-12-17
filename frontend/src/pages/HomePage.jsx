@@ -6,9 +6,6 @@ import { Post_test } from '../assets/images';
 import { content, contentLong } from '../assets/contents/content';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 
-import { useSelector } from 'react-redux';
-import { selectProfileInfo } from '../redux/features/profileInfoSlice';
-
 const homePageStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -26,8 +23,6 @@ const postsStyle = {
 };
 
 export default function HomePage() {
-    const profile = useSelector(selectProfileInfo);
-
     return (
         <Box
             id="homepage"
