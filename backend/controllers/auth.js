@@ -10,7 +10,7 @@ const register = async (req, res) => {
   res
     .status(StatusCodes.CREATED)
     .json({
-      user: { username: user.username },
+      user: { userName: user.userName, email: user.email },
     })
     .message('Register successfully');
 };
