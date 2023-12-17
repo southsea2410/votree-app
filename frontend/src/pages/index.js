@@ -7,13 +7,4 @@ import OrderProducts from './OrderProducts';
 import ChangePassword from './ChangePassword';
 import Product from './Product';
 
-export {
-    HomePage,
-    Login,
-    Marketplace,
-    Product,
-    ResetPassword,
-    UserProfile,
-    OrderProducts,
-    ChangePassword
-};
+export { HomePage, Login, Marketplace, Product, ResetPassword, UserProfile, OrderProducts, ChangePassword };

@@ -144,19 +144,19 @@ h6 {
 .content-regular-16 {
     font-size: 16px;
     font-weight: 400;
-    line-height: 150%; /* 24px */
+    line-height: 112%; /* 24px */
 }
 
 .content-regular-14-22 {
     font-size: 14.22px;
     font-weight: 400;
-    line-height: 150%; /* 21.33px */
+    line-height: 112%; /* 21.33px */
 }
 
 .content-regular-12 {
     font-size: 12px;
     font-weight: 400;
-    line-height: 150%; /* 18px */
+    line-height: 112%; /* 18px */
     letter-spacing: 0.1px;
 }
 
