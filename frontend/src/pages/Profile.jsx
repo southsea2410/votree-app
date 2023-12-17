@@ -100,7 +100,7 @@ function InfoTable() {
                                 return null;
                             if (key == 'sellerDetails')
                                 return Object.keys(infos[key]).map((storeKey) => {
-                                    if (infos[key][storeKey] === undefined || infos[key][storeKey] === null)
+                                    if (infos[key][storeKey] === undefined || infos[key][storeKey] === null || storeKey == '_id')
                                         return null;
                                     return (
                                         <Fragment key={storeKey}>
