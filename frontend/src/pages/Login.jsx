@@ -4,6 +4,11 @@ import { LogoVoTree_primary } from '../assets/images';
 import { colors } from '../styles';
 import * as React from 'react';
 import { GoogleIcon, FBIcon } from '../assets/icons';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { updateProfileInfo } from '../redux/features/profileInfoSlice';
+import { selectProfileInfo } from '../redux/features/profileInfoSlice';
 import './../index.css';
 
 const textBoxStyle = {
@@ -30,10 +35,48 @@ const fieldStyle = {
 };
 
 export default function Login() {
+    const dispatch = useDispatch();
     const [signUp, setSignUp] = React.useState(0);
+    const navigate = useNavigate();
 
     const handleChangeToSignUp = () => {
         setSignUp(!signUp);
+    };
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(
+                'http://localhost:3000/api/v1/auth/login',
+                {
+                    method: 'POST',
+                    header: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: formData
+                }
+            );
+
+            console.log(response);
+
+            if (response.ok) {
+                const data = await response.json();
+                // console.log(data.user);
+                dispatch(updateProfileInfo(data.user));
+                // console.log(get)
+                console.log('Login successful');
+
+                navigate('/profile');
+            } else {
+                console.error('Login failed:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
@@ -88,7 +131,8 @@ export default function Login() {
                             Register
                         </div>
                     </div>
-                    <div
+                    <form
+                        onSubmit={handleLogin}
                         style={{
                             display: 'flex',
                             flexDirection: 'column',
@@ -178,8 +222,9 @@ export default function Login() {
                                 <TextField
                                     size="small"
                                     fullWidth
-                                    placeholder="Email"
+                                    placeholder="Account"
                                     id="fullWidth"
+                                    name="account"
                                     InputLabelProps={{
                                         className: 'content-semi-bold-16'
                                     }}
@@ -195,6 +240,7 @@ export default function Login() {
                                     fullWidth
                                     placeholder="Password"
                                     id="fullWidth"
+                                    name="password"
                                     InputLabelProps={{
                                         className: 'content-semi-bold-16'
                                     }}
@@ -230,9 +276,9 @@ export default function Login() {
                         {signUp ? (
                             <Button>Register</Button>
                         ) : (
-                            <Button>Login</Button>
+                            <Button type="submit">Login</Button>
                         )}
-                    </div>
+                    </form>
                     <div style={{ padding: '31px' }}>
                         <Divider />
                     </div>

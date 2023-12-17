@@ -1,14 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fieldNames } from '../../../data';
 
-const initialState = fieldNames;
+const initialState = {
+    role: '',
+    userName: '',
+    avatar: '',
+    fullName: '',
+    dateOfBirth: '',
+    gender: '',
+    phoneNumber: '',
+    email: '',
+    address: '',
+    interest: '',
+    isLoggedIn: false,
+    storeEmail: '',
+    storeLocation: '',
+    storeName: '',
+    storePhoneNumber: '',
+};
 
 export const profileInfoSlice = createSlice({
     name: 'profileInfo',
     initialState: initialState,
-    reducers: {}
+    reducers: {
+        updateProfileInfo: (state, action) => {
+            return action.payload;
+        }
+    }
 });
 
 export const selectProfileInfo = (state) => state.profileInfo;
 export default profileInfoSlice.reducer;
-export const { getProfileInfoSlice } = profileInfoSlice.actions;
+export const { updateProfileInfo } = profileInfoSlice.actions;

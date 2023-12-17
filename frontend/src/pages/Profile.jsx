@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import React from 'react';
 import { NavBar, SumProfile, UserPost } from '../components';
 import {
     Box,
@@ -19,37 +20,32 @@ import { useNavBarHeight } from '../hooks/useNavBarHeight';
 import { useSelector } from 'react-redux';
 import { selectProfileInfo } from '../redux/features/profileInfoSlice';
 
-// const fields = {
-//     avatar: '',
-//     email: '',
-//     fullName: '',
-//     address: '',
-//     password: '',
-//     phoneNumber: '',
-//     products: [],
-//     role: '',
-//     storeEmail: '',
-//     storeLocation: '',
-//     storeName: '',
-//     storePhoneNumber: '',
-// };
+import { fieldNames } from '../constants';
 
-function InfoTable() {
-    const profileInfo = useSelector(selectProfileInfo);
-
-    const [infos, setInfos] = useState({
-        avatar: '',
-        email: '',
-        fullName: '',
-        userName: '',
-        address: '',
-        phoneNumber: '',
+const fields = {
         role: '',
+        userName: '',
+        avatar: '',
+        fullName: '',
+        dateOfBirth: '',
+        gender: '',
+        phoneNumber: '',
+        email: '',
+        address: '',
+        interest: '',
         storeEmail: '',
         storeLocation: '',
         storeName: '',
-        storePhoneNumber: ''
-    });
+        storePhoneNumber: '',
+};
+
+function InfoTable() {
+    const myProfileInfo = useSelector(selectProfileInfo);
+
+    const [fullName, setFullName] = React.useState('fullName');
+    const [role, setRole] = React.useState('Role');
+
+    const [infos, setInfos] = useState(fields);
     const { id } = useParams();
 
     useEffect(() => {
@@ -59,7 +55,9 @@ function InfoTable() {
             });
             const arr = await data.json();
             console.log(arr);
-            setInfos(arr.data.seller);
+            setFullName(arr.data.seller?.fullName || '');
+            setRole(arr.data.seller?.role || '');
+            setInfos(arr.data.seller || fields);
         }
         fetchUserInfo();
     }, [id]);
@@ -67,6 +65,31 @@ function InfoTable() {
     if (infos === undefined) return <p>User not found!!</p>;
     else
         return (
+            <CardContent
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                rowGap: '20px'
+        }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-between'
+                    }}>
+                    <div>{SumProfile({ fullName: fullName, role: role })}</div>
+                    <UpSellerDialog variant="filled">
+                        Up Seller
+                    </UpSellerDialog>
+                </Box>
+                <Divider variant="slighter"></Divider>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-between',
+                        alignItems: 'flex-start'
+                    }}>
             <Box
                 sx={{
                     display: 'grid',
@@ -85,71 +108,46 @@ function InfoTable() {
                         key == 'password' ||
                         key == 'products' ||
                         key == '__v' ||
-                        key == 'userName'
+                        key == 'userName' ||
+                        key == 'isLoggedIn' ||
+                        key == 'avatar'
                     ) {
                         return null;
                     }
                     return (
-                        <Fragment key={key}>
-                            <p
-                                className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}>
-                                {profileInfo[key]}
-                            </p>
-                            <p className="content-medium-20-25">
-                                {profileInfo[key]}
-                            </p>
-                        </Fragment>
+                                <Fragment key={key}>
+                                    <p
+                                        className="subtitle-semi-bold-20"
+                                        style={{ color: colors.green4 }}>
+                                        {fieldNames[key]}
+                                    </p>
+                                    <p className="content-medium-20-25">
+                                        {(id && id !== '') ? infos[key] : myProfileInfo[key]}
+                                    </p>
+                                </Fragment>
                     );
                 })}
             </Box>
+            <Button variant="filled">Edit Profile</Button>
+                            </Box>
+                            <Divider variant="slighter"></Divider>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between'
+                                }}>
+                                <p className="subtitle-extra-bold">Posts</p>
+                                <Button variant="filled">Activity History</Button>
+                            </Box>
+                        </CardContent>
         );
 }
 
 function UserCard() {
-    const profileInfo = useSelector(selectProfileInfo);
-
     return (
         <Container maxWidth="false" disableGutters>
             <Card variant="outlined">
-                <CardContent
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        rowGap: '20px'
-                    }}>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            justifyContent: 'space-between'
-                        }}>
-                        <div>{SumProfile({ fullName: profileInfo['fullName'], role: profileInfo['role'] })}</div>
-                        <UpSellerDialog variant="filled">
-                            Up Seller
-                        </UpSellerDialog>
-                    </Box>
-                    <Divider variant="slighter"></Divider>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            justifyContent: 'space-between',
-                            alignItems: 'flex-start'
-                        }}>
-                        <InfoTable />
-                        <Button variant="filled">Edit Profile</Button>
-                    </Box>
-                    <Divider variant="slighter"></Divider>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between'
-                        }}>
-                        <p className="subtitle-extra-bold">Posts</p>
-                        <Button variant="filled">Activity History</Button>
-                    </Box>
-                </CardContent>
+                <InfoTable />
             </Card>
         </Container>
     );

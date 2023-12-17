@@ -1,12 +1,15 @@
 require('express-async-errors');
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 
 const app = express();
+
+app.use(cors())
 
 const productRouter = require('./routes/productRoutes');
 const sellerRouter = require('./routes/sellerRoutes');
