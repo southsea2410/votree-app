@@ -72,8 +72,6 @@ export default function Marketplace() {
         }
         fetchData();
     }, [handleAddPlantToCart]);
-
-    console.log('Test');
     return (
         <div
             style={{
