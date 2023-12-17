@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     role: '',
-    userName: '',
     avatar: '',
     fullName: '',
     dateOfBirth: '',
@@ -11,11 +10,6 @@ const initialState = {
     email: '',
     address: '',
     interest: '',
-    isLoggedIn: false,
-    storeEmail: '',
-    storeLocation: '',
-    storeName: '',
-    storePhoneNumber: ''
 };
 
 export const profileInfoSlice = createSlice({
@@ -23,7 +17,10 @@ export const profileInfoSlice = createSlice({
     initialState: initialState,
     reducers: {
         updateProfileInfo: (state, action) => {
-            return action.payload;
+            return {
+                ...state,
+                ...action.payload,
+            }
         }
     }
 });

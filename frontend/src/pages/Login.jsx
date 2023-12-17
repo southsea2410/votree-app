@@ -5,11 +5,16 @@ import { colors } from '../styles';
 import * as React from 'react';
 import { GoogleIcon, FBIcon } from '../assets/icons';
 import { useNavigate } from 'react-router-dom';
+
+// Redux
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { updateProfileInfo } from '../redux/features/profileInfoSlice';
-import { selectProfileInfo } from '../redux/features/profileInfoSlice';
-import './../index.css';
+import { updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
+import { updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
+import { updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
+import { updateIsSeller } from '../redux/features/account/isSellerSlice';
+
+// Utils
+import { fetchUserInfo } from '../utils/apiUtils';
 
 const textBoxStyle = {
     background: colors.primary,
@@ -35,9 +40,9 @@ const fieldStyle = {
 };
 
 export default function Login() {
-    const dispatch = useDispatch();
     const [signUp, setSignUp] = React.useState(0);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleChangeToSignUp = () => {
         setSignUp(!signUp);
@@ -47,20 +52,38 @@ export default function Login() {
         event.preventDefault();
 
         const form = event.target;
-        const formData = new FormData(form);
+        const account = form.account.value;
+        const password = form.password.value;
+        const jsonData = JSON.stringify({ account, password });
 
         try {
             const response = await fetch('/api/v1/auth/login', {
                 method: 'POST',
-                body: formData,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: jsonData,
                 credentials: 'include'
             });
 
-            console.log(response);
-
             if (response.ok) {
                 console.log('Login successful');
-                navigate('/profile');
+                
+                navigate('/profile'); // Homepage
+
+                const { profile, store } = await fetchUserInfo();
+
+                if (profile) {
+                    dispatch(updateProfileInfo(profile));
+                    dispatch(updateIsLoggedIn(true));
+                }
+
+                if (store) {
+                    dispatch(updateStoreInfo(store));
+                    dispatch(updateIsSeller(true));
+                }
+
+
             } else {
                 console.error('Login failed:', response.statusText);
             }

@@ -1,0 +1,47 @@
+
+export const fetchUserInfo = async () => {
+    try {
+        const data = await fetch('/api/v1/updateInfo', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: "include"
+        });
+
+        // Update Redux
+        const arr = await data.json();
+        const info = arr.userInfo;
+        if (arr.userInfo) {
+            const profile = {
+                role: info.role || '',
+                avatar: info.avatar || '',
+                fullName: info.fullName || '',
+                dateOfBirth: info.dateOfBirth || '',
+                gender: info.gender || '',
+                phoneNumber: info.phoneNumber || '',
+                email: info.email || '',
+                address: info.address || '',
+                interest: info.interest || '',
+            }
+            
+            let store = {};
+            if (profile.role === 'seller') {
+                store = {
+                    storeEmail: info.sellerDetails.storeEmail || '',
+                    storeLocation: info.sellerDetails.storeLocation || '',
+                    storeName: info.sellerDetails.storeName || '',
+                    storePhoneNumber: info.sellerDetails.storePhoneNumber || '',
+                }
+            }
+
+            return { profile, store };
+        }
+
+        return {};
+
+    } catch (error) {
+        console.error('Error fetching user information:', error);
+        return false;
+    }
+};
