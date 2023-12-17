@@ -4,7 +4,7 @@ import { Avatar } from '@mui/material';
 import './../../index.css';
 
 export default function SumProfile({
-    username = 'Prince Vegeta',
+    fullName = 'Prince Vegeta',
     role = 'user',
     avatar = 'https://i.pinimg.com/originals/0a/0b/9a/0a0b9a5e1e2b6b6b6b6b6b6b6b6b6b6b.jpg',
     ...props
@@ -29,7 +29,7 @@ export default function SumProfile({
                             alignItems: 'center',
                             display: 'flex'
                         }}>
-                        {username}
+                        {fullName}
                     </div>
                     <div className="extra-medium">
                         <ul style={{ margin: '0', paddingLeft: '22px' }}>

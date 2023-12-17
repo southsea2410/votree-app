@@ -1,1 +1,82 @@
-[{"role":"seller","active":false,"_id":"657d32d4590fea96403ee870","products":[],"id":"4874ef2d-a5cf-4df1-aaa9-6a40164b4269","fullName":"Randal Auer Sr.","userName":"Jaquan.Muller88","email":"Elisabeth_Hilpert58@yahoo.com","password":"hFMzlmD0j4M0xCs","phoneNumber":"(200) 958-7215","avatar":"https://cdn.fakercloud.com/avatars/grrr_nl_128.jpg","storeName":"Turner Group","storeLocation":"4466 Frami Village","storeEmail":"Adonis15@gmail.com","storePhoneNumber":"1-993-543-6588 x4622"},{"role":"seller","active":false,"_id":"657d32d4590fea96403ee871","products":[],"id":"93511a0b-ea80-4349-bf43-c92890f8e032","fullName":"Dr. Elisa Harvey","userName":"Earnestine.VonRueden","email":"Nathan18@yahoo.com","password":"Gj4j079cFBZwUDi","phoneNumber":"287.378.8494","avatar":"https://cdn.fakercloud.com/avatars/rdbannon_128.jpg","storeName":"Thiel, Larson and Stracke","storeLocation":"483 Ellie Valleys","storeEmail":"Eunice_Satterfield@hotmail.com","storePhoneNumber":"893-574-1654 x297"},{"role":"seller","active":true,"_id":"657d32d4590fea96403ee872","products":[],"id":"42b90b0a-0318-4b8e-bf5f-c7ae038bd299","fullName":"Dwayne Stehr DDS","userName":"Graham81","email":"Catharine.Herzog@hotmail.com","password":"o5KwkiRBvsqw_DD","phoneNumber":"822.790.8735","avatar":"https://cdn.fakercloud.com/avatars/enricocicconi_128.jpg","storeName":"Shields - Barton","storeLocation":"17724 Streich Mission","storeEmail":"Savion_Graham36@gmail.com","storePhoneNumber":"885-778-3819 x662"},{"role":"seller","active":false,"_id":"657d32d4590fea96403ee873","products":[],"id":"6d6b198a-7baa-4870-b0cb-0b1f8e772af7","fullName":"Dustin Hodkiewicz","userName":"Nola_Braun","email":"Claudie.Metz@yahoo.com","password":"mmfLZqedRglf8My","phoneNumber":"809.312.7999 x91794","avatar":"https://cdn.fakercloud.com/avatars/plbabin_128.jpg","storeName":"Waters Inc","storeLocation":"835 Luther Ports","storeEmail":"Erik66@yahoo.com","storePhoneNumber":"(325) 459-6426 x435"},{"role":"seller","active":false,"_id":"657d32d4590fea96403ee874","products":[],"id":"e3765e4f-191a-4fdc-a263-4abcac72dfe3","fullName":"April McGlynn","userName":"Levi_Wisoky","email":"Kurt_Reilly@hotmail.com","password":"B_C305zBzuJ6hmM","phoneNumber":"511.229.7473 x5338","avatar":"https://cdn.fakercloud.com/avatars/leonfedotov_128.jpg","storeName":"Quitzon, Kiehn and Dicki","storeLocation":"303 Konopelski Manors","storeEmail":"Diego.Simonis90@yahoo.com","storePhoneNumber":"570.624.2448"},{"role":"seller","active":true,"_id":"657d32d4590fea96403ee875","products":[],"id":"405ea1cb-2f58-4a3a-9a93-af2deb9708a9","fullName":"Mark Lubowitz V","userName":"Rocio_Schulist13","email":"Garland71@gmail.com","password":"AjKNgs5gSqYzVuf","phoneNumber":"1-489-920-0452","avatar":"https://cdn.fakercloud.com/avatars/newbrushes_128.jpg","storeName":"Hayes, Walsh and Maggio","storeLocation":"88712 Huels Overpass","storeEmail":"Rosa_Runte4@yahoo.com","storePhoneNumber":"1-254-835-6869 x891"},{"role":"seller","active":false,"_id":"657d32d4590fea96403ee876","products":[],"id":"9619f8af-ac68-482c-a038-a0e73f35ddd2","fullName":"Pauline Mante","userName":"Brandyn.Hammes83","email":"Stefan.Schmeler@gmail.com","password":"hA8QE_Bmh7jpXsp","phoneNumber":"1-405-479-7908","avatar":"https://cdn.fakercloud.com/avatars/twittypork_128.jpg","storeName":"Willms - Franecki","storeLocation":"22664 Hermann Pine","storeEmail":"Isadore.Little60@gmail.com","storePhoneNumber":"638.565.5048"},{"role":"seller","active":true,"_id":"657d32d4590fea96403ee877","products":[],"id":"16793541-dc56-4163-ad5f-74bac1fb06fe","fullName":"Cornelius Weissnat III","userName":"Joan_Graham","email":"Alexandra.Fritsch1@yahoo.com","password":"qx6U8BkEbbJw3Fi","phoneNumber":"795.567.6445","avatar":"https://cdn.fakercloud.com/avatars/heyimjuani_128.jpg","storeName":"West, Ortiz and Franecki","storeLocation":"70229 Huels Locks","storeEmail":"Randy_Feil8@hotmail.com","storePhoneNumber":"955.858.4566"},{"role":"seller","active":true,"_id":"657d32d4590fea96403ee878","products":[],"id":"90733e09-5e95-4524-ac9c-9b61f808eb6e","fullName":"Wayne Keebler","userName":"Estelle_Reynolds60","email":"Lilla.Heller11@yahoo.com","password":"smaOcFoZ1_Alqnu","phoneNumber":"808.258.9360","avatar":"https://cdn.fakercloud.com/avatars/carlyson_128.jpg","storeName":"Schmeler and Sons","storeLocation":"119 Padberg Corner","storeEmail":"Leo_Waters@hotmail.com","storePhoneNumber":"842.361.7845"},{"role":"seller","active":true,"_id":"657d32d4590fea96403ee879","products":[],"id":"25167205-f364-46b0-a640-d015ade7e0d2","fullName":"Cecilia Ritchie","userName":"Zelma35","email":"Felton_Koch39@hotmail.com","password":"sbevhR8PL2hSsIJ","phoneNumber":"755-934-0311 x874","avatar":"https://cdn.fakercloud.com/avatars/kucingbelang4_128.jpg","storeName":"O'Hara - Fritsch","storeLocation":"303 Irving Loaf","storeEmail":"Ruthie.Runolfsdottir@gmail.com","storePhoneNumber":"(554) 342-4836 x44495"}]
+[
+  {
+    "products": [],
+    "_id": "657d3da0530b5c3220edecc5",
+    "storeName": "Turner Group",
+    "storeLocation": "4466 Frami Village",
+    "storeEmail": "Adonis15@gmail.com",
+    "storePhoneNumber": "1-993-543-6588 x4622"
+  },
+  {
+    "products": [],
+    "_id": "657d3da0530b5c3220edecc6",
+    "storeName": "Thiel, Larson and Stracke",
+    "storeLocation": "483 Ellie Valleys",
+    "storeEmail": "Eunice_Satterfield@hotmail.com",
+    "storePhoneNumber": "893-574-1654 x297"
+  },
+  {
+    "products": [],
+    "_id": "657d3da0530b5c3220edecc7",
+    "storeName": "Shields - Barton",
+    "storeLocation": "17724 Streich Mission",
+    "storeEmail": "Savion_Graham36@gmail.com",
+    "storePhoneNumber": "885-778-3819 x662"
+  },
+  {
+    "products": [],
+    "_id": "657d3da0530b5c3220edecc8",
+    "storeName": "Waters Inc",
+    "storeLocation": "835 Luther Ports",
+    "storeEmail": "Erik66@yahoo.com",
+    "storePhoneNumber": "(325) 459-6426 x435"
+  },
+  {
+    "products": [],
+    "_id": "657d3da0530b5c3220edecc9",
+    "storeName": "Quitzon, Kiehn and Dicki",
+    "storeLocation": "303 Konopelski Manors",
+    "storeEmail": "Diego.Simonis90@yahoo.com",
+    "storePhoneNumber": "570.624.2448"
+  },
+  {
+    "products": [],
+    "_id": "657d3da0530b5c3220edecca",
+    "storeName": "Hayes, Walsh and Maggio",
+    "storeLocation": "88712 Huels Overpass",
+    "storeEmail": "Rosa_Runte4@yahoo.com",
+    "storePhoneNumber": "1-254-835-6869 x891"
+  },
+  {
+    "products": [],
+    "_id": "657d3da0530b5c3220edeccb",
+    "storeName": "Willms - Franecki",
+    "storeLocation": "22664 Hermann Pine",
+    "storeEmail": "Isadore.Little60@gmail.com",
+    "storePhoneNumber": "638.565.5048"
+  },
+  {
+    "products": [],
+    "_id": "657d3da0530b5c3220edeccc",
+    "storeName": "West, Ortiz and Franecki",
+    "storeLocation": "70229 Huels Locks",
+    "storeEmail": "Randy_Feil8@hotmail.com",
+    "storePhoneNumber": "955.858.4566"
+  },
+  {
+    "products": [],
+    "_id": "657d3da0530b5c3220edeccd",
+    "storeName": "Schmeler and Sons",
+    "storeLocation": "119 Padberg Corner",
+    "storeEmail": "Leo_Waters@hotmail.com",
+    "storePhoneNumber": "842.361.7845"
+  },
+  {
+    "products": [],
+    "_id": "657d3da0530b5c3220edecce",
+    "storeName": "O'Hara - Fritsch",
+    "storeLocation": "303 Irving Loaf",
+    "storeEmail": "Ruthie.Runolfsdottir@gmail.com",
+    "storePhoneNumber": "(554) 342-4836 x44495"
+  }
+]

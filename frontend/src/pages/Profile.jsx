@@ -15,6 +15,10 @@ import UpSellerDialog from '../components/profile/UpSellerDialog';
 import { useParams } from 'react-router-dom';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 
+// Redux
+import { useSelector } from 'react-redux';
+import { selectProfileInfo } from '../redux/features/profileInfoSlice';
+
 // const fields = {
 //     avatar: '',
 //     email: '',
@@ -30,21 +34,9 @@ import { useNavBarHeight } from '../hooks/useNavBarHeight';
 //     storePhoneNumber: '',
 // };
 
-const fieldNames = {
-    avatar: 'Avatar',
-    email: 'Email',
-    fullName: 'Full Name',
-    userName: 'User Name',
-    address: 'Address',
-    phoneNumber: 'Phone Number',
-    role: 'Role',
-    storeEmail: 'Store Email',
-    storeLocation: 'Store Location',
-    storeName: 'Store Name',
-    storePhoneNumber: 'Store Phone Number'
-};
-
 function InfoTable() {
+    const profileInfo = useSelector(selectProfileInfo);
+
     const [infos, setInfos] = useState({
         avatar: '',
         email: '',
@@ -92,7 +84,8 @@ function InfoTable() {
                         key == 'role' ||
                         key == 'password' ||
                         key == 'products' ||
-                        key == '__v'
+                        key == '__v' ||
+                        key == 'userName'
                     ) {
                         return null;
                     }
@@ -101,9 +94,11 @@ function InfoTable() {
                             <p
                                 className="subtitle-semi-bold-20"
                                 style={{ color: colors.green4 }}>
-                                {fieldNames[key]}
+                                {profileInfo[key]}
                             </p>
-                            <p className="content-medium-20-25">{infos[key]}</p>
+                            <p className="content-medium-20-25">
+                                {profileInfo[key]}
+                            </p>
                         </Fragment>
                     );
                 })}
@@ -112,6 +107,8 @@ function InfoTable() {
 }
 
 function UserCard() {
+    const profileInfo = useSelector(selectProfileInfo);
+
     return (
         <Container maxWidth="false" disableGutters>
             <Card variant="outlined">
@@ -127,7 +124,7 @@ function UserCard() {
                             flexWrap: 'wrap',
                             justifyContent: 'space-between'
                         }}>
-                        <SumProfile userName={'test'} />
+                        <div>{SumProfile({ fullName: profileInfo['fullName'], role: profileInfo['role'] })}</div>
                         <UpSellerDialog variant="filled">
                             Up Seller
                         </UpSellerDialog>
