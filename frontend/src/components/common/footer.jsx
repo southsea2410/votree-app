@@ -3,14 +3,7 @@ import { colors } from '../../styles';
 import { Divider } from '@mui/material';
 import { LogoVoTree_secondary } from '../../assets/images';
 import './../../index.css';
-import {
-    FacebookIcon,
-    InstaIcon,
-    LinkedInIcon,
-    LocationIcon,
-    MailIcon,
-    PhoneIcon
-} from '../../assets/icons';
+import { FacebookIcon, InstaIcon, LinkedInIcon, LocationIcon, MailIcon, PhoneIcon } from '../../assets/icons';
 
 export default function Footer() {
     return (
@@ -35,17 +28,10 @@ export default function Footer() {
                             display: 'flex',
                             justifyContent: 'space-between'
                         }}>
-                        <img
-                            src={LogoVoTree_secondary}
-                            alt=""
-                            width="211"
-                            height="78"
-                        />
+                        <img src={LogoVoTree_secondary} alt="" width="211" height="78" />
                     </div>
                     <div>
-                        <h4 style={{ color: colors.green2 }}>
-                            SE_10 Group - VoTree Project
-                        </h4>
+                        <h4 style={{ color: colors.green2 }}>SE_10 Group - VoTree Project</h4>
                         <div
                             style={{
                                 display: 'flex',
@@ -58,10 +44,7 @@ export default function Footer() {
                                     alignItems: 'center'
                                 }}>
                                 <LocationIcon color={colors.green2} />
-                                <div style={{ marginLeft: 8 }}>
-                                    227 Nguyen Van Cu, ward 10, district 5, HCM
-                                    City
-                                </div>
+                                <div style={{ marginLeft: 8 }}>227 Nguyen Van Cu, ward 10, district 5, HCM City</div>
                             </div>
                             <div
                                 style={{
@@ -77,9 +60,7 @@ export default function Footer() {
                                     alignItems: 'center'
                                 }}>
                                 <MailIcon color={colors.green2} />
-                                <div style={{ marginLeft: 8 }}>
-                                    se10votree@gmail.com
-                                </div>
+                                <div style={{ marginLeft: 8 }}>se10votree@gmail.com</div>
                             </div>
                         </div>
                     </div>
@@ -107,9 +88,7 @@ export default function Footer() {
                     padding: '0px 120px',
                     alignItems: 'center'
                 }}>
-                <div style={{ color: colors.primary }}>
-                    © 2023 SE_10 Group. All right reserved.
-                </div>
+                <div style={{ color: colors.primary }}>© 2023 SE_10 Group. All right reserved.</div>
                 <div style={{ display: 'flex', gap: 20 }}>
                     <FacebookIcon />
                     <InstaIcon />

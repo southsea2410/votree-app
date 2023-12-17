@@ -100,16 +100,10 @@ export default function InputArticle() {
                                 justifyContent: 'center'
                             }}>
                             <IconButton>
-                                <ImageIcon
-                                    color={colors.green4}
-                                    style={{ fontSize: 40 }}
-                                />
+                                <ImageIcon color={colors.green4} style={{ fontSize: 40 }} />
                             </IconButton>
                             <IconButton>
-                                <VideoIcon
-                                    color={colors.green4}
-                                    style={{ fontSize: 40 }}
-                                />
+                                <VideoIcon color={colors.green4} style={{ fontSize: 40 }} />
                             </IconButton>
                         </div>
                         <div
@@ -118,10 +112,7 @@ export default function InputArticle() {
                                 paddingLeft: '38px',
                                 paddingRight: '38px'
                             }}>
-                            <Button
-                                variant="filled"
-                                color="green4"
-                                style={{ width: '100%' }}>
+                            <Button variant="filled" color="green4" style={{ width: '100%' }}>
                                 Post
                             </Button>
                         </div>

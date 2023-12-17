@@ -1,13 +1,6 @@
 import { Fragment } from 'react';
 import { NavBar, SumProfile, UserPost } from '../components';
-import {
-    Box,
-    Button,
-    Card,
-    CardContent,
-    Container,
-    Divider
-} from '@mui/material';
+import { Box, Button, Card, CardContent, Container, Divider } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { colors } from '../styles';
 import { content, contentLong } from '../assets/contents/content';
@@ -19,47 +12,38 @@ import { useNavBarHeight } from '../hooks/useNavBarHeight';
 import { useSelector } from 'react-redux';
 import { selectProfileInfo } from '../redux/features/profileInfoSlice';
 
-// const fields = {
-//     avatar: '',
-//     email: '',
-//     fullName: '',
-//     address: '',
-//     password: '',
-//     phoneNumber: '',
-//     products: [],
-//     role: '',
-//     storeEmail: '',
-//     storeLocation: '',
-//     storeName: '',
-//     storePhoneNumber: '',
-// };
+import { fieldNames, storeFieldNames } from '../constants';
 
 function InfoTable() {
-    const profileInfo = useSelector(selectProfileInfo);
+    const myProfileInfo = useSelector(selectProfileInfo);
 
-    const [infos, setInfos] = useState({
-        avatar: '',
-        email: '',
-        fullName: '',
-        userName: '',
-        address: '',
-        phoneNumber: '',
-        role: '',
-        storeEmail: '',
-        storeLocation: '',
-        storeName: '',
-        storePhoneNumber: ''
-    });
+    const [fullName, setFullName] = useState('fullName');
+    const [role, setRole] = useState('Role');
+
+    const [infos, setInfos] = useState({});
     const { id } = useParams();
 
     useEffect(() => {
         async function fetchUserInfo() {
-            const data = await fetch('/api/v1/sellers/' + id, {
-                headers: { 'Content-Type': 'application/json' }
-            });
+            let data;
+            if (id === undefined) {
+                data = await fetch('/api/v1/updateInfo', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+            } else {
+                data = await fetch('/api/v1/sellers/' + id, {
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
             const arr = await data.json();
-            console.log(arr);
-            setInfos(arr.data.seller);
+            console.log(arr.userInfo);
+            setFullName(arr.userInfo?.fullName || '');
+            setRole(arr.userInfo?.role || '');
+            setInfos(arr.userInfo);
         }
         fetchUserInfo();
     }, [id]);
@@ -67,89 +51,96 @@ function InfoTable() {
     if (infos === undefined) return <p>User not found!!</p>;
     else
         return (
-            <Box
+            <CardContent
                 sx={{
-                    display: 'grid',
-                    gridTemplateColumns: '200px 400px',
-                    gridAutoRows: 'minmax(50px, auto)',
-                    rowGap: '10px',
-                    columnGap: '15px',
-                    alignItems: 'center'
+                    display: 'flex',
+                    flexDirection: 'column',
+                    rowGap: '20px'
                 }}>
-                {Object.keys(infos).map((key) => {
-                    if (
-                        infos[key] === undefined ||
-                        key == '_id' ||
-                        key == 'id' ||
-                        key == 'role' ||
-                        key == 'password' ||
-                        key == 'products' ||
-                        key == '__v' ||
-                        key == 'userName'
-                    ) {
-                        return null;
-                    }
-                    return (
-                        <Fragment key={key}>
-                            <p
-                                className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}>
-                                {profileInfo[key]}
-                            </p>
-                            <p className="content-medium-20-25">
-                                {profileInfo[key]}
-                            </p>
-                        </Fragment>
-                    );
-                })}
-            </Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-between'
+                    }}>
+                    <div>{SumProfile({ fullName: fullName, role: role })}</div>
+                    <UpSellerDialog variant="filled">Up Seller</UpSellerDialog>
+                </Box>
+                <Divider variant="slighter"></Divider>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'space-between',
+                        alignItems: 'flex-start'
+                    }}>
+                    <Box
+                        sx={{
+                            display: 'grid',
+                            gridTemplateColumns: '200px 400px',
+                            gridAutoRows: 'minmax(50px, auto)',
+                            rowGap: '10px',
+                            columnGap: '15px',
+                            alignItems: 'center'
+                        }}>
+                        {Object.keys(infos).map((key) => {
+                            if (
+                                infos[key] === undefined ||
+                                infos[key] === null ||
+                                key == '_id' ||
+                                key == 'id' ||
+                                key == 'role' ||
+                                key == 'password' ||
+                                key == 'products' ||
+                                key == '__v' ||
+                                key == 'userName' ||
+                                key == 'isLoggedIn' ||
+                                key == 'avatar'
+                            )
+                                return null;
+                            if (key == 'sellerDetails')
+                                return Object.keys(infos[key]).map((storeKey) => {
+                                    if (infos[key][storeKey] === undefined || infos[key][storeKey] === null || storeKey == '_id')
+                                        return null;
+                                    return (
+                                        <Fragment key={storeKey}>
+                                            <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
+                                                {storeFieldNames[storeKey]}
+                                            </p>
+                                            <p className="content-medium-20-25">{infos[key][storeKey]}</p>
+                                        </Fragment>
+                                    );
+                                });
+                            return (
+                                <Fragment key={key}>
+                                    <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
+                                        {fieldNames[key]}
+                                    </p>
+                                    <p className="content-medium-20-25">{infos[key]}</p>
+                                </Fragment>
+                            );
+                        })}
+                    </Box>
+                    <Button variant="filled">Edit Profile</Button>
+                </Box>
+                <Divider variant="slighter"></Divider>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between'
+                    }}>
+                    <p className="subtitle-extra-bold">Posts</p>
+                    <Button variant="filled">Activity History</Button>
+                </Box>
+            </CardContent>
         );
 }
 
 function UserCard() {
-    const profileInfo = useSelector(selectProfileInfo);
-
     return (
         <Container maxWidth="false" disableGutters>
             <Card variant="outlined">
-                <CardContent
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        rowGap: '20px'
-                    }}>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            justifyContent: 'space-between'
-                        }}>
-                        <div>{SumProfile({ fullName: profileInfo['fullName'], role: profileInfo['role'] })}</div>
-                        <UpSellerDialog variant="filled">
-                            Up Seller
-                        </UpSellerDialog>
-                    </Box>
-                    <Divider variant="slighter"></Divider>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            justifyContent: 'space-between',
-                            alignItems: 'flex-start'
-                        }}>
-                        <InfoTable />
-                        <Button variant="filled">Edit Profile</Button>
-                    </Box>
-                    <Divider variant="slighter"></Divider>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between'
-                        }}>
-                        <p className="subtitle-extra-bold">Posts</p>
-                        <Button variant="filled">Activity History</Button>
-                    </Box>
-                </CardContent>
+                <InfoTable />
             </Card>
         </Container>
     );

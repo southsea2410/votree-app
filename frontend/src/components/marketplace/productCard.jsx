@@ -66,24 +66,13 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         gap: '3px',
                         justifyContent: 'space-between'
                     }}>
-                    <div className="content-medium-14-22">
-                        {props.price && '$ ' + props.price}
-                    </div>
-                    <div
-                        className="subtitle-semi-bold-20"
-                        style={{ color: colors.green4 }}>
+                    <div className="content-medium-14-22">{props.price && '$ ' + props.price}</div>
+                    <div className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
                         {props.name}
                     </div>
                     <div>
                         {stars.map((index) => (
-                            <StarIcon
-                                key={index}
-                                color={
-                                    value > index
-                                        ? colors.ratings
-                                        : colors.primary
-                                }
-                            />
+                            <StarIcon key={index} color={value > index ? colors.ratings : colors.primary} />
                         ))}
                     </div>
                     <div style={{ display: 'flex', columnGap: '8px' }}>
@@ -96,9 +85,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                     </div>
                 </div>
                 <CardActions style={{ padding: 0 }}>
-                    <Button
-                        variant="cart"
-                        color={variant === 'product' ? 'secondary' : 'primary'}>
+                    <Button variant="cart" color={variant === 'product' ? 'secondary' : 'primary'}>
                         +
                     </Button>
                 </CardActions>

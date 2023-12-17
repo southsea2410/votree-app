@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { authenticateUser } = require('../middleware/authentication.js');
 
-const { 
-    getInfo,
-    updateInfo,
-    updateToSeller } = require('../controllers/updateInfo.js');
+const {
+  getInfo,
+  updateInfo,
+  updateToSeller,
+} = require('../controllers/updateInfo.js');
 
 router.route('/').get(authenticateUser, getInfo);
 router.route('/').patch(authenticateUser, updateInfo);
