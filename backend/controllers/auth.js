@@ -10,7 +10,7 @@ const register = async (req, res) => {
   res
     .status(StatusCodes.CREATED)
     .json({
-      user: { username: user.username },
+      user: { userName: user.userName, email: user.email },
     })
     .message('Register successfully');
 };
@@ -24,7 +24,7 @@ const login = async (req, res) => {
 
   // Tìm user theo username hoặc email
   const user = await User.findOne({
-    $or: [{ username: account }, { email: account }],
+    $or: [{ userName: account }, { email: account }],
   });
 
   if (!user) {

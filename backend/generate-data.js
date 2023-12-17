@@ -24,19 +24,19 @@ const getRandomSellerId = () => {
   return sellers[randomIndex]._id;
 };
 
-const products = Array.from(
-  { length: 10 },
-  () => new Product(generateData.generateProductData(getRandomSellerId())),
-);
+// const products = Array.from(
+//   { length: 10 },
+//   () => new Product(generateData.generateProductData(getRandomSellerId())),
+// );
 
 const sellersData = JSON.stringify(sellers);
 const sellersDataPath = path.join(__dirname, 'dev-data/data/sellers-test.json');
 
-const productsData = JSON.stringify(products);
-const productsDataPath = path.join(
-  __dirname,
-  'dev-data/data/products-test.json',
-);
+// const productsData = JSON.stringify(products);
+// const productsDataPath = path.join(
+//   __dirname,
+//   'dev-data/data/products-test.json',
+// );
 
 const usersData = JSON.stringify(users);
 const usersDataPath = path.join(__dirname, 'dev-data/data/users-test.json');
@@ -51,7 +51,7 @@ fs.writeFile(sellersDataPath, sellersData, (err) => {
   console.log('Sellers data written to file');
 });
 
-fs.writeFile(productsDataPath, productsData, (err) => {
-  if (err) throw err;
-  console.log('Products data written to file');
-});
+// fs.writeFile(productsDataPath, productsData, (err) => {
+//   if (err) throw err;
+//   console.log('Products data written to file');
+// });

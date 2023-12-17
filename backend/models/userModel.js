@@ -4,20 +4,21 @@ const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
 const userSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    required: [true, 'An user must have an id'],
-    unique: true,
-  },
-  fullName: {
-    type: String,
-    required: [true, 'An user must have a name'],
-  },
   userName: {
     type: String,
     required: [true, 'An user must have a username'],
     unique: true,
   },
+
+  avatar: {
+    type: String,
+  },
+
+  fullName: {
+    type: String,
+    required: [true, 'An user must have a name'],
+  },
+
   dateOfBirth: {
     type: String,
     validate: {
@@ -27,28 +28,42 @@ const userSchema = new mongoose.Schema({
       message: 'Invalid date format. Please use DD/MM/YYYY.',
     },
   },
-  role: {
+
+  gender: {
     type: String,
-    enum: ['user', 'seller'],
-    default: 'user',
+    enum: ['Male', 'Female', 'Other'],
   },
+
+  phoneNumber: {
+    type: String,
+  },
+
   email: {
     type: String,
     required: [true, 'Please provide your email'],
-    unique: true,
     match: [
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       'Please provide a valid email',
     ],
     unique: [true, 'Email already exists'],
   },
-  phoneNumber: {
+
+  address: {
     type: String,
+    maxLength: [500, 'The max length of address is 500 characters'],
   },
-  avatar: {
+
+  interest: {
     type: String,
-    // required: [true, 'An user must have an avatar'],
+    maxLength: [500, 'The max length of interest is 500 characters'],
   },
+
+  role: {
+    type: String,
+    enum: ['user', 'seller'],
+    default: 'user',
+  },
+
   password: {
     type: String,
     required: [true, 'Please provide password'],
@@ -59,6 +74,11 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
     select: false,
+  },
+
+  sellerDetails: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Seller',
   },
 });
 
