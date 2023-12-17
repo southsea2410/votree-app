@@ -24,11 +24,7 @@ export default function UserPost(props) {
                 <CardContent sx={cardContentStyle}>
                     <SumProfile />
                     <Typography>{props.content}</Typography>
-                    <CardMedia
-                        component="img"
-                        image={props.image}
-                        sx={{ minHeight: '500px', borderRadius: '7px' }}
-                    />
+                    <CardMedia component="img" image={props.image} sx={{ minHeight: '500px', borderRadius: '7px' }} />
                     <ReactionBar />
                 </CardContent>
             </Card>

@@ -1,12 +1,30 @@
 require('express-async-errors');
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const helmet = require('helmet');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 
 const app = express();
+
+var whitelist = ['http://localhost:5173' /** other domains if any */];
+var corsOptions = {
+  credentials: true,
+  origin: whitelist,
+};
+
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
+  next();
+});
+
+app.use(cors(corsOptions));
 
 const productRouter = require('./routes/productRoutes');
 const sellerRouter = require('./routes/sellerRoutes');

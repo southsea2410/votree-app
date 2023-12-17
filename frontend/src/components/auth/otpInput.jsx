@@ -74,10 +74,7 @@ export default function OtpInput({ value, valueLength, onChange }) {
         const targetValueLength = targetValue.length;
 
         if (targetValueLength === 1) {
-            const newValue =
-                value.substring(0, index) +
-                targetValue +
-                value.substring(index + 1);
+            const newValue = value.substring(0, index) + targetValue + value.substring(index + 1);
 
             onChange(newValue);
 

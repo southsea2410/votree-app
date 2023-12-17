@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-    Login,
-    HomePage,
-    Marketplace,
-    ResetPassword,
-    UserProfile,
-    OrderProducts,
-    ChangePassword
-} from './pages';
+import { Login, HomePage, Marketplace, ResetPassword, UserProfile, OrderProducts, ChangePassword } from './pages';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {

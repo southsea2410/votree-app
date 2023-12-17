@@ -5,7 +5,7 @@ const Order = require('./orderModel');
 const sellerSchema = new mongoose.Schema({
   storeName: { type: String, required: true },
   storeLocation: { type: String, required: true },
-  storeEmail: { 
+  storeEmail: {
     type: String,
     required: [true, 'Please provide your email'],
     match: [

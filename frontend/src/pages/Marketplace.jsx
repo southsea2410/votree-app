@@ -8,6 +8,9 @@ import { useNavBarHeight } from '../hooks/useNavBarHeight';
 import React, { useCallback } from 'react';
 import { useState, useEffect } from 'react';
 
+import { useSelector } from 'react-redux';
+import { selectProfileInfo } from '../redux/features/profile/profileInfoSlice';
+
 const containerStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -32,6 +35,8 @@ const salePostsContainer = {
 };
 
 export default function Marketplace() {
+    const da = useSelector(selectProfileInfo);
+    console.log(da['fullName']);
     const [plantInCart, setPlantInCart] = React.useState(0);
 
     const handleAddPlantToCart = useCallback(() => {
@@ -80,9 +85,7 @@ export default function Marketplace() {
             <Container disableGutters maxWidth="xl" sx={containerStyle}>
                 <div style={{ paddingBottom: '22px' }}>
                     <WhatshotIcon color="pending" fontSize="medium" />
-                    <span
-                        className="subtitle-extra-bold"
-                        style={{ color: colors.green5, paddingLeft: 10 }}>
+                    <span className="subtitle-extra-bold" style={{ color: colors.green5, paddingLeft: 10 }}>
                         Hot picks
                     </span>
                 </div>
