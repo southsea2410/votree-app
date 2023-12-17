@@ -54,9 +54,9 @@ export default function Login() {
                 'http://localhost:3000/api/v1/auth/login',
                 {
                     method: 'POST',
-                    header: {
-                        'Content-Type': 'application/json',
-                    },
+                    // header: {
+                    //     'Content-Type': 'application/json',
+                    // },
                     body: formData
                 }
             );
@@ -64,12 +64,7 @@ export default function Login() {
             console.log(response);
 
             if (response.ok) {
-                const data = await response.json();
-                // console.log(data.user);
-                dispatch(updateProfileInfo(data.user));
-                // console.log(get)
                 console.log('Login successful');
-
                 navigate('/profile');
             } else {
                 console.error('Login failed:', response.statusText);

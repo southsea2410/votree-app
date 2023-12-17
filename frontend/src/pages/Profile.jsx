@@ -33,10 +33,12 @@ const fields = {
         email: '',
         address: '',
         interest: '',
-        storeEmail: '',
-        storeLocation: '',
-        storeName: '',
-        storePhoneNumber: '',
+        sellerDetails: {
+            storeEmail: '',
+            storeLocation: '',
+            storeName: '',
+            storePhoneNumber: '',
+        }
 };
 
 function InfoTable() {
@@ -50,14 +52,25 @@ function InfoTable() {
 
     useEffect(() => {
         async function fetchUserInfo() {
-            const data = await fetch('/api/v1/sellers/' + id, {
-                headers: { 'Content-Type': 'application/json' }
-            });
+            let data;
+            if (id === undefined) {
+                data = await fetch('http://localhost:3000/api/v1/updateInfo', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: "include"
+                });
+            } else {
+                data = await fetch('http://localhost:3000/api/v1/sellers/' + id, {
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
             const arr = await data.json();
-            console.log(arr);
-            setFullName(arr.data.seller?.fullName || '');
-            setRole(arr.data.seller?.role || '');
-            setInfos(arr.data.seller || fields);
+            console.log(arr.userInfo);
+            // setFullName(arr.seller?.fullName || '');
+            // setRole(arr.seller?.role || '');
+            setInfos(arr.userInfo || fields);
         }
         fetchUserInfo();
     }, [id]);

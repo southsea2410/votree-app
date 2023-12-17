@@ -9,7 +9,19 @@ const mongoSanitize = require('express-mongo-sanitize');
 
 const app = express();
 
-app.use(cors())
+var whitelist = ['http://localhost:5173', /** other domains if any */ ]
+var corsOptions = {
+  credentials: true,
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors(corsOptions));
 
 const productRouter = require('./routes/productRoutes');
 const sellerRouter = require('./routes/sellerRoutes');
