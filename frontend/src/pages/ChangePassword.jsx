@@ -36,9 +36,7 @@ export default function ChangePassword() {
                         borderRadius: 7
                     }}>
                     <div style={{ ...clusterStyle, padding: '35px 35px' }}>
-                        <div
-                            className="subtitle-extra-bold"
-                            style={{ color: colors.green6 }}>
+                        <div className="subtitle-extra-bold" style={{ color: colors.green6 }}>
                             Change Password
                         </div>
                         <div style={clusterStyle}>

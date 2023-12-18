@@ -1,13 +1,6 @@
 import React from 'react';
 import { NavBar, DropDownSelect } from '../components';
-import {
-    Box,
-    Button,
-    Card,
-    CardContent,
-    Container,
-    Divider
-} from '@mui/material';
+import { Box, Button, Card, CardContent, Container, Divider } from '@mui/material';
 import { colors } from '../styles';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 import './../index.css';
@@ -53,15 +46,11 @@ function OrderCard({
                             gridTemplateRows: 'repeat(2, 50px)',
                             alignItems: 'center'
                         }}>
-                        <p
-                            className="subtitle-semi-bold-20"
-                            style={{ color: colors.green4 }}>
+                        <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
                             Seller
                         </p>
                         <p className="content-medium-20-25">{seller}</p>
-                        <p
-                            className="subtitle-semi-bold-20"
-                            style={{ color: colors.green4 }}>
+                        <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
                             Customer
                         </p>
                         <p className="content-medium-20-25">{customer}</p>
@@ -86,14 +75,10 @@ function OrderCard({
                             }}>
                             {profileData.map((data, index) => (
                                 <React.Fragment key={index}>
-                                    <p
-                                        className="subtitle-semi-bold-20"
-                                        style={{ color: colors.green4 }}>
+                                    <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
                                         {data.name}
                                     </p>
-                                    <p className="content-medium-20-25">
-                                        {data.quantity}
-                                    </p>
+                                    <p className="content-medium-20-25">{data.quantity}</p>
                                 </React.Fragment>
                             ))}
                         </Box>
@@ -110,9 +95,7 @@ function OrderCard({
                             justifyContent: 'space-between',
                             alignItems: 'center'
                         }}>
-                        <p className="subtitle-semi-bold-20">
-                            Total: 176.000.000 VND
-                        </p>
+                        <p className="subtitle-semi-bold-20">Total: 176.000.000 VND</p>
                         <Button variant="active">Purchase</Button>
                     </Box>
                 </CardContent>

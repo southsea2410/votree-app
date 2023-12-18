@@ -26,19 +26,11 @@ export default function PostArticle({ onClick }) {
                     alignItems: 'center'
                 }}>
                 <Avatar variant="small">N</Avatar>
-                <Button
-                    variant="post"
-                    style={{ gap: 15, padding: '0px 15px', height: 40 }}
-                    onClick={onClick}>
+                <Button variant="post" style={{ gap: 15, padding: '0px 15px', height: 40 }} onClick={onClick}>
                     <div style={{ display: 'flex' }}>
-                        <LeafIcon
-                            color={colors.green6}
-                            style={{ fontSize: 25 }}
-                        />
+                        <LeafIcon color={colors.green6} style={{ fontSize: 25 }} />
                     </div>
-                    <div
-                        className="content-semi-bold-16"
-                        style={{ color: colors.green6 }}>
+                    <div className="content-semi-bold-16" style={{ color: colors.green6 }}>
                         How is your plan today, Prince Vegeta?
                     </div>
                 </Button>

@@ -38,9 +38,7 @@ export default function ResetPassword() {
 
     return (
         <div className="containerStyle">
-            <GlobalStyles
-                styles={{ '#root': { backgroundColor: '#FFFFFF' } }}
-            />
+            <GlobalStyles styles={{ '#root': { backgroundColor: '#FFFFFF' } }} />
             <div
                 style={{
                     display: 'flex',
@@ -55,16 +53,13 @@ export default function ResetPassword() {
                         borderRadius: 7
                     }}>
                     <div style={{ ...clusterStyle, padding: '35px 35px' }}>
-                        <div
-                            className="subtitle-extra-bold"
-                            style={{ color: colors.green6 }}>
+                        <div className="subtitle-extra-bold" style={{ color: colors.green6 }}>
                             Reset Password
                         </div>
                         {sentOTP ? (
                             <div style={clusterStyle}>
                                 <h5 style={{ padding: 0, margin: 0 }}>
-                                    Enter the verification code sent in your
-                                    email.
+                                    Enter the verification code sent in your email.
                                 </h5>
                                 <form
                                     style={{
@@ -73,11 +68,7 @@ export default function ResetPassword() {
                                         width: '100%',
                                         gap: 15
                                     }}>
-                                    <OtpInput
-                                        value={otp}
-                                        valueLength={otpLength}
-                                        onChange={onChange}
-                                    />
+                                    <OtpInput value={otp} valueLength={otpLength} onChange={onChange} />
                                     <div style={textBoxClusterStyle}>
                                         <TextField
                                             size="small"
@@ -85,8 +76,7 @@ export default function ResetPassword() {
                                             placeholder="Email"
                                             id="fullWidth"
                                             InputLabelProps={{
-                                                className:
-                                                    'content-semi-bold-16'
+                                                className: 'content-semi-bold-16'
                                             }}
                                             multiline
                                             rows={1}
@@ -101,8 +91,7 @@ export default function ResetPassword() {
                                             placeholder="Password"
                                             id="fullWidth"
                                             InputLabelProps={{
-                                                className:
-                                                    'content-semi-bold-16'
+                                                className: 'content-semi-bold-16'
                                             }}
                                             multiline
                                             rows={1}
@@ -117,8 +106,7 @@ export default function ResetPassword() {
                                             placeholder="Re-type password"
                                             id="fullWidth"
                                             InputLabelProps={{
-                                                className:
-                                                    'content-semi-bold-16'
+                                                className: 'content-semi-bold-16'
                                             }}
                                             multiline
                                             rows={1}
@@ -128,23 +116,17 @@ export default function ResetPassword() {
                                             style={textBoxStyle}
                                         />
                                     </div>
-                                    <Button style={{ width: '100%' }}>
-                                        Verify
-                                    </Button>
+                                    <Button style={{ width: '100%' }}>Verify</Button>
                                 </form>
-                                <div className="content-semi-bold-14-22">
-                                    If you didn&apos;t receive a code! Resend
-                                </div>
+                                <div className="content-semi-bold-14-22">If you didn&apos;t receive a code! Resend</div>
                             </div>
                         ) : (
                             <div style={clusterStyle}>
                                 <h5 style={{ margin: 0, color: colors.green6 }}>
-                                    Enter the email address associated with your
-                                    account.
+                                    Enter the email address associated with your account.
                                 </h5>
                                 <h5 style={{ color: colors.green5, margin: 0 }}>
-                                    We will email you an OTP to reset your
-                                    password.
+                                    We will email you an OTP to reset your password.
                                 </h5>
                                 <TextField
                                     size="small"
@@ -161,14 +143,10 @@ export default function ResetPassword() {
                                     }}
                                     style={textBoxStyle}
                                 />
-                                <Button
-                                    style={{ width: '100%' }}
-                                    onClick={handleSendOTP}>
+                                <Button style={{ width: '100%' }} onClick={handleSendOTP}>
                                     Send OTP
                                 </Button>
-                                <div className="content-semi-bold-14-22">
-                                    Log in with password
-                                </div>
+                                <div className="content-semi-bold-14-22">Log in with password</div>
                             </div>
                         )}
                     </div>

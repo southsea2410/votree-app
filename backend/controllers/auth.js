@@ -10,7 +10,7 @@ const register = async (req, res) => {
   res
     .status(StatusCodes.CREATED)
     .json({
-      user: { username: user.username },
+      user: { userName: user.userName, email: user.email },
     })
     .message('Register successfully');
 };
@@ -22,9 +22,9 @@ const login = async (req, res) => {
     throw new BadRequestError('Please provide username/email and password');
   }
 
-  // Tìm user theo username hoặc email
+  // Find user follow the username or email
   const user = await User.findOne({
-    $or: [{ username: account }, { email: account }],
+    $or: [{ userName: account }, { email: account }],
   });
 
   if (!user) {
@@ -41,7 +41,6 @@ const login = async (req, res) => {
   let refreshToken = '';
   // check for existing token
   const existingToken = await Token.findOne({ user: user._id });
-
   if (existingToken) {
     const { isValid } = existingToken;
     if (!isValid) {

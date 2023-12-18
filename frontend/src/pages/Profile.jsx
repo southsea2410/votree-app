@@ -1,159 +1,27 @@
+import * as React from 'react';
 import { Fragment } from 'react';
 import { NavBar, SumProfile, UserPost } from '../components';
-import {
-    Box,
-    Button,
-    Card,
-    CardContent,
-    Container,
-    Divider
-} from '@mui/material';
-import { useState, useEffect } from 'react';
+import { Box, Button, Card, CardContent, Container, Divider } from '@mui/material';
+import { useEffect } from 'react';
 import { colors } from '../styles';
 import { content, contentLong } from '../assets/contents/content';
 import UpSellerDialog from '../components/profile/UpSellerDialog';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 
 // Redux
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { selectProfileInfo } from '../redux/features/profileInfoSlice';
+import { selectProfileInfo, updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
+import { selectStoreInfo, updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
+import { selectIsLoggedIn, updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
 
-// const fields = {
-//     avatar: '',
-//     email: '',
-//     fullName: '',
-//     address: '',
-//     password: '',
-//     phoneNumber: '',
-//     products: [],
-//     role: '',
-//     storeEmail: '',
-//     storeLocation: '',
-//     storeName: '',
-//     storePhoneNumber: '',
-// };
+// Constants
+import { fieldNames, storeFieldNames } from '../constants';
 
-function InfoTable() {
-    const profileInfo = useSelector(selectProfileInfo);
-
-    const [infos, setInfos] = useState({
-        avatar: '',
-        email: '',
-        fullName: '',
-        userName: '',
-        address: '',
-        phoneNumber: '',
-        role: '',
-        storeEmail: '',
-        storeLocation: '',
-        storeName: '',
-        storePhoneNumber: ''
-    });
-    const { id } = useParams();
-
-    useEffect(() => {
-        async function fetchUserInfo() {
-            const data = await fetch('/api/v1/sellers/' + id, {
-                headers: { 'Content-Type': 'application/json' }
-            });
-            const arr = await data.json();
-            console.log(arr);
-            setInfos(arr.data.seller);
-        }
-        fetchUserInfo();
-    }, [id]);
-
-    if (infos === undefined) return <p>User not found!!</p>;
-    else
-        return (
-            <Box
-                sx={{
-                    display: 'grid',
-                    gridTemplateColumns: '200px 400px',
-                    gridAutoRows: 'minmax(50px, auto)',
-                    rowGap: '10px',
-                    columnGap: '15px',
-                    alignItems: 'center'
-                }}>
-                {Object.keys(infos).map((key) => {
-                    if (
-                        infos[key] === undefined ||
-                        key == '_id' ||
-                        key == 'id' ||
-                        key == 'role' ||
-                        key == 'password' ||
-                        key == 'products' ||
-                        key == '__v' ||
-                        key == 'userName'
-                    ) {
-                        return null;
-                    }
-                    return (
-                        <Fragment key={key}>
-                            <p
-                                className="subtitle-semi-bold-20"
-                                style={{ color: colors.green4 }}>
-                                {profileInfo[key]}
-                            </p>
-                            <p className="content-medium-20-25">
-                                {profileInfo[key]}
-                            </p>
-                        </Fragment>
-                    );
-                })}
-            </Box>
-        );
-}
-
-function UserCard() {
-    const profileInfo = useSelector(selectProfileInfo);
-
-    return (
-        <Container maxWidth="false" disableGutters>
-            <Card variant="outlined">
-                <CardContent
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        rowGap: '20px'
-                    }}>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            justifyContent: 'space-between'
-                        }}>
-                        <div>{SumProfile({ fullName: profileInfo['fullName'], role: profileInfo['role'] })}</div>
-                        <UpSellerDialog variant="filled">
-                            Up Seller
-                        </UpSellerDialog>
-                    </Box>
-                    <Divider variant="slighter"></Divider>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            justifyContent: 'space-between',
-                            alignItems: 'flex-start'
-                        }}>
-                        <InfoTable />
-                        <Button variant="filled">Edit Profile</Button>
-                    </Box>
-                    <Divider variant="slighter"></Divider>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between'
-                        }}>
-                        <p className="subtitle-extra-bold">Posts</p>
-                        <Button variant="filled">Activity History</Button>
-                    </Box>
-                </CardContent>
-            </Card>
-        </Container>
-    );
-}
+// Utils
+import { fetchUserInfo } from '../utils/apiUtils';
+import { updateIsSeller } from '../redux/features/account/isSellerSlice';
 
 const containerStyle = {
     display: 'flex',
@@ -167,13 +35,221 @@ const containerStyle = {
 // 6577d9852aeaa934ac6173f5
 
 export default function UserProfile() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const profileInfoFromRedux = useSelector(selectProfileInfo);
+    const storeInfoFromRedux = useSelector(selectStoreInfo);
+    const [isLoggedIn, setIsLoggedIn] = React.useState(useSelector(selectIsLoggedIn));
+
+    const [fullName, setFullName] = React.useState('Your full name');
+    const [role, setRole] = React.useState('Your role');
+
+    const [profileInfo, setProfileInfo] = React.useState(profileInfoFromRedux);
+    const [storeInfo, setStoreInfo] = React.useState(storeInfoFromRedux);
+
+    const { id } = useParams();
+
+    const handleLogout = async () => {
+        try {
+            const response = await fetch('api/v1/auth/logout', {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                navigate('/');
+            } else {
+                console.error('Logout request failed:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network errors or exceptions that occur during the logout process
+            console.error('Error during logout:', error);
+        }
+    };
+
+    useEffect(() => {
+        async function fetchProfileInfo() {
+            if (id === undefined || id === '') {
+                if (!isLoggedIn) {
+                    const { profile, store } = await fetchUserInfo();
+                    if (profile) {
+                        dispatch(updateProfileInfo(profile));
+                        dispatch(updateIsLoggedIn(true));
+                        setIsLoggedIn(true);
+                        setFullName(profile.fullName);
+                        setRole(profile.role.toLowerCase());
+                        setProfileInfo(profile);
+                        if (store) {
+                            setStoreInfo(store);
+                            dispatch(updateStoreInfo(store));
+                            dispatch(updateIsSeller(true));
+                        }
+                    } else {
+                        navigate('/');
+                    }
+                }
+            } else {
+                const data = await fetch('/api/v1/sellers/' + id, {
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                const arr = await data.json();
+                const info = arr.data.seller;
+                if (arr.data.seller) {
+                    const profile = {
+                        role: info.role || '',
+                        avatar: info.avatar || '',
+                        fullName: info.fullName || '',
+                        dateOfBirth: info.dateOfBirth || '',
+                        gender: info.gender || '',
+                        phoneNumber: info.phoneNumber || '',
+                        email: info.email || '',
+                        address: info.address || '',
+                        interest: info.interest || ''
+                    };
+                    setIsLoggedIn(true);
+                    setProfileInfo(profile);
+                    setFullName(profile.fullName);
+                    setRole(profile.role.toLowerCase());
+                    if (profile.role.toLowerCase() === 'seller') {
+                        const store = {
+                            storeEmail: info.sellerDetails.storeEmail || '',
+                            storeLocation: info.sellerDetails.storeLocation || '',
+                            storeName: info.sellerDetails.storeName || '',
+                            storePhoneNumber: info.sellerDetails.storePhoneNumber || ''
+                        };
+                        setStoreInfo(store);
+                    }
+                } else {
+                    navigate('/profile');
+                }
+            }
+        }
+        fetchProfileInfo();
+    }, [id, isLoggedIn]);
+
     return (
         <div style={{ paddingTop: useNavBarHeight() }}>
             <Box className="navbar">
                 <NavBar />
             </Box>
+            <Button onClick={handleLogout}>Log out</Button> {/* for testing logout */}
             <Container maxWidth="lg" sx={containerStyle}>
-                <UserCard />
+                <Container maxWidth="false" disableGutters>
+                    <Card variant="outlined">
+                        <CardContent
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                rowGap: '20px'
+                            }}>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    justifyContent: 'space-between'
+                                }}>
+                                <div>{SumProfile({ fullName: fullName, role: role })}</div>
+                                {role === 'seller' ? (
+                                    <></>
+                                ) : (
+                                    <UpSellerDialog variant="filled">Up Seller</UpSellerDialog>
+                                )}
+                            </Box>
+                            <Divider variant="slighter"></Divider>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'flex-start'
+                                }}>
+                                <Box
+                                    sx={{
+                                        display: 'grid',
+                                        gridTemplateColumns: '200px 400px',
+                                        gridAutoRows: 'minmax(50px, auto)',
+                                        rowGap: '10px',
+                                        columnGap: '15px',
+                                        alignItems: 'center'
+                                    }}>
+                                    {Object.keys(profileInfo).map((key) => {
+                                        if (
+                                            profileInfo[key] === undefined ||
+                                            profileInfo[key] === null ||
+                                            key == '_id' ||
+                                            key == 'id' ||
+                                            key == 'role' ||
+                                            key == 'password' ||
+                                            key == 'products' ||
+                                            key == '__v' ||
+                                            key == 'userName' ||
+                                            key == 'isLoggedIn' ||
+                                            key == 'avatar'
+                                        )
+                                            return null;
+
+                                        return (
+                                            <Fragment key={key}>
+                                                <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
+                                                    {fieldNames[key]}
+                                                </p>
+                                                <p className="content-medium-20-25">{profileInfo[key]}</p>
+                                            </Fragment>
+                                        );
+                                    })}
+                                </Box>
+                                <Button variant="filled">Edit Profile</Button>
+                            </Box>
+                            <Divider variant="slighter"></Divider>
+                            <Box>
+                                {role === 'seller' ? (
+                                    <Box
+                                        sx={{
+                                            display: 'grid',
+                                            gridTemplateColumns: '200px 400px',
+                                            gridAutoRows: 'minmax(50px, auto)',
+                                            rowGap: '10px',
+                                            columnGap: '15px',
+                                            alignItems: 'center'
+                                        }}>
+                                        {Object.keys(storeInfo).map((key) => {
+                                            if (
+                                                storeInfo[key] === undefined ||
+                                                storeInfo[key] === null ||
+                                                key == '_id' ||
+                                                key == 'id'
+                                            )
+                                                return null;
+
+                                            return (
+                                                <Fragment key={key}>
+                                                    <p
+                                                        className="subtitle-semi-bold-20"
+                                                        style={{ color: colors.green4 }}>
+                                                        {storeFieldNames[key]}
+                                                    </p>
+                                                    <p className="content-medium-20-25">{storeInfo[key]}</p>
+                                                </Fragment>
+                                            );
+                                        })}
+                                    </Box>
+                                ) : (
+                                    <Box></Box>
+                                )}
+                            </Box>
+                            {role === 'seller' ? <Divider variant="slighter"></Divider> : <></>}
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between'
+                                }}>
+                                <p className="subtitle-extra-bold">Posts</p>
+                                <Button variant="filled">Activity History</Button>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                </Container>
                 <UserPost content={content} />
                 <UserPost content={contentLong} />
                 <UserPost />

@@ -15,13 +15,7 @@ import { LogoVoTree_primary } from '../../assets/images';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { colors } from '../../styles';
-import {
-    HomeIcon,
-    MarketIcon,
-    MarketIconFill,
-    Noti,
-    Basket
-} from '../../assets/icons';
+import { HomeIcon, MarketIcon, MarketIconFill, Noti, Basket } from '../../assets/icons';
 import { Avatar } from '@mui/material';
 
 const ImageContainer = styled('div')({
@@ -92,10 +86,7 @@ export default function NavBar({ className }) {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}>
             <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 4 new mails"
-                    color="inherit">
+                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
                     <Badge badgeContent={4} color="error">
                         <MailIcon />
                     </Badge>
@@ -103,10 +94,7 @@ export default function NavBar({ className }) {
                 <p>Messages</p>
             </MenuItem>
             <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit">
+                <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
                     <Badge badgeContent={17} color="error">
                         <NotificationsIcon />
                     </Badge>
@@ -144,12 +132,7 @@ export default function NavBar({ className }) {
                             alignItems: 'center'
                         }}>
                         <ImageContainer>
-                            <img
-                                src={LogoVoTree_primary}
-                                alt=""
-                                width="157"
-                                height="58"
-                            />
+                            <img src={LogoVoTree_primary} alt="" width="157" height="58" />
                         </ImageContainer>
                         <SearchBar />
                     </div>
@@ -163,26 +146,16 @@ export default function NavBar({ className }) {
                             <BottomNavigationAction
                                 icon={
                                     value === 0 ? (
-                                        <HomeIcon
-                                            color={colors.green5}
-                                            style={{ fontSize: 30 }}
-                                        />
+                                        <HomeIcon color={colors.green5} style={{ fontSize: 30 }} />
                                     ) : (
-                                        <HomeIcon
-                                            color={colors.green1}
-                                            style={{ fontSize: 30 }}
-                                        />
+                                        <HomeIcon color={colors.green1} style={{ fontSize: 30 }} />
                                     )
                                 }
                                 showLabel={true}
                                 selected={value === 0}
                                 style={{
-                                    borderBottom:
-                                        value === 0 ? '4px solid' : '4px solid',
-                                    borderColor:
-                                        value === 0
-                                            ? colors.green5
-                                            : colors.green1
+                                    borderBottom: value === 0 ? '4px solid' : '4px solid',
+                                    borderColor: value === 0 ? colors.green5 : colors.green1
                                 }}
                             />
                             <BottomNavigationAction
@@ -190,20 +163,14 @@ export default function NavBar({ className }) {
                                     value === 0 ? (
                                         <MarketIcon style={{ fontSize: 30 }} />
                                     ) : (
-                                        <MarketIconFill
-                                            style={{ fontSize: 30 }}
-                                        />
+                                        <MarketIconFill style={{ fontSize: 30 }} />
                                     )
                                 }
                                 showLabel={true}
                                 selected={value === 1}
                                 style={{
-                                    borderBottom:
-                                        value === 1 ? '4px solid' : '4px solid',
-                                    borderColor:
-                                        value === 1
-                                            ? colors.green5
-                                            : colors.green1
+                                    borderBottom: value === 1 ? '4px solid' : '4px solid',
+                                    borderColor: value === 1 ? colors.green5 : colors.green1
                                 }}
                             />
                         </BottomNavigation>
