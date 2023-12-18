@@ -9,7 +9,7 @@ import {
     OrderProducts,
     ChangePassword
 } from './pages';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
     return (
@@ -31,6 +31,7 @@ function App() {
                     </Route>
                     <Route path="orderproducts" element={<OrderProducts />} />
                     <Route path="changepassword" element={<ChangePassword />} />
+                    <Route path='*' element={<Navigate replace to='/'/>}/>
                 </Route>
             </Routes>
         </Router>

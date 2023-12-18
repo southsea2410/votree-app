@@ -4,26 +4,26 @@ const { random } = require('faker');
 faker.seed(123);
 
 exports.generateUserData = () => {
-  const pw = faker.internet.password();
+  // const pw = faker.internet.password();
   return {
-    id: faker.random.uuid(),
-    fullName: faker.name.findName(),
     userName: faker.internet.userName(),
-    email: faker.internet.email(),
-    password: pw,
-    role: 'user',
+    avatar: faker.image.imageUrl(),
+    fullName: faker.name.findName(),
+    dateOfBirth: faker.date.past(),
+    gender: faker.random.arrayElement(['Male', 'Female', 'Other']),
     phoneNumber: faker.phone.phoneNumber(),
-    // avatar: faker.image.avatar(),
-    avatar: faker.image.avatar(),
-    active: faker.random.boolean(),
-    createdAt: faker.date.past(),
+    email: faker.internet.email(),
+    address: faker.address.streetAddress(),
+    interest: faker.random.words(),
+    role: 'user',
+    password: 'mywebapp2023',
+    active: 'true',
   };
 };
 
 exports.generateSellerData = () => {
   const pw = faker.internet.password();
   return {
-    id: faker.random.uuid(),
     fullName: faker.name.findName(),
     userName: faker.internet.userName(),
     email: faker.internet.email(),
@@ -43,7 +43,6 @@ exports.generateSellerData = () => {
 
 exports.generateProductData = (sellerId) => {
   return {
-    id: faker.random.uuid(),
     name: faker.commerce.productName(),
     // type is one of its: botanical, ferns, flower, herbs, succulents, trees, vegetables
     type: random.arrayElement([

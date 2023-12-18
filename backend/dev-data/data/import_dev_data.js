@@ -21,21 +21,21 @@ mongoose
   .then(() => console.log('DB connection successful!'));
 
 // READ JSON FILE
-const users = JSON.parse(
-  fs.readFileSync(`${__dirname}/users-test.json`, 'utf-8'),
-);
-const sellers = JSON.parse(
-  fs.readFileSync(`${__dirname}/sellers-test.json`, 'utf-8'),
-);
-// const products = JSON.parse(
-//   fs.readFileSync(`${__dirname}/products-test.json`, 'utf-8'),
+// const users = JSON.parse(
+//   fs.readFileSync(`${__dirname}/users-test.json`, 'utf-8'),
 // );
+// const sellers = JSON.parse(
+//   fs.readFileSync(`${__dirname}/sellers-test.json`, 'utf-8'),
+// );
+const products = JSON.parse(
+  fs.readFileSync(`${__dirname}/products-test.json`, 'utf-8'),
+);
 
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
     await User.create(users, { validateBeforeSave: false });
-    await Seller.create(sellers, { validateBeforeSave: false });
+    // await Seller.create(sellers, { validateBeforeSave: false });
     // await Product.create(products, { validateBeforeSave: false });
 
     console.log('Data successfully loaded!');
@@ -49,7 +49,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await User.deleteMany();
-    await Seller.deleteMany();
+    // await Seller.deleteMany();
     // await Product.deleteMany();
 
     console.log('Data successfully deleted!');

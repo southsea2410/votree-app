@@ -1,5 +1,6 @@
 const Seller = require('../models/sellerModel');
 const Product = require('../models/productModel');
+const productController = require('../controllers/productController');
 
 exports.createSeller = async (req, res, next) => {
   try {
@@ -19,36 +20,17 @@ exports.createSeller = async (req, res, next) => {
 };
 
 // Adding a product to a seller
-exports.addProduct = async (req, res, next) => {
-  try {
-    const seller = await Seller.findById(req.params.sellerId);
-    // Add seller id to req.body
-    req.body.sellerId = seller._id;
-    const product = await Product.create(req.body);
 
-    await seller.products.push(product._id);
-    await seller.save();
-
-    res.status(201).json({
-      status: 'success',
-      data: {
-        product,
-      },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
-  }
+exports.addProduct = async (req, res) => {
+  req.sellerId = req.params.sellerId; // Or determine the sellerId based on the logged-in user or other criteria
+  productController.createProduct(req, res);
 };
 
 // Get all products of a seller
 exports.getAllSellerProducts = async (req, res, next) => {
   try {
     const seller = await Seller.findById(req.params.sellerId);
-    const products = await Product.find({ sellerId: seller._id });
-
+    const products = seller.products;
     res.status(200).json({
       status: 'success',
       results: products.length,
@@ -127,6 +109,7 @@ exports.updateSeller = async (req, res, next) => {
     'storeLocation',
     'storeEmail',
     'storePhoneNumber',
+    'products',
   ];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update),

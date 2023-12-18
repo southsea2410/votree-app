@@ -27,6 +27,7 @@ app.use(function (req, res, next) {
 
 app.use(cors(corsOptions));
 
+const userRouter = require('./routes/userRoutes');
 const productRouter = require('./routes/productRoutes');
 const sellerRouter = require('./routes/sellerRoutes');
 const cartRouter = require('./routes/cartRoutes');
@@ -38,7 +39,7 @@ const cookieParser = require('cookie-parser');
 
 // routers
 const authRouter = require('./routes/auth');
-const updateInfoRouter = require('./routes/updateInfo');
+const userInfoRouter = require('./routes/userInfo');
 const updatepwRouter = require('./routes/updatepw');
 const otpRouter = require('./routes/otp');
 const forgotpwRouter = require('./routes/forgotpw');
@@ -73,6 +74,7 @@ app.use(express.static(`${__dirname}/public`));
 // Data sanitization against XSS
 app.use(xss());
 
+app.use('/api/v1/users', userRouter);
 app.use('/api/v1/marketplace/products', productRouter);
 app.use('/api/v1/sellers', sellerRouter);
 app.use('/api/v1/marketplace/carts', cartRouter);
@@ -85,7 +87,7 @@ app.use('/api/v1/otp', otpRouter);
 app.use('/api/v1/forgotpw', forgotpwRouter);
 
 // routes after login
-app.use('/api/v1/updateInfo', updateInfoRouter);
+app.use('/api/v1/userInfo', userInfoRouter);
 app.use('/api/v1/updatepw', updatepwRouter);
 
 app.use(notFoundMiddleware);

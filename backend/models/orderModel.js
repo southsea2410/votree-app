@@ -11,9 +11,6 @@ const orderSchema = new mongoose.Schema({
       ref: 'Cart',
     },
   ],
-  totalAmount: {
-    type: Number,
-  },
   paid: {
     type: Boolean,
     default: false,
@@ -23,11 +20,15 @@ const orderSchema = new mongoose.Schema({
 orderSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'cartId',
-    select: 'userId',
+    select: 'userId totalPrice totalQuantity image',
   });
 
   next();
 });
+
+// 4242424242424242: Accept
+// 4000000000003220: Authentication
+// 4000000000000002: Declined
 
 const Order = mongoose.model('Order', orderSchema);
 
