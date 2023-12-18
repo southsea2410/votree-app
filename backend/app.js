@@ -27,6 +27,8 @@ app.use(function (req, res, next) {
 
 app.use(cors(corsOptions));
 
+
+const userRouter = require('./routes/userRoutes');
 const productRouter = require('./routes/productRoutes');
 const sellerRouter = require('./routes/sellerRoutes');
 const cartRouter = require('./routes/cartRoutes');
@@ -73,6 +75,7 @@ app.use(express.static(`${__dirname}/public`));
 // Data sanitization against XSS
 app.use(xss());
 
+app.use('/api/v1/users', userRouter);
 app.use('/api/v1/marketplace/products', productRouter);
 app.use('/api/v1/sellers', sellerRouter);
 app.use('/api/v1/marketplace/carts', cartRouter);
