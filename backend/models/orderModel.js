@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema({
 orderSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'cartId',
-    select: 'userId totalPrice totalQuantity',
+    select: 'userId totalPrice totalQuantity image',
   });
 
   next();

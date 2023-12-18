@@ -24,7 +24,6 @@ exports.generateUserData = () => {
 exports.generateSellerData = () => {
   const pw = faker.internet.password();
   return {
-    id: faker.random.uuid(),
     fullName: faker.name.findName(),
     userName: faker.internet.userName(),
     email: faker.internet.email(),
@@ -44,7 +43,6 @@ exports.generateSellerData = () => {
 
 exports.generateProductData = (sellerId) => {
   return {
-    id: faker.random.uuid(),
     name: faker.commerce.productName(),
     // type is one of its: botanical, ferns, flower, herbs, succulents, trees, vegetables
     type: random.arrayElement([

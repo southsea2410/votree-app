@@ -31,6 +31,8 @@ const users = Array.from(
 
 // const sellersData = JSON.stringify(sellers);
 // const sellersDataPath = path.join(__dirname, 'dev-data/data/sellers-test.json');
+// const sellersData = JSON.stringify(sellers);
+// const sellersDataPath = path.join(__dirname, 'dev-data/data/sellers-test.json');
 
 // const productsData = JSON.stringify(products);
 // const productsDataPath = path.join(
@@ -38,13 +40,13 @@ const users = Array.from(
 //   'dev-data/data/products-test.json',
 // );
 
-const usersData = JSON.stringify(users);
-const usersDataPath = path.join(__dirname, 'dev-data/data/users-test.json');
+// const usersData = JSON.stringify(users);
+// const usersDataPath = path.join(__dirname, 'dev-data/data/users-test.json');
 
-fs.writeFile(usersDataPath, usersData, (err) => {
-  if (err) throw err;
-  console.log('Users data written to file');
-});
+// fs.writeFile(usersDataPath, usersData, (err) => {
+//   if (err) throw err;
+//   console.log('Users data written to file');
+// });
 
 // fs.writeFile(sellersDataPath, sellersData, (err) => {
 //   if (err) throw err;
@@ -53,5 +55,10 @@ fs.writeFile(usersDataPath, usersData, (err) => {
 
 // fs.writeFile(productsDataPath, productsData, (err) => {
 //   if (err) throw err;
-//   console.log('Products data written to file');
+//   console.log('Sellers data written to file');
 // });
+
+fs.writeFile(productsDataPath, productsData, (err) => {
+  if (err) throw err;
+  console.log('Products data written to file');
+});
