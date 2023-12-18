@@ -32,6 +32,14 @@ const containerStyle = {
     backgroundColor: colors.secondary
 };
 
+// const logoutButtonStyle = {
+//     position: 'fixed',
+//     top: '20px', // Adjust this value to position vertically
+//     right: '20px', // Adjust this value to position horizontally
+//     // padding: useNavBarHeight(),
+//     // zIndex: 1,
+// };
+
 // 6577d9852aeaa934ac6173f4
 // 6577d9852aeaa934ac6173f5
 
@@ -138,7 +146,9 @@ export default function UserProfile() {
             <Box className="navbar">
                 <NavBar />
             </Box>
-            <Button onClick={handleLogout}>Log out</Button> {/* for testing logout */}
+            <div style={{ zIndex: 1, position: 'fixed', right: 10 }}>
+                <Button onClick={handleLogout}>Log out</Button>
+            </div>
             <Container maxWidth="lg" sx={containerStyle}>
                 <Container maxWidth="false" disableGutters>
                     <Card variant="outlined">
