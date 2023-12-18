@@ -10,7 +10,8 @@ export default function ReactionBar() {
     const isLoggedIn = useSelector(selectIsLoggedIn);
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 15, pointerEvents: isLoggedIn ? 'auto' : 'none' }}>
+        <div
+            style={{ display: 'flex', justifyContent: 'center', gap: 15, pointerEvents: isLoggedIn ? 'auto' : 'none' }}>
             <Button variant="outline-green1">17K</Button>
             <Button variant="outline-success">
                 <UpvoteIcon style={{ fontSize: 30 }} />

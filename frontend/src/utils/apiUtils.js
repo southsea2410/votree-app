@@ -1,6 +1,6 @@
 export const fetchUserInfo = async () => {
     try {
-        const data = await fetch('/api/v1/updateInfo', {
+        const data = await fetch('/api/v1/userInfo', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

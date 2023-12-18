@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { Post_test } from '../assets/images';
 import { content, contentLong } from '../assets/contents/content';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
+import { useNavigate } from 'react-router-dom';
 
 // Redux
 import { useDispatch } from 'react-redux';
@@ -36,6 +37,7 @@ const postsStyle = {
 };
 
 export default function HomePage() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isLoggedIn, setIsLoggedIn] = React.useState(useSelector(selectIsLoggedIn));
 

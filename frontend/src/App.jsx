@@ -31,7 +31,7 @@ function App() {
                     </Route>
                     <Route path="orderproducts" element={<OrderProducts />} />
                     <Route path="changepassword" element={<ChangePassword />} />
-                    <Route path='*' element={<Navigate replace to='/'/>}/>
+                    <Route path="*" element={<Navigate replace to="/" />} />
                 </Route>
             </Routes>
         </Router>

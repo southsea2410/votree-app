@@ -32,21 +32,13 @@ const containerStyle = {
     backgroundColor: colors.secondary
 };
 
-// const logoutButtonStyle = {
-//     position: 'fixed',
-//     top: '20px', // Adjust this value to position vertically
-//     right: '20px', // Adjust this value to position horizontally
-//     // padding: useNavBarHeight(),
-//     // zIndex: 1,
-// };
-
 // 6577d9852aeaa934ac6173f4
 // 6577d9852aeaa934ac6173f5
 
 export default function UserProfile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    dispatch(updateNavBarState(2)) // state 2 is profile
+    dispatch(updateNavBarState(2)); // state 2 is profile
 
     const profileInfoFromRedux = useSelector(selectProfileInfo);
     const storeInfoFromRedux = useSelector(selectStoreInfo);
@@ -59,25 +51,6 @@ export default function UserProfile() {
     const [storeInfo, setStoreInfo] = React.useState(storeInfoFromRedux);
 
     const { id } = useParams();
-
-    const handleLogout = async () => {
-        try {
-            const response = await fetch('api/v1/auth/logout', {
-                method: 'DELETE'
-            });
-
-            if (response.ok) {
-                navigate('/');
-                dispatch(updateIsLoggedIn(false));
-                dispatch(updateIsSeller(false));
-            } else {
-                console.error('Logout request failed:', response.statusText);
-            }
-        } catch (error) {
-            // Handle network errors or exceptions that occur during the logout process
-            console.error('Error during logout:', error);
-        }
-    };
 
     useEffect(() => {
         async function fetchProfileInfo() {
@@ -146,9 +119,6 @@ export default function UserProfile() {
             <Box className="navbar">
                 <NavBar />
             </Box>
-            <div style={{ zIndex: 1, position: 'fixed', right: 10 }}>
-                <Button onClick={handleLogout}>Log out</Button>
-            </div>
             <Container maxWidth="lg" sx={containerStyle}>
                 <Container maxWidth="false" disableGutters>
                     <Card variant="outlined">

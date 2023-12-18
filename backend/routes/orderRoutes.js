@@ -1,6 +1,9 @@
 const orderController = require('../controllers/orderController.js');
 const express = require('express');
-const {authenticateUser, authorizePermissions} = require('../middleware/authentication');
+const {
+  authenticateUser,
+  authorizePermissions,
+} = require('../middleware/authentication');
 const router = express.Router();
 
 router.use(authenticateUser);

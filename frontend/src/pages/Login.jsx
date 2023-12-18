@@ -7,9 +7,9 @@ import { GoogleIcon, FBIcon } from '../assets/icons';
 import { useNavigate } from 'react-router-dom';
 
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
-import { selectIsLoggedIn, updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
+import { updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
 import { updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
 import { updateIsSeller } from '../redux/features/account/isSellerSlice';
 
@@ -69,8 +69,6 @@ export default function Login() {
             if (response.ok) {
                 console.log('Login successful');
 
-                // navigate('/profile'); // Homepage
-
                 const { profile, store } = await fetchUserInfo();
 
                 if (profile) {
@@ -83,10 +81,7 @@ export default function Login() {
                     dispatch(updateIsSeller(true));
                 }
 
-                // const tmp = useSelector(selectIsLoggedIn);
-                // console.log(tmp);
-
-                navigate('/profile'); // Homepage
+                navigate('/'); // Homepage
             } else {
                 console.error('Login failed:', response.statusText);
             }
