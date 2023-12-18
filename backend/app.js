@@ -27,7 +27,6 @@ app.use(function (req, res, next) {
 
 app.use(cors(corsOptions));
 
-
 const userRouter = require('./routes/userRoutes');
 const productRouter = require('./routes/productRoutes');
 const sellerRouter = require('./routes/sellerRoutes');
@@ -40,7 +39,7 @@ const cookieParser = require('cookie-parser');
 
 // routers
 const authRouter = require('./routes/auth');
-const updateInfoRouter = require('./routes/updateInfo');
+const userInfoRouter = require('./routes/userInfo');
 const updatepwRouter = require('./routes/updatepw');
 const otpRouter = require('./routes/otp');
 const forgotpwRouter = require('./routes/forgotpw');
@@ -88,7 +87,7 @@ app.use('/api/v1/otp', otpRouter);
 app.use('/api/v1/forgotpw', forgotpwRouter);
 
 // routes after login
-app.use('/api/v1/updateInfo', updateInfoRouter);
+app.use('/api/v1/userInfo', userInfoRouter);
 app.use('/api/v1/updatepw', updatepwRouter);
 
 app.use(notFoundMiddleware);

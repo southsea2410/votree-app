@@ -13,16 +13,16 @@ const users = Array.from(
   () => new User(generateData.generateUserData()),
 );
 
-const sellers = Array.from(
-  { length: 10 },
-  () => new Seller(generateData.generateSellerData()),
-);
+// const sellers = Array.from(
+//   { length: 10 },
+//   () => new Seller(generateData.generateSellerData()),
+// );
 
 // get random seller id from sellers array
-const getRandomSellerId = () => {
-  const randomIndex = Math.floor(Math.random() * sellers.length);
-  return sellers[randomIndex]._id;
-};
+// const getRandomSellerId = () => {
+//   const randomIndex = Math.floor(Math.random() * sellers.length);
+//   return sellers[randomIndex]._id;
+// };
 
 // const products = Array.from(
 //   { length: 10 },
@@ -47,6 +47,11 @@ const getRandomSellerId = () => {
 // });
 
 // fs.writeFile(sellersDataPath, sellersData, (err) => {
+//   if (err) throw err;
+//   console.log('Sellers data written to file');
+// });
+
+// fs.writeFile(productsDataPath, productsData, (err) => {
 //   if (err) throw err;
 //   console.log('Sellers data written to file');
 // });

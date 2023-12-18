@@ -34,9 +34,9 @@ const products = JSON.parse(
 // IMPORT DATA INTO DB
 const importData = async () => {
   try {
-    // await User.create(users, { validateBeforeSave: false });
+    await User.create(users, { validateBeforeSave: false });
     // await Seller.create(sellers, { validateBeforeSave: false });
-    await Product.create(products, { validateBeforeSave: false });
+    // await Product.create(products, { validateBeforeSave: false });
 
     console.log('Data successfully loaded!');
   } catch (err) {
@@ -48,9 +48,9 @@ const importData = async () => {
 // DELETE ALL DATA FROM DB
 const deleteData = async () => {
   try {
-    // await User.deleteMany();
+    await User.deleteMany();
     // await Seller.deleteMany();
-    await Product.deleteMany();
+    // await Product.deleteMany();
 
     console.log('Data successfully deleted!');
   } catch (err) {
