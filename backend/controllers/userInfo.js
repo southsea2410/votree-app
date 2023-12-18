@@ -6,7 +6,8 @@ const Token = require('../models/Authentication/Token');
 const crypto = require('crypto');
 const { createTokenUser, attachCookiesToResponse } = require('../utils');
 
-const getInfo = async (req, res) => {
+const getUserInfo = async (req, res) => {
+  console.log('getUserInfo');
   const {
     user: { userId, role },
   } = req;
@@ -41,7 +42,29 @@ const getInfo = async (req, res) => {
   }
 };
 
-const updateInfo = async (req, res) => {
+const getUserInfoById = async (req, res) => {
+  try {
+    userInfo = await User.findOne({ _id: req.params.id }).select(
+      'role fullName dateOfBirth gender phoneNumber email address interest sellerDetails',
+    );
+    if (!userInfo) {
+      throw new NotFoundError(`No user with id ${req.params.id}`);
+    }
+
+    if (userInfo.role === 'seller') {
+      userInfo.sellerDetails = await Seller.findOne({
+        _id: userInfo.sellerDetails,
+      }).select('storeName storeLocation storeEmail storePhoneNumber');
+    }
+    res.status(StatusCodes.OK).json({ userInfo });
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: error.message });
+  }
+};
+
+const updateUserInfo = async (req, res) => {
   const {
     body: {
       fullName,
@@ -128,7 +151,7 @@ const updateToSeller = async (req, res) => {
       storePhoneNumber,
     });
 
-    await seller.save();
+    (seller._id = currentUser._id), await seller.save();
 
     await User.findByIdAndUpdate(userId, {
       role: 'seller',
@@ -157,7 +180,8 @@ const updateToSeller = async (req, res) => {
 };
 
 module.exports = {
-  getInfo,
-  updateInfo,
+  getUserInfo,
+  getUserInfoById,
+  updateUserInfo,
   updateToSeller,
 };

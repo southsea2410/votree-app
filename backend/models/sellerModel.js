@@ -2,29 +2,34 @@ const mongoose = require('mongoose');
 const User = require('./userModel'); // Import existing user model
 const Order = require('./orderModel');
 
-const sellerSchema = new mongoose.Schema({
-  storeName: { type: String, required: true },
-  storeLocation: { type: String, required: true },
-  storeEmail: {
-    type: String,
-    required: [true, 'Please provide your email'],
-    match: [
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      'Please provide a valid email',
-    ],
-    unique: [true, 'Email already exists'],
+const sellerSchema = new mongoose.Schema(
+  {
+    storeName: { type: String, required: true },
+    storeLocation: { type: String, required: true },
+    storeEmail: {
+      type: String,
+      required: [true, 'Please provide your email'],
+      match: [
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        'Please provide a valid email',
+      ],
+      unique: [true, 'Email already exists'],
+    },
+    storePhoneNumber: { type: String, required: true },
+    products: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
   },
-  storePhoneNumber: { type: String, required: true },
-
-  products: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  },
+  { timestamps: true },
+);
 
 sellerSchema.virtual('Product', {
   ref: 'Product',
   foreignField: 'sellerId',
   localField: 'id',
 });
-
 // Method to add a product to the seller's inventory
 // sellerSchema.methods.addProduct = async function (productData) {
 //   const product = new Product({

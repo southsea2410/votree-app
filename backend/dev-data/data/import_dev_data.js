@@ -35,7 +35,7 @@ const sellers = JSON.parse(
 const importData = async () => {
   try {
     await User.create(users, { validateBeforeSave: false });
-    await Seller.create(sellers, { validateBeforeSave: false });
+    // await Seller.create(sellers, { validateBeforeSave: false });
     // await Product.create(products, { validateBeforeSave: false });
 
     console.log('Data successfully loaded!');
@@ -49,7 +49,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await User.deleteMany();
-    await Seller.deleteMany();
+    // await Seller.deleteMany();
     // await Product.deleteMany();
 
     console.log('Data successfully deleted!');
