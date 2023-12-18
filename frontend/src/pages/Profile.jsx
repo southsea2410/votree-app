@@ -72,6 +72,7 @@ export default function UserProfile() {
             if (id === undefined || id === '') {
                 if (!isLoggedIn) {
                     const { profile, store } = await fetchUserInfo();
+                    console.log(profile);
                     if (profile) {
                         dispatch(updateProfileInfo(profile));
                         dispatch(updateIsLoggedIn(true));
@@ -89,7 +90,7 @@ export default function UserProfile() {
                     }
                 }
             } else {
-                const data = await fetch('/api/v1/sellers/' + id, {
+                const data = await fetch('/api/v1/userInfo/' + id, {
                     headers: { 'Content-Type': 'application/json' }
                 });
 

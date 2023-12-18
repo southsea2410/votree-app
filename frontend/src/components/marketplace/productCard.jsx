@@ -22,13 +22,14 @@ export default function ProductCard({ variant = 'product', ...props }) {
 
     async function fetchSellerName() {
         // Fetch seller
-        const res = await fetch('api/v1/sellers/' + props.sellerId, {
-            headers: { 'Content-Type': 'application/json' }
+        const res = await fetch('/api/v1/userInfo/' + props.sellerId, {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
         });
         const data = await res.json();
 
-        const seller = data.data.seller;
-        setSellerName(seller.fullName);
+        const seller = data.data?.seller;
+        setSellerName(seller?.fullName || 'Unknown');
     }
 
     useEffect(() => {
@@ -48,7 +49,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                 <CardMedia
                     sx={{ maxWidth: '100%' }}
                     variant="product"
-                    image={props.image?.replace('../', 'http://localhost:3000/')}
+                    image={props.image?.replace('../../public', 'http://localhost:3000/')}
                     title="plant"
                 />
             </Link>

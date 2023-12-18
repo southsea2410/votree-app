@@ -39,8 +39,8 @@ const fieldStyle = {
     cursor: 'pointer'
 };
 
-export default function Login() {
-    const [signUp, setSignUp] = React.useState(0);
+export default function Login({register = 0}) {
+    const [signUp, setSignUp] = React.useState(register);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

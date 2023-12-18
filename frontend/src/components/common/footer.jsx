@@ -4,8 +4,13 @@ import { Divider } from '@mui/material';
 import { LogoVoTree_secondary } from '../../assets/images';
 import './../../index.css';
 import { FacebookIcon, InstaIcon, LinkedInIcon, LocationIcon, MailIcon, PhoneIcon } from '../../assets/icons';
-
+import { Link, useNavigate } from 'react-router-dom';
 export default function Footer() {
+    const linkStyle = {
+        textDecoration: 'none',
+        color: 'inherit'
+    }
+    const navigate = useNavigate();
     return (
         <div
             className="content-medium-16"
@@ -73,9 +78,9 @@ export default function Footer() {
                         justifyContent: 'center',
                         color: colors.green2
                     }}>
-                    <div>Main screen</div>
-                    <div>Sign in</div>
-                    <div>Sign up</div>
+                    <Link style={linkStyle} to={('/')}>Main screen</Link>
+                    <Link style={linkStyle} to={('/login')}>Sign in</Link>
+                    <Link style={linkStyle} to={('/login')}>Sign up</Link>
                 </div>
             </div>
             <div style={{ marginTop: '40px', marginBottom: '23px' }}>

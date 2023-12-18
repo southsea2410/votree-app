@@ -10,14 +10,17 @@ import {
     ChangePassword
 } from './pages';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import ScrollToTop from './hooks/scrollToTop';
 
 function App() {
     return (
         <Router>
+            <ScrollToTop />
             <Routes>
                 <Route path="/">
                     <Route index element={<HomePage />} />
                     <Route path="login" element={<Login />} />
+                    <Route path="register" element={<Login register={1} />} />
                     <Route path="marketplace">
                         <Route index element={<Marketplace />} />
                         <Route path="product">
@@ -31,7 +34,7 @@ function App() {
                     </Route>
                     <Route path="orderproducts" element={<OrderProducts />} />
                     <Route path="changepassword" element={<ChangePassword />} />
-                    <Route path='*' element={<Navigate replace to='/'/>}/>
+                    {/* <Route path='*' element={<Navigate replace to='/'/>}/> */}
                 </Route>
             </Routes>
         </Router>

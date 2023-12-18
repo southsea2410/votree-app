@@ -36,7 +36,6 @@ const salePostsContainer = {
 
 export default function Marketplace() {
     const da = useSelector(selectProfileInfo);
-    console.log(da['fullName']);
     const [plantInCart, setPlantInCart] = React.useState(0);
 
     const handleAddPlantToCart = useCallback(() => {
@@ -57,7 +56,7 @@ export default function Marketplace() {
             console.log(data);
 
             // Remove unnecessary data
-            data = data.data.products;
+            data = data.data?.products;
 
             // Create list of products
             const products = data.map((product) => {

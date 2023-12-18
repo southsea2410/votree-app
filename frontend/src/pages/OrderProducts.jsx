@@ -4,6 +4,7 @@ import { Box, Button, Card, CardContent, Container, Divider } from '@mui/materia
 import { colors } from '../styles';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 import './../index.css';
+import { redirect } from 'react-router-dom';
 
 function OrderCard({
     field = 'Method',
@@ -36,7 +37,7 @@ function OrderCard({
                             justifyContent: 'center',
                             alignItems: 'center'
                         }}>
-                        Invoice details
+                        Invoice Details
                     </div>
                     <Box
                         className="subtitle-semi-bold-20"
@@ -96,7 +97,7 @@ function OrderCard({
                             alignItems: 'center'
                         }}>
                         <p className="subtitle-semi-bold-20">Total: 176.000.000 VND</p>
-                        <Button variant="active">Purchase</Button>
+                        <Button variant="active" onClick={async () => redirect('http://localhost:3000/api/v1/marketplace/orders/checkout-session/657d59e59561f77a748ed7d8')}>Purchase</Button>
                     </Box>
                 </CardContent>
             </Card>

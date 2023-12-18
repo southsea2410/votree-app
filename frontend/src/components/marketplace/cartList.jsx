@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { Button, Divider, useMediaQuery } from '@mui/material';
@@ -7,6 +7,8 @@ import { colors } from '../../styles';
 import './../../index.css';
 import { Cart, CloseIcon } from '../../assets/icons';
 import { IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import getCart from '../../hooks/getCart';
 
 const style = {
     display: 'flex',
@@ -27,12 +29,23 @@ const cartStyle = {
     bottom: 50,
     right: 50
 };
+let cart = ''
+const user = '65801a0fe68ad8521059535e';
 
 export default function CartList() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const Navigate = useNavigate();
+
+    const purchaseNavigate = () => {
+        Navigate('/orderproducts');
+    }
+
+    useEffect(() => {
+        cart = getCart(user);
+    }, [cart]);
 
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Check for small screen
@@ -43,7 +56,7 @@ export default function CartList() {
     return (
         <div>
             <div style={cartStyle} onClick={handleOpen}>
-                {open ? <></> : <Cart />}
+                {open ? null : <Cart />}
             </div>
             <Modal open={open} onClose={handleClose}>
                 <Box
@@ -97,83 +110,8 @@ export default function CartList() {
                                 <Divider style={{ width: 658, height: 1 }} />
                             </div>
                         </Box>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                width: '669px'
-                            }}>
-                            <Box style={{ display: 'flex' }}>
-                                <Box
-                                    className="subtitle-extra-bold"
-                                    style={{
-                                        color: colors.green4,
-                                        paddingRight: 474
-                                    }}>
-                                    Hoa học phí
-                                </Box>
-                                <Box className="subtitle-extra-bold" style={{ color: colors.success }}>
-                                    4
-                                </Box>
-                            </Box>
-                            <div style={{ padding: '20px' }}>
-                                <Divider style={{ width: 658, height: 1 }} />
-                            </div>
-                        </Box>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                width: '669px'
-                            }}>
-                            <Box style={{ display: 'flex' }}>
-                                <Box
-                                    className="subtitle-extra-bold"
-                                    style={{
-                                        color: colors.green4,
-                                        paddingRight: 474
-                                    }}>
-                                    Hoa học phí
-                                </Box>
-                                <Box className="subtitle-extra-bold" style={{ color: colors.success }}>
-                                    3
-                                </Box>
-                            </Box>
-                            <div style={{ padding: '20px' }}>
-                                <Divider style={{ width: 658, height: 1 }} />
-                            </div>
-                        </Box>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                width: '669px'
-                            }}>
-                            <Box style={{ display: 'flex' }}>
-                                <Box
-                                    className="subtitle-extra-bold"
-                                    style={{
-                                        color: colors.green4,
-                                        paddingRight: 474
-                                    }}>
-                                    Hoa học phí
-                                </Box>
-                                <Box className="subtitle-extra-bold" style={{ color: colors.success }}>
-                                    5
-                                </Box>
-                            </Box>
-                            <div style={{ padding: '20px' }}>
-                                <Divider style={{ width: 658, height: 1 }} />
-                            </div>
-                        </Box>
                     </div>
-                    <Button style={{ alignSelf: 'center', width: 155, height: 45 }}>Buy</Button>
+                    <Button style={{ alignSelf: 'center', width: 155, height: 45 }} onClick={purchaseNavigate}>Buy</Button>
                 </Box>
             </Modal>
         </div>
