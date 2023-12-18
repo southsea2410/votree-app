@@ -17,6 +17,7 @@ const sellerSchema = new mongoose.Schema({
   storePhoneNumber: { type: String, required: true },
 
   products: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
+  
 });
 
 sellerSchema.virtual('Product', {
