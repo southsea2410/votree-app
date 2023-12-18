@@ -150,7 +150,8 @@ const updateToSeller = async (req, res) => {
       storeEmail,
       storePhoneNumber,
     });
-
+    
+    seller._id = currentUser._id,
     await seller.save();
 
     await User.findByIdAndUpdate(userId, {

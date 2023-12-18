@@ -80,7 +80,9 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Seller',
   },
-});
+  },
+  { timestamps: true },
+);
 
 userSchema.pre(/^find/, function (next) {
   // this points to the current query

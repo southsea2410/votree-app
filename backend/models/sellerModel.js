@@ -15,17 +15,21 @@ const sellerSchema = new mongoose.Schema({
     unique: [true, 'Email already exists'],
   },
   storePhoneNumber: { type: String, required: true },
-
   products: [{ type: mongoose.Schema.ObjectId, ref: 'Product' }],
-  
-});
+
+},
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }, 
+  { timestamps: true },
+);
 
 sellerSchema.virtual('Product', {
   ref: 'Product',
   foreignField: 'sellerId',
   localField: 'id',
 });
-
 // Method to add a product to the seller's inventory
 // sellerSchema.methods.addProduct = async function (productData) {
 //   const product = new Product({
