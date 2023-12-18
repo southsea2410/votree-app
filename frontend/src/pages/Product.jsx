@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { NavBar } from '../components';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Box, Button, Container, Divider, GlobalStyles } from '@mui/material';
 import { useEffect } from 'react';
 import { BackIcon, StarIcon } from '../assets/icons';

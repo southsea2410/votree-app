@@ -1,8 +1,11 @@
-import { Button, GlobalStyles, TextField } from '@mui/material';
 import { Footer, OtpInput } from '../components';
 import { colors } from '../styles';
 import * as React from 'react';
 import './../index.css';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { OutlinedInput, IconButton, InputAdornment, FormControl, Button, GlobalStyles, TextField } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const textBoxStyle = {
     background: colors.primary,
@@ -25,16 +28,24 @@ const textBoxClusterStyle = {
     gap: 12
 };
 
+const fieldStyle = {
+    cursor: 'pointer'
+};
+
 export default function ResetPassword() {
-    const [sentOTP, setSentOTP] = React.useState(0);
+    const navigate = useNavigate();
     const [otp, setOtp] = React.useState('');
+    const [showPassword, setShowPassword] = React.useState(false);
+    const [showRetypePassword, setShowRetypePassword] = React.useState(false);
     const otpLength = 6;
 
-    const handleSendOTP = () => {
-        setSentOTP(!sentOTP);
-    };
-
     const onChange = (value) => setOtp(value);
+
+    const handleChangeToForgotPassword = () => navigate('/forgotpassword');
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+    const handleClickShowRetypePassword = () => setShowRetypePassword(!showRetypePassword);
+    const handleMouseDownRetypePassword = () => setShowRetypePassword(!showRetypePassword);
 
     return (
         <div className="containerStyle">
@@ -56,99 +67,90 @@ export default function ResetPassword() {
                         <div className="subtitle-extra-bold" style={{ color: colors.green6 }}>
                             Reset Password
                         </div>
-                        {sentOTP ? (
-                            <div style={clusterStyle}>
-                                <h5 style={{ padding: 0, margin: 0 }}>
-                                    Enter the verification code sent in your email.
-                                </h5>
-                                <form
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        width: '100%',
-                                        gap: 15
-                                    }}>
-                                    <OtpInput value={otp} valueLength={otpLength} onChange={onChange} />
-                                    <div style={textBoxClusterStyle}>
-                                        <TextField
-                                            size="small"
-                                            fullWidth
-                                            placeholder="Email"
-                                            id="fullWidth"
-                                            InputLabelProps={{
-                                                className: 'content-semi-bold-16'
-                                            }}
-                                            multiline
-                                            rows={1}
-                                            InputProps={{
-                                                textAlign: 'center'
-                                            }}
-                                            style={textBoxStyle}
-                                        />
-                                        <TextField
+                        <div style={clusterStyle}>
+                            <h5 style={{ padding: 0, margin: 0 }}>Enter the verification code sent in your email.</h5>
+                            <form
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    width: '100%',
+                                    gap: 15
+                                }}>
+                                <OtpInput value={otp} valueLength={otpLength} onChange={onChange} />
+                                <div style={textBoxClusterStyle}>
+                                    <TextField
+                                        size="small"
+                                        fullWidth
+                                        placeholder="Email"
+                                        id="fullWidth"
+                                        InputLabelProps={{
+                                            className: 'content-semi-bold-16'
+                                        }}
+                                        multiline
+                                        rows={1}
+                                        InputProps={{
+                                            textAlign: 'center'
+                                        }}
+                                        style={textBoxStyle}
+                                    />
+                                    <FormControl style={textBoxClusterStyle}>
+                                        <OutlinedInput
                                             size="small"
                                             fullWidth
                                             placeholder="Password"
                                             id="fullWidth"
-                                            InputLabelProps={{
-                                                className: 'content-semi-bold-16'
-                                            }}
-                                            multiline
+                                            name="password"
+                                            type={showPassword ? 'text' : 'password'}
                                             rows={1}
-                                            InputProps={{
-                                                textAlign: 'center'
-                                            }}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={handleClickShowPassword}
+                                                        onMouseDown={handleMouseDownPassword}
+                                                        edge="end">
+                                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                            label="Password"
                                             style={textBoxStyle}
                                         />
-                                        <TextField
+                                    </FormControl>
+                                    <FormControl style={textBoxClusterStyle}>
+                                        <OutlinedInput
                                             size="small"
                                             fullWidth
                                             placeholder="Re-type password"
                                             id="fullWidth"
-                                            InputLabelProps={{
-                                                className: 'content-semi-bold-16'
-                                            }}
-                                            multiline
+                                            name="Re-type password"
+                                            type={showRetypePassword ? 'text' : 'password'}
                                             rows={1}
-                                            InputProps={{
-                                                textAlign: 'center'
-                                            }}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle Re-type password visibility"
+                                                        onClick={handleClickShowRetypePassword}
+                                                        onMouseDown={handleMouseDownRetypePassword}
+                                                        edge="end">
+                                                        {showRetypePassword ? <VisibilityOff /> : <Visibility />}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                            label="Retype password"
                                             style={textBoxStyle}
                                         />
-                                    </div>
-                                    <Button style={{ width: '100%' }}>Verify</Button>
-                                </form>
-                                <div className="content-semi-bold-14-22">If you didn&apos;t receive a code! Resend</div>
+                                    </FormControl>
+                                </div>
+                                <Button style={{ width: '100%' }}>Verify</Button>
+                            </form>
+                            <div
+                                className="content-semi-bold-14-22 linkText"
+                                onClick={handleChangeToForgotPassword}
+                                style={fieldStyle}>
+                                If you didn&apos;t receive a code! Resend
                             </div>
-                        ) : (
-                            <div style={clusterStyle}>
-                                <h5 style={{ margin: 0, color: colors.green6 }}>
-                                    Enter the email address associated with your account.
-                                </h5>
-                                <h5 style={{ color: colors.green5, margin: 0 }}>
-                                    We will email you an OTP to reset your password.
-                                </h5>
-                                <TextField
-                                    size="small"
-                                    fullWidth
-                                    placeholder="Email"
-                                    id="fullWidth"
-                                    InputLabelProps={{
-                                        className: 'content-semi-bold-16'
-                                    }}
-                                    multiline
-                                    rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
-                                    }}
-                                    style={textBoxStyle}
-                                />
-                                <Button style={{ width: '100%' }} onClick={handleSendOTP}>
-                                    Send OTP
-                                </Button>
-                                <div className="content-semi-bold-14-22">Log in with password</div>
-                            </div>
-                        )}
+                        </div>
                     </div>
                 </div>
             </div>

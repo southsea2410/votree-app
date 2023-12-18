@@ -7,13 +7,6 @@ import './../../index.css';
 import { colors } from '../../styles';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// const NUM_OF_STARS = 5;
-
-const linkSellerStyle = {
-    color: '#3366CC',
-    textDecoration: 'underline',
-    textDecorationColor: '#99CCFF'
-};
 
 export default function ProductCard({ variant = 'product', ...props }) {
     const stars = [...Array(5).keys()];
@@ -87,9 +80,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                             Sold By:
                         </p>
                         <Link to={'/profile/' + props.sellerId}>
-                            <p className="content-semi-bold-16" style={linkSellerStyle}>
-                                {' ' + sellerName}
-                            </p>
+                            <p className="content-semi-bold-16 linkText">{' ' + sellerName}</p>
                         </Link>
                     </div>
                 </div>

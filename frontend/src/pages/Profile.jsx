@@ -73,6 +73,9 @@ export default function UserProfile() {
                         dispatch(updateNavBarState(0));
                         navigate('/');
                     }
+                } else {
+                    setFullName(profileInfo.fullName);
+                    setRole(profileInfo.role);
                 }
             } else {
                 const data = await fetch('/api/v1/sellers/' + id, {
