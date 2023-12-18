@@ -15,21 +15,47 @@ import { LogoVoTree_primary } from '../../assets/images';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { colors } from '../../styles';
-import { HomeIcon, MarketIcon, MarketIconFill, Noti, Basket } from '../../assets/icons';
+import { HomeIcon, MarketIcon, MarketIconFill, Noti, Basket, BasketClicked, NotiClicked } from '../../assets/icons';
 import { Avatar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+
+// Redux
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { selectNavBarState } from '../../redux/features/common/navBarStateSlice';
+import { updateNavBarState } from '../../redux/features/common/navBarStateSlice';
+import { selectIsLoggedIn } from '../../redux/features/account/isLoggedInSlice';
 
 const ImageContainer = styled('div')({
     display: 'flex',
     justifyContent: 'center'
 });
 
+const hoverStyle = {
+    cursor: 'pointer'
+};
+
 export default function NavBar({ className }) {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navBarState = useSelector(selectNavBarState);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(navBarState);
+    const [basketClicked, setBasketClicked] = React.useState(false);
+    const [notiClicked, setNotiClicked] = React.useState(false);
+    const isLoggedIn = useSelector(selectIsLoggedIn);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+
+        if (newValue === 0) navigate('/');
+        if (newValue === 1) navigate('/marketplace');
+        if (newValue === 2) navigate('/profile');
+        
+        // update Redux
+        dispatch(updateNavBarState(newValue));
     };
 
     const isMenuOpen = Boolean(anchorEl);
@@ -47,6 +73,26 @@ export default function NavBar({ className }) {
         setAnchorEl(null);
         handleMobileMenuClose();
     };
+
+    const handleNavigateToHome = () => {
+        setValue(0);
+        dispatch(updateNavBarState(0));
+        navigate('/');
+    }
+
+    const handleNavigateToLogin = () => {
+        navigate('/login');
+    }
+
+    const handleClickBasket = () => {
+        setBasketClicked(!basketClicked);
+        if (notiClicked) setNotiClicked(!notiClicked);
+    }
+
+    const handleClickNoti = () => {
+        setNotiClicked(!notiClicked);
+        if (basketClicked) setBasketClicked(!basketClicked);
+    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -131,15 +177,14 @@ export default function NavBar({ className }) {
                             flexDirection: 'row',
                             alignItems: 'center'
                         }}>
-                        <ImageContainer>
+                        <ImageContainer onClick={handleNavigateToHome} style={hoverStyle}>
                             <img src={LogoVoTree_primary} alt="" width="157" height="58" />
                         </ImageContainer>
                         <SearchBar />
                     </div>
                     <div
                         style={{
-                            width: '200px',
-                            marginLeft: '4%',
+                            marginLeft: '6%',
                             marginRight: 'auto'
                         }}>
                         <BottomNavigation value={value} onChange={handleChange}>
@@ -160,31 +205,87 @@ export default function NavBar({ className }) {
                             />
                             <BottomNavigationAction
                                 icon={
-                                    value === 0 ? (
-                                        <MarketIcon style={{ fontSize: 30 }} />
-                                    ) : (
+                                    value === 1 ? (
                                         <MarketIconFill style={{ fontSize: 30 }} />
+                                    ) : (
+                                        <MarketIcon color={colors.green5} style={{ fontSize: 30 }} />
                                     )
                                 }
                                 showLabel={true}
                                 selected={value === 1}
                                 style={{
                                     borderBottom: value === 1 ? '4px solid' : '4px solid',
-                                    borderColor: value === 1 ? colors.green5 : colors.green1
+                                    borderColor: value === 1 ? colors.green5 : colors.green1,
+                                    pointerEvents: isLoggedIn ? 'auto' : 'none'
                                 }}
                             />
                         </BottomNavigation>
                     </div>
-                    <Box
-                        sx={{
-                            display: { xs: 'none', md: 'flex', gap: '19px' }
-                        }}
-                        // lastChild={true}
-                        float="right">
-                        {value === 1 ? <Basket /> : null}
-                        <Noti />
-                        <Avatar variant="small">N</Avatar>
-                    </Box>
+                    {
+                        isLoggedIn ?
+                        <Box
+                            sx={{
+                                display: { xs: 'none', md: 'flex', gap: '19px' }
+                            }}
+                            // lastChild={true}
+                            float="right">
+                            <div onClick={handleClickBasket} style={hoverStyle}>
+                                {
+                                    basketClicked ?
+                                    <BasketClicked />
+                                    :
+                                    <Basket />
+                                }
+                            </div>
+                            <div onClick={handleClickNoti} style={hoverStyle}>
+                                {
+                                    notiClicked ?
+                                    <NotiClicked />
+                                    :
+                                    <Noti />
+                                }
+                            </div>
+                            <div style={{...hoverStyle, pointerEvents: isLoggedIn ? 'auto' : 'none'}} onClick={() => handleChange(null, 2)}>
+                            {
+                                value === 2 ?
+                                <Avatar variant="small-border">N</Avatar>
+                                :
+                                <Avatar variant="small">N</Avatar>
+                            }
+                            </div>
+                            <Box sx={{ flexGrow: 0 }}>
+            {/* <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu> */}
+          </Box>
+                        </Box>
+                        :
+                        <Button style={{ padding: '6px 21px' }} onClick={handleNavigateToLogin}>Log in / Sign up</Button>
+                    }
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}
