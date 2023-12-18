@@ -10,6 +10,7 @@ import Footer from './common/footer';
 import OtpInput from './auth/otpInput';
 import CartList from './marketplace/cartList';
 import DropDownSelect from './common/dropDownSelect';
+import AvatarInteraction from './common/avatarInteraction';
 
 export {
     NavBar,
@@ -23,5 +24,6 @@ export {
     PostArticle,
     OtpInput,
     CartList,
-    DropDownSelect
+    DropDownSelect,
+    AvatarInteraction
 };

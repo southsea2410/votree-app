@@ -32,7 +32,10 @@ export default function PostArticle({ onClick }) {
                     alignItems: 'center'
                 }}>
                 <Avatar variant="small">N</Avatar>
-                <Button variant="post" style={{ gap: 15, padding: '0px 15px', height: 40, pointerEvents: isLoggedIn ? 'auto' : 'none' }} onClick={onClick}>
+                <Button
+                    variant="post"
+                    style={{ gap: 15, padding: '0px 15px', height: 40, pointerEvents: isLoggedIn ? 'auto' : 'none' }}
+                    onClick={onClick}>
                     <div style={{ display: 'flex' }}>
                         <LeafIcon color={colors.green6} style={{ fontSize: 25 }} />
                     </div>

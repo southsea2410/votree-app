@@ -100,7 +100,7 @@ export default function Marketplace() {
         }
         fetchData();
     }, [handleAddPlantToCart, isLoggedIn]);
-    
+
     return (
         <div
             style={{
