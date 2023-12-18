@@ -261,6 +261,17 @@ const theme = createTheme({
                     }
                 },
                 {
+                    props: { variant: 'small-border' },
+                    style: {
+                        fontSize: 20.25,
+                        fontWeight: '50px',
+                        width: '50px',
+                        height: '50px',
+                        border: '3px solid',
+                        borderColor: colors.green5
+                    }
+                },
+                {
                     props: { variant: 'small' },
                     style: {
                         fontSize: 20.25,

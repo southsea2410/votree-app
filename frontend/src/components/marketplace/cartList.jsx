@@ -25,7 +25,8 @@ const style = {
 const cartStyle = {
     position: 'fixed',
     bottom: 50,
-    right: 50
+    right: 50,
+    cursor: 'pointer'
 };
 
 export default function CartList() {

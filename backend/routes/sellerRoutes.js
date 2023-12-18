@@ -1,12 +1,15 @@
 const express = require('express');
 const sellerController = require('./../controllers/sellerController');
-
+// const productController = require('./../controllers/productController');
+const { checkIndivualPermissions } = require('../utils');
 const router = express.Router();
 
 router
   .route('/')
   .get(sellerController.getAllSellers)
   .post(sellerController.createSeller);
+
+// router.use(checkIndivualPermissions);
 
 router
   .route('/:sellerId')
@@ -18,10 +21,6 @@ router
   .route('/:sellerId/products')
   .post(sellerController.addProduct)
   .get(sellerController.getAllSellerProducts);
-
-// Equivalent
-router.route('/:sellerId/products').post(sellerController.addProduct);
-router.route('/:sellerId/products').get(sellerController.getAllSellerProducts);
 
 router
   .route('/:sellerId/products/:productId')

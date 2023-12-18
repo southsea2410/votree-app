@@ -69,8 +69,6 @@ export default function Login() {
             if (response.ok) {
                 console.log('Login successful');
 
-                navigate('/profile'); // Homepage
-
                 const { profile, store } = await fetchUserInfo();
 
                 if (profile) {
@@ -82,6 +80,8 @@ export default function Login() {
                     dispatch(updateStoreInfo(store));
                     dispatch(updateIsSeller(true));
                 }
+
+                navigate('/'); // Homepage
             } else {
                 console.error('Login failed:', response.statusText);
             }

@@ -1,21 +1,31 @@
 const cartController = require('../controllers/cartController');
 const express = require('express');
 const router = express.Router();
+const {
+  authenticateUser,
+  authorizePermissions,
+} = require('../middleware/authentication');
+
+// router.use(authenticateUser);
 
 router
   .route('/')
   .get(cartController.getAllCarts)
-  .post(cartController.createCart);
+  .post(
+    authenticateUser,
+    authorizePermissions('user'),
+    cartController.createCart,
+  );
 
 router
   .route('/:cartId')
   .get(cartController.getCart)
-  .patch(cartController.updateCart)
+  .patch(authenticateUser, cartController.updateCart)
   .delete(cartController.deleteCart);
 
 router
   .route('/:cartId/products')
-  .post(cartController.addProduct)
+  // .post(cartController.addProduct)
   .get(cartController.getCartProducts);
 
 router

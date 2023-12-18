@@ -34,7 +34,10 @@ exports.getAllProduct = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
   try {
-    const newProduct = await Product.create(req.body);
+    const sellerId = req.sellerId || req.body.sellerId; // Assuming sellerId is provided
+    const productData = { ...req.body, sellerId }; // Include sellerId in the product data
+
+    const newProduct = await Product.create(productData);
 
     res.status(201).json({
       status: 'success',

@@ -1,16 +1,32 @@
 const express = require('express');
-const productController = require('./../controllers/productController.js');
-const router = express.Router();
+const productController = require('./../controllers/productController');
+const router = express.Router({ mergeParams: true });
+const {
+  authenticateUser,
+  authorizePermissions,
+} = require('../middleware/authentication');
 
 router
   .route('/')
   .get(productController.getAllProduct)
-  .post(productController.createProduct);
+  .post(
+    authenticateUser,
+    authorizePermissions('seller'),
+    productController.createProduct,
+  );
 
 router
   .route('/:id')
   .get(productController.getProduct)
-  .patch(productController.updateProduct)
-  .delete(productController.deleteProduct);
+  .patch(
+    authenticateUser,
+    authorizePermissions('seller'),
+    productController.updateProduct,
+  )
+  .delete(
+    authenticateUser,
+    authorizePermissions('selller'),
+    productController.deleteProduct,
+  );
 
 module.exports = router;

@@ -34,7 +34,7 @@ export default function InputArticle() {
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Check for small screen
 
     const modalWidth = isSmallScreen ? '90%' : 900;
-    const modalHeight = isSmallScreen ? '60%' : 600;
+    const modalHeight = isSmallScreen ? '63%' : 630;
 
     return (
         <div>

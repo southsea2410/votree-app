@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { selectProfileInfo, updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
 import { selectStoreInfo, updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
 import { selectIsLoggedIn, updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
+import { updateNavBarState } from '../redux/features/common/navBarStateSlice';
 
 // Constants
 import { fieldNames, storeFieldNames } from '../constants';
@@ -37,6 +38,7 @@ const containerStyle = {
 export default function UserProfile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    dispatch(updateNavBarState(2)); // state 2 is profile
 
     const profileInfoFromRedux = useSelector(selectProfileInfo);
     const storeInfoFromRedux = useSelector(selectStoreInfo);
@@ -49,23 +51,6 @@ export default function UserProfile() {
     const [storeInfo, setStoreInfo] = React.useState(storeInfoFromRedux);
 
     const { id } = useParams();
-
-    const handleLogout = async () => {
-        try {
-            const response = await fetch('api/v1/auth/logout', {
-                method: 'DELETE'
-            });
-
-            if (response.ok) {
-                navigate('/');
-            } else {
-                console.error('Logout request failed:', response.statusText);
-            }
-        } catch (error) {
-            // Handle network errors or exceptions that occur during the logout process
-            console.error('Error during logout:', error);
-        }
-    };
 
     useEffect(() => {
         async function fetchProfileInfo() {
@@ -85,6 +70,7 @@ export default function UserProfile() {
                             dispatch(updateIsSeller(true));
                         }
                     } else {
+                        dispatch(updateNavBarState(0));
                         navigate('/');
                     }
                 }
@@ -133,7 +119,6 @@ export default function UserProfile() {
             <Box className="navbar">
                 <NavBar />
             </Box>
-            <Button onClick={handleLogout}>Log out</Button> {/* for testing logout */}
             <Container maxWidth="lg" sx={containerStyle}>
                 <Container maxWidth="false" disableGutters>
                     <Card variant="outlined">
