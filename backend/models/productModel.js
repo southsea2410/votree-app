@@ -84,6 +84,10 @@ const productSchema = new mongoose.Schema(
       ref: 'Seller',
       required: [true, 'A product must belong to a seller'],
     },
+    isHotPick: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     toJSON: { virtuals: true },

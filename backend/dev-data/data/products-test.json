@@ -14,7 +14,8 @@
     "description": "You will receive the succulent arraignment that is in this picture. I will ship out with soil & pot. Easy to care for. Water once or twice weekly.",
     "price": 20,
     "image": "../../public/img/products/ASSORTED_SUCCULENT_ARRANGEMENT.jpeg",
-    "sellerId": "657d32d4590fea96403ee873"
+    "sellerId": "657d32d4590fea96403ee873",
+    "isHotPick": true
   },
   {
     "createdAt": "2023-10-10T10:53:42.185Z",
@@ -31,7 +32,8 @@
     "description": "Only 3 available and it's in 1 people's basket",
     "price": 12,
     "image": "../../public/img/products/Autograph_Tree_Clusia_Rosea.jpeg",
-    "sellerId": "657d32d4590fea96403ee872"
+    "sellerId": "657d32d4590fea96403ee872",
+    "isHotPick": true
   },
   {
     "createdAt": "2023-10-14T19:35:53.471Z",
@@ -48,7 +50,8 @@
     "description": "Chicago Lustre Arrowwood Viburnum, Viburnum dentatum Synnestvedt, is selected for its upright, rounded, dense habit and glossy, deep green foliage that turns red-purple in fall. They grow 8-10' tall mature..\nThe creamy white flowers bloom in June and mature into clusters of globe-shaped fruit. The fruit are deep porcelain blue to blue-purple, maturing in August and providing food for the birds.\nChicago Lustre is a medium-sized to large-sized ornamental shrub, that can grow even larger under optimum conditions. It has an upright, oval growth habit in youth, becoming arching, spreading, and suckering with age. It has a medium growth rate and prefers full sun to partial shade with moist, well-drained soils.\nThe foliage turns yellow and progresses through red into purple in autumn.",
     "price": 12,
     "image": "../../public/img/products/Chicago_Lustre_Viburnum.jpg",
-    "sellerId": "657d32d4590fea96403ee879"
+    "sellerId": "657d32d4590fea96403ee879",
+    "isHotPick": true
   },
   {
     "createdAt": "2023-03-19T10:24:55.574Z",

@@ -93,6 +93,19 @@ exports.updateCart = async (req, res) => {
     // Find the cart by ID
     const cart = await cartModel.findById(req.params.cartId);
 
+    // Check if new product dont belongs to current seller
+    // const product = await productModel.findById(productId);
+    const seller = await sellerModel.findById(cart.seller);
+    const sellerOfProduct = await productModel
+      .findById(productId)
+      .select('sellerId');
+    if (seller !== sellerOfProduct) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Product does not belong to current seller',
+      });
+    }
+
     // Check if the cart exists and if the user is valid
     if (!cart || !cart.user || cart.user.toString() !== userId) {
       return res.status(404).json({
