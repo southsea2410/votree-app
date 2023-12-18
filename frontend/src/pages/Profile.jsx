@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { selectProfileInfo, updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
 import { selectStoreInfo, updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
 import { selectIsLoggedIn, updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
+import { updateNavBarState } from '../redux/features/common/navBarStateSlice';
 
 // Constants
 import { fieldNames, storeFieldNames } from '../constants';
@@ -37,6 +38,7 @@ const containerStyle = {
 export default function UserProfile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    dispatch(updateNavBarState(2)) // state 2 is profile
 
     const profileInfoFromRedux = useSelector(selectProfileInfo);
     const storeInfoFromRedux = useSelector(selectStoreInfo);
@@ -58,6 +60,8 @@ export default function UserProfile() {
 
             if (response.ok) {
                 navigate('/');
+                dispatch(updateIsLoggedIn(false));
+                dispatch(updateIsSeller(false));
             } else {
                 console.error('Logout request failed:', response.statusText);
             }
@@ -85,6 +89,7 @@ export default function UserProfile() {
                             dispatch(updateIsSeller(true));
                         }
                     } else {
+                        dispatch(updateNavBarState(0));
                         navigate('/');
                     }
                 }

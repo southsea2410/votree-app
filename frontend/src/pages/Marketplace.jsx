@@ -7,9 +7,18 @@ import { colors } from '../styles';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 import React, { useCallback } from 'react';
 import { useState, useEffect } from 'react';
+import { fetchUserInfo } from '../utils/apiUtils';
+import { useNavigate } from 'react-router-dom';
 
+// Redux
 import { useSelector } from 'react-redux';
-import { selectProfileInfo } from '../redux/features/profile/profileInfoSlice';
+import { useDispatch } from 'react-redux';
+import { updateNavBarState } from '../redux/features/common/navBarStateSlice';
+import { selectIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
+import { updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
+import { updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
+import { updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
+import { updateIsSeller } from '../redux/features/account/isSellerSlice';
 
 const containerStyle = {
     display: 'flex',
@@ -35,9 +44,12 @@ const salePostsContainer = {
 };
 
 export default function Marketplace() {
-    const da = useSelector(selectProfileInfo);
-    console.log(da['fullName']);
     const [plantInCart, setPlantInCart] = React.useState(0);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    dispatch(updateNavBarState(1)); // state 1 is marketplace
+
+    const [isLoggedIn, setIsLoggedIn] = React.useState(useSelector(selectIsLoggedIn));
 
     const handleAddPlantToCart = useCallback(() => {
         setPlantInCart((plantInCart) => plantInCart + 1);
@@ -48,6 +60,22 @@ export default function Marketplace() {
     useEffect(() => {
         async function fetchData() {
             // Fetch data
+            if (!isLoggedIn) {
+                const { profile, store } = await fetchUserInfo();
+                if (profile) {
+                    dispatch(updateProfileInfo(profile));
+                    dispatch(updateIsLoggedIn(true));
+                    setIsLoggedIn(true);
+                    if (store) {
+                        dispatch(updateStoreInfo(store));
+                        dispatch(updateIsSeller(true));
+                    }
+                } else {
+                    dispatch(updateNavBarState(0));
+                    navigate('/');
+                }
+            }
+
             let res = await fetch('/api/v1/marketplace/products', {
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -71,7 +99,8 @@ export default function Marketplace() {
             setList(products);
         }
         fetchData();
-    }, [handleAddPlantToCart]);
+    }, [handleAddPlantToCart, isLoggedIn]);
+    
     return (
         <div
             style={{
