@@ -1,4 +1,4 @@
-import { Button, Divider, TextField } from '@mui/material';
+import { Button, Divider, TextField, OutlinedInput } from '@mui/material';
 import { Footer } from '../components';
 import { LogoVoTree_primary } from '../assets/images';
 import { colors } from '../styles';
@@ -21,7 +21,7 @@ const textBoxStyle = {
     borderRadius: 8,
     border: '1px solid',
     boderColor: colors.green6,
-    width: '100%'
+    width: '100%',
 };
 
 const textBoxClusterStyle = {
@@ -196,11 +196,12 @@ export default function Login() {
                                     size="small"
                                     fullWidth
                                     placeholder="Password"
+                                    name="password"
+                                    type="password"
                                     id="fullWidth"
                                     InputLabelProps={{
                                         className: 'content-semi-bold-16'
                                     }}
-                                    multiline
                                     rows={1}
                                     InputProps={{
                                         textAlign: 'center'
@@ -212,10 +213,10 @@ export default function Login() {
                                     fullWidth
                                     placeholder="Re-type password"
                                     id="fullWidth"
+                                    type="password"
                                     InputLabelProps={{
                                         className: 'content-semi-bold-16'
                                     }}
-                                    multiline
                                     rows={1}
                                     InputProps={{
                                         textAlign: 'center'
@@ -247,10 +248,10 @@ export default function Login() {
                                     placeholder="Password"
                                     id="fullWidth"
                                     name="password"
+                                    type="password"
                                     InputLabelProps={{
                                         className: 'content-semi-bold-16'
                                     }}
-                                    multiline
                                     rows={1}
                                     InputProps={{
                                         textAlign: 'center'
