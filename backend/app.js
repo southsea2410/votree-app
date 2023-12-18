@@ -27,7 +27,6 @@ app.use(function (req, res, next) {
 
 app.use(cors(corsOptions));
 
-
 const userRouter = require('./routes/userRoutes');
 const productRouter = require('./routes/productRoutes');
 const sellerRouter = require('./routes/sellerRoutes');

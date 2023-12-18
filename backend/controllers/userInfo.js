@@ -50,19 +50,19 @@ const getUserInfoById = async (req, res) => {
     if (!userInfo) {
       throw new NotFoundError(`No user with id ${req.params.id}`);
     }
-    
+
     if (userInfo.role === 'seller') {
       userInfo.sellerDetails = await Seller.findOne({
         _id: userInfo.sellerDetails,
       }).select('storeName storeLocation storeEmail storePhoneNumber');
     }
     res.status(StatusCodes.OK).json({ userInfo });
-  }catch (error) {
+  } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ error: error.message }); 
+      .json({ error: error.message });
   }
-}
+};
 
 const updateUserInfo = async (req, res) => {
   const {
@@ -150,9 +150,8 @@ const updateToSeller = async (req, res) => {
       storeEmail,
       storePhoneNumber,
     });
-    
-    seller._id = currentUser._id,
-    await seller.save();
+
+    (seller._id = currentUser._id), await seller.save();
 
     await User.findByIdAndUpdate(userId, {
       role: 'seller',

@@ -26,12 +26,9 @@ orderSchema.pre(/^find/, function (next) {
   next();
 });
 
-
-
 // 4242424242424242: Accept
 // 4000000000003220: Authentication
 // 4000000000000002: Declined
-
 
 const Order = mongoose.model('Order', orderSchema);
 
