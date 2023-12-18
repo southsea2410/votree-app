@@ -82,7 +82,7 @@ const userSchema = new mongoose.Schema(
       ref: 'Seller',
     },
   },
-  { timestamps: true },
+  // { timestamps: true },
 );
 
 userSchema.pre(/^find/, function (next) {

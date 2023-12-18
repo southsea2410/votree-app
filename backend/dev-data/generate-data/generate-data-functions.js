@@ -16,7 +16,7 @@ exports.generateUserData = () => {
     address: faker.address.streetAddress(),
     interest: faker.random.words(),
     role: 'user',
-    password: faker.internet.password(),
+    password: 'mywebapp2023',
     active: 'true',
   };
 };
