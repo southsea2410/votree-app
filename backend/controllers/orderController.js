@@ -11,7 +11,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     'products.product',
   );
   const user = await User.findById(cart.user);
-
   // 2. Create checkout session
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -28,12 +27,12 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
           currency: 'usd',
           product_data: {
             name: item.product.name,
-            description: item.product.description,
-            images: [
-              `${req.protocol}://${req.get('host')}/img/products/${
-                item.product.image
-              }`,
-            ],
+            // images: [
+            //   `${req.protocol}://${req.get(
+            //     'host',
+            //   )}/img/products/ASSORTED_SUCCULENT_ARRANGEMENT.jpeg`,
+            // ],
+            images: [item.product.image],
           },
           unit_amount: item.product.price * 100, // price in cents
         },
@@ -49,8 +48,6 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     session,
   });
 });
-
-
 
 exports.createOrderCheckout = catchAsync(async (req, res, next) => {
   // This is only temporary, because it's unsecure: everyone can make bookings without paying
