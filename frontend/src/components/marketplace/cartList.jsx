@@ -27,7 +27,8 @@ const style = {
 const cartStyle = {
     position: 'fixed',
     bottom: 50,
-    right: 50
+    right: 50,
+    cursor: 'pointer'
 };
 let cart = ''
 const user = '65801a0fe68ad8521059535e';

@@ -31,6 +31,8 @@ const users = Array.from(
 
 // const sellersData = JSON.stringify(sellers);
 // const sellersDataPath = path.join(__dirname, 'dev-data/data/sellers-test.json');
+// const sellersData = JSON.stringify(sellers);
+// const sellersDataPath = path.join(__dirname, 'dev-data/data/sellers-test.json');
 
 // const productsData = JSON.stringify(products);
 // const productsDataPath = path.join(
