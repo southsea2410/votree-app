@@ -27,41 +27,6 @@ app.use(function (req, res, next) {
 
 app.use(cors(corsOptions));
 
-var whitelist = ['http://localhost:5173' /** other domains if any */];
-var corsOptions = {
-  credentials: true,
-  origin: whitelist,
-};
-
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  res.header('Cross-Origin-Resource-Policy', 'same-site');
-  next();
-});
-
-app.use(cors(corsOptions));
-
-var whitelist = ['http://localhost:5173' /** other domains if any */];
-var corsOptions = {
-  credentials: true,
-  origin: whitelist,
-};
-
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  res.header('Cross-Origin-Resource-Policy', 'same-site');
-  next();
-});
-
-app.use(cors(corsOptions));
 
 const userRouter = require('./routes/userRoutes');
 const productRouter = require('./routes/productRoutes');

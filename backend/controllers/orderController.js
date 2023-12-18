@@ -50,6 +50,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   });
 });
 
+
+
 exports.createOrderCheckout = catchAsync(async (req, res, next) => {
   // This is only temporary, because it's unsecure: everyone can make bookings without paying
   const { cartId } = req.params;
