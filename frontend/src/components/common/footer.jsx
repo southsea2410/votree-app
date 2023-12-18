@@ -4,8 +4,23 @@ import { Divider } from '@mui/material';
 import { LogoVoTree_secondary } from '../../assets/images';
 import './../../index.css';
 import { FacebookIcon, InstaIcon, LinkedInIcon, LocationIcon, MailIcon, PhoneIcon } from '../../assets/icons';
+import { useNavigate } from 'react-router-dom';
+
+const fieldStyle = {
+    cursor: 'pointer'
+};
 
 export default function Footer() {
+    const navigate = useNavigate();
+
+    const handleChangeToHomePage = () => {
+        navigate('/');
+    };
+
+    const handleChangeToLogin = () => {
+        navigate('/login');
+    };
+
     return (
         <div
             className="content-medium-16"
@@ -28,7 +43,9 @@ export default function Footer() {
                             display: 'flex',
                             justifyContent: 'space-between'
                         }}>
-                        <img src={LogoVoTree_secondary} alt="" width="211" height="78" />
+                        <div onClick={handleChangeToHomePage} style={fieldStyle}>
+                            <img src={LogoVoTree_secondary} alt="" width="211" height="78" />
+                        </div>
                     </div>
                     <div>
                         <h4 style={{ color: colors.green2 }}>SE_10 Group - VoTree Project</h4>
@@ -73,9 +90,12 @@ export default function Footer() {
                         justifyContent: 'center',
                         color: colors.green2
                     }}>
-                    <div>Main screen</div>
-                    <div>Sign in</div>
-                    <div>Sign up</div>
+                    <div onClick={handleChangeToHomePage} style={fieldStyle}>
+                        Main screen
+                    </div>
+                    <div onClick={handleChangeToLogin} style={fieldStyle}>
+                        Sign in / Sign up
+                    </div>
                 </div>
             </div>
             <div style={{ marginTop: '40px', marginBottom: '23px' }}>

@@ -1,10 +1,12 @@
-import { Button, Divider, TextField, OutlinedInput } from '@mui/material';
+import { Button, Divider, TextField, OutlinedInput, IconButton, InputAdornment, FormControl } from '@mui/material';
 import { Footer } from '../components';
 import { LogoVoTree_primary } from '../assets/images';
 import { colors } from '../styles';
 import * as React from 'react';
 import { GoogleIcon, FBIcon } from '../assets/icons';
 import { useNavigate } from 'react-router-dom';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 // Redux
 import { useDispatch } from 'react-redux';
@@ -21,7 +23,7 @@ const textBoxStyle = {
     borderRadius: 8,
     border: '1px solid',
     boderColor: colors.green6,
-    width: '100%',
+    width: '100%'
 };
 
 const textBoxClusterStyle = {
@@ -41,11 +43,17 @@ const fieldStyle = {
 
 export default function Login() {
     const [signUp, setSignUp] = React.useState(0);
+    const [showPassword, setShowPassword] = React.useState(false);
+    const [showRetypePassword, setShowRetypePassword] = React.useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleChangeToSignUp = () => {
         setSignUp(!signUp);
+    };
+
+    const handleChangeToForgotPassword = () => {
+        navigate('/forgotpassword');
     };
 
     const handleLogin = async (event) => {
@@ -89,6 +97,11 @@ export default function Login() {
             console.error('Error:', error);
         }
     };
+
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+    const handleClickShowRetypePassword = () => setShowRetypePassword(!showRetypePassword);
+    const handleMouseDownRetypePassword = () => setShowRetypePassword(!showRetypePassword);
 
     return (
         <div className="containerStyle">
@@ -137,15 +150,15 @@ export default function Login() {
                             Register
                         </div>
                     </div>
-                    <form
-                        onSubmit={handleLogin}
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: 15,
-                            padding: '0px 30px'
-                        }}>
-                        {signUp ? (
+                    {signUp ? (
+                        <form
+                            onSubmit={handleLogin}
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 15,
+                                padding: '0px 30px'
+                            }}>
                             <div style={textBoxClusterStyle}>
                                 <TextField
                                     size="small"
@@ -192,39 +205,69 @@ export default function Login() {
                                     }}
                                     style={textBoxStyle}
                                 />
-                                <TextField
-                                    size="small"
-                                    fullWidth
-                                    placeholder="Password"
-                                    name="password"
-                                    type="password"
-                                    id="fullWidth"
-                                    InputLabelProps={{
-                                        className: 'content-semi-bold-16'
-                                    }}
-                                    rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
-                                    }}
-                                    style={textBoxStyle}
-                                />
-                                <TextField
-                                    size="small"
-                                    fullWidth
-                                    placeholder="Re-type password"
-                                    id="fullWidth"
-                                    type="password"
-                                    InputLabelProps={{
-                                        className: 'content-semi-bold-16'
-                                    }}
-                                    rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
-                                    }}
-                                    style={textBoxStyle}
-                                />
+                                <FormControl style={textBoxClusterStyle}>
+                                    <OutlinedInput
+                                        size="small"
+                                        fullWidth
+                                        placeholder="Password"
+                                        id="fullWidth"
+                                        name="password"
+                                        type={showPassword ? 'text' : 'password'}
+                                        rows={1}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end">
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                        style={textBoxStyle}
+                                    />
+                                </FormControl>
+                                <FormControl style={textBoxClusterStyle}>
+                                    <OutlinedInput
+                                        size="small"
+                                        fullWidth
+                                        placeholder="Re-type password"
+                                        id="fullWidth"
+                                        name="Re-type password"
+                                        type={showRetypePassword ? 'text' : 'password'}
+                                        rows={1}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle Re-type password visibility"
+                                                    onClick={handleClickShowRetypePassword}
+                                                    onMouseDown={handleMouseDownRetypePassword}
+                                                    edge="end">
+                                                    {showRetypePassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Retype password"
+                                        style={textBoxStyle}
+                                    />
+                                </FormControl>
                             </div>
-                        ) : (
+                            <div className="extra-medium" onClick={handleChangeToSignUp} style={fieldStyle}>
+                                Already have an account?
+                            </div>
+                            <Button>Register</Button>
+                        </form>
+                    ) : (
+                        <form
+                            onSubmit={handleLogin}
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 15,
+                                padding: '0px 30px'
+                            }}>
                             <div style={textBoxClusterStyle}>
                                 <TextField
                                     size="small"
@@ -242,38 +285,42 @@ export default function Login() {
                                     }}
                                     style={textBoxStyle}
                                 />
-                                <TextField
-                                    size="small"
-                                    fullWidth
-                                    placeholder="Password"
-                                    id="fullWidth"
-                                    name="password"
-                                    type="password"
-                                    InputLabelProps={{
-                                        className: 'content-semi-bold-16'
-                                    }}
-                                    rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
-                                    }}
-                                    style={textBoxStyle}
-                                />
+                                <FormControl style={textBoxClusterStyle}>
+                                    <OutlinedInput
+                                        size="small"
+                                        fullWidth
+                                        placeholder="Password"
+                                        id="fullWidth"
+                                        name="password"
+                                        type={showPassword ? 'text' : 'password'}
+                                        rows={1}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    edge="end">
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                        style={textBoxStyle}
+                                    />
+                                </FormControl>
                             </div>
-                        )}
-                        {signUp ? (
-                            <div className="extra-medium" onClick={handleChangeToSignUp} style={fieldStyle}>
-                                Already have an account?
-                            </div>
-                        ) : (
                             <div>
-                                <div className="extra-medium">Forgot Password?</div>
+                                <div className="extra-medium" onClick={handleChangeToForgotPassword} style={fieldStyle}>
+                                    Forgot Password?
+                                </div>
                                 <div className="extra-medium" onClick={handleChangeToSignUp} style={fieldStyle}>
                                     Don&apos;t have an account?
                                 </div>
                             </div>
-                        )}
-                        {signUp ? <Button>Register</Button> : <Button type="submit">Login</Button>}
-                    </form>
+                            <Button type="submit">Login</Button>
+                        </form>
+                    )}
                     <div style={{ padding: '31px' }}>
                         <Divider />
                     </div>

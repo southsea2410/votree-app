@@ -7,7 +7,8 @@ import {
     ResetPassword,
     UserProfile,
     OrderProducts,
-    ChangePassword
+    ChangePassword,
+    ForgotPassword
 } from './pages';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -24,6 +25,7 @@ function App() {
                             <Route path=":productId" element={<Product />} />
                         </Route>
                     </Route>
+                    <Route path="forgotpassword" element={<ForgotPassword />} />
                     <Route path="resetpassword" element={<ResetPassword />} />
                     <Route path="profile">
                         <Route index element={<UserProfile />} />
