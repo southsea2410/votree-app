@@ -9,7 +9,7 @@ import {
     OrderProducts,
     ChangePassword
 } from './pages';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import ScrollToTop from './hooks/scrollToTop';
 
 function App() {

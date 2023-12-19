@@ -44,12 +44,14 @@ export default function ProductCard({ variant = 'product', ...props }) {
                 flexDirection: 'column',
                 boxShadow:
                     '0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.20)'
-            }}>
+            }}
+            >
             <Link style={{ display: 'contents', textDecoration: 'none' }} to={'/marketplace/product/' + props._id}>
                 <CardMedia
+                    component="div"
                     sx={{ maxWidth: '100%' }}
                     variant="product"
-                    image={props.image?.replace('../../public', 'http://localhost:3000/')}
+                    image={props.image}
                     title="plant"
                 />
             </Link>
@@ -94,11 +96,9 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         </Link>
                     </div>
                 </div>
-                <CardActions style={{ padding: 0 }}>
-                    <Button variant="cart" color={variant === 'product' ? 'secondary' : 'primary'}>
-                        +
-                    </Button>
-                </CardActions>
+                <Button productid={props._id} sellerid={props.sellerId} className='product-card-add' variant="cart" color={variant === 'product' ? 'secondary' : 'primary'}>
+                    +
+                </Button>
             </div>
         </Card>
     );

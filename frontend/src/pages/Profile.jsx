@@ -82,8 +82,7 @@ export default function UserProfile() {
     useEffect(() => {
         async function fetchProfileInfo() {
             if (id === undefined || id === '') {
-                if (!isLoggedIn) {
-                    const { profile, store } = await fetchUserInfo();
+                fetchUserInfo().then(({profile, store}) => {
                     console.log(profile);
                     if (profile) {
                         dispatch(updateProfileInfo(profile));
@@ -101,7 +100,7 @@ export default function UserProfile() {
                         dispatch(updateNavBarState(0));
                         navigate('/');
                     }
-                }
+                });
             } else {
                 const data = await fetch('/api/v1/userInfo/' + id, {
                     headers: { 'Content-Type': 'application/json' }
@@ -140,7 +139,7 @@ export default function UserProfile() {
             }
         }
         fetchProfileInfo();
-    }, [id, isLoggedIn]);
+    }, []);
 
     return (
         <div style={{ paddingTop: useNavBarHeight() }}>
