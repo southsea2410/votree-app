@@ -14,10 +14,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
+import { selectProfileInfo } from '../redux/features/profile/profileInfoSlice';
 import { updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
 import { updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
 import { updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
-import { updateIsSeller } from '../redux/features/account/isSellerSlice';
+import { selectIsSeller, updateIsSeller } from '../redux/features/account/isSellerSlice';
 import { updateNavBarState } from '../redux/features/common/navBarStateSlice';
 
 const homePageStyle = {
@@ -40,7 +41,11 @@ const postsStyle = {
 export default function HomePage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const profileInfoFromRedux = useSelector(selectProfileInfo);
     const [isLoggedIn, setIsLoggedIn] = React.useState(useSelector(selectIsLoggedIn));
+    const [fullName, setFullName] = React.useState(profileInfoFromRedux.fullName);
+    const [role, setRole] = React.useState(profileInfoFromRedux.role);
 
     useEffect(() => {
         async function fetchData() {
@@ -51,6 +56,8 @@ export default function HomePage() {
                     dispatch(updateProfileInfo(profile));
                     dispatch(updateIsLoggedIn(true));
                     setIsLoggedIn(true);
+                    setFullName(profile.fullName);
+                    setRole(profile.role);
                     if (store) {
                         dispatch(updateStoreInfo(store));
                         dispatch(updateIsSeller(true));
@@ -75,7 +82,7 @@ export default function HomePage() {
                 <NavBar />
             </Box>
             <Box sx={{ alignSelf: 'center' }}>
-                <InputArticle />
+                <InputArticle fullName={fullName} role={role} />
             </Box>
             <Box sx={postsStyle}>
                 <UserPost content={content} image={Post_test} />
