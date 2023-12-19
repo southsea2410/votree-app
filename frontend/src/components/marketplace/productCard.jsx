@@ -7,13 +7,6 @@ import './../../index.css';
 import { colors } from '../../styles';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// const NUM_OF_STARS = 5;
-
-const linkSellerStyle = {
-    color: '#3366CC',
-    textDecoration: 'underline',
-    textDecorationColor: '#99CCFF'
-};
 
 export default function ProductCard({ variant = 'product', ...props }) {
     const stars = [...Array(5).keys()];
@@ -42,6 +35,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
             style={{
                 display: 'flex',
                 flexDirection: 'column',
+                position: 'relative',
                 boxShadow:
                     '0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.20)'
             }}
@@ -73,10 +67,10 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         <div className="content-medium-14-22" style={{ color: colors.green6 }}>
                             {props.price && '$ ' + props.price}
                         </div>
-                        <div className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
+                        <div className="subtitle-semi-bold-20" style={{ color: colors.green4, paddingTop: '5px' }}>
                             {props.name}
                         </div>
-                        <div>
+                        <div style={{ paddingTop: '10px' }}>
                             {stars.map((index) => (
                                 <StarIcon
                                     key={index}
@@ -90,9 +84,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                             Sold By:
                         </p>
                         <Link to={'/profile/' + props.sellerId}>
-                            <p className="content-semi-bold-16" style={linkSellerStyle}>
-                                {' ' + sellerName}
-                            </p>
+                            <p className="content-semi-bold-16 linkText">{' ' + sellerName}</p>
                         </Link>
                     </div>
                 </div>

@@ -11,6 +11,6 @@ export default configureStore({
         storeInfo: storeInfoReducer,
         isLoggedIn: isLoggedInReducer,
         isSeller: isSellerReducer,
-        navBarState: navBarStateReducer,
+        navBarState: navBarStateReducer
     }
 });

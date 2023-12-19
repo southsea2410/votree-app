@@ -16,9 +16,9 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { colors } from '../../styles';
 import { HomeIcon, MarketIcon, MarketIconFill, Noti, Basket, BasketClicked, NotiClicked } from '../../assets/icons';
-import { Avatar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import AvatarInteraction from './avatarInteraction';
 
 // Redux
 import { useSelector } from 'react-redux';
@@ -53,7 +53,7 @@ export default function NavBar({ className }) {
         if (newValue === 0) navigate('/');
         if (newValue === 1) navigate('/marketplace');
         if (newValue === 2) navigate('/profile');
-        
+
         // update Redux
         dispatch(updateNavBarState(newValue));
     };
@@ -78,21 +78,21 @@ export default function NavBar({ className }) {
         setValue(0);
         dispatch(updateNavBarState(0));
         navigate('/');
-    }
+    };
 
     const handleNavigateToLogin = () => {
         navigate('/login');
-    }
+    };
 
     const handleClickBasket = () => {
         setBasketClicked(!basketClicked);
         if (notiClicked) setNotiClicked(!notiClicked);
-    }
+    };
 
     const handleClickNoti = () => {
         setNotiClicked(!notiClicked);
         if (basketClicked) setBasketClicked(!basketClicked);
-    }
+    };
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -221,71 +221,31 @@ export default function NavBar({ className }) {
                             />
                         </BottomNavigation>
                     </div>
-                    {
-                        isLoggedIn ?
+                    {isLoggedIn ? (
                         <Box
                             sx={{
                                 display: { xs: 'none', md: 'flex', gap: '19px' }
                             }}
-                            // lastChild={true}
                             float="right">
                             <div onClick={handleClickBasket} style={hoverStyle}>
-                                {
-                                    basketClicked ?
-                                    <BasketClicked />
-                                    :
-                                    <Basket />
-                                }
+                                {basketClicked ? <BasketClicked /> : <Basket />}
                             </div>
                             <div onClick={handleClickNoti} style={hoverStyle}>
-                                {
-                                    notiClicked ?
-                                    <NotiClicked />
-                                    :
-                                    <Noti />
-                                }
+                                {notiClicked ? <NotiClicked /> : <Noti />}
                             </div>
-                            <div style={{...hoverStyle, pointerEvents: isLoggedIn ? 'auto' : 'none'}} onClick={() => handleChange(null, 2)}>
-                            {
-                                value === 2 ?
-                                <Avatar variant="small-border">N</Avatar>
-                                :
-                                <Avatar variant="small">N</Avatar>
-                            }
+                            <div style={{ ...hoverStyle, pointerEvents: isLoggedIn ? 'auto' : 'none' }}>
+                                {value === 2 ? (
+                                    <AvatarInteraction variant="small-border">N</AvatarInteraction>
+                                ) : (
+                                    <AvatarInteraction variant="small">N</AvatarInteraction>
+                                )}
                             </div>
-                            <Box sx={{ flexGrow: 0 }}>
-            {/* <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu> */}
-          </Box>
                         </Box>
-                        :
-                        <Button style={{ padding: '6px 21px' }} onClick={handleNavigateToLogin}>Log in / Sign up</Button>
-                    }
+                    ) : (
+                        <Button style={{ padding: '6px 21px' }} onClick={handleNavigateToLogin}>
+                            Log in / Sign up
+                        </Button>
+                    )}
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}

@@ -9,12 +9,24 @@ const {
 router
   .route('/')
   .get(productController.getAllProduct)
-  .post(authenticateUser, authorizePermissions('seller'), productController.createProduct);
+  .post(
+    authenticateUser,
+    authorizePermissions('seller'),
+    productController.createProduct,
+  );
 
 router
   .route('/:id')
   .get(productController.getProduct)
-  .patch(authenticateUser, authorizePermissions('seller'), productController.updateProduct)
-  .delete(authenticateUser, authorizePermissions('selller'), productController.deleteProduct);
+  .patch(
+    authenticateUser,
+    authorizePermissions('seller'),
+    productController.updateProduct,
+  )
+  .delete(
+    authenticateUser,
+    authorizePermissions('selller'),
+    productController.deleteProduct,
+  );
 
 module.exports = router;

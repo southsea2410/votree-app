@@ -181,3 +181,9 @@ h6 {
     height: '500px';
     padding-top: '100px';
 }
+
+.linkText {
+    color: #3366cc;
+    text-decoration: underline;
+    text-decoration-color: #99ccff;
+}

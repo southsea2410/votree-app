@@ -268,7 +268,7 @@ const theme = createTheme({
                         width: '50px',
                         height: '50px',
                         border: '3px solid',
-                        borderColor: colors.green5,
+                        borderColor: colors.green5
                     }
                 },
                 {
