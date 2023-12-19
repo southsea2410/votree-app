@@ -154,6 +154,7 @@ export default function OtpInput({ value, valueLength, onChange }) {
                     onChange={(e) => inputOnChange(e, index)}
                     onKeyDown={inputOnKeyDown}
                     onFocus={inputOnFocus}
+                    name={'otp'}
                 />
             ))}
         </div>
