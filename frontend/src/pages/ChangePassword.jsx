@@ -60,10 +60,10 @@ export default function ChangePassword() {
             const response = await fetch('/api/v1/updatepw', {
                 method: 'PATCH',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: jsonData,
-            })
+                body: jsonData
+            });
 
             if (response.ok) {
                 alert('Password update successful!');
@@ -95,9 +95,7 @@ export default function ChangePassword() {
                         <div className="subtitle-extra-bold" style={{ color: colors.green6 }}>
                             Change Password
                         </div>
-                        <form
-                            onSubmit={handleChangePassword}
-                            style={clusterStyle}>
+                        <form onSubmit={handleChangePassword} style={clusterStyle}>
                             <div
                                 style={{
                                     display: 'flex',
@@ -106,79 +104,81 @@ export default function ChangePassword() {
                                     width: 364
                                 }}>
                                 <FormControl style={textBoxClusterStyle}>
-                                        <OutlinedInput
-                                            size="small"
-                                            fullWidth
-                                            placeholder="Current password"
-                                            id="fullWidth"
-                                            name="currentPassword"
-                                            type={showCurrentPassword ? 'text' : 'password'}
-                                            rows={1}
-                                            endAdornment={
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        aria-label="toggle password visibility"
-                                                        onClick={handleClickShowCurrentPassword}
-                                                        onMouseDown={handleMouseDownCurrentPassword}
-                                                        edge="end">
-                                                        {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }
-                                            label="Password"
-                                            style={textBoxStyle}
-                                        />
+                                    <OutlinedInput
+                                        size="small"
+                                        fullWidth
+                                        placeholder="Current password"
+                                        id="fullWidth"
+                                        name="currentPassword"
+                                        type={showCurrentPassword ? 'text' : 'password'}
+                                        rows={1}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowCurrentPassword}
+                                                    onMouseDown={handleMouseDownCurrentPassword}
+                                                    edge="end">
+                                                    {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                        style={textBoxStyle}
+                                    />
                                 </FormControl>
                                 <FormControl style={textBoxClusterStyle}>
-                                        <OutlinedInput
-                                            size="small"
-                                            fullWidth
-                                            placeholder="New password"
-                                            id="fullWidth"
-                                            name="newPassword"
-                                            type={showNewPassword ? 'text' : 'password'}
-                                            rows={1}
-                                            endAdornment={
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        aria-label="toggle password visibility"
-                                                        onClick={handleClickShowNewPassword}
-                                                        onMouseDown={handleMouseDownNewPassword}
-                                                        edge="end">
-                                                        {showNewPassword ? <VisibilityOff /> : <Visibility />}
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }
-                                            label="Password"
-                                            style={textBoxStyle}
-                                        />
+                                    <OutlinedInput
+                                        size="small"
+                                        fullWidth
+                                        placeholder="New password"
+                                        id="fullWidth"
+                                        name="newPassword"
+                                        type={showNewPassword ? 'text' : 'password'}
+                                        rows={1}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowNewPassword}
+                                                    onMouseDown={handleMouseDownNewPassword}
+                                                    edge="end">
+                                                    {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                        style={textBoxStyle}
+                                    />
                                 </FormControl>
                                 <FormControl style={textBoxClusterStyle}>
-                                        <OutlinedInput
-                                            size="small"
-                                            fullWidth
-                                            placeholder="Re-type new password"
-                                            id="fullWidth"
-                                            name="RePW"
-                                            type={showRetypePassword ? 'text' : 'password'}
-                                            rows={1}
-                                            endAdornment={
-                                                <InputAdornment position="end">
-                                                    <IconButton
-                                                        aria-label="toggle password visibility"
-                                                        onClick={handleClickShowRetypePassword}
-                                                        onMouseDown={handleMouseDownRetypePassword}
-                                                        edge="end">
-                                                        {showRetypePassword ? <VisibilityOff /> : <Visibility />}
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            }
-                                            label="Password"
-                                            style={textBoxStyle}
-                                        />
+                                    <OutlinedInput
+                                        size="small"
+                                        fullWidth
+                                        placeholder="Re-type new password"
+                                        id="fullWidth"
+                                        name="RePW"
+                                        type={showRetypePassword ? 'text' : 'password'}
+                                        rows={1}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowRetypePassword}
+                                                    onMouseDown={handleMouseDownRetypePassword}
+                                                    edge="end">
+                                                    {showRetypePassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                        style={textBoxStyle}
+                                    />
                                 </FormControl>
                             </div>
-                            <Button style={{ width: '100%' }} type="submit">Confirm</Button>
+                            <Button style={{ width: '100%' }} type="submit">
+                                Confirm
+                            </Button>
                         </form>
                     </div>
                 </div>

@@ -64,37 +64,36 @@ export default function ResetPassword() {
         const confirmPW = form.RePW.value;
 
         if (!email || !otp || otp === '' || !newPassword || !confirmPW) {
-            alert("Please fill in all fields");
+            alert('Please fill in all fields');
             return;
         }
 
         if (newPassword !== confirmPW) {
-            alert("Passwords do not match");
+            alert('Passwords do not match');
             return;
         }
 
         const jsonData = JSON.stringify({ email, otp, newPassword });
 
         try {
-            const response = await fetch("/api/v1/forgotpw/reset",
-            {
-                method: "POST",
+            const response = await fetch('/api/v1/forgotpw/reset', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
-                  },
-                body: jsonData,
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
             });
 
             if (response.ok) {
-                alert("Password reset successful!");
+                alert('Password reset successful!');
                 navigate('/login');
             } else {
-                alert("Password reset failed. Please try again!");
+                alert('Password reset failed. Please try again!');
             }
         } catch (error) {
-            console.error("Error:", error);
+            console.error('Error:', error);
         }
-    }
+    };
 
     return (
         <div className="containerStyle">
@@ -126,14 +125,14 @@ export default function ResetPassword() {
                                     width: '100%',
                                     gap: 15
                                 }}>
-                                <OtpInput value={otp} valueLength={otpLength} onChange={onChange} name='otp' />
+                                <OtpInput value={otp} valueLength={otpLength} onChange={onChange} name="otp" />
                                 <div style={textBoxClusterStyle}>
                                     <TextField
                                         size="small"
                                         fullWidth
                                         placeholder="Email"
                                         id="fullWidth"
-                                        name='email'
+                                        name="email"
                                         InputLabelProps={{
                                             className: 'content-semi-bold-16'
                                         }}
@@ -193,7 +192,9 @@ export default function ResetPassword() {
                                         />
                                     </FormControl>
                                 </div>
-                                <Button style={{ width: '100%' }} type="submit">Verify</Button>
+                                <Button style={{ width: '100%' }} type="submit">
+                                    Verify
+                                </Button>
                             </form>
                             <div
                                 className="content-semi-bold-14-22 linkText"

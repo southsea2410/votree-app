@@ -26,7 +26,7 @@ const fieldStyle = {
 
 const errorStyle = {
     color: colors.decline
-}
+};
 
 export default function ForgotPassword() {
     const navigate = useNavigate();
@@ -46,9 +46,9 @@ export default function ForgotPassword() {
             const response = await fetch('/api/v1/forgotpw', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ email })
             });
 
             if (response.ok) {
@@ -64,17 +64,17 @@ export default function ForgotPassword() {
 
     const showError = (inputId, errorMessage = 'required') => {
         setErrorMessages((prevErrors) => ({
-          ...prevErrors,
-          [inputId]: errorMessage,
+            ...prevErrors,
+            [inputId]: errorMessage
         }));
     };
 
     const validateEmail = (email) => {
         return String(email)
-          .toLowerCase()
-          .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          );
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
     };
 
     const handleChangeToLogin = () => navigate('/login');
@@ -135,9 +135,11 @@ export default function ForgotPassword() {
                                 className="content-semi-bold-14-22 linkText"
                                 onClick={handleChangeToLogin}
                                 style={fieldStyle}>
-                                    <span>Log in with password</span>
+                                <span>Log in with password</span>
                             </div>
-                            <span id="email-error" style={{...errorStyle}} className='content-semi-bold-16'>{errorMessages['email']}</span>
+                            <span id="email-error" style={{ ...errorStyle }} className="content-semi-bold-16">
+                                {errorMessages['email']}
+                            </span>
                         </div>
                     </div>
                 </div>

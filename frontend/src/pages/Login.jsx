@@ -4,7 +4,7 @@ import { LogoVoTree_primary } from '../assets/images';
 import { colors } from '../styles';
 import * as React from 'react';
 import { GoogleIcon, FBIcon } from '../assets/icons';
-import { json, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -54,7 +54,7 @@ export default function Login() {
 
     const handleChangeToSignIn = () => {
         setSignUp(false);
-    }
+    };
 
     const handleChangeToForgotPassword = () => {
         navigate('/forgotpassword');
@@ -113,23 +113,23 @@ export default function Login() {
         const rePW = form.RePW.value;
 
         if (password !== rePW) {
-            alert("Confirm password unsuccessful!");
+            alert('Confirm password unsuccessful!');
             return;
         }
 
         const jsonData = JSON.stringify({ fullName, email, userName, password });
-        
+
         try {
             const response = await fetch('/api/v1/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: jsonData,
+                body: jsonData
             });
 
             if (response.ok) {
-                alert("Register successful!")
+                alert('Register successful!');
                 navigate('/login');
                 handleChangeToSignIn();
             } else {
@@ -137,12 +137,12 @@ export default function Login() {
                 if (errorData && errorData.msg) {
                     alert(`Registration failed: ${errorData.msg}`);
                 } else {
-                    alert("Registration failed. Please try again!");
+                    alert('Registration failed. Please try again!');
                 }
             }
         } catch (error) {
-            console.error("Error:", error);
-            alert("An error occurred during registration. Please try again later!");
+            console.error('Error:', error);
+            alert('An error occurred during registration. Please try again later!');
         }
     };
 
