@@ -34,6 +34,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
             style={{
                 display: 'flex',
                 flexDirection: 'column',
+                position: 'relative',
                 boxShadow:
                     '0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.20)'
             }}>
@@ -63,10 +64,10 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         <div className="content-medium-14-22" style={{ color: colors.green6 }}>
                             {props.price && '$ ' + props.price}
                         </div>
-                        <div className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
+                        <div className="subtitle-semi-bold-20" style={{ color: colors.green4, paddingTop: '5px' }}>
                             {props.name}
                         </div>
-                        <div>
+                        <div style={{ paddingTop: '10px' }}>
                             {stars.map((index) => (
                                 <StarIcon
                                     key={index}
@@ -84,11 +85,18 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         </Link>
                     </div>
                 </div>
-                <CardActions style={{ padding: 0 }}>
-                    <Button variant="cart" color={variant === 'product' ? 'secondary' : 'primary'}>
-                        +
-                    </Button>
-                </CardActions>
+                <div
+                    style={{
+                        position: 'absolute',
+                        bottom: 5,
+                        right: 17
+                    }}>
+                    <CardActions style={{ padding: '10px 0px', paddingLeft: '15px' }}>
+                        <Button variant="cart" color={variant === 'product' ? 'secondary' : 'primary'}>
+                            +
+                        </Button>
+                    </CardActions>
+                </div>
             </div>
         </Card>
     );

@@ -6,6 +6,18 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { OutlinedInput, IconButton, InputAdornment, FormControl, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { fetchUserInfo } from '../utils/apiUtils';
+import { useEffect } from 'react';
+
+// Redux
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
+import { updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
+import { updateIsSeller } from '../redux/features/account/isSellerSlice';
+import { updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
+import { updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
+import { updateNavBarState } from '../redux/features/common/navBarStateSlice';
 
 const textBoxStyle = {
     background: colors.primary,
@@ -30,9 +42,11 @@ const textBoxClusterStyle = {
 
 export default function ChangePassword() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [showCurrentPassword, setShowCurrentPassword] = React.useState(false);
     const [showNewPassword, setShowNewPassword] = React.useState(false);
     const [showRetypePassword, setShowRetypePassword] = React.useState(false);
+    const [isLoggedIn, setIsLoggedIn] = React.useState(useSelector(selectIsLoggedIn));
 
     const handleClickShowCurrentPassword = () => setShowCurrentPassword(!showCurrentPassword);
     const handleMouseDownCurrentPassword = () => setShowCurrentPassword(!showCurrentPassword);
@@ -75,6 +89,27 @@ export default function ChangePassword() {
             console.error('Error:', error);
         }
     };
+
+    useEffect(() => {
+        async function fetchProfileInfo() {
+            if (!isLoggedIn) {
+                const { profile, store } = await fetchUserInfo();
+                if (profile) {
+                    setIsLoggedIn(true);
+                    dispatch(updateProfileInfo(profile));
+                    dispatch(updateIsLoggedIn(true));
+                    if (store) {
+                        dispatch(updateStoreInfo(store));
+                        dispatch(updateIsSeller(true));
+                    }
+                } else {
+                    dispatch(updateNavBarState(0));
+                    navigate('/');
+                }
+            }
+        }
+        fetchProfileInfo();
+    }, [isLoggedIn]);
 
     return (
         <div className="containerStyle">
