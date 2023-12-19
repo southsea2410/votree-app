@@ -5,7 +5,7 @@ import React from 'react';
 import { useEffect } from 'react';
 
 // Dummy data
-import { Post_test } from '../assets/images';
+import { Post_test, Product_test } from '../assets/images';
 import { content, contentLong } from '../assets/contents/content';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 import { useNavigate } from 'react-router-dom';
@@ -33,7 +33,8 @@ const postsStyle = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    rowGap: '20px'
+    rowGap: '20px',
+    paddingBottom: '50px',
 };
 
 export default function HomePage() {
@@ -78,7 +79,7 @@ export default function HomePage() {
             </Box>
             <Box sx={postsStyle}>
                 <UserPost content={content} image={Post_test} />
-                <UserPost content={content} />
+                <UserPost content={content} image={Product_test}/>
                 <UserPost content={content} />
                 <UserPost content={contentLong} />
                 <UserPost content={content} />

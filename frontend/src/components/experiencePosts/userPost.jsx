@@ -22,7 +22,7 @@ export default function UserPost(props) {
         return (
             <Card variant="outlined" sx={cardStyle}>
                 <CardContent sx={cardContentStyle}>
-                    <SumProfile />
+                    <SumProfile fullName={props.fullName} role={props.role} />
                     <Typography>{props.content}</Typography>
                     <CardMedia component="img" image={props.image} sx={{ minHeight: '500px', borderRadius: '7px' }} />
                     <ReactionBar />
@@ -33,7 +33,7 @@ export default function UserPost(props) {
         return (
             <Card variant="outlined" sx={cardStyle}>
                 <CardContent sx={cardContentStyle}>
-                    <SumProfile />
+                    <SumProfile fullName={props.fullName} role={props.role} />
                     <Typography>{props.content}</Typography>
                     <ReactionBar />
                 </CardContent>

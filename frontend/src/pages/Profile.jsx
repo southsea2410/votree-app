@@ -8,6 +8,7 @@ import { content, contentLong } from '../assets/contents/content';
 import UpSellerDialog from '../components/profile/UpSellerDialog';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
+import { Post_test, Product_test } from '../assets/images';
 
 // Redux
 import { useDispatch } from 'react-redux';
@@ -29,7 +30,8 @@ const containerStyle = {
     flexDirection: 'column',
     alignItems: 'center',
     rowGap: '15px',
-    backgroundColor: colors.secondary
+    backgroundColor: colors.secondary,
+    paddingBottom: '50px'
 };
 
 // 6577d9852aeaa934ac6173f4
@@ -238,11 +240,11 @@ export default function UserProfile() {
                         </CardContent>
                     </Card>
                 </Container>
-                <UserPost content={content} />
-                <UserPost content={contentLong} />
-                <UserPost />
-                <UserPost />
-                <UserPost />
+                <UserPost content={content} fullName={fullName} role={role} image={Post_test}/>
+                <UserPost fullName={fullName} role={role} image={Product_test} />
+                <UserPost fullName={fullName} role={role} />
+                <UserPost content={contentLong} fullName={fullName} role={role} />
+                <UserPost fullName={fullName} role={role} />
             </Container>
         </div>
     );
