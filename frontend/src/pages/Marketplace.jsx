@@ -5,7 +5,6 @@ import { Divider } from '@mui/material';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import { colors } from '../styles';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
-import React, { useCallback } from 'react';
 import { useState, useEffect } from 'react';
 import { fetchUserInfo } from '../utils/apiUtils';
 import { useNavigate } from 'react-router-dom';
@@ -44,18 +43,14 @@ const salePostsContainer = {
 };
 
 export default function Marketplace() {
-    const [plantInCart, setPlantInCart] = React.useState(0);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     dispatch(updateNavBarState(1)); // state 1 is marketplace
+    const [isLoggedIn, setIsLoggedIn] = useState(useSelector(selectIsLoggedIn));
 
-    const [isLoggedIn, setIsLoggedIn] = React.useState(useSelector(selectIsLoggedIn));
 
-    const handleAddPlantToCart = useCallback(() => {
-        setPlantInCart((plantInCart) => plantInCart + 1);
-    }, []);
 
-    const [list, setList] = useState([]);
+    const [list, setList] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
@@ -85,22 +80,20 @@ export default function Marketplace() {
             console.log(data);
 
             // Remove unnecessary data
-            data = data.data.products;
+            data = data.data?.products;
 
             // Create list of products
             const products = data.map((product) => {
                 return (
-                    <div key={product._id} onClick={handleAddPlantToCart}>
-                        <ProductCard {...product} />
-                    </div>
+                    <ProductCard key={product._id} {...product} />
                 );
             });
 
             setList(products);
         }
         fetchData();
-    }, [handleAddPlantToCart, isLoggedIn]);
-
+    }, []);
+    
     return (
         <div
             style={{
@@ -117,15 +110,9 @@ export default function Marketplace() {
                     </span>
                 </div>
                 <Box sx={hotSalesContainer}>
-                    <div onClick={handleAddPlantToCart}>
+                        {/* <ProductCard variant="hotpick" />
                         <ProductCard variant="hotpick" />
-                    </div>
-                    <div onClick={handleAddPlantToCart}>
-                        <ProductCard variant="hotpick" />
-                    </div>
-                    <div onClick={handleAddPlantToCart}>
-                        <ProductCard variant="hotpick" />
-                    </div>
+                        <ProductCard variant="hotpick" /> */}
                 </Box>
 
                 <div style={{ padding: '31px' }}>
@@ -134,7 +121,7 @@ export default function Marketplace() {
 
                 <Box sx={salePostsContainer}>{list}</Box>
             </Container>
-            {plantInCart ? <CartList /> : <></>}
+            {list == null || <CartList />}
             <div>
                 <Footer className="footerStyle" />
             </div>

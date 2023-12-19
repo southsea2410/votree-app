@@ -54,13 +54,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Set security HTTP headers
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      imgSrc: ["'self'", 'http://localhost:5173'],
-    },
-  }),
-);
+app.use(helmet());
 
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));

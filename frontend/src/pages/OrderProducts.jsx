@@ -1,9 +1,18 @@
-import React from 'react';
-import { NavBar, DropDownSelect } from '../components';
+import { useEffect, useState, Fragment } from 'react';
+import { NavBar, DropDownSelect, Footer } from '../components';
 import { Box, Button, Card, CardContent, Container, Divider } from '@mui/material';
 import { colors } from '../styles';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 import './../index.css';
+import { redirect, useNavigate } from 'react-router-dom';
+import { fetchUserInfo } from '../utils/apiUtils';
+
+
+// Redux
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
+import { updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
 
 function OrderCard({
     field = 'Method',
@@ -11,12 +20,79 @@ function OrderCard({
     seller = 'King Vegeta',
     customer = 'Prince Vegeta'
 }) {
-    const profileData = [
-        { name: 'Hoa hoc phi', quantity: 3 },
-        { name: 'Hoa hoc phi', quantity: 1 },
-        { name: 'Hoa hoc phi', quantity: 2 },
-        { name: 'Hoa hoc phi', quantity: 5 }
-    ]; // will update
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    // dispatch(updateNavBarState(1)); // state 1 is marketplace
+
+    const [cart, setCart] = useState(null);
+    
+    // Get User Id from Redux
+    const userId = useSelector((state) => state.profileInfo._id);
+
+    // Fetch cart from backend
+    async function getCart() {
+        // Fetch data
+        const { profile } = await fetchUserInfo();
+        if (profile) {
+            dispatch(updateProfileInfo(profile));
+            dispatch(updateIsLoggedIn(true));
+        } else {
+            navigate('/');
+        }
+
+        try{
+            const res = await fetch(`/api/v1/marketplace/carts`, {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            });
+            let cartArr = await res.json();
+    
+            let cartNum = cartArr.results;
+
+            cartArr = cartArr.data.carts;
+
+            // Loop through cartArr to find cart with userId
+            for (let i = 0; i <= cartNum; i++){
+                if (i === cartNum) {
+                    setCart(null);
+                    throw 'Not Found cart With this user';
+                }
+                if (cartArr[i].user == userId){
+                    setCart(cartArr[i]);
+                    console.log('Found cart with this user', cartArr[i]);
+                    return;
+                }
+            }
+        }
+        catch (err){
+            console.log(err);
+        }
+    }
+
+
+    useEffect(() => {
+        getCart();
+    }, []);
+
+    if (cart == null) return null;
+
+    async function handlePurchase(){
+        const res = await fetch(`/api/v1/marketplace/orders/checkout-session/` + cart._id, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            }
+        });
+        let data = await res.json();
+        const url = data.session.url;
+        console.log(url);
+        window.open(url, '_blank', 'rel: "noopener noreferrer"');
+    }
+
 
     return (
         <Box>
@@ -36,7 +112,7 @@ function OrderCard({
                             justifyContent: 'center',
                             alignItems: 'center'
                         }}>
-                        Invoice details
+                        Invoice Details
                     </div>
                     <Box
                         className="subtitle-semi-bold-20"
@@ -49,11 +125,11 @@ function OrderCard({
                         <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
                             Seller
                         </p>
-                        <p className="content-medium-20-25">{seller}</p>
+                        <p className="content-medium-20-25">{cart.seller}</p>
                         <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
                             Customer
                         </p>
-                        <p className="content-medium-20-25">{customer}</p>
+                        <p className="content-medium-20-25">{cart.user}</p>
                     </Box>
                     <Divider variant="slighter"></Divider>
                     <Box className="subtitle-bold-28" color={colors.green2}>
@@ -73,13 +149,13 @@ function OrderCard({
                                 gridTemplateRows: 'repeat(4, 50px)',
                                 alignItems: 'center'
                             }}>
-                            {profileData.map((data, index) => (
-                                <React.Fragment key={index}>
+                            {cart.products.map((product, index) => (
+                                <Fragment key={index}>
                                     <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
-                                        {data.name}
+                                        {product.product.name}
                                     </p>
-                                    <p className="content-medium-20-25">{data.quantity}</p>
-                                </React.Fragment>
+                                    <p className="content-medium-20-25">{product.quantity}</p>
+                                </Fragment>
                             ))}
                         </Box>
                     </Box>
@@ -95,8 +171,8 @@ function OrderCard({
                             justifyContent: 'space-between',
                             alignItems: 'center'
                         }}>
-                        <p className="subtitle-semi-bold-20">Total: 176.000.000 VND</p>
-                        <Button variant="active">Purchase</Button>
+                        <p className="subtitle-semi-bold-20">Total: $ {cart.totalPrice}</p>
+                        <Button variant="active" onClick={handlePurchase}>Purchase</Button>
                     </Box>
                 </CardContent>
             </Card>
@@ -107,9 +183,9 @@ function OrderCard({
 export default function OrderProducts() {
     return (
         <Box style={{ paddingTop: useNavBarHeight(), paddingBottom: '80px' }}>
-            <Box className="navbar">
+            {/* <Box className="navbar">
                 <NavBar />
-            </Box>
+            </Box> */}
             <Container maxWidth="lg">
                 <div>
                     {OrderCard({
@@ -118,6 +194,7 @@ export default function OrderProducts() {
                     })}
                 </div>
             </Container>
+            <Footer />
         </Box>
     );
 }

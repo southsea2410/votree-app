@@ -56,7 +56,7 @@ export default function Product() {
                 </Link>
                 <Container maxWidth="xs">
                     <img
-                        src={productInfos.image?.replace('../', 'http://localhost:3000/')}
+                        src={productInfos.image}
                         style={{ maxWidth: '100%', borderRadius: '10px' }}
                     />
                 </Container>
