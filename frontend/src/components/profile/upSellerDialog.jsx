@@ -67,7 +67,6 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
             });
 
             if (response.ok) {
-                alert('Update successfull!');
 
                 const { profile, store } = await fetchUserInfo();
 
@@ -81,6 +80,8 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
                     dispatch(updateIsSeller(true));
                 }
 
+                alert('Update successful!');
+                
                 window.location.reload();
             } else {
                 const errorData = await response.json();

@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Fragment } from 'react';
-import { NavBar, SumProfile, UserPost } from '../components';
+import { NavBar, SumProfile, UserPost, UpSellerDialog, EditProfileDialog } from '../components';
 import { Box, Button, Card, CardContent, Container, Divider } from '@mui/material';
 import { useEffect } from 'react';
 import { colors } from '../styles';
 import { content, contentLong } from '../assets/contents/content';
-import UpSellerDialog from '../components/profile/UpSellerDialog';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 import { Post_test, Product_test } from '../assets/images';
@@ -189,7 +188,21 @@ export default function UserProfile() {
                                         );
                                     })}
                                 </Box>
-                                <Button variant="filled">Edit Profile</Button>
+                                <EditProfileDialog
+                                    variant="filled"
+                                    role={profileInfo.role || ''}
+                                    fullName={profileInfo.fullName || ''}
+                                    dateOfBirth={profileInfo.dateOfBirth || ''}
+                                    gender={profileInfo.gender || ''}
+                                    phoneNumber={profileInfo.phoneNumber || ''}
+                                    email={profileInfo.email || ''}
+                                    address={profileInfo.address || ''}
+                                    interest={profileInfo.interest || ''}
+                                    storeName={storeInfo.storeName || ''}
+                                    storeLocation={storeInfo.storeLocation || ''}
+                                    storeEmail={storeInfo.storeEmail || ''}
+                                    storePhoneNumber={storeInfo.storePhoneNumber || ''}
+                                    >Edit Profile</EditProfileDialog>
                             </Box>
                             <Divider variant="slighter"></Divider>
                             <Box>
