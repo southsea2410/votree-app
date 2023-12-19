@@ -49,7 +49,8 @@ export default function Product() {
                     flexDirection: { xs: 'column', md: 'row' },
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    paddingBottom: '100px'
                 }}>
                 <Link to="/marketplace">
                     <BackIcon fontSize="60px" className="back-icon" />
