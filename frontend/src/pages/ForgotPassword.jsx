@@ -24,13 +24,57 @@ const fieldStyle = {
     cursor: 'pointer'
 };
 
+const errorStyle = {
+    color: colors.decline
+};
+
 export default function ForgotPassword() {
     const navigate = useNavigate();
-    const [sentOTP, setSentOTP] = React.useState(0);
+    const [errorMessages, setErrorMessages] = React.useState({});
 
-    const handleSendOTP = () => {
-        setSentOTP(!sentOTP);
-        navigate('/resetpassword');
+    const handleSendOTP = async (event) => {
+        event.preventDefault();
+
+        const email = event.target.email.value;
+
+        if (!validateEmail(email) || !email.trim()) {
+            showError('email', 'Please fill out a valid email format');
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/v1/forgotpw', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email })
+            });
+
+            if (response.ok) {
+                navigate('/resetpassword');
+            } else {
+                alert(`Error:' ${response.status}`);
+                console.error('Error:', response.status);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const showError = (inputId, errorMessage = 'required') => {
+        setErrorMessages((prevErrors) => ({
+            ...prevErrors,
+            [inputId]: errorMessage
+        }));
+    };
+
+    const validateEmail = (email) => {
+        return String(email)
+            .toLowerCase()
+            .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            );
     };
 
     const handleChangeToLogin = () => navigate('/login');
@@ -47,7 +91,7 @@ export default function ForgotPassword() {
                 <div
                     style={{
                         width: 422,
-                        height: 487,
+                        height: 450,
                         border: '1px solid',
                         borderRadius: 7
                     }}>
@@ -62,27 +106,40 @@ export default function ForgotPassword() {
                             <h5 style={{ color: colors.green5, margin: 0 }}>
                                 We will email you an OTP to reset your password.
                             </h5>
-                            <TextField
-                                size="small"
-                                fullWidth
-                                placeholder="Email"
-                                id="fullWidth"
-                                InputLabelProps={{
-                                    className: 'content-semi-bold-16'
-                                }}
-                                multiline
-                                rows={1}
-                                style={textBoxStyle}
-                            />
-                            <Button style={{ width: '100%' }} onClick={handleSendOTP}>
-                                Send OTP
-                            </Button>
+                            <form
+                                onSubmit={handleSendOTP}
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: 15,
+                                    width: '100%'
+                                }}>
+                                <TextField
+                                    size="small"
+                                    fullWidth
+                                    placeholder="Email"
+                                    id="fullWidth"
+                                    name="email"
+                                    InputLabelProps={{
+                                        className: 'content-semi-bold-16'
+                                    }}
+                                    multiline
+                                    rows={1}
+                                    style={textBoxStyle}
+                                />
+                                <Button style={{ width: '100%' }} type="submit">
+                                    Send OTP
+                                </Button>
+                            </form>
                             <div
                                 className="content-semi-bold-14-22 linkText"
                                 onClick={handleChangeToLogin}
                                 style={fieldStyle}>
-                                Log in with password
+                                <span>Log in with password</span>
                             </div>
+                            <span id="email-error" style={{ ...errorStyle }} className="content-semi-bold-16">
+                                {errorMessages['email']}
+                            </span>
                         </div>
                     </div>
                 </div>

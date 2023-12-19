@@ -47,6 +47,54 @@ export default function ResetPassword() {
     const handleClickShowRetypePassword = () => setShowRetypePassword(!showRetypePassword);
     const handleMouseDownRetypePassword = () => setShowRetypePassword(!showRetypePassword);
 
+    const handleResetPassword = async (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        let otpStr = '';
+        const otpLength = form.otp.length;
+
+        for (let i = 0; i < otpLength; ++i) {
+            otpStr = otpStr + `${form.otp[i].value}`;
+        }
+        const otp = otpStr;
+        console.log(otp);
+        const email = form.email.value;
+        const newPassword = form.password.value;
+        const confirmPW = form.RePW.value;
+
+        if (!email || !otp || otp === '' || !newPassword || !confirmPW) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        if (newPassword !== confirmPW) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        const jsonData = JSON.stringify({ email, otp, newPassword });
+
+        try {
+            const response = await fetch('/api/v1/forgotpw/reset', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            });
+
+            if (response.ok) {
+                alert('Password reset successful!');
+                navigate('/login');
+            } else {
+                alert('Password reset failed. Please try again!');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     return (
         <div className="containerStyle">
             <GlobalStyles styles={{ '#root': { backgroundColor: '#FFFFFF' } }} />
@@ -70,19 +118,21 @@ export default function ResetPassword() {
                         <div style={clusterStyle}>
                             <h5 style={{ padding: 0, margin: 0 }}>Enter the verification code sent in your email.</h5>
                             <form
+                                onSubmit={handleResetPassword}
                                 style={{
                                     display: 'flex',
                                     flexDirection: 'column',
                                     width: '100%',
                                     gap: 15
                                 }}>
-                                <OtpInput value={otp} valueLength={otpLength} onChange={onChange} />
+                                <OtpInput value={otp} valueLength={otpLength} onChange={onChange} name="otp" />
                                 <div style={textBoxClusterStyle}>
                                     <TextField
                                         size="small"
                                         fullWidth
                                         placeholder="Email"
                                         id="fullWidth"
+                                        name="email"
                                         InputLabelProps={{
                                             className: 'content-semi-bold-16'
                                         }}
@@ -123,7 +173,7 @@ export default function ResetPassword() {
                                             fullWidth
                                             placeholder="Re-type password"
                                             id="fullWidth"
-                                            name="Re-type password"
+                                            name="RePW"
                                             type={showRetypePassword ? 'text' : 'password'}
                                             rows={1}
                                             endAdornment={
@@ -142,7 +192,9 @@ export default function ResetPassword() {
                                         />
                                     </FormControl>
                                 </div>
-                                <Button style={{ width: '100%' }}>Verify</Button>
+                                <Button style={{ width: '100%' }} type="submit">
+                                    Verify
+                                </Button>
                             </form>
                             <div
                                 className="content-semi-bold-14-22 linkText"

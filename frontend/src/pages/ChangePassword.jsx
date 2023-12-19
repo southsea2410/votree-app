@@ -1,8 +1,11 @@
-import { Button, TextField } from '@mui/material';
 import { Footer } from '../components';
 import { colors } from '../styles';
 import * as React from 'react';
 import './../index.css';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { OutlinedInput, IconButton, InputAdornment, FormControl, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const textBoxStyle = {
     background: colors.primary,
@@ -19,7 +22,60 @@ const clusterStyle = {
     gap: '45px'
 };
 
+const textBoxClusterStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 12
+};
+
 export default function ChangePassword() {
+    const navigate = useNavigate();
+    const [showCurrentPassword, setShowCurrentPassword] = React.useState(false);
+    const [showNewPassword, setShowNewPassword] = React.useState(false);
+    const [showRetypePassword, setShowRetypePassword] = React.useState(false);
+
+    const handleClickShowCurrentPassword = () => setShowCurrentPassword(!showCurrentPassword);
+    const handleMouseDownCurrentPassword = () => setShowCurrentPassword(!showCurrentPassword);
+    const handleClickShowNewPassword = () => setShowNewPassword(!showNewPassword);
+    const handleMouseDownNewPassword = () => setShowNewPassword(!showNewPassword);
+    const handleClickShowRetypePassword = () => setShowRetypePassword(!showRetypePassword);
+    const handleMouseDownRetypePassword = () => setShowRetypePassword(!showRetypePassword);
+
+    const handleChangePassword = async (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const currentPassword = form.currentPassword.value;
+        const newPassword = form.newPassword.value;
+        const confirmPW = form.RePW.value;
+
+        if (newPassword !== confirmPW) {
+            alert('Passwords do not match!');
+            return;
+        }
+
+        const jsonData = JSON.stringify({ currentPassword, newPassword });
+
+        try {
+            const response = await fetch('/api/v1/updatepw', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            });
+
+            if (response.ok) {
+                alert('Password update successful!');
+                navigate('/profile');
+            } else {
+                alert('Password update failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     return (
         <div className="containerStyle">
             <div
@@ -39,7 +95,7 @@ export default function ChangePassword() {
                         <div className="subtitle-extra-bold" style={{ color: colors.green6 }}>
                             Change Password
                         </div>
-                        <div style={clusterStyle}>
+                        <form onSubmit={handleChangePassword} style={clusterStyle}>
                             <div
                                 style={{
                                     display: 'flex',
@@ -47,54 +103,83 @@ export default function ChangePassword() {
                                     gap: 25,
                                     width: 364
                                 }}>
-                                <TextField
-                                    size="small"
-                                    fullWidth
-                                    placeholder="Old password"
-                                    id="fullWidth"
-                                    InputLabelProps={{
-                                        className: 'content-semi-bold-16'
-                                    }}
-                                    multiline
-                                    rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
-                                    }}
-                                    style={textBoxStyle}
-                                />
-                                <TextField
-                                    size="small"
-                                    fullWidth
-                                    placeholder="New password"
-                                    id="fullWidth"
-                                    InputLabelProps={{
-                                        className: 'content-semi-bold-16'
-                                    }}
-                                    multiline
-                                    rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
-                                    }}
-                                    style={textBoxStyle}
-                                />
-                                <TextField
-                                    size="small"
-                                    fullWidth
-                                    placeholder="Re-type new password"
-                                    id="fullWidth"
-                                    InputLabelProps={{
-                                        className: 'content-semi-bold-16'
-                                    }}
-                                    multiline
-                                    rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
-                                    }}
-                                    style={textBoxStyle}
-                                />
+                                <FormControl style={textBoxClusterStyle}>
+                                    <OutlinedInput
+                                        size="small"
+                                        fullWidth
+                                        placeholder="Current password"
+                                        id="fullWidth"
+                                        name="currentPassword"
+                                        type={showCurrentPassword ? 'text' : 'password'}
+                                        rows={1}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowCurrentPassword}
+                                                    onMouseDown={handleMouseDownCurrentPassword}
+                                                    edge="end">
+                                                    {showCurrentPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                        style={textBoxStyle}
+                                    />
+                                </FormControl>
+                                <FormControl style={textBoxClusterStyle}>
+                                    <OutlinedInput
+                                        size="small"
+                                        fullWidth
+                                        placeholder="New password"
+                                        id="fullWidth"
+                                        name="newPassword"
+                                        type={showNewPassword ? 'text' : 'password'}
+                                        rows={1}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowNewPassword}
+                                                    onMouseDown={handleMouseDownNewPassword}
+                                                    edge="end">
+                                                    {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                        style={textBoxStyle}
+                                    />
+                                </FormControl>
+                                <FormControl style={textBoxClusterStyle}>
+                                    <OutlinedInput
+                                        size="small"
+                                        fullWidth
+                                        placeholder="Re-type new password"
+                                        id="fullWidth"
+                                        name="RePW"
+                                        type={showRetypePassword ? 'text' : 'password'}
+                                        rows={1}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowRetypePassword}
+                                                    onMouseDown={handleMouseDownRetypePassword}
+                                                    edge="end">
+                                                    {showRetypePassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                        label="Password"
+                                        style={textBoxStyle}
+                                    />
+                                </FormControl>
                             </div>
-                            <Button style={{ width: '100%' }}>Confirm</Button>
-                        </div>
+                            <Button style={{ width: '100%' }} type="submit">
+                                Confirm
+                            </Button>
+                        </form>
                     </div>
                 </div>
             </div>

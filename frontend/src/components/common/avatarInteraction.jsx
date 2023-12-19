@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { updateIsLoggedIn } from '../../redux/features/account/isLoggedInSlice';
 import { updateIsSeller } from '../../redux/features/account/isSellerSlice';
 
-const settings = ['Profile', 'Log out'];
+const settings = ['Profile', 'Change password', 'Log out'];
 
 function AvatarInteraction({ variant }) {
     const navigate = useNavigate();
@@ -55,6 +55,8 @@ function AvatarInteraction({ variant }) {
             navigate('/profile');
         } else if (setting === 'Log out') {
             handleLogout();
+        } else if (setting === 'Change password') {
+            navigate('/changepassword');
         }
     };
 

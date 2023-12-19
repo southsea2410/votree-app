@@ -49,7 +49,11 @@ export default function Login() {
     const dispatch = useDispatch();
 
     const handleChangeToSignUp = () => {
-        setSignUp(!signUp);
+        setSignUp(true);
+    };
+
+    const handleChangeToSignIn = () => {
+        setSignUp(false);
     };
 
     const handleChangeToForgotPassword = () => {
@@ -89,12 +93,56 @@ export default function Login() {
                     dispatch(updateIsSeller(true));
                 }
 
-                navigate('/'); // Homepage
+                navigate('/');
             } else {
                 console.error('Login failed:', response.statusText);
             }
         } catch (error) {
             console.error('Error:', error);
+        }
+    };
+
+    const handleRegister = async (event) => {
+        event.preventDefault();
+
+        const form = event.target;
+        const fullName = form.fullName.value;
+        const email = form.email.value;
+        const userName = form.userName.value;
+        const password = form.password.value;
+        const rePW = form.RePW.value;
+
+        if (password !== rePW) {
+            alert('Confirm password unsuccessful!');
+            return;
+        }
+
+        const jsonData = JSON.stringify({ fullName, email, userName, password });
+
+        try {
+            const response = await fetch('/api/v1/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            });
+
+            if (response.ok) {
+                alert('Register successful!');
+                navigate('/login');
+                handleChangeToSignIn();
+            } else {
+                const errorData = await response.json();
+                if (errorData && errorData.msg) {
+                    alert(`Registration failed: ${errorData.msg}`);
+                } else {
+                    alert('Registration failed. Please try again!');
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred during registration. Please try again later!');
         }
     };
 
@@ -137,7 +185,7 @@ export default function Login() {
                                 ...fieldStyle,
                                 opacity: signUp ? '15%' : '100%'
                             }}
-                            onClick={handleChangeToSignUp}>
+                            onClick={handleChangeToSignIn}>
                             Log in
                         </div>
                         <div
@@ -152,7 +200,7 @@ export default function Login() {
                     </div>
                     {signUp ? (
                         <form
-                            onSubmit={handleLogin}
+                            onSubmit={handleRegister}
                             style={{
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -163,16 +211,27 @@ export default function Login() {
                                 <TextField
                                     size="small"
                                     fullWidth
-                                    placeholder="Name"
+                                    placeholder="User name"
                                     id="fullWidth"
+                                    name="userName"
                                     InputLabelProps={{
                                         className: 'content-semi-bold-16'
                                     }}
                                     multiline
                                     rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
+                                    style={textBoxStyle}
+                                />
+                                <TextField
+                                    size="small"
+                                    fullWidth
+                                    placeholder="Your name"
+                                    id="fullWidth"
+                                    name="fullName"
+                                    InputLabelProps={{
+                                        className: 'content-semi-bold-16'
                                     }}
+                                    multiline
+                                    rows={1}
                                     style={textBoxStyle}
                                 />
                                 <TextField
@@ -180,29 +239,12 @@ export default function Login() {
                                     fullWidth
                                     placeholder="Email"
                                     id="fullWidth"
+                                    name="email"
                                     InputLabelProps={{
                                         className: 'content-semi-bold-16'
                                     }}
                                     multiline
                                     rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
-                                    }}
-                                    style={textBoxStyle}
-                                />
-                                <TextField
-                                    size="small"
-                                    fullWidth
-                                    placeholder="Username"
-                                    id="fullWidth"
-                                    InputLabelProps={{
-                                        className: 'content-semi-bold-16'
-                                    }}
-                                    multiline
-                                    rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
-                                    }}
                                     style={textBoxStyle}
                                 />
                                 <FormControl style={textBoxClusterStyle}>
@@ -235,7 +277,7 @@ export default function Login() {
                                         fullWidth
                                         placeholder="Re-type password"
                                         id="fullWidth"
-                                        name="Re-type password"
+                                        name="RePW"
                                         type={showRetypePassword ? 'text' : 'password'}
                                         rows={1}
                                         endAdornment={
@@ -254,10 +296,10 @@ export default function Login() {
                                     />
                                 </FormControl>
                             </div>
-                            <div className="extra-medium" onClick={handleChangeToSignUp} style={fieldStyle}>
+                            <div className="extra-medium" onClick={handleChangeToSignIn} style={fieldStyle}>
                                 Already have an account?
                             </div>
-                            <Button>Register</Button>
+                            <Button type="submit">Register</Button>
                         </form>
                     ) : (
                         <form
@@ -280,9 +322,6 @@ export default function Login() {
                                     }}
                                     multiline
                                     rows={1}
-                                    InputProps={{
-                                        textAlign: 'center'
-                                    }}
                                     style={textBoxStyle}
                                 />
                                 <FormControl style={textBoxClusterStyle}>
@@ -318,7 +357,7 @@ export default function Login() {
                                     Don&apos;t have an account?
                                 </div>
                             </div>
-                            <Button type="submit">Login</Button>
+                            <Button type="submit">Log in</Button>
                         </form>
                     )}
                     <div style={{ padding: '31px' }}>
