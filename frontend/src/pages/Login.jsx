@@ -96,9 +96,11 @@ export default function Login() {
                 navigate('/');
             } else {
                 console.error('Login failed:', response.statusText);
+                alert(`Login failed: ${response.statusText}`);
             }
         } catch (error) {
             console.error('Error:', error);
+            alert(`'Error: ${error}`);
         }
     };
 

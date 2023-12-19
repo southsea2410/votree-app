@@ -54,7 +54,7 @@ export default function ForgotPassword() {
             if (response.ok) {
                 navigate('/resetpassword');
             } else {
-                alert(`Error:' ${response.status}`);
+                alert(`Error: ${response.status}`);
                 console.error('Error:', response.status);
             }
         } catch (error) {

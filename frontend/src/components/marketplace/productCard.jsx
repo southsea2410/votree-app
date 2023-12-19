@@ -85,11 +85,12 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         </Link>
                     </div>
                 </div>
-                <div style={{
-                    position: 'absolute',
-                    bottom: 5,
-                    right: 17,
-                }}>
+                <div
+                    style={{
+                        position: 'absolute',
+                        bottom: 5,
+                        right: 17
+                    }}>
                     <CardActions style={{ padding: '10px 0px', paddingLeft: '15px' }}>
                         <Button variant="cart" color={variant === 'product' ? 'secondary' : 'primary'}>
                             +
