@@ -299,7 +299,7 @@ export default function Login() {
                             <div className="extra-medium" onClick={handleChangeToSignIn} style={fieldStyle}>
                                 Already have an account?
                             </div>
-                            <Button  type="submit">Register</Button>
+                            <Button type="submit">Register</Button>
                         </form>
                     ) : (
                         <form
