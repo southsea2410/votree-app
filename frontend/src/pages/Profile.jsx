@@ -55,8 +55,8 @@ export default function UserProfile() {
     useEffect(() => {
         async function fetchProfileInfo() {
             if (id === undefined || id === '') {
-                fetchUserInfo().then(({profile, store}) => {
-                    console.log(profile);
+                if (!isLoggedIn) {
+                    const { profile, store } = await fetchUserInfo();
                     if (profile) {
                         dispatch(updateProfileInfo(profile));
                         dispatch(updateIsLoggedIn(true));
@@ -78,7 +78,7 @@ export default function UserProfile() {
                     setRole(profileInfo.role);
                 }
             } else {
-                const data = await fetch('/api/v1/userInfo/' + id, {
+                const data = await fetch('/api/v1/sellers/' + id, {
                     headers: { 'Content-Type': 'application/json' }
                 });
 
@@ -115,7 +115,7 @@ export default function UserProfile() {
             }
         }
         fetchProfileInfo();
-    }, []);
+    }, [id, isLoggedIn]);
 
     return (
         <div style={{ paddingTop: useNavBarHeight() }}>
