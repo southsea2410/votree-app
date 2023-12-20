@@ -120,7 +120,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                     <Button
                         productid={props._id}
                         sellerid={props.sellerId}
-                        className="product-card-add"
+                        className={variant === 'edit' ? 'product-card-add' : 'product-card-edit'}
                         variant="cart"
                         color={variant === 'product' ? 'secondary' : 'primary'}>
                         {variant === 'edit' ? <BorderColorIcon style={{ color: colors.green4 }} /> : '+'}
