@@ -32,7 +32,7 @@ const salePostsContainer = {
     width: '100%'
 };
 
-function PostsContainer({ id }) {
+function PostsContainer({ id, isLoggedIn }) {
     const [list, setList] = useState('');
 
     async function fetchSalePosts() {
@@ -48,7 +48,7 @@ function PostsContainer({ id }) {
         const products = data.map((product, index) => {
             console.log(product.seller === id, index, product.seller, id);
             if (product.sellerId === id) {
-                return <ProductCard key={product._id} variant="edit" {...product} />;
+                return <ProductCard key={product._id} variant={isLoggedIn ? 'edit' : 'product'} {...product} />;
             }
             return null;
         });
