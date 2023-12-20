@@ -7,6 +7,7 @@ import './../../index.css';
 import { colors } from '../../styles';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import EditProductInfoDialog from './editProductInfoDialog';
 
 export default function ProductCard({ variant = 'product', ...props }) {
     const stars = [...Array(5).keys()];
@@ -117,14 +118,13 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         bottom: 10,
                         right: 12
                     }}>
-                    <Button
+                    <EditProductInfoDialog
                         productid={props._id}
-                        sellerid={props.sellerId}
                         className={variant === 'edit' ? 'product-card-add' : 'product-card-edit'}
                         variant="cart"
                         color={variant === 'product' ? 'secondary' : 'primary'}>
                         {variant === 'edit' ? <BorderColorIcon style={{ color: colors.green4 }} /> : '+'}
-                    </Button>
+                    </EditProductInfoDialog>
                 </div>
             </div>
         </Card>

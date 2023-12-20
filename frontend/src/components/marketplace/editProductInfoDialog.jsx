@@ -141,7 +141,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         console.log(jsonData);
 
         try {
-            const response = await fetch('/api/v1/marketplace/products/' + id, {
+            const response = await fetch('/api/v1/marketplace/products/' + props.productid, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'

@@ -43,7 +43,7 @@ function ProductsContainer({ id, isLoggedIn }) {
         let data = await res.json();
 
         // Remove unnecessary data
-        data = data.data.products;
+        data = data.data?.products;
 
         // Create list of products
         const products = data.map((product, index) => {
