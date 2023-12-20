@@ -190,18 +190,6 @@ export default function UserProfile() {
                                 </Box>
                                 <EditProfileDialog
                                     variant="filled"
-                                    // role={profileInfo.role || ''}
-                                    // fullName={profileInfo.fullName || ''}
-                                    // dateOfBirth={profileInfo.dateOfBirth || ''}
-                                    // gender={profileInfo.gender || ''}
-                                    // phoneNumber={profileInfo.phoneNumber || ''}
-                                    // email={profileInfo.email || ''}
-                                    // address={profileInfo.address || ''}
-                                    // interest={profileInfo.interest || ''}
-                                    // storeName={storeInfo.storeName || ''}
-                                    // storeLocation={storeInfo.storeLocation || ''}
-                                    // storeEmail={storeInfo.storeEmail || ''}
-                                    // storePhoneNumber={storeInfo.storePhoneNumber || ''}
                                     >Edit Profile</EditProfileDialog>
                             </Box>
                             <Divider variant="slighter"></Divider>

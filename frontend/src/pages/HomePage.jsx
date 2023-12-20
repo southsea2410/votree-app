@@ -18,7 +18,7 @@ import { selectProfileInfo } from '../redux/features/profile/profileInfoSlice';
 import { updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
 import { updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
 import { updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
-import { selectIsSeller, updateIsSeller } from '../redux/features/account/isSellerSlice';
+import { updateIsSeller } from '../redux/features/account/isSellerSlice';
 import { updateNavBarState } from '../redux/features/common/navBarStateSlice';
 
 const homePageStyle = {

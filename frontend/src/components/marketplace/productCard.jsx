@@ -86,14 +86,21 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         </Link>
                     </div>
                 </div>
-                <Button
-                    productid={props._id}
-                    sellerid={props.sellerId}
-                    className="product-card-add"
-                    variant="cart"
-                    color={variant === 'product' ? 'secondary' : 'primary'}>
-                    +
-                </Button>
+                <div
+                    style={{
+                        position: 'absolute',
+                        bottom: 10,
+                        right: 12
+                    }}>
+                    <Button
+                        productid={props._id}
+                        sellerid={props.sellerId}
+                        className="product-card-add"
+                        variant="cart"
+                        color={variant === 'product' ? 'secondary' : 'primary'}>
+                        +
+                    </Button>
+                </div>
             </div>
         </Card>
     );

@@ -8,7 +8,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { colors } from '../../styles';
-import { useNavigate } from 'react-router-dom';
 import { fetchUserInfo } from '../../utils/apiUtils';
 import { useEffect } from 'react';
 
@@ -38,7 +37,6 @@ const dialogContentTextStyle = {
 
 export default function EditProfileDialog({ variant = 'filled', ...props }) {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const profileInfoFromRedux = useSelector(selectProfileInfo);
     const storeInfoFromRedux = useSelector(selectStoreInfo);
     const [open, setOpen] = React.useState(false);
