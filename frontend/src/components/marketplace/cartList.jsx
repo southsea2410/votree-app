@@ -125,11 +125,11 @@ export default function CartList() {
             if (cartNum == 0) throw 'Not Found cart With this user';
 
             cartArr = cartArr.data.carts;
-
+            console.log(cartArr);
             // Loop through cartArr to find cart with userId
             for (let i = 0; i <= cartNum; i++){
-                if (i === cartNum) {
-                    if (event == null) throw 'Not Found cart With this user';
+                if (i == cartNum) {
+                    throw 'Not Found cart With this user';
                 }
                 if (cartArr[i].user == userId){
                     setCart(cartArr[i]);
