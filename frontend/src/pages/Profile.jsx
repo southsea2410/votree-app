@@ -79,13 +79,14 @@ export default function UserProfile() {
                     setRole(profileInfo.role);
                 }
             } else {
-                const data = await fetch('/api/v1/sellers/' + id, {
+                const data = await fetch('/api/v1/userInfo/' + id, {
+                    method: 'GET',
                     headers: { 'Content-Type': 'application/json' }
                 });
 
                 const arr = await data.json();
-                const info = arr.data.seller;
-                if (arr.data.seller) {
+                const info = arr?.userInfo;
+                if (arr?.userInfo) {
                     const profile = {
                         role: info.role || '',
                         avatar: info.avatar || '',
@@ -97,7 +98,6 @@ export default function UserProfile() {
                         address: info.address || '',
                         interest: info.interest || ''
                     };
-                    setIsLoggedIn(true);
                     setProfileInfo(profile);
                     setFullName(profile.fullName);
                     setRole(profile.role.toLowerCase());

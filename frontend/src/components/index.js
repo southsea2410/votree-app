@@ -13,6 +13,7 @@ import DropDownSelect from './common/dropDownSelect';
 import AvatarInteraction from './common/avatarInteraction';
 import UpSellerDialog from './profile/UpSellerDialog';
 import EditProfileDialog from './profile/editProfileDialog';
+import EditProductInfoDialog from './marketplace/editProductInfoDialog';
 
 export {
     NavBar,
@@ -29,5 +30,6 @@ export {
     DropDownSelect,
     AvatarInteraction,
     UpSellerDialog,
-    EditProfileDialog
+    EditProfileDialog,
+    EditProductInfoDialog
 };

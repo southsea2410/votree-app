@@ -35,91 +35,59 @@ const dialogContentTextStyle = {
     paddingTop: '35px'
 };
 
-export default function EditProfileDialog({ variant = 'filled', ...props }) {
+export default function EditProductInfoDialog({ variant = 'filled', ...props }) {
     const dispatch = useDispatch();
     const profileInfoFromRedux = useSelector(selectProfileInfo);
     const storeInfoFromRedux = useSelector(selectStoreInfo);
     const [open, setOpen] = React.useState(false);
 
-    const infos = (profileInfoFromRedux.role === 'seller') ? [
-        'fullName',
-        'dateOfBirth',
-        'gender',
-        'phoneNumber',
-        'email',
-        'address',
-        'interest',
-        'storeName',
-        'storeLocation',
-        'storeEmail',
-        'storePhoneNumber'
-    ] : [
-        'fullName',
-        'dateOfBirth',
-        'gender',
-        'phoneNumber',
-        'email',
-        'address',
-        'interest',
+    const infos = [
+        'name',
+        'price',
+        'discountPrice',
+        'quantity',
+        'description',
+        'active',
+        'type',
+        'suitEnvironment',
+        'suitClimate',
     ];
 
-    const infosTitle = (profileInfoFromRedux.role === 'seller') ? [
-        'full Name',
-        'date Of Birth',
-        'gender',
-        'phone Number',
-        'email',
-        'address',
-        'interest',
-        'store Name',
-        'store Location',
-        'store Email',
-        'store Phone Number'
-    ] : [
-        'full Name *',
-        'date Of Birth',
-        'gender',
-        'phone Number',
-        'email',
-        'address',
-        'interest'
+    const infosTitle = [
+        'name *',
+        'price *',
+        'discount Price',
+        'quantity *',
+        'description',
+        'active',
+        'type',
+        'suit Environment',
+        'suit Climate',
     ];
 
-    const [latestValues, setLatestValues] = React.useState((profileInfoFromRedux.role === 'seller') ? [
-        profileInfoFromRedux.fullName,
-        profileInfoFromRedux.dateOfBirth,
-        profileInfoFromRedux.gender,
-        profileInfoFromRedux.phoneNumber,
-        profileInfoFromRedux.email,
-        profileInfoFromRedux.address,
-        profileInfoFromRedux.interest,
-        storeInfoFromRedux.storeName,
-        storeInfoFromRedux.storeLocation,
-        storeInfoFromRedux.storeEmail,
-        storeInfoFromRedux.storePhoneNumber
-    ] : [
-        profileInfoFromRedux.fullName,
-        profileInfoFromRedux.dateOfBirth,
-        profileInfoFromRedux.gender,
-        profileInfoFromRedux.phoneNumber,
-        profileInfoFromRedux.email,
-        profileInfoFromRedux.address,
-        profileInfoFromRedux.interest
+    const [latestValues, setLatestValues] = React.useState([
+        props.name,
+        props.price,
+        props.discountPrice,
+        props.quantity,
+        props.description,
+        props.active,
+        props.type,
+        props.suitEnvironment,
+        props.suitClimate
     ]);
 
     useEffect(() => {
         setLatestValues([
-            profileInfoFromRedux.fullName,
-            profileInfoFromRedux.dateOfBirth,
-            profileInfoFromRedux.gender,
-            profileInfoFromRedux.phoneNumber,
-            profileInfoFromRedux.email,
-            profileInfoFromRedux.address,
-            profileInfoFromRedux.interest,
-            storeInfoFromRedux.storeName,
-            storeInfoFromRedux.storeLocation,
-            storeInfoFromRedux.storeEmail,
-            storeInfoFromRedux.storePhoneNumber
+            props.name,
+            props.price,
+            props.discountPrice,
+            props.quantity,
+            props.description,
+            props.active,
+            props.type,
+            props.suitEnvironment,
+            props.suitClimate
         ]);
     }, [profileInfoFromRedux]);
 
@@ -145,49 +113,37 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
         event.preventDefault();
 
         const form = event.target;
-        const fullName = form.fullName.value;
-        const dateOfBirth = form.dateOfBirth.value;
+        const name = form.name.value;
+        const price = form.price.value;
+        const discountPrice = form.discountPrice.value;
+        const quantity = form.quantity.value;
+        const description = form.description.value;
+        const active = (quantity == '0') ? false : true;
+        const type = form.type.value;
+        const suitEnvironment = form.suitEnvironment.value;
+        const suitClimate = form.suitClimate.value;
 
-        const tmp = values[2];
-        const gender = tmp.charAt(0).toUpperCase() + tmp.slice(1).toLowerCase();
-
-        const phoneNumber = form.phoneNumber.value;
-        const email = form.email.value;
-        const address = form.address.value;
-        const interest = form.interest.value;
-        const storeName = form.storeName?.value;
-        const storeLocation = form.storeLocation?.value;
-        const storeEmail = form.storeEmail?.value;
-        const storePhoneNumber = form.storePhoneNumber?.value;
-
-        if (!fullName || fullName === '') {
-            alert('Full name must not be empty!');
-            return;
-        }
-
-        if (gender !== '' && gender !== 'Male' && gender !== 'Female' && gender !== 'Different') {
-            alert(`Gender must be 'Male', 'Female' or 'Different'!`);
+        if (!name || name === '' || !price || price === '' || !quantity || quantity == '' ) {
+            alert('You must fill in all necessary field!');
             return;
         }
         
         const jsonData = JSON.stringify({ 
-            fullName,
-            dateOfBirth,
-            gender,
-            phoneNumber,
-            email,
-            address,
-            interest,
-            storeName,
-            storeLocation,
-            storeEmail,
-            storePhoneNumber
+            name,
+            price,
+            discountPrice,
+            quantity,
+            description,
+            active,
+            type,
+            suitEnvironment,
+            suitClimate
         });
 
         console.log(jsonData);
 
         try {
-            const response = await fetch('/api/v1/userInfo', {
+            const response = await fetch('/api/v1/marketplace/products/' + id, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -263,7 +219,7 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
                         color: colors.green5,
                         paddingBottom: 0
                     }}>
-                    <p className="subtitle-semi-bold-28">Profile Update Form</p>
+                    <p className="subtitle-semi-bold-28">Product Update Form</p>
                     <IconButton
                         aria-label="close"
                         onClick={handleClose}
