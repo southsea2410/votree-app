@@ -11,6 +11,8 @@ import OtpInput from './auth/otpInput';
 import CartList from './marketplace/cartList';
 import DropDownSelect from './common/dropDownSelect';
 import AvatarInteraction from './common/avatarInteraction';
+import UpSellerDialog from './profile/UpSellerDialog';
+import EditProfileDialog from './profile/editProfileDialog';
 
 export {
     NavBar,
@@ -25,5 +27,7 @@ export {
     OtpInput,
     CartList,
     DropDownSelect,
-    AvatarInteraction
+    AvatarInteraction,
+    UpSellerDialog,
+    EditProfileDialog
 };

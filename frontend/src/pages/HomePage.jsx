@@ -5,7 +5,7 @@ import React from 'react';
 import { useEffect } from 'react';
 
 // Dummy data
-import { Post_test } from '../assets/images';
+import { Post_test, Product_test } from '../assets/images';
 import { content, contentLong } from '../assets/contents/content';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
+import { selectProfileInfo } from '../redux/features/profile/profileInfoSlice';
 import { updateProfileInfo } from '../redux/features/profile/profileInfoSlice';
 import { updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
 import { updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
@@ -33,13 +34,18 @@ const postsStyle = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    rowGap: '20px'
+    rowGap: '20px',
+    paddingBottom: '50px',
 };
 
 export default function HomePage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const profileInfoFromRedux = useSelector(selectProfileInfo);
     const [isLoggedIn, setIsLoggedIn] = React.useState(useSelector(selectIsLoggedIn));
+    const [fullName, setFullName] = React.useState(profileInfoFromRedux.fullName);
+    const [role, setRole] = React.useState(profileInfoFromRedux.role);
 
     useEffect(() => {
         async function fetchData() {
@@ -50,6 +56,8 @@ export default function HomePage() {
                     dispatch(updateProfileInfo(profile));
                     dispatch(updateIsLoggedIn(true));
                     setIsLoggedIn(true);
+                    setFullName(profile.fullName);
+                    setRole(profile.role);
                     if (store) {
                         dispatch(updateStoreInfo(store));
                         dispatch(updateIsSeller(true));
@@ -74,11 +82,11 @@ export default function HomePage() {
                 <NavBar />
             </Box>
             <Box sx={{ alignSelf: 'center' }}>
-                <InputArticle />
+                <InputArticle fullName={fullName} role={role} />
             </Box>
             <Box sx={postsStyle}>
                 <UserPost content={content} image={Post_test} />
-                <UserPost content={content} />
+                <UserPost content={content} image={Product_test}/>
                 <UserPost content={content} />
                 <UserPost content={contentLong} />
                 <UserPost content={content} />

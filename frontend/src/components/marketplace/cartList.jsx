@@ -35,6 +35,10 @@ const cartStyle = {
     cursor: 'pointer'
 };
 
+const hoverStyle = {
+    cursor: 'pointer',
+}
+
 function CartListBody({ cart }) {
     // Use this to check the format of cart object
     console.log(cart);
@@ -244,7 +248,7 @@ export default function CartList() {
                     </Box>
                     {cart && (
                         <DeleteForever
-                            sx={{ alignSelf: 'center', justifySelf: 'center' }}
+                            sx={{ ...hoverStyle, alignSelf: 'center', justifySelf: 'center' }}
                             onClick={handleRemovePlantFromCart}
                         />
                     )}

@@ -26,7 +26,7 @@ const style = {
     borderRadius: '7px'
 };
 
-export default function InputArticle() {
+export default function InputArticle({ fullName, role }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -38,12 +38,10 @@ export default function InputArticle() {
 
     return (
         <div>
-            <PostArticle onClick={handleOpen} />
+            <PostArticle onClick={handleOpen} fullName={fullName} />
             <Modal
                 open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description">
+                onClose={handleClose}>
                 <Box
                     sx={style}
                     style={{
@@ -59,7 +57,7 @@ export default function InputArticle() {
                             justifyContent: 'center',
                             textAlign: 'center',
                             height: 58,
-                            marginBottom: 9
+                            marginBottom: 10
                         }}>
                         Create Article
                     </div>
@@ -69,13 +67,13 @@ export default function InputArticle() {
                             height: '100vh',
                             background: colors.primary,
                             borderRadius: 7,
-                            marginTop: 31,
+                            marginTop: 20,
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'space-between'
                         }}>
                         <div style={{ marginTop: '25px', marginLeft: 64 }}>
-                            <SumProfile />
+                            <SumProfile fullName={fullName} role={role} />
                         </div>
                         <Box
                             sx={{
