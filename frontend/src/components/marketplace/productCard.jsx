@@ -1,5 +1,4 @@
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import { StarIcon } from '../../assets/icons';
@@ -15,18 +14,19 @@ export default function ProductCard({ variant = 'product', ...props }) {
 
     async function fetchSellerName() {
         // Fetch seller
-        const res = await fetch('api/v1/sellers/' + props.sellerId, {
-            headers: { 'Content-Type': 'application/json' }
+        const res = await fetch('/api/v1/userInfo/' + props.sellerId, {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
         });
         const data = await res.json();
 
-        const seller = data.data.seller;
-        setSellerName(seller.fullName);
+        const seller = data.data?.seller;
+        setSellerName(seller?.fullName || 'Unknown');
     }
 
     useEffect(() => {
         fetchSellerName();
-    }, []);
+    }, [sellerName]);
 
     return (
         <Card
@@ -40,9 +40,10 @@ export default function ProductCard({ variant = 'product', ...props }) {
             }}>
             <Link style={{ display: 'contents', textDecoration: 'none' }} to={'/marketplace/product/' + props._id}>
                 <CardMedia
+                    component="div"
                     sx={{ maxWidth: '100%' }}
                     variant="product"
-                    image={props.image?.replace('../', 'http://localhost:3000/')}
+                    image={props.image}
                     title="plant"
                 />
             </Link>
@@ -85,18 +86,14 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         </Link>
                     </div>
                 </div>
-                <div
-                    style={{
-                        position: 'absolute',
-                        bottom: 5,
-                        right: 17
-                    }}>
-                    <CardActions style={{ padding: '10px 0px', paddingLeft: '15px' }}>
-                        <Button variant="cart" color={variant === 'product' ? 'secondary' : 'primary'}>
-                            +
-                        </Button>
-                    </CardActions>
-                </div>
+                <Button
+                    productid={props._id}
+                    sellerid={props.sellerId}
+                    className="product-card-add"
+                    variant="cart"
+                    color={variant === 'product' ? 'secondary' : 'primary'}>
+                    +
+                </Button>
             </div>
         </Card>
     );

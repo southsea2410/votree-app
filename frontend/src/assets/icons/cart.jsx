@@ -3,9 +3,9 @@ import Avatar from '@mui/material/Avatar';
 import CartIcon from './cartIcon';
 import { colors } from '../../styles';
 
-export default function Cart() {
+export default function Cart({ className }) {
     return (
-        <Avatar variant="big" color="green6">
+        <Avatar className={className} variant="big" color="green6">
             <CartIcon color={colors.green3} style={{ fontSize: 32 }} />
         </Avatar>
     );
