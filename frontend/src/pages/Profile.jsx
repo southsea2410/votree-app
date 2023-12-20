@@ -59,7 +59,7 @@ function ProductsContainer({ id, isLoggedIn }) {
 
     useEffect(() => {
         fetchSalePosts();
-    }, []);
+    }, [id]);
 
     return <Box sx={salePostsContainer}>{list}</Box>;
 }
@@ -157,9 +157,9 @@ export default function UserProfile() {
             }
         }
         fetchProfileInfo();
-    }, [id, isLoggedIn]);
+    }, [profileInfo._id, isLoggedIn]);
 
-    console.log(id);
+    // console.log(id);
     return (
         <div style={{ paddingTop: useNavBarHeight() }}>
             {/* Main container for page */}
@@ -269,19 +269,21 @@ export default function UserProfile() {
                     </CardContent>
                 </Card>
                 <Card variant="outlined" sx={{ width: '100%' }}>
+                    {
                     <CardHeader
                         disableTypography
                         title={
                             <Box
                                 className="subtitle-extra-bold"
                                 sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                {isYourProfile ? 'Your Products' : 'Their Products'}
-                                {isYourProfile ? (
+                                {isYourProfile && role === 'seller' ? 'Your Products' : 'Their Products'}
+                                {isYourProfile && role === 'seller' ? (
                                     <AddProductDialog sellerId={profileInfo._id}>Add new</AddProductDialog>
                                 ) : null}
                             </Box>
                         }
                     />
+                    }
                     <CardContent>
                         <ProductsContainer id={id || profileInfo._id} /> {/* Product Cards */}
                         <CartList />
