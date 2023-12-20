@@ -33,7 +33,7 @@ const salePostsContainer = {
     width: '100%'
 };
 
-function ProductsContainer({ id, isLoggedIn }) {
+function ProductsContainer({ id, isYourProfile, isLoggedIn }) {
     const [list, setList] = useState('');
 
     async function fetchSalePosts() {
@@ -49,7 +49,7 @@ function ProductsContainer({ id, isLoggedIn }) {
         const products = data.map((product, index) => {
             console.log(product.seller === id, index, product.seller, id);
             if (product.sellerId === id) {
-                return <ProductCard key={product._id} variant={isLoggedIn ? 'edit' : 'product'} {...product} />;
+                return <ProductCard key={product._id} variant={(isYourProfile && isLoggedIn) ? 'edit' : 'product'} {...product} />;
             }
             return null;
         });
@@ -285,7 +285,7 @@ export default function UserProfile() {
                     />
                     }
                     <CardContent>
-                        <ProductsContainer id={id || profileInfo._id} /> {/* Product Cards */}
+                        <ProductsContainer id={id || profileInfo._id} isYourProfile={isYourProfile} isLoggedIn={isLoggedIn} /> {/* Product Cards */}
                         <CartList />
                     </CardContent>
                 </Card>
