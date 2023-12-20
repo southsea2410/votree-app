@@ -99,7 +99,7 @@ exports.updateCart = async (req, res) => {
     const sellerOfProduct = await productModel
       .findById(productId)
       .select('sellerId');
-    if (seller !== sellerOfProduct) {
+    if (seller.toString() != sellerOfProduct) {
       return res.status(400).json({
         status: 'fail',
         message: 'Product does not belong to current seller',
