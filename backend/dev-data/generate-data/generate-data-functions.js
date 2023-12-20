@@ -6,6 +6,7 @@ faker.seed(123);
 exports.generateUserData = () => {
   // const pw = faker.internet.password();
   return {
+    // id: faker.random.uuid(),
     userName: faker.internet.userName(),
     avatar: faker.image.imageUrl(),
     fullName: faker.name.findName(),
