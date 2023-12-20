@@ -44,3 +44,40 @@ export const fetchUserInfo = async (id = '') => {
         return false;
     }
 };
+
+
+export const fetchProductInfo = async (id = '') => {
+    try {
+        const data = await fetch('/api/v1/marketplace/products/' + id, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            // credentials: 'include'
+        });
+
+        // Update Redux
+        const arr = await data.json();
+        const info = arr?.data?.product;
+        if (info) {
+            const product = {
+                name: info.name || '',
+                price: info.price || '',
+                discountPrice: info.discountPrice || '',
+                quantity: info.quantity || '',
+                description: info.description || '',
+                active: info.active || '',
+                type: info.type || '',
+                suitEnvironment: info.suitEnvironment || '',
+                suitClimate: info.suitClimate || ''
+            };
+
+            return { product };
+        }
+
+        return {};
+    } catch (error) {
+        console.error('Error fetching product information:', error);
+        return false;
+    }
+};

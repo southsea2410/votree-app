@@ -36,22 +36,22 @@ export default function ProductCard({ variant = 'product', ...props }) {
     //     setSellerName(seller.fullName || 'Unknown');
     // }
 
-    useEffect(() => {
-        async function fetchSellerName() {
-            const res = await fetch('/api/v1/userInfo/' + props.sellerId, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include'
-            })
-            .then((res) => {
-                res.json().then((data) =>{
-                    const seller = data.userInfo;
-                    setSellerName(seller.fullName || 'Unknown');
-                });
-            })
-        }
-        fetchSellerName();
-    }, [props.sellerId]);
+    // useEffect(() => {
+    //     async function fetchSellerName() {
+    //         const res = await fetch('/api/v1/userInfo/' + props.sellerId, {
+    //             method: 'GET',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             credentials: 'include'
+    //         })
+    //         .then((res) => {
+    //             res.json().then((data) =>{
+    //                 const seller = data.userInfo;
+    //                 setSellerName(seller.fullName || 'Unknown');
+    //             });
+    //         })
+    //     }
+    //     fetchSellerName();
+    // }, [props.sellerId]);
 
     return (
         <Card
@@ -107,7 +107,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                             Sold By:
                         </p>
                         <Link to={'/profile/' + props.sellerId}>
-                            <p className="content-semi-bold-16 linkText">{' ' + sellerName}</p>
+                            <p className="content-semi-bold-16 linkText">{' ' + props.sellerName}</p>
                         </Link>
                     </div>
                 </div>

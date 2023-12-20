@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { colors } from '../../styles';
-import { fetchUserInfo } from '../../utils/apiUtils';
+import { fetchUserInfo, fetchProductInfo } from '../../utils/apiUtils';
 import { useEffect } from 'react';
 
 // Redux
@@ -47,7 +47,6 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         'discountPrice',
         'quantity',
         'description',
-        'active',
         'type',
         'suitEnvironment',
         'suitClimate',
@@ -59,7 +58,6 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         'discount Price',
         'quantity *',
         'description',
-        'active',
         'type',
         'suit Environment',
         'suit Climate',
@@ -89,7 +87,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
             props.suitEnvironment,
             props.suitClimate
         ]);
-    }, [profileInfoFromRedux]);
+    }, []);
 
     const [values, setValues] = React.useState(latestValues);
 
@@ -118,7 +116,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         const discountPrice = form.discountPrice.value;
         const quantity = form.quantity.value;
         const description = form.description.value;
-        const active = (quantity == '0') ? false : true;
+        const active = (quantity == '0') ? 'false' : 'true';
         const type = form.type.value;
         const suitEnvironment = form.suitEnvironment.value;
         const suitClimate = form.suitClimate.value;
@@ -152,57 +150,28 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
             });
 
             if (response.ok) {
-
-                const { profile, store } = await fetchUserInfo();
-
-                if (profile) {
-                    dispatch(updateProfileInfo(profile));
-                    dispatch(updateIsLoggedIn(true));
-                }
-
-                if (store) {
-                    dispatch(updateStoreInfo(store));
-                    dispatch(updateIsSeller(true));
-                }
-
-                setLatestValues((profile.role === 'seller') ? [
-                    profile.fullName,
-                    profile.dateOfBirth,
-                    profile.gender,
-                    profile.phoneNumber,
-                    profile.email,
-                    profile.address,
-                    profile.interest,
-                    store.storeName,
-                    store.storeLocation,
-                    store.storeEmail,
-                    store.storePhoneNumber
-                ] : [
-                    profile.fullName,
-                    profile.dateOfBirth,
-                    profile.gender,
-                    profile.phoneNumber,
-                    profile.email,
-                    profile.address,
-                    profile.interest
+                setLatestValues([
+                    name,
+                    price,
+                    discountPrice,
+                    quantity,
+                    description,
+                    active,
+                    type,
+                    suitEnvironment,
+                    suitClimate
                 ])
 
                 alert('Update successful!');
 
                 window.location.reload();
             } else {
-                const errorData = await response.json();
-                if (errorData && errorData.error) {
-                    alert(`Update failed: ${errorData.error}`);
-                } else {
-                    alert('Update failed. Please try again!');
-                }
+                alert('Update failed. Please try again!');
             }
         } catch (error) {
             console.error('Error:', error);
             alert('An error occurred during update. Please try again later!');
         }
-
     }
 
     return (
