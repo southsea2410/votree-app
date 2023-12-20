@@ -49,6 +49,7 @@ export default function Marketplace() {
     const [isLoggedIn, setIsLoggedIn] = useState(useSelector(selectIsLoggedIn));
 
     const [list, setList] = useState('');
+    const [hotlist, setHotList] = useState('');
 
     useEffect(() => {
         async function fetchData() {
@@ -84,11 +85,18 @@ export default function Marketplace() {
             const products = data.map((product) => {
                 return <ProductCard key={product._id} {...product} />;
             });
+            // Create list of hot 
+            const hotPick = data.map((product) => {
+                if (product.isHotPick == true)
+                return <ProductCard key={product._id} {...product} />;
+                else return null;
+            });
 
             setList(products);
+            setHotList(hotPick);
         }
         fetchData();
-    }, [JSON.stringify(list)]);
+    }, [JSON.stringify(list), JSON.stringify(hotlist)]);
 
     return (
         <div
@@ -106,9 +114,7 @@ export default function Marketplace() {
                     </span>
                 </div>
                 <Box sx={hotSalesContainer}>
-                    {/* <ProductCard variant="hotpick" />
-                        <ProductCard variant="hotpick" />
-                        <ProductCard variant="hotpick" /> */}
+                    {hotlist}
                 </Box>
 
                 <div style={{ padding: '31px' }}>

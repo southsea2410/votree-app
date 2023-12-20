@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./userModel');
 
 const productSchema = new mongoose.Schema(
   {
@@ -100,6 +101,11 @@ productSchema.virtual('reviews', {
   foreignField: 'product',
   localField: '_id',
 });
+
+productSchema.methods.getSellerInfo = async function () {
+  const user = await User.findById(this.sellerId);
+  return user.name;
+};
 
 const Product = mongoose.model('Product', productSchema);
 

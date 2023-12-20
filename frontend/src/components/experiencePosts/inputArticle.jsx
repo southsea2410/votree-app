@@ -39,9 +39,7 @@ export default function InputArticle({ fullName, role }) {
     return (
         <div>
             <PostArticle onClick={handleOpen} fullName={fullName} />
-            <Modal
-                open={open}
-                onClose={handleClose}>
+            <Modal open={open} onClose={handleClose}>
                 <Box
                     sx={style}
                     style={{

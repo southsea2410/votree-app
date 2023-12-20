@@ -2,6 +2,7 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import { StarIcon } from '../../assets/icons';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import './../../index.css';
 import { colors } from '../../styles';
 import { useState, useEffect } from 'react';
@@ -122,7 +123,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         className="product-card-add"
                         variant="cart"
                         color={variant === 'product' ? 'secondary' : 'primary'}>
-                        +
+                        {variant === 'edit' ? <BorderColorIcon style={{ color: colors.green4 }} /> : '+'}
                     </Button>
                 </div>
             </div>

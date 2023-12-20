@@ -23,7 +23,7 @@ const buttonStylePosition = {
     display: 'flex',
     justifyContent: 'center',
     paddingBottom: 17
-}
+};
 
 const dialogContentTextStyle = {
     color: colors.green5,
@@ -54,7 +54,7 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
         const storeLocation = form.storeLocation.value;
         const storeEmail = form.storeEmail.value;
         const storePhoneNumber = form.storePhoneNumber.value;
-        
+
         const jsonData = JSON.stringify({ storeName, storeLocation, storeEmail, storePhoneNumber });
 
         try {
@@ -67,7 +67,6 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
             });
 
             if (response.ok) {
-
                 const { profile, store } = await fetchUserInfo();
 
                 if (profile) {
@@ -81,7 +80,7 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
                 }
 
                 alert('Update successful!');
-                
+
                 window.location.reload();
             } else {
                 const errorData = await response.json();
@@ -95,8 +94,7 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
             console.error('Error:', error);
             alert('An error occurred during update. Please try again later!');
         }
-
-    }
+    };
 
     return (
         <React.Fragment>
@@ -113,11 +111,7 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
                         paddingBottom: 0
                     }}>
                     <p className="subtitle-semi-bold-28">Seller Registration Form</p>
-                    <IconButton
-                        aria-label="close"
-                        onClick={handleClose}
-                        className="extra-medium"
-                        >
+                    <IconButton aria-label="close" onClick={handleClose} className="extra-medium">
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
@@ -127,24 +121,48 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
                         display: 'flex',
                         flexDirection: 'column',
                         gap: 15,
-                        padding: '0px 30px',
+                        padding: '0px 30px'
                     }}>
                     <DialogContent>
                         <DialogContentText className="extra-medium" sx={dialogContentTextStyle}>
                             <MarketIcon />
                             Store Name
                         </DialogContentText>
-                        <TextField name="storeName" autoFocus margin="dense" id="storeName" type="text" fullWidth variant="standard" />
+                        <TextField
+                            name="storeName"
+                            autoFocus
+                            margin="dense"
+                            id="storeName"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                        />
                         <DialogContentText className="extra-medium" sx={dialogContentTextStyle}>
                             <LocationIcon />
                             Store Location
                         </DialogContentText>
-                        <TextField name="storeLocation" autoFocus margin="dense" id="storeLocation" type="text" fullWidth variant="standard" />
+                        <TextField
+                            name="storeLocation"
+                            autoFocus
+                            margin="dense"
+                            id="storeLocation"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                        />
                         <DialogContentText className="extra-medium" sx={dialogContentTextStyle}>
                             <MailIcon />
                             Store Email
                         </DialogContentText>
-                        <TextField name="storeEmail" autoFocus margin="dense" id="storeEmail" type="text" fullWidth variant="standard" />
+                        <TextField
+                            name="storeEmail"
+                            autoFocus
+                            margin="dense"
+                            id="storeEmail"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                        />
                         <DialogContentText className="extra-medium" sx={dialogContentTextStyle}>
                             <PhoneIcon />
                             Store Phone Number
@@ -160,7 +178,9 @@ export default function UpSellerDialog({ variant = 'filled', ...props }) {
                         />
                     </DialogContent>
                     <div style={buttonStylePosition}>
-                        <Button onClick={handleClose} type="submit">Submit</Button>
+                        <Button onClick={handleClose} type="submit">
+                            Submit
+                        </Button>
                     </div>
                 </form>
             </Dialog>

@@ -8,7 +8,7 @@ import { LeafIcon } from '../../assets/icons';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/features/account/isLoggedInSlice';
 
-export default function PostArticle({ onClick, fullName = "Plantie" }) {
+export default function PostArticle({ onClick, fullName = 'Plantie' }) {
     const isLoggedIn = useSelector(selectIsLoggedIn);
 
     return (

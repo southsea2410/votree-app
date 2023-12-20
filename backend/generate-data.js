@@ -40,13 +40,13 @@ const users = Array.from(
 //   'dev-data/data/products-test.json',
 // );
 
-// const usersData = JSON.stringify(users);
-// const usersDataPath = path.join(__dirname, 'dev-data/data/users-test.json');
+const usersData = JSON.stringify(users);
+const usersDataPath = path.join(__dirname, 'dev-data/data/users-test.json');
 
-// fs.writeFile(usersDataPath, usersData, (err) => {
-//   if (err) throw err;
-//   console.log('Users data written to file');
-// });
+fs.writeFile(usersDataPath, usersData, (err) => {
+  if (err) throw err;
+  console.log('Users data written to file');
+});
 
 // fs.writeFile(sellersDataPath, sellersData, (err) => {
 //   if (err) throw err;
@@ -57,8 +57,3 @@ const users = Array.from(
 //   if (err) throw err;
 //   console.log('Sellers data written to file');
 // });
-
-fs.writeFile(productsDataPath, productsData, (err) => {
-  if (err) throw err;
-  console.log('Products data written to file');
-});

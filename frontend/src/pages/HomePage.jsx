@@ -35,7 +35,7 @@ const postsStyle = {
     alignItems: 'center',
     justifyContent: 'center',
     rowGap: '20px',
-    paddingBottom: '50px',
+    paddingBottom: '50px'
 };
 
 export default function HomePage() {
@@ -86,7 +86,7 @@ export default function HomePage() {
             </Box>
             <Box sx={postsStyle}>
                 <UserPost content={content} image={Post_test} />
-                <UserPost content={content} image={Product_test}/>
+                <UserPost content={content} image={Product_test} />
                 <UserPost content={content} />
                 <UserPost content={contentLong} />
                 <UserPost content={content} />
