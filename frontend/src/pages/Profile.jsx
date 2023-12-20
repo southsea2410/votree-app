@@ -272,9 +272,13 @@ export default function UserProfile() {
                     <CardHeader
                         disableTypography
                         title={
-                            <Box className="subtitle-extra-bold" sx={{display: 'flex', justifyContent:'space-between'}}>
+                            <Box
+                                className="subtitle-extra-bold"
+                                sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                 {isYourProfile ? 'Your Products' : 'Their Products'}
-                                {isYourProfile ? <AddProductDialog sellerId={profileInfo._id}>Add new</AddProductDialog> : null}
+                                {isYourProfile ? (
+                                    <AddProductDialog sellerId={profileInfo._id}>Add new</AddProductDialog>
+                                ) : null}
                             </Box>
                         }
                     />
@@ -287,7 +291,10 @@ export default function UserProfile() {
                     <CardHeader
                         disableTypography
                         title={
-                            <span className="subtitle-extra-bold"> {isYourProfile ? 'Your Posts' : 'Their Posts'} </span>
+                            <span className="subtitle-extra-bold">
+                                {' '}
+                                {isYourProfile ? 'Your Posts' : 'Their Posts'}{' '}
+                            </span>
                         }
                     />
                 </Card>

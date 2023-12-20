@@ -8,7 +8,7 @@ import Select from '@mui/material/Select';
 export default function DropDownSelect({ field = 'Method', list = ['Cash', 'Banking', 'Momo', 'VNPay'] }) {
     // const [selection, setSelection] = React.useState(list[0] || '');
 
-    const handleChange = (event) => {
+    const handleChange = () => {
         // setSelection(event.target.value);
     };
 

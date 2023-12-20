@@ -10,13 +10,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { colors } from '../../styles';
 
 // Redux
-
-const buttonStylePosition = {
-    display: 'flex',
-    justifyContent: 'center',
-    paddingBottom: 17
-};
-
 const dialogContentTextStyle = {
     color: colors.green5,
     display: 'flex',
@@ -40,18 +33,19 @@ export default function AddProductDialog({ variant = 'filled', ...props }) {
         event.preventDefault();
 
         const form = event.target;
-        console.log(props.sellerId)
+        console.log(props.sellerId);
         const jsonData = JSON.stringify({
-            "id": String(Math.floor(Math.random() * 10000)),
-            "name": form.productName.value,
-            "suitClimate": form.productClimate.value,
-            "suitEnvironment": form.productEnvironment.value,
-            "type": form.productType.value,
-            "quantity": form.productQuantity.value,
-            "description": form.productDescription.value,
-            "image": form.productImage.value,
-            "price": form.productPrice.value,
-            "sellerId":  props.sellerId});
+            id: String(Math.floor(Math.random() * 10000)),
+            name: form.productName.value,
+            suitClimate: form.productClimate.value,
+            suitEnvironment: form.productEnvironment.value,
+            type: form.productType.value,
+            quantity: form.productQuantity.value,
+            description: form.productDescription.value,
+            image: form.productImage.value,
+            price: form.productPrice.value,
+            sellerId: props.sellerId
+        });
 
         try {
             const response = await fetch('/api/v1/marketplace/products', {
@@ -61,7 +55,7 @@ export default function AddProductDialog({ variant = 'filled', ...props }) {
                 },
                 body: jsonData
             });
-            console.log('Submitted')
+            console.log('Submitted');
             if (response.ok) {
                 alert('Add product successful!');
                 window.location.reload();
@@ -98,10 +92,7 @@ export default function AddProductDialog({ variant = 'filled', ...props }) {
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
-                <form
-                    id="addProductForm"
-                    onSubmit={handleSubmit}
-                    style={{display:'content'}}>
+                <form id="addProductForm" onSubmit={handleSubmit} style={{ display: 'content' }}>
                     <DialogContent>
                         <DialogContentText className="extra-medium" sx={dialogContentTextStyle}>
                             Product Name
@@ -193,13 +184,11 @@ export default function AddProductDialog({ variant = 'filled', ...props }) {
                         <TextareaAutosize
                             name="productDescription"
                             id="productDescription"
-                            style={{width: '100%'}}
-                            className='content-regular-16'
+                            style={{ width: '100%' }}
+                            className="content-regular-16"
                             minRows={3}
                         />
-                        <Button type="submit">
-                            Submit
-                        </Button>
+                        <Button type="submit">Submit</Button>
                     </DialogContent>
                 </form>
             </Dialog>

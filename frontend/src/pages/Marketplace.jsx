@@ -85,10 +85,9 @@ export default function Marketplace() {
             const products = data.map((product) => {
                 return <ProductCard key={product._id} {...product} />;
             });
-            // Create list of hot 
+            // Create list of hot
             const hotPick = data.map((product) => {
-                if (product.isHotPick == true)
-                return <ProductCard key={product._id} {...product} />;
+                if (product.isHotPick == true) return <ProductCard key={product._id} {...product} />;
                 else return null;
             });
 
@@ -113,9 +112,7 @@ export default function Marketplace() {
                         Hot picks
                     </span>
                 </div>
-                <Box sx={hotSalesContainer}>
-                    {hotlist}
-                </Box>
+                <Box sx={hotSalesContainer}>{hotlist}</Box>
 
                 <div style={{ padding: '31px' }}>
                     <Divider style={{ width: 658, height: 1 }} />
