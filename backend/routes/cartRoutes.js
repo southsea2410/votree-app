@@ -11,11 +11,7 @@ const {
 router
   .route('/')
   .get(cartController.getAllCarts)
-  .post(
-    authenticateUser,
-    authorizePermissions('user'),
-    cartController.createCart,
-  );
+  .post(authenticateUser, cartController.createCart);
 
 router
   .route('/:cartId')

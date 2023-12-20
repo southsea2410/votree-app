@@ -1,4 +1,5 @@
 const Product = require('../models/productModel');
+const Seller = require('../models/sellerModel');
 
 exports.getAllProduct = async (req, res) => {
   try {
@@ -39,10 +40,16 @@ exports.createProduct = async (req, res) => {
 
     const newProduct = await Product.create(productData);
 
+    const seller = await Seller.findById(sellerId);
+    seller.products.push(newProduct._id);
+
+    await seller.save();
+
     res.status(201).json({
       status: 'success',
       data: {
         product: newProduct,
+        seller: seller,
       },
     });
   } catch (err) {

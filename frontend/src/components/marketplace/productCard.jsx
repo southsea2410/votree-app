@@ -2,6 +2,7 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import { StarIcon } from '../../assets/icons';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import './../../index.css';
 import { colors } from '../../styles';
 import { useState, useEffect } from 'react';
@@ -15,18 +16,20 @@ export default function ProductCard({ variant = 'product', ...props }) {
     async function fetchSellerName() {
         // Fetch seller
         const res = await fetch('/api/v1/userInfo/' + props.sellerId, {
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include'
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+            // credentials: 'include'
         });
         const data = await res.json();
+        console.log(props.sellerId === data.userInfo._id, props.name, props.sellerId, data.userInfo._id);
 
-        const seller = data.data?.seller;
-        setSellerName(seller?.fullName || 'Unknown');
+        const seller = data.userInfo;
+        setSellerName(seller?.fullName);
     }
 
     useEffect(() => {
         fetchSellerName();
-    }, [sellerName]);
+    }, []);
 
     return (
         <Card
@@ -98,7 +101,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         className="product-card-add"
                         variant="cart"
                         color={variant === 'product' ? 'secondary' : 'primary'}>
-                        +
+                        {variant === 'edit' ? <BorderColorIcon style={{ color: colors.green4 }} /> : '+'}
                     </Button>
                 </div>
             </div>

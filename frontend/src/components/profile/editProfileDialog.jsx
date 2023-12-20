@@ -25,7 +25,7 @@ const buttonStylePosition = {
     display: 'flex',
     justifyContent: 'center',
     paddingBottom: 17
-}
+};
 
 const dialogContentTextStyle = {
     color: colors.green5,
@@ -41,71 +41,65 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
     const storeInfoFromRedux = useSelector(selectStoreInfo);
     const [open, setOpen] = React.useState(false);
 
-    const infos = (profileInfoFromRedux.role === 'seller') ? [
-        'fullName',
-        'dateOfBirth',
-        'gender',
-        'phoneNumber',
-        'email',
-        'address',
-        'interest',
-        'storeName',
-        'storeLocation',
-        'storeEmail',
-        'storePhoneNumber'
-    ] : [
-        'fullName',
-        'dateOfBirth',
-        'gender',
-        'phoneNumber',
-        'email',
-        'address',
-        'interest',
-    ];
+    const infos =
+        profileInfoFromRedux.role === 'seller'
+            ? [
+                  'fullName',
+                  'dateOfBirth',
+                  'gender',
+                  'phoneNumber',
+                  'email',
+                  'address',
+                  'interest',
+                  'storeName',
+                  'storeLocation',
+                  'storeEmail',
+                  'storePhoneNumber'
+              ]
+            : ['fullName', 'dateOfBirth', 'gender', 'phoneNumber', 'email', 'address', 'interest'];
 
-    const infosTitle = (profileInfoFromRedux.role === 'seller') ? [
-        'full Name',
-        'date Of Birth',
-        'gender',
-        'phone Number',
-        'email',
-        'address',
-        'interest',
-        'store Name',
-        'store Location',
-        'store Email',
-        'store Phone Number'
-    ] : [
-        'full Name',
-        'date Of Birth',
-        'gender',
-        'phone Number',
-        'email',
-        'address',
-        'interest'
-    ];
+    const infosTitle =
+        profileInfoFromRedux.role === 'seller'
+            ? [
+                  'full Name',
+                  'date Of Birth',
+                  'gender',
+                  'phone Number',
+                  'email',
+                  'address',
+                  'interest',
+                  'store Name',
+                  'store Location',
+                  'store Email',
+                  'store Phone Number'
+              ]
+            : ['full Name', 'date Of Birth', 'gender', 'phone Number', 'email', 'address', 'interest'];
 
-    const [latestValues, setLatestValues] = React.useState((profileInfoFromRedux.role === 'seller') ? [
-        profileInfoFromRedux.fullName,
-        profileInfoFromRedux.dateOfBirth,
-        profileInfoFromRedux.gender,
-        profileInfoFromRedux.phoneNumber,
-        profileInfoFromRedux.email,
-        profileInfoFromRedux.address,
-        profileInfoFromRedux.interest,
-        storeInfoFromRedux.storeName,
-        storeInfoFromRedux.storeLocation,
-        storeInfoFromRedux.storeEmail,
-        storeInfoFromRedux.storePhoneNumber
-    ] : [
-        profileInfoFromRedux.fullName,
-        profileInfoFromRedux.dateOfBirth,
-        profileInfoFromRedux.gender,
-        profileInfoFromRedux.phoneNumber,
-        profileInfoFromRedux.email,
-        profileInfoFromRedux.address,
-        profileInfoFromRedux.interest
-    ]);
+    const [latestValues, setLatestValues] = React.useState(
+        profileInfoFromRedux.role === 'seller'
+            ? [
+                  profileInfoFromRedux.fullName,
+                  profileInfoFromRedux.dateOfBirth,
+                  profileInfoFromRedux.gender,
+                  profileInfoFromRedux.phoneNumber,
+                  profileInfoFromRedux.email,
+                  profileInfoFromRedux.address,
+                  profileInfoFromRedux.interest,
+                  storeInfoFromRedux.storeName,
+                  storeInfoFromRedux.storeLocation,
+                  storeInfoFromRedux.storeEmail,
+                  storeInfoFromRedux.storePhoneNumber
+              ]
+            : [
+                  profileInfoFromRedux.fullName,
+                  profileInfoFromRedux.dateOfBirth,
+                  profileInfoFromRedux.gender,
+                  profileInfoFromRedux.phoneNumber,
+                  profileInfoFromRedux.email,
+                  profileInfoFromRedux.address,
+                  profileInfoFromRedux.interest
+              ]
+    );
 
     useEffect(() => {
         setLatestValues([
@@ -130,7 +124,7 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
         setOpen(true);
     };
 
-        const handleClose = () => {
+    const handleClose = () => {
         setValues(latestValues);
         setOpen(false);
     };
@@ -169,8 +163,8 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
             alert(`Gender must be 'Male', 'Female' or 'Different'!`);
             return;
         }
-        
-        const jsonData = JSON.stringify({ 
+
+        const jsonData = JSON.stringify({
             fullName,
             dateOfBirth,
             gender,
@@ -196,7 +190,6 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
             });
 
             if (response.ok) {
-
                 const { profile, store } = await fetchUserInfo();
 
                 if (profile) {
@@ -209,27 +202,31 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
                     dispatch(updateIsSeller(true));
                 }
 
-                setLatestValues((profile.role === 'seller') ? [
-                    profile.fullName,
-                    profile.dateOfBirth,
-                    profile.gender,
-                    profile.phoneNumber,
-                    profile.email,
-                    profile.address,
-                    profile.interest,
-                    store.storeName,
-                    store.storeLocation,
-                    store.storeEmail,
-                    store.storePhoneNumber
-                ] : [
-                    profile.fullName,
-                    profile.dateOfBirth,
-                    profile.gender,
-                    profile.phoneNumber,
-                    profile.email,
-                    profile.address,
-                    profile.interest
-                ])
+                setLatestValues(
+                    profile.role === 'seller'
+                        ? [
+                              profile.fullName,
+                              profile.dateOfBirth,
+                              profile.gender,
+                              profile.phoneNumber,
+                              profile.email,
+                              profile.address,
+                              profile.interest,
+                              store.storeName,
+                              store.storeLocation,
+                              store.storeEmail,
+                              store.storePhoneNumber
+                          ]
+                        : [
+                              profile.fullName,
+                              profile.dateOfBirth,
+                              profile.gender,
+                              profile.phoneNumber,
+                              profile.email,
+                              profile.address,
+                              profile.interest
+                          ]
+                );
 
                 alert('Update successful!');
 
@@ -246,8 +243,7 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
             console.error('Error:', error);
             alert('An error occurred during update. Please try again later!');
         }
-
-    }
+    };
 
     return (
         <React.Fragment>
@@ -264,11 +260,7 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
                         paddingBottom: 0
                     }}>
                     <p className="subtitle-semi-bold-28">Profile Update Form</p>
-                    <IconButton
-                        aria-label="close"
-                        onClick={handleClose}
-                        className="extra-medium"
-                        >
+                    <IconButton aria-label="close" onClick={handleClose} className="extra-medium">
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
@@ -278,25 +270,28 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
                         display: 'flex',
                         flexDirection: 'column',
                         gap: 15,
-                        padding: '0px 30px',
+                        padding: '0px 30px'
                     }}>
                     <DialogContent>
                         {infos.map((key, index) => {
-                            return (<div key={index}>
-                                <DialogContentText className="extra-medium" sx={dialogContentTextStyle}>
-                                {`${infosTitle[index]}`}
-                                </DialogContentText>
-                                <TextField
-                                    name={key}
-                                    value={values[index]}
-                                    onChange={(event) => handleInputChange(event, index)}
-                                    autoFocus
-                                    margin="dense"
-                                    id={key}
-                                    type="text"
-                                    fullWidth
-                                    variant="standard" />
-                            </div>)
+                            return (
+                                <div key={index}>
+                                    <DialogContentText className="extra-medium" sx={dialogContentTextStyle}>
+                                        {`${infosTitle[index]}`}
+                                    </DialogContentText>
+                                    <TextField
+                                        name={key}
+                                        value={values[index]}
+                                        onChange={(event) => handleInputChange(event, index)}
+                                        autoFocus
+                                        margin="dense"
+                                        id={key}
+                                        type="text"
+                                        fullWidth
+                                        variant="standard"
+                                    />
+                                </div>
+                            );
                         })}
                     </DialogContent>
                     <div style={buttonStylePosition}>
