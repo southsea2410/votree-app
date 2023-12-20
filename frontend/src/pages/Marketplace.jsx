@@ -106,9 +106,9 @@ export default function Marketplace() {
                     </span>
                 </div>
                 <Box sx={hotSalesContainer}>
-                    {/* <ProductCard variant="hotpick" />
-                        <ProductCard variant="hotpick" />
-                        <ProductCard variant="hotpick" /> */}
+                    <ProductCard variant="hotpick" />
+                    <ProductCard variant="hotpick" />
+                    <ProductCard variant="hotpick" />
                 </Box>
 
                 <div style={{ padding: '31px' }}>

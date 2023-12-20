@@ -101,7 +101,6 @@ productSchema.virtual('reviews', {
   localField: '_id',
 });
 
-
 const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;

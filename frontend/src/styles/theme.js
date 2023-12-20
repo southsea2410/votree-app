@@ -361,6 +361,13 @@ const theme = createTheme({
                         maxWidth: 388,
                         height: 353
                     }
+                },
+                {
+                    props: { variant: 'edit' },
+                    style: {
+                        maxWidth: 388,
+                        height: 353
+                    }
                 }
             ],
             styleOverrides: {

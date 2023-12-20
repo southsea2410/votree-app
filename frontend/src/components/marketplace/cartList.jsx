@@ -36,8 +36,8 @@ const cartStyle = {
 };
 
 const hoverStyle = {
-    cursor: 'pointer',
-}
+    cursor: 'pointer'
+};
 
 function CartListBody({ cart }) {
     // Use this to check the format of cart object
