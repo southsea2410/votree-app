@@ -10,6 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { colors } from '../../styles';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserInfo } from '../../utils/apiUtils';
+import { useEffect } from 'react';
 
 // Redux
 import { useDispatch } from 'react-redux';
@@ -40,8 +41,8 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
     const navigate = useNavigate();
     const profileInfoFromRedux = useSelector(selectProfileInfo);
     const storeInfoFromRedux = useSelector(selectStoreInfo);
-    // console.log(profileInfoFromRedux.fullName);
     const [open, setOpen] = React.useState(false);
+
     const infos = (profileInfoFromRedux.role === 'seller') ? [
         'fullName',
         'dateOfBirth',
@@ -108,6 +109,22 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
         profileInfoFromRedux.interest
     ]);
 
+    useEffect(() => {
+        setLatestValues([
+            profileInfoFromRedux.fullName,
+            profileInfoFromRedux.dateOfBirth,
+            profileInfoFromRedux.gender,
+            profileInfoFromRedux.phoneNumber,
+            profileInfoFromRedux.email,
+            profileInfoFromRedux.address,
+            profileInfoFromRedux.interest,
+            storeInfoFromRedux.storeName,
+            storeInfoFromRedux.storeLocation,
+            storeInfoFromRedux.storeEmail,
+            storeInfoFromRedux.storePhoneNumber
+        ]);
+    }, [profileInfoFromRedux]);
+
     const [values, setValues] = React.useState(latestValues);
 
     const handleClickOpen = () => {
@@ -116,15 +133,14 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
     };
 
         const handleClose = () => {
-            setValues(latestValues);
+        setValues(latestValues);
         setOpen(false);
     };
 
     const handleInputChange = (event, index) => {
         const updatedValues = [...values];
-        updatedValues[index] = String(event.target.value);
+        updatedValues[index] = event.target.value;
         setValues(updatedValues);
-        console.log(values[2]);
     };
 
     const handleSubmit = async (event) => {
@@ -136,8 +152,6 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
 
         const tmp = values[2];
         const gender = tmp.charAt(0).toUpperCase() + tmp.slice(1).toLowerCase();
-        console.log(gender);
-        if (gender === 'Male') console.log(1);
 
         const phoneNumber = form.phoneNumber.value;
         const email = form.email.value;
@@ -153,7 +167,7 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
             return;
         }
 
-        if (gender !== 'Male' && gender !== 'Female' && gender !== 'Different') {
+        if (gender !== '' && gender !== 'Male' && gender !== 'Female' && gender !== 'Different') {
             alert(`Gender must be 'Male', 'Female' or 'Different'!`);
             return;
         }
@@ -172,8 +186,10 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
             storePhoneNumber
         });
 
+        console.log(jsonData);
+
         try {
-            const response = await fetch('/api/v1/updateInfo', {
+            const response = await fetch('/api/v1/userInfo', {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -195,9 +211,31 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
                     dispatch(updateIsSeller(true));
                 }
 
+                setLatestValues((profile.role === 'seller') ? [
+                    profile.fullName,
+                    profile.dateOfBirth,
+                    profile.gender,
+                    profile.phoneNumber,
+                    profile.email,
+                    profile.address,
+                    profile.interest,
+                    store.storeName,
+                    store.storeLocation,
+                    store.storeEmail,
+                    store.storePhoneNumber
+                ] : [
+                    profile.fullName,
+                    profile.dateOfBirth,
+                    profile.gender,
+                    profile.phoneNumber,
+                    profile.email,
+                    profile.address,
+                    profile.interest
+                ])
+
                 alert('Update successful!');
 
-                // window.location.reload();
+                window.location.reload();
             } else {
                 const errorData = await response.json();
                 if (errorData && errorData.error) {
@@ -264,7 +302,7 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
                         })}
                     </DialogContent>
                     <div style={buttonStylePosition}>
-                        <Button onClick={handleClose} type="submit">Submit</Button>
+                        <Button type="submit">Submit</Button>
                     </div>
                 </form>
             </Dialog>
