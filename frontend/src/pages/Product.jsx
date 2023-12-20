@@ -1,5 +1,5 @@
 import { Fragment, useState } from 'react';
-import { NavBar } from '../components';
+import { CartList, NavBar } from '../components';
 import { Link, useParams } from 'react-router-dom';
 import { Box, Button, Container, Divider, GlobalStyles } from '@mui/material';
 import { useEffect } from 'react';
@@ -36,7 +36,8 @@ export default function Product() {
 
     useEffect(() => {
         fetchProductInfos();
-    }, []);
+        console.log(productInfos);
+    }, [JSON.stringify(productInfos)]);
     if (productInfos == null) return null;
     return (
         <Fragment>
@@ -55,10 +56,7 @@ export default function Product() {
                     <BackIcon fontSize="60px" className="back-icon" />
                 </Link>
                 <Container maxWidth="xs">
-                    <img
-                        src={productInfos.image}
-                        style={{ maxWidth: '100%', borderRadius: '10px' }}
-                    />
+                    <img src={productInfos.image} style={{ maxWidth: '100%', borderRadius: '10px' }} />
                 </Container>
 
                 <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column', rowGap: '30px' }}>
@@ -91,11 +89,16 @@ export default function Product() {
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '50px' }}>
                         <p className="extra-medium">Quantity Left: {productInfos.quantity}</p>
-                        <Link>
-                            <Button variant="contained">Add to Cart</Button>
-                        </Link>
+                        <Button
+                            sellerid={productInfos.sellerId}
+                            productid={productInfos._id}
+                            className="product-card-add"
+                            variant="contained">
+                            Add to Cart
+                        </Button>
                     </Box>
                 </Container>
+                <CartList />
             </Container>
         </Fragment>
     );

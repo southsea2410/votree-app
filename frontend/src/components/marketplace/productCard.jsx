@@ -1,5 +1,4 @@
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import { StarIcon } from '../../assets/icons';
@@ -27,7 +26,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
 
     useEffect(() => {
         fetchSellerName();
-    }, []);
+    }, [sellerName]);
 
     return (
         <Card
@@ -38,8 +37,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                 position: 'relative',
                 boxShadow:
                     '0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.20)'
-            }}
-            >
+            }}>
             <Link style={{ display: 'contents', textDecoration: 'none' }} to={'/marketplace/product/' + props._id}>
                 <CardMedia
                     component="div"
@@ -88,7 +86,12 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         </Link>
                     </div>
                 </div>
-                <Button productid={props._id} sellerid={props.sellerId} className='product-card-add' variant="cart" color={variant === 'product' ? 'secondary' : 'primary'}>
+                <Button
+                    productid={props._id}
+                    sellerid={props.sellerId}
+                    className="product-card-add"
+                    variant="cart"
+                    color={variant === 'product' ? 'secondary' : 'primary'}>
                     +
                 </Button>
             </div>

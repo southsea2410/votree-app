@@ -1,6 +1,6 @@
-export const fetchUserInfo = async () => {
+export const fetchUserInfo = async (id = '') => {
     try {
-        const data = await fetch('/api/v1/userInfo', {
+        const data = await fetch('/api/v1/userInfo/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

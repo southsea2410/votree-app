@@ -48,9 +48,7 @@ export default function Marketplace() {
     dispatch(updateNavBarState(1)); // state 1 is marketplace
     const [isLoggedIn, setIsLoggedIn] = useState(useSelector(selectIsLoggedIn));
 
-
-
-    const [list, setList] = useState(null);
+    const [list, setList] = useState('');
 
     useEffect(() => {
         async function fetchData() {
@@ -84,16 +82,14 @@ export default function Marketplace() {
 
             // Create list of products
             const products = data.map((product) => {
-                return (
-                    <ProductCard key={product._id} {...product} />
-                );
+                return <ProductCard key={product._id} {...product} />;
             });
 
             setList(products);
         }
         fetchData();
-    }, []);
-    
+    }, [JSON.stringify(list)]);
+
     return (
         <div
             style={{
@@ -110,7 +106,7 @@ export default function Marketplace() {
                     </span>
                 </div>
                 <Box sx={hotSalesContainer}>
-                        {/* <ProductCard variant="hotpick" />
+                    {/* <ProductCard variant="hotpick" />
                         <ProductCard variant="hotpick" />
                         <ProductCard variant="hotpick" /> */}
                 </Box>
@@ -121,7 +117,7 @@ export default function Marketplace() {
 
                 <Box sx={salePostsContainer}>{list}</Box>
             </Container>
-            {list == null || <CartList />}
+            {list == '' || <CartList />}
             <div>
                 <Footer className="footerStyle" />
             </div>

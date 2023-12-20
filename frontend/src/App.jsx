@@ -10,7 +10,7 @@ import {
     ChangePassword,
     ForgotPassword
 } from './pages';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ScrollToTop from './hooks/scrollToTop';
 
 function App() {

@@ -41,7 +41,7 @@ const fieldStyle = {
     cursor: 'pointer'
 };
 
-export default function Login({register = 0}) {
+export default function Login({ register = 0 }) {
     const [signUp, setSignUp] = React.useState(register);
     const [showPassword, setShowPassword] = React.useState(false);
     const [showRetypePassword, setShowRetypePassword] = React.useState(false);
