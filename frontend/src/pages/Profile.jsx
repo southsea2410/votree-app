@@ -1,5 +1,5 @@
-import { Fragment, useState, useEffect } from 'react';
-import { NavBar, SumProfile, UserPost, UpSellerDialog, EditProfileDialog, CartList } from '../components';
+import { Fragment, useState, useEffect, useRef } from 'react';
+import { NavBar, SumProfile, UserPost, UpSellerDialog, EditProfileDialog, CartList, EditProductInfoDialog } from '../components';
 import { Box, Card, CardContent, CardHeader, Container, Divider } from '@mui/material';
 import { colors } from '../styles';
 import { content, contentLong } from '../assets/contents/content';
@@ -35,19 +35,22 @@ const salePostsContainer = {
 
 function ProductsContainer({ id, isYourProfile, isLoggedIn }) {
     const [list, setList] = useState('');
+    const [data, setData] = useState([]);
+    // const [listProductsId, setListProductsId] = useState([]);
 
     async function fetchSalePosts() {
         let res = await fetch('/api/v1/marketplace/products', {
             headers: { 'Content-Type': 'application/json' }
         });
-        let data = await res.json();
+        let data_tmp = await res.json();
 
         // Remove unnecessary data
-        data = data.data?.products;
+        data_tmp = data_tmp.data?.products;
+
+        setData(data_tmp);
 
         // Create list of products
         const products = data.map((product, index) => {
-            console.log(product.seller === id, index, product.seller, id);
             if (product.sellerId === id) {
                 return <ProductCard key={product._id} variant={(isYourProfile && isLoggedIn) ? 'edit' : 'product'} {...product} />;
             }
@@ -57,11 +60,24 @@ function ProductsContainer({ id, isYourProfile, isLoggedIn }) {
         setList(products);
     }
 
+    // async function fetchProductsOfUser() {
+    //     let res = await fetch('/api/v1/sellers/' + id + '/products', { // userId
+    //         headers: { 'Content-Type': 'application/json' }
+    //     });
+    //     let data_tmp = await res.json();
+
+    //     // Remove unnecessary data
+    //     data_tmp = data_tmp.data?.products;
+
+    //     setListProductsId(data_tmp);
+    // }
+
     useEffect(() => {
         fetchSalePosts();
+        // fetchProductsOfUser();
     }, [id]);
 
-    return <Box sx={salePostsContainer}>{list}</Box>;
+    return <Box sx={salePostsContainer}>{list}<EditProductInfoDialog data={data} /></Box>;
 }
 
 const containerStyle = {

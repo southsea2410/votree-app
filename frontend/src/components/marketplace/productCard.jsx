@@ -6,7 +6,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import './../../index.css';
 import { colors } from '../../styles';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import EditProductInfoDialog from './editProductInfoDialog';
 
 export default function ProductCard({ variant = 'product', ...props }) {
@@ -118,13 +118,14 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         bottom: 10,
                         right: 12
                     }}>
-                    <EditProductInfoDialog
+                    <Button
                         productid={props._id}
-                        className={variant === 'edit' ? 'product-card-add' : 'product-card-edit'}
+                        sellerid={props.sellerId}
+                        className={variant === 'edit' ? 'product-card-edit' : 'product-card-add'}
                         variant="cart"
                         color={variant === 'product' ? 'secondary' : 'primary'}>
                         {variant === 'edit' ? <BorderColorIcon style={{ color: colors.green4 }} /> : '+'}
-                    </EditProductInfoDialog>
+                    </Button>
                 </div>
             </div>
         </Card>
