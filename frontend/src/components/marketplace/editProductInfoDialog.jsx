@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { colors } from '../../styles';
-import { fetchUserInfo, fetchProductInfo } from '../../utils/apiUtils';
+import { fetchProductInfo, fetchUserProducts } from '../../utils/apiUtils';
 import { useEffect } from 'react';
 
 // Redux
@@ -20,6 +20,9 @@ import { updateStoreInfo } from '../../redux/features/profile/storeInfoSlice';
 import { updateIsSeller } from '../../redux/features/account/isSellerSlice';
 import { selectProfileInfo } from '../../redux/features/profile/profileInfoSlice';
 import { selectStoreInfo } from '../../redux/features/profile/storeInfoSlice';
+import { selectProducts } from '../../redux/features/product/productsSlice';
+import { updateProduct } from '../../redux/features/product/productsSlice';
+import { deleteProduct } from '../../redux/features/product/productsSlice';
 
 const buttonStylePosition = {
     display: 'flex',
@@ -43,9 +46,11 @@ const deleteStyle = {
 
 export default function EditProductInfoDialog({ variant = 'filled', ...props }) {
     const dispatch = useDispatch();
-    const profileInfoFromRedux = useSelector(selectProfileInfo);
-    const storeInfoFromRedux = useSelector(selectStoreInfo);
+    const productsFromRedux = useSelector(selectProducts);
+    const specificProduct = productsFromRedux[props.productId];
+
     const [open, setOpen] = React.useState(false);
+
     const infos = [
         'name',
         'price',
@@ -68,97 +73,37 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         'suit Climate',
     ];
 
-    const [latestValues, setLatestValues] = React.useState([]);
-
-    // useEffect(() => {
-    //     setLatestValues([
-    //         props.name,
-    //         props.price,
-    //         props.discountPrice,
-    //         props.quantity,
-    //         props.description,
-    //         props.active,
-    //         props.type,
-    //         props.suitEnvironment,
-    //         props.suitClimate
-    //     ]);
-    // }, []);
-
-    const [values, setValues] = React.useState(latestValues);
-    const [id, setId] = React.useState({});
-
-    // async function fetchProductInfo(__id) {
-    //     try {
-    //         let res = await fetch('/api/v1/marketplace/products/' + __id, {
-    //             headers: { 'Content-Type': 'application/json' }
-    //         });
-    //         let data_tmp = await res.json();
-
-    //         // Remove unnecessary data
-    //         data_tmp = data_tmp.data?.product;
-
-    //         setLatestValues([
-    //             data_tmp.name,
-    //             data_tmp.price,
-    //             data_tmp.discountPrice,
-    //             data_tmp.quantity,
-    //             data_tmp.description,
-    //             data_tmp.active,
-    //             data_tmp.type,
-    //             data_tmp.suitEnvironment,
-    //             data_tmp.suitClimate
-    //         ]);
-    //     } catch (error) {
-    //         console.error('Fetch error:', error);
-    //     }
-    // }
-
-    const handleClickOpen = (event) => {
-        const product = event.currentTarget.getAttribute('productid');
-        const seller = event.currentTarget.getAttribute('sellerid');
-        setId(
-            {product, seller}
-        );
-
-        // for (let i = 0; i < props.ids.length; ++i) {
-        //     if (props.ids[i] === product) {
-                // fetchProductInfo(product);
-        //         break;
-        //     }
-        // }
-
-
-        for (let i = 0; i < props.data.length; ++i) {
-            if (props.data[i]._id === product) {
-                setLatestValues(
-                    [
-                        props.data[i].name,
-                        props.data[i].price,
-                        props.data[i].discountPrice,
-                        props.data[i].quantity,
-                        props.data[i].description,
-                        props.data[i].active,
-                        props.data[i].type,
-                        props.data[i].suitEnvironment,
-                        props.data[i].suitClimate
-                    ]
-                );
-                break;
-            }
-        }
-        setValues(latestValues);
-        // setOpen(true);
-    };
-
-    // useEffect(() => {
-    //     setValues(latestValues);
-    // }, [latestValues]);
+    const [latestValues, setLatestValues] = React.useState([
+        specificProduct.name,
+        specificProduct.price,
+        specificProduct.discountPrice,
+        specificProduct.quantity,
+        specificProduct.description,
+        specificProduct.type,
+        specificProduct.suitEnvironment,
+        specificProduct.suitClimate,
+        
+    ]);
 
     useEffect(() => {
-        if (values.length !== 0) {
-            setOpen(true);
-        }
-    }, [values]);
+        setLatestValues([
+            specificProduct.name,
+            specificProduct.price,
+            specificProduct.discountPrice,
+            specificProduct.quantity,
+            specificProduct.description,
+            specificProduct.type,
+            specificProduct.suitEnvironment,
+            specificProduct.suitClimate,
+        ]);
+    }, [specificProduct]);
+
+    const [values, setValues] = React.useState(latestValues);
+
+    const handleClickOpen = () => {
+        setValues(latestValues);
+        setOpen(true);
+    };
 
     const handleClose = () => {
         setValues(latestValues);
@@ -230,17 +175,30 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
             });
 
             if (response.ok) {
+                const { productsData } = await fetchUserProducts();
+
+                if (productsData) {
+                    const id_tmp = props.productId;
+                    for (let i = 0; i < productsData.length; ++i) {
+                        if (id_tmp === productsData[i]._id) {
+                            dispatch(updateProduct({id: id_tmp, updatedProduct: productsData[i]}))
+                            break;
+                        }
+                    }
+
+                }
+
                 setLatestValues([
-                    name,
-                    price,
-                    discountPrice,
-                    quantity,
-                    description,
-                    active,
-                    type,
-                    suitEnvironment,
-                    suitClimate
-                ])
+                    productsData.name,
+                    productsData.price,
+                    productsData.discountPrice,
+                    productsData.quantity,
+                    productsData.description,
+                    productsData.active,
+                    productsData.type,
+                    productsData.suitEnvironment,
+                    productsData.suitClimate
+                ]);
 
                 alert('Update successful!');
 
@@ -254,21 +212,11 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         }
     }
 
-
-
-        let El = []
-        setTimeout(() => {
-            El = document.getElementsByClassName('product-card-edit');
-            for (let i = 0; i < El.length; ++i) {
-                El[i].addEventListener("click", handleClickOpen);
-            }
-        }, 2000);
-
     return (
         <React.Fragment>
-            {/* <Button variant={variant} onClick={handleClickOpen}>
+            <Button variant={variant} onClick={handleClickOpen} className={props.className}>
                 {props.children}
-            </Button> */}
+            </Button>
             <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
                 <DialogTitle
                     sx={{

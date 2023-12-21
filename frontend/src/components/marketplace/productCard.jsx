@@ -9,7 +9,13 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import EditProductInfoDialog from './editProductInfoDialog';
 
+// Redux
+import { useSelector } from 'react-redux';
+import { selectNavBarState } from '../../redux/features/common/navBarStateSlice';
+
 export default function ProductCard({ variant = 'product', ...props }) {
+    const navBarState = useSelector(selectNavBarState);
+    const { id } = useParams();
     const stars = [...Array(5).keys()];
 
     const [sellerName, setSellerName] = useState('Unknown');
@@ -118,14 +124,21 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         bottom: 10,
                         right: 12
                     }}>
-                    <Button
-                        productid={props._id}
-                        sellerid={props.sellerId}
-                        className={variant === 'edit' ? 'product-card-edit' : 'product-card-add'}
-                        variant="cart"
-                        color={variant === 'product' ? 'secondary' : 'primary'}>
-                        {variant === 'edit' ? <BorderColorIcon style={{ color: colors.green4 }} /> : '+'}
-                    </Button>
+                    {
+                        navBarState === 2 && (!id || id === '') ?
+                        <EditProductInfoDialog variant="cart" className={'product-card-edit'} productId={props._id}>
+                            <BorderColorIcon style={{ color: colors.green4 }} />
+                        </EditProductInfoDialog>
+                        :
+                        <Button
+                            productid={props._id}
+                            sellerid={props.sellerId}
+                            className={variant === 'edit' ? 'product-card-edit' : 'product-card-add'}
+                            variant="cart"
+                            color={variant === 'product' ? 'secondary' : 'primary'}>
+                            {variant === 'edit' ? <BorderColorIcon style={{ color: colors.green4 }} /> : '+'}
+                        </Button>
+                    }
                 </div>
             </div>
         </Card>

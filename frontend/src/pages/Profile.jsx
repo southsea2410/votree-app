@@ -77,7 +77,7 @@ function ProductsContainer({ id, isYourProfile, isLoggedIn }) {
         // fetchProductsOfUser();
     }, [id]);
 
-    return <Box sx={salePostsContainer}>{list}<EditProductInfoDialog data={data} /></Box>;
+    return <Box sx={salePostsContainer}>{list}</Box>;
 }
 
 const containerStyle = {

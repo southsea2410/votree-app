@@ -45,10 +45,36 @@ export const fetchUserInfo = async (id = '') => {
     }
 };
 
+export const fetchUserProducts = async (id = '') => {
+    try {
+        const data = await fetch('/api/v1/sellers/products/' + id, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            // credentials: 'include'
+        });
+
+        // Update Redux
+        const arr = await data.json();
+        const info = arr.data?.productsData;
+        if (info) {
+            const productsData = info;
+
+            return { productsData };
+        }
+
+        return {};
+    } catch (error) {
+        console.error('Error fetching user information:', error);
+        return {};
+    }
+};
+
 
 export const fetchProductInfo = async (id = '') => {
     try {
-        const data = await fetch('/api/v1/marketplace/products/' + id, {
+        const data = await fetch('/api/v1/sellers/products/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -77,7 +103,7 @@ export const fetchProductInfo = async (id = '') => {
 
         return {};
     } catch (error) {
-        console.error('Error fetching product information:', error);
+        // console.error('Error fetching product information:', error);
         return false;
     }
 };
