@@ -12,6 +12,7 @@ import {
 } from './pages';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ScrollToTop from './hooks/scrollToTop';
+import AfterPurchase from './components/marketplace/AfterPurchase';
 
 function App() {
     return (
@@ -34,7 +35,11 @@ function App() {
                         <Route index element={<UserProfile />} />
                         <Route path=":id" element={<UserProfile />} />
                     </Route>
-                    <Route path="orderproducts" element={<OrderProducts />} />
+                    <Route path="orderproducts">
+                        <Route index element={<AfterPurchase />} />
+                        <Route path="success" element={<AfterPurchase variant='success' />} />
+                        <Route path="fail" element={<AfterPurchase variant='fail' />} />
+                    </Route>
                     <Route path="changepassword" element={<ChangePassword />} />
                     {/* <Route path='*' element={<Navigate replace to='/'/>}/> */}
                 </Route>
