@@ -10,6 +10,9 @@ router.use(authenticateUser);
 
 router.get('/checkout-session/:cartId', orderController.getCheckoutSession);
 
+// Order checkout
+// router.route('/checkout/:cartId').get(orderController.createOrderCheckout);
+
 router
   .route('/')
   .post(orderController.createOrder)

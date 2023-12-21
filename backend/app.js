@@ -33,6 +33,8 @@ const sellerRouter = require('./routes/sellerRoutes');
 const cartRouter = require('./routes/cartRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const orderController = require('./controllers/orderController');
+const bodyParser = require('body-parser');
 
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
@@ -55,6 +57,12 @@ if (process.env.NODE_ENV === 'development') {
 
 // Set security HTTP headers
 app.use(helmet());
+
+app.post(
+  '/webhook-checkout',
+  bodyParser.raw({ type: 'application/json' }),
+  orderController.webhookCheckout,
+);
 
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));

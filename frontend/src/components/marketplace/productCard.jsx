@@ -5,31 +5,17 @@ import { StarIcon } from '../../assets/icons';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import './../../index.css';
 import { colors } from '../../styles';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import EditProductInfoDialog from './editProductInfoDialog';
+
+// Redux
+import { useSelector } from 'react-redux';
+import { selectNavBarState } from '../../redux/features/common/navBarStateSlice';
 
 export default function ProductCard({ variant = 'product', ...props }) {
+    const navBarState = useSelector(selectNavBarState);
+    const { id } = useParams();
     const stars = [...Array(5).keys()];
-
-    const [sellerName, setSellerName] = useState('Unknown');
-
-    async function fetchSellerName() {
-        // Fetch seller
-        const res = await fetch('/api/v1/userInfo/' + props.sellerId, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-            // credentials: 'include'
-        });
-        const data = await res.json();
-        console.log(props.sellerId === data.userInfo._id, props.name, props.sellerId, data.userInfo._id);
-
-        const seller = data.userInfo;
-        setSellerName(seller?.fullName);
-    }
-
-    useEffect(() => {
-        fetchSellerName();
-    }, []);
 
     return (
         <Card
@@ -41,7 +27,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                 boxShadow:
                     '0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.20)'
             }}>
-            <Link style={{ display: 'contents', textDecoration: 'none' }} to={'/marketplace/product/' + props._id}>
+            <Link style={{ display: 'contents', textDecoration: 'none' }} to={'/marketplace/products/' + props._id}>
                 <CardMedia
                     component="div"
                     sx={{ maxWidth: '100%' }}
@@ -64,7 +50,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         flexDirection: 'column',
                         gap: '3px'
                     }}>
-                    <Link style={{ textDecoration: 'none' }} to={'/marketplace/product/' + props._id}>
+                    <Link style={{ textDecoration: 'none' }} to={'/marketplace/products/' + props._id}>
                         <div className="content-medium-14-22" style={{ color: colors.green6 }}>
                             {props.price && '$ ' + props.price}
                         </div>
@@ -85,7 +71,9 @@ export default function ProductCard({ variant = 'product', ...props }) {
                             Sold By:
                         </p>
                         <Link to={'/profile/' + props.sellerId}>
-                            <p className="content-semi-bold-16 linkText">{' ' + sellerName}</p>
+                            <p className="content-semi-bold-16 linkText">
+                                {' ' + props?.sellerInfo[0]?.userInfo[0]?.fullName}
+                            </p>
                         </Link>
                     </div>
                 </div>
@@ -95,14 +83,20 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         bottom: 10,
                         right: 12
                     }}>
-                    <Button
-                        productid={props._id}
-                        sellerid={props.sellerId}
-                        className={variant !== 'edit' ? 'product-card-add' : 'product-card-edit'}
-                        variant="cart"
-                        color={variant === 'product' ? 'secondary' : 'primary'}>
-                        {variant === 'edit' ? <BorderColorIcon style={{ color: colors.green4 }} /> : '+'}
-                    </Button>
+                    {navBarState === 2 && (!id || id === '') ? (
+                        <EditProductInfoDialog variant="cart" className={'product-card-edit'} productId={props._id}>
+                            <BorderColorIcon style={{ color: colors.green4 }} />
+                        </EditProductInfoDialog>
+                    ) : (
+                        <Button
+                            productid={props._id}
+                            sellerid={props.sellerId}
+                            className={variant === 'edit' ? 'product-card-edit' : 'product-card-add'}
+                            variant="cart"
+                            color={variant === 'product' ? 'secondary' : 'primary'}>
+                            {variant === 'edit' ? <BorderColorIcon style={{ color: colors.green4 }} /> : '+'}
+                        </Button>
+                    )}
                 </div>
             </div>
         </Card>

@@ -1,5 +1,5 @@
 import { useEffect, useState, Fragment } from 'react';
-import { DropDownSelect, Footer } from '../components';
+import { DropDownSelect, NavBar } from '../components';
 import { Box, Button, Card, CardContent, Container, Divider } from '@mui/material';
 import { colors } from '../styles';
 import { useNavBarHeight } from '../hooks/useNavBarHeight';
@@ -175,10 +175,10 @@ function OrderCard({ field = 'Method', list = ['Cash', 'Banking', 'Momo', 'VNPay
 
 export default function OrderProducts() {
     return (
-        <Box style={{ paddingTop: useNavBarHeight(), paddingBottom: '80px' }}>
-            {/* <Box className="navbar">
+        <Box style={{ paddingTop: useNavBarHeight(), paddingBottom: '50px' }}>
+            <Box className="navbar">
                 <NavBar />
-            </Box> */}
+            </Box>
             <Container maxWidth="lg">
                 <div>
                     {OrderCard({
@@ -187,7 +187,6 @@ export default function OrderProducts() {
                     })}
                 </div>
             </Container>
-            <Footer />
         </Box>
     );
 }

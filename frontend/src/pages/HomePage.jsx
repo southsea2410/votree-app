@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { NavBar, InputArticle, UserPost } from '../components';
-import { fetchUserInfo } from '../utils/apiUtils';
+import { fetchUserInfo, fetchUserProducts } from '../utils/apiUtils';
 import React from 'react';
 import { useEffect } from 'react';
 
@@ -20,6 +20,7 @@ import { updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
 import { updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
 import { updateIsSeller } from '../redux/features/account/isSellerSlice';
 import { updateNavBarState } from '../redux/features/common/navBarStateSlice';
+import { addProduct } from '../redux/features/product/productsSlice';
 
 const homePageStyle = {
     display: 'flex',
@@ -53,6 +54,10 @@ export default function HomePage() {
             if (!isLoggedIn) {
                 const { profile, store } = await fetchUserInfo();
                 if (profile) {
+                    const { productsData } = await fetchUserProducts();
+                    for (let i = 0; i < productsData.length; ++i) {
+                        dispatch(addProduct({ id: productsData[i]._id, product: productsData[i] }));
+                    }
                     dispatch(updateProfileInfo(profile));
                     dispatch(updateIsLoggedIn(true));
                     setIsLoggedIn(true);

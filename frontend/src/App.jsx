@@ -25,7 +25,7 @@ function App() {
                     <Route path="register" element={<Login register={1} />} />
                     <Route path="marketplace">
                         <Route index element={<Marketplace />} />
-                        <Route path="product">
+                        <Route path="products">
                             <Route path=":productId" element={<Product />} />
                         </Route>
                     </Route>

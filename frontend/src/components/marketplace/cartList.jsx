@@ -41,7 +41,7 @@ const hoverStyle = {
 
 function CartListBody({ cart }) {
     // Use this to check the format of cart object
-    console.log(cart);
+    // console.log(cart);
     if (cart == '') return <p>Fetching Cart from backend...</p>;
 
     return (
@@ -134,7 +134,7 @@ export default function CartList() {
             if (cartNum == 0) throw 'Not Found cart With this user';
 
             cartArr = cartArr.data.carts;
-            console.log(cartArr);
+            // console.log(cartArr);
             // Loop through cartArr to find cart with userId
             for (let i = 0; i <= cartNum; i++) {
                 if (i == cartNum) {
