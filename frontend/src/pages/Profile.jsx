@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from 'react';
-import { NavBar, SumProfile, UserPost, UpSellerDialog, EditProfileDialog } from '../components';
+import { NavBar, SumProfile, UserPost, UpSellerDialog, EditProfileDialog, CartList } from '../components';
 import { Box, Card, CardContent, CardHeader, Container, Divider } from '@mui/material';
 import { colors } from '../styles';
 import { content, contentLong } from '../assets/contents/content';
@@ -24,6 +24,7 @@ import { updateIsSeller } from '../redux/features/account/isSellerSlice';
 
 // Product Card
 import { ProductCard } from '../components';
+import AddProductDialog from '../components/profile/newProductDialog';
 const salePostsContainer = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, 388px)',
@@ -32,7 +33,7 @@ const salePostsContainer = {
     width: '100%'
 };
 
-function PostsContainer({ id, isLoggedIn }) {
+function ProductsContainer({ id, isLoggedIn }) {
     const [list, setList] = useState('');
 
     async function fetchSalePosts() {
@@ -58,7 +59,7 @@ function PostsContainer({ id, isLoggedIn }) {
 
     useEffect(() => {
         fetchSalePosts();
-    }, []);
+    }, [id]);
 
     return <Box sx={salePostsContainer}>{list}</Box>;
 }
@@ -91,10 +92,11 @@ export default function UserProfile() {
     const [storeInfo, setStoreInfo] = useState(storeInfoFromRedux);
 
     const { id } = useParams();
+    const isYourProfile = id === undefined || id === '';
 
     useEffect(() => {
         async function fetchProfileInfo() {
-            if (id === undefined || id === '') {
+            if (isYourProfile) {
                 if (!isLoggedIn) {
                     const { profile, store } = await fetchUserInfo();
                     if (profile) {
@@ -155,20 +157,18 @@ export default function UserProfile() {
             }
         }
         fetchProfileInfo();
-    }, [id, isLoggedIn]);
+    }, [profileInfo._id, isLoggedIn]);
 
+    // console.log(id);
     return (
         <div style={{ paddingTop: useNavBarHeight() }}>
-            {' '}
             {/* Main container for page */}
             <Box className="navbar">
                 <NavBar />
             </Box>
             <Container maxWidth="lg" fixed sx={containerStyle}>
-                {' '}
                 {/* Main container for body */}
                 <Card variant="outlined" sx={{ width: '100%' }}>
-                    {' '}
                     {/* Profile card */}
                     <CardContent
                         sx={{
@@ -269,24 +269,34 @@ export default function UserProfile() {
                     </CardContent>
                 </Card>
                 <Card variant="outlined" sx={{ width: '100%' }}>
-                    <CardHeader
-                        disableTypography
-                        title={
-                            <span className="subtitle-extra-bold">
-                                {' '}
-                                {id === '' ? 'Your Products' : 'Their Products'}{' '}
-                            </span>
-                        }
-                    />
+                    {
+                        <CardHeader
+                            disableTypography
+                            title={
+                                <Box
+                                    className="subtitle-extra-bold"
+                                    sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    {isYourProfile && role === 'seller' ? 'Your Products' : 'Their Products'}
+                                    {isYourProfile && role === 'seller' ? (
+                                        <AddProductDialog sellerId={profileInfo._id}>Add new</AddProductDialog>
+                                    ) : null}
+                                </Box>
+                            }
+                        />
+                    }
                     <CardContent>
-                        <PostsContainer id={id || profileInfo._id} /> {/* Product Cards */}
+                        <ProductsContainer id={id || profileInfo._id} /> {/* Product Cards */}
+                        <CartList />
                     </CardContent>
                 </Card>
                 <Card sx={{ width: '100%' }}>
                     <CardHeader
                         disableTypography
                         title={
-                            <span className="subtitle-extra-bold"> {id === '' ? 'Your Posts' : 'Their Posts'} </span>
+                            <span className="subtitle-extra-bold">
+                                {' '}
+                                {isYourProfile ? 'Your Posts' : 'Their Posts'}{' '}
+                            </span>
                         }
                     />
                 </Card>

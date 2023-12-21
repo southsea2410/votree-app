@@ -9,7 +9,6 @@ import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { colors } from '../../styles';
 import { LocationIcon, MailIcon, MarketIcon, PhoneIcon } from '../../assets/icons';
-import { useNavigate } from 'react-router-dom';
 import { fetchUserInfo } from '../../utils/apiUtils';
 
 // Redux
@@ -35,7 +34,6 @@ const dialogContentTextStyle = {
 
 export default function UpSellerDialog({ variant = 'filled', ...props }) {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
