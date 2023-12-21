@@ -50,7 +50,7 @@ function ProductsContainer({ ...props }) {
     }
     useEffect(() => {
         const productsStructure = props.products.map((product, index) => {
-            // console.log(product, index);
+            console.log(product, 111);
             return (
                 <ProductCard
                     key={product._id}

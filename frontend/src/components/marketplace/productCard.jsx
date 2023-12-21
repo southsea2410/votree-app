@@ -21,48 +21,6 @@ export default function ProductCard({ variant = 'product', ...props }) {
 
     useEffect(()=> setTemp(true), [props.price]);
 
-    // const [sellerName, setSellerName] = useState('Unknown');
-
-    // async function fetchSellerName() {
-    //     // Fetch seller
-    //     // console.log(1, props.name);
-    //     // console.log(props.sellerId);
-    //     const res = await fetch('/api/v1/userInfo/' + props.sellerId, {
-    //         method: 'GET',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         credentials: 'include'
-    //     });
-    //     const data = await res.json();
-    //     // console.log(2, props.name, data.userInfo.name);
-    //     // console.log(props.sellerId);
-    //     // console.log(props.sellerId === data.userInfo._id, props.name, data.userInfo.fullName);
-    //     if (props.sellerId === data.userInfo._id) {
-    //         console.log(props.sellerId, data.userInfo._id, data.userInfo.fullName, props.name);
-    //     } else {
-    //         console.log(props.sellerId, data.userInfo._id, data.userInfo.fullName, props.name);
-    //     }
-
-    //     const seller = data.userInfo;
-    //     setSellerName(seller.fullName || 'Unknown');
-    // }
-
-    // useEffect(() => {
-    //     async function fetchSellerName() {
-    //         const res = await fetch('/api/v1/userInfo/' + props.sellerId, {
-    //             method: 'GET',
-    //             headers: { 'Content-Type': 'application/json' },
-    //             credentials: 'include'
-    //         })
-    //         .then((res) => {
-    //             res.json().then((data) =>{
-    //                 const seller = data.userInfo;
-    //                 setSellerName(seller.fullName || 'Unknown');
-    //             });
-    //         })
-    //     }
-    //     fetchSellerName();
-    // }, [props.sellerId]);
-
     return (
         <Card
             variant={variant}
