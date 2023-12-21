@@ -20,7 +20,7 @@ import { updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
 import { updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
 import { updateIsSeller } from '../redux/features/account/isSellerSlice';
 import { updateNavBarState } from '../redux/features/common/navBarStateSlice';
-import { addProduct, updateProduct } from '../redux/features/product/productsSlice';
+import { addProduct } from '../redux/features/product/productsSlice';
 
 const homePageStyle = {
     display: 'flex',

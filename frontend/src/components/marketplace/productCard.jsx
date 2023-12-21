@@ -5,7 +5,6 @@ import { StarIcon } from '../../assets/icons';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import './../../index.css';
 import { colors } from '../../styles';
-import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import EditProductInfoDialog from './editProductInfoDialog';
 
@@ -16,10 +15,7 @@ import { selectNavBarState } from '../../redux/features/common/navBarStateSlice'
 export default function ProductCard({ variant = 'product', ...props }) {
     const navBarState = useSelector(selectNavBarState);
     const { id } = useParams();
-    const [temp, setTemp] = useState(false);
     const stars = [...Array(5).keys()];
-
-    useEffect(() => setTemp(true), [props.price]);
 
     return (
         <Card

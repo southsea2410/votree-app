@@ -1,13 +1,5 @@
-import { Fragment, useState, useEffect, useRef } from 'react';
-import {
-    NavBar,
-    SumProfile,
-    UserPost,
-    UpSellerDialog,
-    EditProfileDialog,
-    CartList,
-    EditProductInfoDialog
-} from '../components';
+import { Fragment, useState, useEffect } from 'react';
+import { NavBar, SumProfile, UserPost, UpSellerDialog, EditProfileDialog, CartList } from '../components';
 import { Box, Card, CardContent, CardHeader, Container, Divider } from '@mui/material';
 import { colors } from '../styles';
 import { content, contentLong } from '../assets/contents/content';
@@ -49,8 +41,7 @@ function ProductsContainer({ ...props }) {
         return <Box sx={salePostsContainer}>No products</Box>;
     }
     useEffect(() => {
-        const productsStructure = props.products.map((product, index) => {
-            console.log(product, 111);
+        const productsStructure = props.products.map((product) => {
             return (
                 <ProductCard
                     key={product._id}
@@ -90,15 +81,16 @@ export default function UserProfile() {
     const [isLoggedIn, setIsLoggedIn] = useState(useSelector(selectIsLoggedIn));
 
     // const [productsData, setProductsData] = useState(useSelector(selectProducts));
-    const [productsArray, setProductsArray] = useState(Object.values(useSelector(selectProducts)));
-    const [products, setProducts] = useState([1]);
+    // const [productsArray, setProductsArray] = useState(Object.values(useSelector(selectProducts)));
+    const [products, setProducts] = useState(Object.values(useSelector(selectProducts)));
+
     // console.log(1);
     // console.log(products);
 
     const [summary, setSummary] = useState({});
 
     const [profileInfo, setProfileInfo] = useState(profileInfoFromRedux);
-    console.log(products, profileInfo, 1);
+    // console.log(products, profileInfo, 1);
     const [storeInfo, setStoreInfo] = useState(storeInfoFromRedux);
 
     const { id } = useParams();
@@ -133,7 +125,8 @@ export default function UserProfile() {
                     }
                 } else {
                     setSummary({ fullName: profileInfo.fullName, role: profileInfo.role.toLowerCase() });
-                    setProducts(productsArray);
+                    // setProducts(productsArray);
+                    console.log(222, products);
                 }
             } else {
                 const data = await fetch('/api/v1/userInfo/' + id, {

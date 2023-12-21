@@ -48,7 +48,7 @@ export default function AddProductDialog({ variant = 'filled', ...props }) {
         });
 
         try {
-            const response = await fetch('/api/v1/marketplace/products', {
+            const response = await fetch('/api/v1/sellers/products', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

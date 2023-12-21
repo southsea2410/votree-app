@@ -8,21 +8,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { colors } from '../../styles';
-import { fetchProductInfo, fetchUserProducts } from '../../utils/apiUtils';
+import { fetchUserProducts } from '../../utils/apiUtils';
 import { useEffect } from 'react';
 
 // Redux
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { updateProfileInfo } from '../../redux/features/profile/profileInfoSlice';
-import { updateIsLoggedIn } from '../../redux/features/account/isLoggedInSlice';
-import { updateStoreInfo } from '../../redux/features/profile/storeInfoSlice';
-import { updateIsSeller } from '../../redux/features/account/isSellerSlice';
-import { selectProfileInfo } from '../../redux/features/profile/profileInfoSlice';
-import { selectStoreInfo } from '../../redux/features/profile/storeInfoSlice';
 import { selectProducts } from '../../redux/features/product/productsSlice';
 import { updateProduct } from '../../redux/features/product/productsSlice';
-import { deleteProduct } from '../../redux/features/product/productsSlice';
 
 const buttonStylePosition = {
     display: 'flex',

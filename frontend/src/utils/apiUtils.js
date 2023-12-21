@@ -45,7 +45,7 @@ export const fetchUserInfo = async (id = '') => {
     }
 };
 
-export const fetchUserProducts = async (id = '') => {
+export const fetchUserProducts = async () => {
     try {
         const data = await fetch('/api/v1/sellers/products', {
             method: 'GET',
