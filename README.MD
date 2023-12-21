@@ -33,7 +33,7 @@ You have 6 H1 headings. You may want to use the "H1 -> H2" option to demote all 
 # User Interface Prototype
 
 
-# Main Flow - Experience Post
+## Main Flow - Experience Post
 
 Upon the initial visit to the page, unregistered visitors will be presented with this screen. The content on this page revolves around posts sharing experiences related to botanical works, gardening techniques, and captivating images of beautiful plants. Registered users have the privilege to upload posts and engage with Upvotes, Downvotes, and comments on this platform.
 
@@ -56,7 +56,7 @@ Upon the initial visit to the page, unregistered visitors will be presented with
 ## The main screen after login (Desktop and Mobile)
 
 
-# Create Article
+## Create Article
 
 After logging in, the "Create Article" bar will appear at the top of the Main screen. When the user clicks on it, a pop-up form for creating an article will be displayed.
 
@@ -67,7 +67,7 @@ After logging in, the "Create Article" bar will appear at the top of the Main sc
 
 
 
-# Login / Register Screen
+## Login / Register Screen
 
 At not-login state, Guest who wants to register; User / Seller who wants to login to use our services, can click on the Sign in/ Sign up button to redirect to Login / Register screen as shown below:
 
@@ -87,7 +87,7 @@ At not-login state, Guest who wants to register; User / Seller who wants to logi
 ## Login and Register Pages (Desktop and Mobile)
 
 
-# User / Seller Profile Screen
+## User / Seller Profile Screen
 
 Registered users can access this page by clicking on their avatar located in the right corner of the screen. On this page, users can view and manage their personal information, choose to upgrade their account to a Seller, and review their Activity History.
 
@@ -101,7 +101,7 @@ Registered users can access this page by clicking on their avatar located in the
 ## User Profile Screen (Desktop and Mobile)
 
 
-# Upgrade to Seller form
+## Upgrade to Seller form
 
 Upon clicking the "Up Seller" button, the following form will appear, prompting the user to provide essential information necessary to apply for a Seller account.
 
@@ -110,7 +110,7 @@ Upon clicking the "Up Seller" button, the following form will appear, prompting 
 
 
 
-# Marketplace Screen
+## Marketplace Screen
 
 Our system also serves a crucial purpose by enabling users to explore and shop for plants and botanical products. Positioned on the right side of the Main Screen button in the navigation bar, the Marketplace option is represented by a grocery store icon.
 
