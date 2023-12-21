@@ -14,12 +14,13 @@ import { selectProfileInfo, updateProfileInfo } from '../redux/features/profile/
 import { selectStoreInfo, updateStoreInfo } from '../redux/features/profile/storeInfoSlice';
 import { selectIsLoggedIn, updateIsLoggedIn } from '../redux/features/account/isLoggedInSlice';
 import { updateNavBarState } from '../redux/features/common/navBarStateSlice';
+import { addProduct, selectProducts } from '../redux/features/product/productsSlice';
 
 // Constants
 import { fieldNames, storeFieldNames } from '../constants';
 
 // Utils
-import { fetchUserInfo } from '../utils/apiUtils';
+import { fetchUserInfo, fetchUserProducts } from '../utils/apiUtils';
 import { updateIsSeller } from '../redux/features/account/isSellerSlice';
 
 // Product Card
@@ -33,32 +34,41 @@ const salePostsContainer = {
     width: '100%'
 };
 
-function ProductsContainer({ id, isYourProfile, isLoggedIn }) {
+function ProductsContainer({ id, isYourProfile, isLoggedIn, products }) {
     const [list, setList] = useState('');
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([]);
     // const [listProductsId, setListProductsId] = useState([]);
+    
+    // console.log(products);
 
-    async function fetchSalePosts() {
-        let res = await fetch('/api/v1/marketplace/products', {
-            headers: { 'Content-Type': 'application/json' }
-        });
-        let data_tmp = await res.json();
+    const productsStructure = products.map((product, index) => {
+        return <ProductCard key={product._id} variant={(isYourProfile && isLoggedIn) ? 'edit' : 'product'} {...product} />;
+    });
 
-        // Remove unnecessary data
-        data_tmp = data_tmp.data?.products;
+    setList(productsStructure);
 
-        setData(data_tmp);
 
-        // Create list of products
-        const products = data.map((product, index) => {
-            if (product.sellerId === id) {
-                return <ProductCard key={product._id} variant={(isYourProfile && isLoggedIn) ? 'edit' : 'product'} {...product} />;
-            }
-            return null;
-        });
+    // async function fetchSalePosts() {
+    //     let res = await fetch('/api/v1/marketplace/products', {
+    //         headers: { 'Content-Type': 'application/json' }
+    //     });
+    //     let data_tmp = await res.json();
 
-        setList(products);
-    }
+    //     // Remove unnecessary data
+    //     data_tmp = data_tmp.data?.products;
+
+    //     setData(data_tmp);
+
+    //     // Create list of products
+    //     const products = data.map((product, index) => {
+    //         if (product.sellerId === id) {
+    //             return <ProductCard key={product._id} variant={(isYourProfile && isLoggedIn) ? 'edit' : 'product'} {...product} />;
+    //         }
+    //         return null;
+    //     });
+
+    //     setList(products);
+    // }
 
     // async function fetchProductsOfUser() {
     //     let res = await fetch('/api/v1/sellers/' + id + '/products', { // userId
@@ -72,10 +82,10 @@ function ProductsContainer({ id, isYourProfile, isLoggedIn }) {
     //     setListProductsId(data_tmp);
     // }
 
-    useEffect(() => {
-        fetchSalePosts();
-        // fetchProductsOfUser();
-    }, [id]);
+    // useEffect(() => {
+    //     fetchSalePosts();
+    //     // fetchProductsOfUser();
+    // }, [id]);
 
     return <Box sx={salePostsContainer}>{list}</Box>;
 }
@@ -101,6 +111,12 @@ export default function UserProfile() {
     const storeInfoFromRedux = useSelector(selectStoreInfo);
     const [isLoggedIn, setIsLoggedIn] = useState(useSelector(selectIsLoggedIn));
 
+    const productsData = useSelector(selectProducts);
+    const productsArray = Object.values(productsData);
+    const [products, setProducts] = useState(productsArray);
+    // console.log(1);
+    // console.log(products);
+
     const [fullName, setFullName] = useState('Your full name');
     const [role, setRole] = useState('Your role');
 
@@ -116,8 +132,15 @@ export default function UserProfile() {
                 if (!isLoggedIn) {
                     const { profile, store } = await fetchUserInfo();
                     if (profile) {
+                        const { productsData } = await fetchUserProducts();
+                        console.log(productsData);
+                        for (let i = 0; i < productsData.length; ++i) {
+                            dispatch(addProduct({id: productsData[i]._id, product: productsData[i]}));
+                        }
                         dispatch(updateProfileInfo(profile));
                         dispatch(updateIsLoggedIn(true));
+                        setProducts(productsData);
+                        // console.log(products);
                         setIsLoggedIn(true);
                         setFullName(profile.fullName);
                         setRole(profile.role.toLowerCase());
@@ -301,7 +324,7 @@ export default function UserProfile() {
                     />
                     }
                     <CardContent>
-                        <ProductsContainer id={id || profileInfo._id} isYourProfile={isYourProfile} isLoggedIn={isLoggedIn} /> {/* Product Cards */}
+                        <ProductsContainer id={id || profileInfo._id} isYourProfile={isYourProfile} isLoggedIn={isLoggedIn} products={products} />
                         <CartList />
                     </CardContent>
                 </Card>

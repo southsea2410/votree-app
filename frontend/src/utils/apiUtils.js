@@ -47,17 +47,18 @@ export const fetchUserInfo = async (id = '') => {
 
 export const fetchUserProducts = async (id = '') => {
     try {
-        const data = await fetch('/api/v1/sellers/products/' + id, {
+        const data = await fetch('/api/v1/sellers/products', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            // credentials: 'include'
+            credentials: 'include'
         });
-
+        
         // Update Redux
         const arr = await data.json();
-        const info = arr.data?.productsData;
+        console.log(arr);
+        const info = arr.data?.products;
         if (info) {
             const productsData = info;
 

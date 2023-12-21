@@ -83,15 +83,21 @@ exports.createProduct = async (req, res) => {
 
 exports.getProduct = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.productId).populate(
-      'reviews',
-    );
+    // const product = await Product.findById(req.params.productId).populate(
+    //   'reviews',
+    // );
     // checkInvidualPermissions(req.user.userId, product.sellerId);
-
+    const products = await Product.find().populate({
+      path: 'sellerInfo',
+      populate: {
+        path: 'userInfo',
+        select: 'fullName', // Select only the fullName field from the User document
+      },
+    });
     res.status(200).json({
       status: 'success',
       data: {
-        product: product,
+        products: products,
       },
     });
   } catch (err) {

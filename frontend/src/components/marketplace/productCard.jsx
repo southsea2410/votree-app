@@ -16,6 +16,7 @@ import { selectNavBarState } from '../../redux/features/common/navBarStateSlice'
 export default function ProductCard({ variant = 'product', ...props }) {
     const navBarState = useSelector(selectNavBarState);
     const { id } = useParams();
+    console.log(props);
     const stars = [...Array(5).keys()];
 
     // const [sellerName, setSellerName] = useState('Unknown');
@@ -70,7 +71,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                 boxShadow:
                     '0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.20)'
             }}>
-            <Link style={{ display: 'contents', textDecoration: 'none' }} to={'/marketplace/product/' + props._id}>
+            <Link style={{ display: 'contents', textDecoration: 'none' }} to={'/marketplace/products/' + props._id}>
                 <CardMedia
                     component="div"
                     sx={{ maxWidth: '100%' }}
@@ -93,7 +94,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         flexDirection: 'column',
                         gap: '3px'
                     }}>
-                    <Link style={{ textDecoration: 'none' }} to={'/marketplace/product/' + props._id}>
+                    <Link style={{ textDecoration: 'none' }} to={'/marketplace/products/' + props._id}>
                         <div className="content-medium-14-22" style={{ color: colors.green6 }}>
                             {props.price && '$ ' + props.price}
                         </div>
@@ -115,7 +116,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         </p>
                         <Link to={'/profile/' + props.sellerId}>
                             <p className="content-semi-bold-16 linkText">
-                                {' ' + props.sellerInfo[0].userInfo[0].fullName}
+                                {' ' + props.sellerInfo[0]?.userInfo[0]?.fullName}
                             </p>
                         </Link>
                     </div>

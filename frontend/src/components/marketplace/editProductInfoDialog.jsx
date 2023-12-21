@@ -47,7 +47,10 @@ const deleteStyle = {
 export default function EditProductInfoDialog({ variant = 'filled', ...props }) {
     const dispatch = useDispatch();
     const productsFromRedux = useSelector(selectProducts);
-    const specificProduct = productsFromRedux[props.productId];
+    console.log(1);
+    console.log(productsFromRedux);
+    const specificProduct = productsFromRedux.dictionary[props.productId];
+    // console.log(specificProduc)
 
     const [open, setOpen] = React.useState(false);
 
@@ -163,7 +166,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
             suitClimate
         });
 
-        console.log(jsonData);
+        // console.log(jsonData);
 
         try {
             const response = await fetch('/api/v1/marketplace/products/' + id, {
@@ -179,7 +182,8 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
 
                 if (productsData) {
                     const id_tmp = props.productId;
-                    for (let i = 0; i < productsData.length; ++i) {
+                    let i = 0;
+                    for (i = 0; i < productsData.length; ++i) {
                         if (id_tmp === productsData[i]._id) {
                             dispatch(updateProduct({id: id_tmp, updatedProduct: productsData[i]}))
                             break;
@@ -189,15 +193,15 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
                 }
 
                 setLatestValues([
-                    productsData.name,
-                    productsData.price,
-                    productsData.discountPrice,
-                    productsData.quantity,
-                    productsData.description,
-                    productsData.active,
-                    productsData.type,
-                    productsData.suitEnvironment,
-                    productsData.suitClimate
+                    productsData[i].name,
+                    productsData[i].price,
+                    productsData[i].discountPrice,
+                    productsData[i].quantity,
+                    productsData[i].description,
+                    productsData[i].active,
+                    productsData[i].type,
+                    productsData[i].suitEnvironment,
+                    productsData[i].suitClimate
                 ]);
 
                 alert('Update successful!');
