@@ -1,22 +1,43 @@
 const Product = require('../models/productModel');
 const Seller = require('../models/sellerModel');
+const {
+  checkInvidualPermissions,
+} = require('../utils/checkIndividualPermissions');
 
 exports.getAllProduct = async (req, res) => {
   try {
-    const queryObj = { ...req.query };
-    const excludedFields = ['page', 'sort', 'limit', 'fields'];
-    excludedFields.forEach((el) => delete queryObj[el]);
+    // const queryObj = { ...req.query };
+    // const excludedFields = ['page', 'sort', 'limit', 'fields'];
+    // excludedFields.forEach((el) => delete queryObj[el]);
 
-    let queryStr = JSON.stringify(queryObj);
-    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+    // let queryStr = JSON.stringify(queryObj);
+    // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
 
-    let query = Product.find(JSON.parse(queryStr));
+    // let query = Product.find(JSON.parse(queryStr));
 
-    if (req.query.sort) {
-      query = query.sort(req.query.sort);
-    }
+    // if (req.query.sort) {
+    //   query = query.sort(req.query.sort);
+    // }
 
-    const products = await query;
+    // const products = await query
+    //   .populate({
+    //     path: 'sellerInfo',
+    //     populate: {
+    //       path: 'userInfo',
+    //       select: 'fullName', // Select only the fullName field from the User document
+    //     },
+    //   })
+    //   .exec((err, products) => {
+    //     // Handle err and use products
+    //   });
+
+    const products = await Product.find().populate({
+      path: 'sellerInfo',
+      populate: {
+        path: 'userInfo',
+        select: 'fullName', // Select only the fullName field from the User document
+      },
+    });
 
     res.status(200).json({
       status: 'success',
@@ -62,7 +83,10 @@ exports.createProduct = async (req, res) => {
 
 exports.getProduct = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id).populate('reviews');
+    const product = await Product.findById(req.params.productId).populate(
+      'reviews',
+    );
+    // checkInvidualPermissions(req.user.userId, product.sellerId);
 
     res.status(200).json({
       status: 'success',
@@ -99,10 +123,14 @@ exports.updateProduct = async (req, res) => {
       return res.status(400).send({ error: 'Invalid updates!' });
     }
 
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const product = await Product.findByIdAndUpdate(
+      req.params.productId,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
 
     res.status(200).json({
       status: 'success',

@@ -61,7 +61,7 @@ app.use(helmet());
 app.post(
   '/webhook-checkout',
   bodyParser.raw({ type: 'application/json' }),
-  orderController.webhookCheckout
+  orderController.webhookCheckout,
 );
 
 app.use(express.json());
