@@ -35,17 +35,11 @@ const salePostsContainer = {
 };
 
 function ProductsContainer({ ...props }) {
-    const [list, setList] = useState(null);
-    // const [data, setData] = useState([]);
-    // const [listProductsId, setListProductsId] = useState([]);
-    
-    // console.log(products);
-    // console.log(1, props.products);
-
-    
-    
-    
-    // console.log('PS', productsStructure);
+    const [list, setList] = useState('');
+    console.log("Props at Products Container", props)
+    if (props.products === undefined) {
+        return <Box sx={salePostsContainer}>No products</Box>;
+    }
     useEffect(()=>{
         const productsStructure = props.products.map((product, index) => {
             // console.log(product, index);
@@ -54,44 +48,6 @@ function ProductsContainer({ ...props }) {
         setList(productsStructure);
     },[JSON.stringify(props.products)]);
 
-    // async function fetchSalePosts() {
-        // let res = await fetch('/api/v1/marketplace/products', {
-    //         headers: { 'Content-Type': 'application/json' }
-    //     });
-    //     let data_tmp = await res.json();
-
-    //     // Remove unnecessary data
-    //     data_tmp = data_tmp.data?.products;
-
-    //     setData(data_tmp);
-
-    //     // Create list of products
-        // const products = data.map((product, index) => {
-        //     if (product.sellerId === id) {
-        //         return <ProductCard key={product._id} variant={(isYourProfile && isLoggedIn) ? 'edit' : 'product'} {...product} />;
-        //     }
-        //     return null;
-        // });
-
-        // setList(products);
-    // }
-
-    // async function fetchProductsOfUser() {
-    //     let res = await fetch('/api/v1/sellers/' + id + '/products', { // userId
-    //         headers: { 'Content-Type': 'application/json' }
-    //     });
-    //     let data_tmp = await res.json();
-
-    //     // Remove unnecessary data
-    //     data_tmp = data_tmp.data?.products;
-
-    //     setListProductsId(data_tmp);
-    // }
-
-    // useEffect(() => {
-    //     fetchSalePosts();
-    //     // fetchProductsOfUser();
-    // }, [id]);
 
     return <Box sx={salePostsContainer}>{list}</Box>;
 }
@@ -119,14 +75,13 @@ export default function UserProfile() {
 
     const productsData = useSelector(selectProducts);
     const productsArray = Object.values(productsData);
-    const [products, setProducts] = useState(productsArray);
+    const [products, setProducts] = useState(null);
     // console.log(1);
     // console.log(products);
 
-    const [fullName, setFullName] = useState('Your full name');
-    const [role, setRole] = useState('Your role');
+    const [summary, setSummary] = useState({});
 
-    const [profileInfo, setProfileInfo] = useState(profileInfoFromRedux);
+    const [profileInfo, setProfileInfo] = useState(null);
     const [storeInfo, setStoreInfo] = useState(storeInfoFromRedux);
     
     const { id } = useParams();
@@ -148,10 +103,9 @@ export default function UserProfile() {
                         dispatch(updateProfileInfo(profile));
                         dispatch(updateIsLoggedIn(true));
                         setProducts(productsData);
-                        // console.log(1, productsData);
+
                         setIsLoggedIn(true);
-                        setFullName(profile.fullName);
-                        setRole(profile.role.toLowerCase());
+                        setSummary({fullName: profile.fullName, role: profile.role.toLowerCase()});
                         setProfileInfo(profile);
                         if (store) {
                             setStoreInfo(store);
@@ -163,8 +117,7 @@ export default function UserProfile() {
                         navigate('/');
                     }
                 } else {
-                    setFullName(profileInfo.fullName);
-                    setRole(profileInfo.role);
+                    setSummary({fullName: profile.fullName, role: profile.role.toLowerCase()});
                 }
             } else {
                 const data = await fetch('/api/v1/userInfo/' + id, {
@@ -187,8 +140,7 @@ export default function UserProfile() {
                         interest: info.interest || ''
                     };
                     setProfileInfo(profile);
-                    setFullName(profile.fullName);
-                    setRole(profile.role.toLowerCase());
+                    setSummary({fullName: profile.fullName, role: profile.role.toLowerCase()});
                     if (profile.role.toLowerCase() === 'seller') {
                         const store = {
                             storeEmail: info.sellerDetails.storeEmail || '',
@@ -204,7 +156,7 @@ export default function UserProfile() {
             }
         }
         fetchProfileInfo();
-    }, [profileInfo._id, isLoggedIn, products]);
+    }, []);
 
     // console.log(id);
     return (
@@ -229,8 +181,8 @@ export default function UserProfile() {
                                 flexWrap: 'wrap',
                                 justifyContent: 'space-between'
                             }}>
-                            <div>{SumProfile({ fullName: fullName, role: role })}</div>
-                            {role === 'seller' ? <></> : <UpSellerDialog variant="filled">Up Seller</UpSellerDialog>}
+                            <div>{SumProfile({ fullName: summary.fullName, role: summary.role })}</div>
+                            {summary.role === 'seller' ? <></> : <UpSellerDialog variant="filled">Up Seller</UpSellerDialog>}
                         </Box>
                         <Divider variant="slighter"></Divider>
                         <Box
@@ -249,7 +201,7 @@ export default function UserProfile() {
                                     columnGap: '15px',
                                     alignItems: 'center'
                                 }}>
-                                {Object.keys(profileInfo).map((key) => {
+                                { profileInfo && Object.keys(profileInfo).map((key) => {
                                     if (
                                         profileInfo[key] === undefined ||
                                         profileInfo[key] === null ||
@@ -279,7 +231,7 @@ export default function UserProfile() {
                         </Box>
                         <Divider variant="slighter"></Divider>
                         <Box>
-                            {role === 'seller' ? (
+                            {summary.role === 'seller' ? (
                                 <Box
                                     sx={{
                                         display: 'grid',
@@ -312,7 +264,7 @@ export default function UserProfile() {
                                 <Box></Box>
                             )}
                         </Box>
-                        {role === 'seller' ? <Divider variant="slighter"></Divider> : <></>}
+                        {summary.role === 'seller' ? <Divider variant="slighter"></Divider> : <></>}
                     </CardContent>
                 </Card>
                 <Card variant="outlined" sx={{ width: '100%' }}>
@@ -323,8 +275,8 @@ export default function UserProfile() {
                             <Box
                                 className="subtitle-extra-bold"
                                 sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                {isYourProfile && role === 'seller' ? 'Your Products' : 'Their Products'}
-                                {isYourProfile && role === 'seller' ? (
+                                {isYourProfile && summary.role === 'seller' ? 'Your Products' : 'Their Products'}
+                                {isYourProfile && summary.role === 'seller' ? (
                                     <AddProductDialog sellerId={profileInfo._id}>Add new</AddProductDialog>
                                 ) : null}
                             </Box>
@@ -332,7 +284,7 @@ export default function UserProfile() {
                     />
                     }
                     <CardContent>
-                        <ProductsContainer id={id || profileInfo._id} isYourProfile={isYourProfile} isLoggedIn={isLoggedIn} products={products} />
+                        { (products && profileInfo) && <ProductsContainer id={id || profileInfo._id} isYourProfile={isYourProfile} isLoggedIn={isLoggedIn} products={products} /> }
                         <CartList />
                     </CardContent>
                 </Card>
@@ -347,11 +299,11 @@ export default function UserProfile() {
                         }
                     />
                 </Card>
-                <UserPost content={content} fullName={fullName} role={role} image={Post_test} />
-                <UserPost fullName={fullName} role={role} image={Product_test} />
-                <UserPost fullName={fullName} content={content} role={role} />
-                <UserPost content={contentLong} fullName={fullName} role={role} />
-                <UserPost fullName={fullName} content={contentLong} role={role} />
+                <UserPost content={content} fullName={summary.fullname} role={summary.role} image={Post_test} />
+                <UserPost fullName={summary.fullname} role={summary.role} image={Product_test} />
+                <UserPost fullName={summary.fullname} content={content} role={summary.role} />
+                <UserPost content={contentLong} fullName={summary.fullname} role={summary.role} />
+                <UserPost fullName={summary.fullname} content={contentLong} role={summary.role} />
             </Container>
         </div>
     );
