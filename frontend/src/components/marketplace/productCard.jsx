@@ -16,8 +16,11 @@ import { selectNavBarState } from '../../redux/features/common/navBarStateSlice'
 export default function ProductCard({ variant = 'product', ...props }) {
     const navBarState = useSelector(selectNavBarState);
     const { id } = useParams();
-    console.log(props);
+    console.log(props.sellerInfo);
+    const [temp, setTemp] = useState(false);
     const stars = [...Array(5).keys()];
+
+    useEffect(()=> setTemp(true), [props.price]);
 
     // const [sellerName, setSellerName] = useState('Unknown');
 
@@ -116,7 +119,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         </p>
                         <Link to={'/profile/' + props.sellerId}>
                             <p className="content-semi-bold-16 linkText">
-                                {' ' + props.sellerInfo[0]?.userInfo[0]?.fullName}
+                                {' ' + props?.sellerInfo[0]?.userInfo[0]?.fullName}
                             </p>
                         </Link>
                     </div>

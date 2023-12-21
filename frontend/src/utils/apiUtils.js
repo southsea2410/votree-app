@@ -57,7 +57,7 @@ export const fetchUserProducts = async (id = '') => {
         
         // Update Redux
         const arr = await data.json();
-        console.log(arr);
+        // console.log(arr);
         const info = arr.data?.products;
         if (info) {
             const productsData = info;

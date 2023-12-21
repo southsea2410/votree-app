@@ -32,7 +32,13 @@ exports.getAllSellerProducts = async (req, res, next) => {
   try {
     const sellerId = req.user.userId;
 
-    const products = await Product.find({ sellerId: sellerId });
+    const products = await Product.find({ sellerId: sellerId }).populate({
+      path: 'sellerInfo',
+      populate: {
+        path: 'userInfo',
+        select: 'fullName', // Select only the fullName field from the User document
+      },
+    });;
 
     res.status(200).json({
       status: 'success',
