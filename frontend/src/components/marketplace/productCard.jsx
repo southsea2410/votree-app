@@ -11,25 +11,25 @@ import { Link } from 'react-router-dom';
 export default function ProductCard({ variant = 'product', ...props }) {
     const stars = [...Array(5).keys()];
 
-    const [sellerName, setSellerName] = useState('Unknown');
+    // const [sellerName, setSellerName] = useState('Unknown');
 
-    async function fetchSellerName() {
-        // Fetch seller
-        const res = await fetch('/api/v1/userInfo/' + props.sellerId, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-            // credentials: 'include'
-        });
-        const data = await res.json();
-        console.log(props.sellerId === data.userInfo._id, props.name, props.sellerId, data.userInfo._id);
+    // async function fetchSellerName() {
+    //     // Fetch seller
+    //     const res = await fetch('/api/v1/userInfo/' + props.sellerId, {
+    //         method: 'GET',
+    //         headers: { 'Content-Type': 'application/json' }
+    //         // credentials: 'include'
+    //     });
+    //     const data = await res.json();
+    //     console.log(props.sellerId === data.userInfo._id, props.name, props.sellerId, data.userInfo._id);
 
-        const seller = data.userInfo;
-        setSellerName(seller?.fullName);
-    }
+    //     const seller = data.userInfo;
+    //     setSellerName(seller?.fullName);
+    // }
 
-    useEffect(() => {
-        fetchSellerName();
-    }, []);
+    // useEffect(() => {
+    //     fetchSellerName();
+    // }, []);
 
     return (
         <Card
@@ -85,7 +85,9 @@ export default function ProductCard({ variant = 'product', ...props }) {
                             Sold By:
                         </p>
                         <Link to={'/profile/' + props.sellerId}>
-                            <p className="content-semi-bold-16 linkText">{' ' + sellerName}</p>
+                            <p className="content-semi-bold-16 linkText">
+                                {' ' + props.sellerInfo[0].userInfo[0].fullName}
+                            </p>
                         </Link>
                     </div>
                 </div>
