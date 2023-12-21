@@ -18,7 +18,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
     const { id } = useParams();
     const stars = [...Array(5).keys()];
 
-    const [sellerName, setSellerName] = useState('Unknown');
+    // const [sellerName, setSellerName] = useState('Unknown');
 
     // async function fetchSellerName() {
     //     // Fetch seller
@@ -114,7 +114,9 @@ export default function ProductCard({ variant = 'product', ...props }) {
                             Sold By:
                         </p>
                         <Link to={'/profile/' + props.sellerId}>
-                            <p className="content-semi-bold-16 linkText">{' ' + props.sellerName}</p>
+                            <p className="content-semi-bold-16 linkText">
+                                {' ' + props.sellerInfo[0].userInfo[0].fullName}
+                            </p>
                         </Link>
                     </div>
                 </div>

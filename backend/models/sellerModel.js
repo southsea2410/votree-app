@@ -28,17 +28,14 @@ const sellerSchema = new mongoose.Schema(
 sellerSchema.virtual('Product', {
   ref: 'Product',
   foreignField: 'sellerId',
-  localField: 'id',
+  localField: '_id',
 });
-// Method to add a product to the seller's inventory
-// sellerSchema.methods.addProduct = async function (productData) {
-//   const product = new Product({
-//     ...productData,
-//     sellerId: this.id,
-//   });
-//   await product.save();
-//   return product;
-// };
+
+sellerSchema.virtual('userInfo', {
+  ref: 'User',
+  localField: '_id', 
+  foreignField: 'sellerDetails',
+});
 
 sellerSchema.methods.calculateTotalSales = async function () {
   const sales = await Order.aggregate([
@@ -58,7 +55,6 @@ sellerSchema.methods.calculateAverageRating = async function () {
   return result[0] ? result[0].averageRating : 0;
 };
 
-// Compile the model from the schema
 const Seller = mongoose.model('Seller', sellerSchema);
 
 module.exports = Seller;
