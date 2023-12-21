@@ -270,19 +270,19 @@ export default function UserProfile() {
                 </Card>
                 <Card variant="outlined" sx={{ width: '100%' }}>
                     {
-                    <CardHeader
-                        disableTypography
-                        title={
-                            <Box
-                                className="subtitle-extra-bold"
-                                sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                {isYourProfile && role === 'seller' ? 'Your Products' : 'Their Products'}
-                                {isYourProfile && role === 'seller' ? (
-                                    <AddProductDialog sellerId={profileInfo._id}>Add new</AddProductDialog>
-                                ) : null}
-                            </Box>
-                        }
-                    />
+                        <CardHeader
+                            disableTypography
+                            title={
+                                <Box
+                                    className="subtitle-extra-bold"
+                                    sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    {isYourProfile && role === 'seller' ? 'Your Products' : 'Their Products'}
+                                    {isYourProfile && role === 'seller' ? (
+                                        <AddProductDialog sellerId={profileInfo._id}>Add new</AddProductDialog>
+                                    ) : null}
+                                </Box>
+                            }
+                        />
                     }
                     <CardContent>
                         <ProductsContainer id={id || profileInfo._id} /> {/* Product Cards */}

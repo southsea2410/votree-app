@@ -37,8 +37,8 @@ function App() {
                     </Route>
                     <Route path="orderproducts">
                         <Route index element={<AfterPurchase />} />
-                        <Route path="success" element={<AfterPurchase variant='success' />} />
-                        <Route path="fail" element={<AfterPurchase variant='fail' />} />
+                        <Route path="success" element={<AfterPurchase variant="success" />} />
+                        <Route path="fail" element={<AfterPurchase variant="fail" />} />
                     </Route>
                     <Route path="changepassword" element={<ChangePassword />} />
                     {/* <Route path='*' element={<Navigate replace to='/'/>}/> */}
