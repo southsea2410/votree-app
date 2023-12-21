@@ -1,5 +1,13 @@
 import { Fragment, useState, useEffect, useRef } from 'react';
-import { NavBar, SumProfile, UserPost, UpSellerDialog, EditProfileDialog, CartList, EditProductInfoDialog } from '../components';
+import {
+    NavBar,
+    SumProfile,
+    UserPost,
+    UpSellerDialog,
+    EditProfileDialog,
+    CartList,
+    EditProductInfoDialog
+} from '../components';
 import { Box, Card, CardContent, CardHeader, Container, Divider } from '@mui/material';
 import { colors } from '../styles';
 import { content, contentLong } from '../assets/contents/content';
@@ -35,26 +43,29 @@ const salePostsContainer = {
 };
 
 function ProductsContainer({ ...props }) {
-    const [list, setList] = useState([]);
-    
+    const [list, setList] = useState('');
+    console.log('Props at Products Container', props);
+    if (props.products === undefined) {
+        return <Box sx={salePostsContainer}>No products</Box>;
+    }
     useEffect(() => {
-
-
-        const productsStructure = props.products.map((product) => {
-            return <ProductCard key={product._id} variant={(props.isYourProfile && props.isLoggedIn) ? 'edit' : 'product'} {...product} />;
+        const productsStructure = props.products.map((product, index) => {
+            // console.log(product, index);
+            return (
+                <ProductCard
+                    key={product._id}
+                    variant={props.isYourProfile && props.isLoggedIn ? 'edit' : 'product'}
+                    {...product}
+                />
+            );
         });
 
         // console.log(list);
 
         setList(productsStructure);
-        // console.log(list);
-    }, []);
+    }, [JSON.stringify(props.products)]);
 
-    console.log(1, list);
-
-    return (<Box sx={salePostsContainer}>
-
-    </Box>);
+    return <Box sx={salePostsContainer}>{list}</Box>;
 }
 
 const containerStyle = {
@@ -80,23 +91,20 @@ export default function UserProfile() {
 
     const productsData = useSelector(selectProducts);
     const productsArray = Object.values(productsData);
-    const [products, setProducts] = useState(productsArray);
+    const [products, setProducts] = useState(null);
     // console.log(1);
     // console.log(products);
 
-    const [fullName, setFullName] = useState('Your full name');
-    const [role, setRole] = useState('Your role');
+    const [summary, setSummary] = useState({});
 
-    const [profileInfo, setProfileInfo] = useState(profileInfoFromRedux);
+    const [profileInfo, setProfileInfo] = useState(null);
     const [storeInfo, setStoreInfo] = useState(storeInfoFromRedux);
-    
+
     const { id } = useParams();
     const isYourProfile = id === undefined || id === '';
 
-
     useEffect(() => {
         async function fetchProfileInfo() {
-
             if (isYourProfile) {
                 if (!isLoggedIn) {
                     const { profile, store } = await fetchUserInfo();
@@ -104,15 +112,14 @@ export default function UserProfile() {
                         const { productsData } = await fetchUserProducts();
                         // console.log(1, productsData);
                         for (let i = 0; i < productsData.length; ++i) {
-                            dispatch(addProduct({id: productsData[i]._id, product: productsData[i]}));
+                            dispatch(addProduct({ id: productsData[i]._id, product: productsData[i] }));
                         }
                         dispatch(updateProfileInfo(profile));
                         dispatch(updateIsLoggedIn(true));
                         setProducts(productsData);
-                        // console.log(1, productsData);
+
                         setIsLoggedIn(true);
-                        setFullName(profile.fullName);
-                        setRole(profile.role.toLowerCase());
+                        setSummary({ fullName: profile.fullName, role: profile.role.toLowerCase() });
                         setProfileInfo(profile);
                         if (store) {
                             setStoreInfo(store);
@@ -124,8 +131,7 @@ export default function UserProfile() {
                         navigate('/');
                     }
                 } else {
-                    setFullName(profileInfo.fullName);
-                    setRole(profileInfo.role);
+                    setSummary({ fullName: profile.fullName, role: profile.role.toLowerCase() });
                 }
             } else {
                 const data = await fetch('/api/v1/userInfo/' + id, {
@@ -148,8 +154,7 @@ export default function UserProfile() {
                         interest: info.interest || ''
                     };
                     setProfileInfo(profile);
-                    setFullName(profile.fullName);
-                    setRole(profile.role.toLowerCase());
+                    setSummary({ fullName: profile.fullName, role: profile.role.toLowerCase() });
                     if (profile.role.toLowerCase() === 'seller') {
                         const store = {
                             storeEmail: info.sellerDetails.storeEmail || '',
@@ -165,7 +170,7 @@ export default function UserProfile() {
             }
         }
         fetchProfileInfo();
-    }, [profileInfo._id, isLoggedIn, products]);
+    }, []);
 
     // console.log(id);
     return (
@@ -190,8 +195,12 @@ export default function UserProfile() {
                                 flexWrap: 'wrap',
                                 justifyContent: 'space-between'
                             }}>
-                            <div>{SumProfile({ fullName: fullName, role: role })}</div>
-                            {role === 'seller' ? <></> : <UpSellerDialog variant="filled">Up Seller</UpSellerDialog>}
+                            <div>{SumProfile({ fullName: summary.fullName, role: summary.role })}</div>
+                            {summary.role === 'seller' ? (
+                                <></>
+                            ) : (
+                                <UpSellerDialog variant="filled">Up Seller</UpSellerDialog>
+                            )}
                         </Box>
                         <Divider variant="slighter"></Divider>
                         <Box
@@ -210,37 +219,38 @@ export default function UserProfile() {
                                     columnGap: '15px',
                                     alignItems: 'center'
                                 }}>
-                                {Object.keys(profileInfo).map((key) => {
-                                    if (
-                                        profileInfo[key] === undefined ||
-                                        profileInfo[key] === null ||
-                                        key == '_id' ||
-                                        key == 'id' ||
-                                        key == 'role' ||
-                                        key == 'password' ||
-                                        key == 'products' ||
-                                        key == '__v' ||
-                                        key == 'userName' ||
-                                        key == 'isLoggedIn' ||
-                                        key == 'avatar'
-                                    )
-                                        return null;
+                                {profileInfo &&
+                                    Object.keys(profileInfo).map((key) => {
+                                        if (
+                                            profileInfo[key] === undefined ||
+                                            profileInfo[key] === null ||
+                                            key == '_id' ||
+                                            key == 'id' ||
+                                            key == 'role' ||
+                                            key == 'password' ||
+                                            key == 'products' ||
+                                            key == '__v' ||
+                                            key == 'userName' ||
+                                            key == 'isLoggedIn' ||
+                                            key == 'avatar'
+                                        )
+                                            return null;
 
-                                    return (
-                                        <Fragment key={key}>
-                                            <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
-                                                {fieldNames[key]}
-                                            </p>
-                                            <p className="content-medium-20-25">{profileInfo[key]}</p>
-                                        </Fragment>
-                                    );
-                                })}
+                                        return (
+                                            <Fragment key={key}>
+                                                <p className="subtitle-semi-bold-20" style={{ color: colors.green4 }}>
+                                                    {fieldNames[key]}
+                                                </p>
+                                                <p className="content-medium-20-25">{profileInfo[key]}</p>
+                                            </Fragment>
+                                        );
+                                    })}
                             </Box>
                             <EditProfileDialog variant="filled">Edit Profile</EditProfileDialog>
                         </Box>
                         <Divider variant="slighter"></Divider>
                         <Box>
-                            {role === 'seller' ? (
+                            {summary.role === 'seller' ? (
                                 <Box
                                     sx={{
                                         display: 'grid',
@@ -273,27 +283,34 @@ export default function UserProfile() {
                                 <Box></Box>
                             )}
                         </Box>
-                        {role === 'seller' ? <Divider variant="slighter"></Divider> : <></>}
+                        {summary.role === 'seller' ? <Divider variant="slighter"></Divider> : <></>}
                     </CardContent>
                 </Card>
                 <Card variant="outlined" sx={{ width: '100%' }}>
                     {
-                    <CardHeader
-                        disableTypography
-                        title={
-                            <Box
-                                className="subtitle-extra-bold"
-                                sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                {isYourProfile && role === 'seller' ? 'Your Products' : 'Their Products'}
-                                {isYourProfile && role === 'seller' ? (
-                                    <AddProductDialog sellerId={profileInfo._id}>Add new</AddProductDialog>
-                                ) : null}
-                            </Box>
-                        }
-                    />
+                        <CardHeader
+                            disableTypography
+                            title={
+                                <Box
+                                    className="subtitle-extra-bold"
+                                    sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    {isYourProfile && summary.role === 'seller' ? 'Your Products' : 'Their Products'}
+                                    {isYourProfile && summary.role === 'seller' ? (
+                                        <AddProductDialog sellerId={profileInfo._id}>Add new</AddProductDialog>
+                                    ) : null}
+                                </Box>
+                            }
+                        />
                     }
                     <CardContent>
-                        <ProductsContainer id={id || profileInfo._id} isYourProfile={isYourProfile} isLoggedIn={isLoggedIn} products={products} />
+                        {products && profileInfo && (
+                            <ProductsContainer
+                                id={id || profileInfo._id}
+                                isYourProfile={isYourProfile}
+                                isLoggedIn={isLoggedIn}
+                                products={products}
+                            />
+                        )}
                         <CartList />
                     </CardContent>
                 </Card>
@@ -308,11 +325,11 @@ export default function UserProfile() {
                         }
                     />
                 </Card>
-                <UserPost content={content} fullName={fullName} role={role} image={Post_test} />
-                <UserPost fullName={fullName} role={role} image={Product_test} />
-                <UserPost fullName={fullName} content={content} role={role} />
-                <UserPost content={contentLong} fullName={fullName} role={role} />
-                <UserPost fullName={fullName} content={contentLong} role={role} />
+                <UserPost content={content} fullName={summary.fullname} role={summary.role} image={Post_test} />
+                <UserPost fullName={summary.fullname} role={summary.role} image={Product_test} />
+                <UserPost fullName={summary.fullname} content={content} role={summary.role} />
+                <UserPost content={contentLong} fullName={summary.fullname} role={summary.role} />
+                <UserPost fullName={summary.fullname} content={contentLong} role={summary.role} />
             </Container>
         </div>
     );

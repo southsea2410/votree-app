@@ -16,7 +16,6 @@ import { selectNavBarState } from '../../redux/features/common/navBarStateSlice'
 export default function ProductCard({ variant = 'product', ...props }) {
     const navBarState = useSelector(selectNavBarState);
     const { id } = useParams();
-    console.log(props.sellerInfo);
     const [temp, setTemp] = useState(false);
     const stars = [...Array(5).keys()];
 
