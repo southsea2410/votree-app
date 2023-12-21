@@ -34,11 +34,16 @@ exports.getAllSellerProducts = async (req, res, next) => {
 
     const products = await Product.find({ sellerId: sellerId });
 
+    const productsData = {};
+    products.forEach((product) => {
+      productsData[product._id] = product;
+    });
+
     res.status(200).json({
       status: 'success',
       results: products.length,
       data: {
-        products,
+        productsData,
       },
     });
   } catch (err) {
