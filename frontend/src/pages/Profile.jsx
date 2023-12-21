@@ -35,65 +35,26 @@ const salePostsContainer = {
 };
 
 function ProductsContainer({ ...props }) {
-    const [list, setList] = useState(null);
-    // const [data, setData] = useState([]);
-    // const [listProductsId, setListProductsId] = useState([]);
+    const [list, setList] = useState([]);
     
-    // console.log(products);
-    // console.log(1, props.products);
+    useEffect(() => {
 
-    
-    
-    
-    // console.log('PS', productsStructure);
-    useEffect(()=>{
-        const productsStructure = props.products.map((product, index) => {
-            // console.log(product, index);
+
+        const productsStructure = props.products.map((product) => {
             return <ProductCard key={product._id} variant={(props.isYourProfile && props.isLoggedIn) ? 'edit' : 'product'} {...product} />;
         });
+
+        // console.log(list);
+
         setList(productsStructure);
-    },[JSON.stringify(props.products)]);
+        // console.log(list);
+    }, []);
 
-    // async function fetchSalePosts() {
-        // let res = await fetch('/api/v1/marketplace/products', {
-    //         headers: { 'Content-Type': 'application/json' }
-    //     });
-    //     let data_tmp = await res.json();
+    console.log(1, list);
 
-    //     // Remove unnecessary data
-    //     data_tmp = data_tmp.data?.products;
+    return (<Box sx={salePostsContainer}>
 
-    //     setData(data_tmp);
-
-    //     // Create list of products
-        // const products = data.map((product, index) => {
-        //     if (product.sellerId === id) {
-        //         return <ProductCard key={product._id} variant={(isYourProfile && isLoggedIn) ? 'edit' : 'product'} {...product} />;
-        //     }
-        //     return null;
-        // });
-
-        // setList(products);
-    // }
-
-    // async function fetchProductsOfUser() {
-    //     let res = await fetch('/api/v1/sellers/' + id + '/products', { // userId
-    //         headers: { 'Content-Type': 'application/json' }
-    //     });
-    //     let data_tmp = await res.json();
-
-    //     // Remove unnecessary data
-    //     data_tmp = data_tmp.data?.products;
-
-    //     setListProductsId(data_tmp);
-    // }
-
-    // useEffect(() => {
-    //     fetchSalePosts();
-    //     // fetchProductsOfUser();
-    // }, [id]);
-
-    return <Box sx={salePostsContainer}>{list}</Box>;
+    </Box>);
 }
 
 const containerStyle = {
