@@ -29,7 +29,7 @@ const buttonStylePosition = {
     justifyContent: 'center',
     paddingBottom: 17,
     gap: 15
-}
+};
 
 const dialogContentTextStyle = {
     color: colors.green5,
@@ -42,7 +42,7 @@ const dialogContentTextStyle = {
 const deleteStyle = {
     width: 155,
     height: 54
-}
+};
 
 export default function EditProductInfoDialog({ variant = 'filled', ...props }) {
     const dispatch = useDispatch();
@@ -62,7 +62,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         'description',
         'type',
         'suitEnvironment',
-        'suitClimate',
+        'suitClimate'
     ];
 
     const infosTitle = [
@@ -73,7 +73,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         'description',
         'type',
         'suit Environment',
-        'suit Climate',
+        'suit Climate'
     ];
 
     const [latestValues, setLatestValues] = React.useState([
@@ -84,8 +84,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         specificProduct.description,
         specificProduct.type,
         specificProduct.suitEnvironment,
-        specificProduct.suitClimate,
-        
+        specificProduct.suitClimate
     ]);
 
     useEffect(() => {
@@ -97,7 +96,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
             specificProduct.description,
             specificProduct.type,
             specificProduct.suitEnvironment,
-            specificProduct.suitClimate,
+            specificProduct.suitClimate
         ]);
     }, [specificProduct]);
 
@@ -133,7 +132,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         } catch (error) {
             alert(`${error}`);
         }
-    }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -144,17 +143,17 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         const discountPrice = form.discountPrice.value;
         const quantity = form.quantity.value;
         const description = form.description.value;
-        const active = (quantity == '0') ? 'false' : 'true';
+        const active = quantity == '0' ? 'false' : 'true';
         const type = form.type.value;
         const suitEnvironment = form.suitEnvironment.value;
         const suitClimate = form.suitClimate.value;
 
-        if (!name || name === '' || !price || price === '' || !quantity || quantity == '' ) {
+        if (!name || name === '' || !price || price === '' || !quantity || quantity == '') {
             alert('You must fill in all necessary field!');
             return;
         }
-        
-        const jsonData = JSON.stringify({ 
+
+        const jsonData = JSON.stringify({
             name,
             price,
             discountPrice,
@@ -195,11 +194,10 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
                                 productsData[i].suitEnvironment,
                                 productsData[i].suitClimate
                             ]);
-                            dispatch(updateProduct({id: id_tmp, updatedProduct: productsData[i]}))
+                            dispatch(updateProduct({ id: id_tmp, updatedProduct: productsData[i] }));
                             break;
                         }
                     }
-
                 }
 
                 alert('Update successful!');
@@ -212,7 +210,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
             console.error('Error:', error);
             alert('An error occurred during update. Please try again later!');
         }
-    }
+    };
 
     return (
         <React.Fragment>
@@ -229,11 +227,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
                         paddingBottom: 0
                     }}>
                     <p className="subtitle-semi-bold-28">Product Update Form</p>
-                    <IconButton
-                        aria-label="close"
-                        onClick={handleClose}
-                        className="extra-medium"
-                        >
+                    <IconButton aria-label="close" onClick={handleClose} className="extra-medium">
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
@@ -243,34 +237,38 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
                         display: 'flex',
                         flexDirection: 'column',
                         gap: 15,
-                        padding: '0px 30px',
+                        padding: '0px 30px'
                     }}>
                     <DialogContent>
                         {infos.map((key, index) => {
-                            return (<div key={index}>
-                                <DialogContentText className="extra-medium" sx={dialogContentTextStyle}>
-                                {`${infosTitle[index]}`}
-                                </DialogContentText>
-                                <TextField
-                                    name={key}
-                                    value={values[index]}
-                                    onChange={(event) => handleInputChange(event, index)}
-                                    autoFocus
-                                    margin="dense"
-                                    id={key}
-                                    type="text"
-                                    fullWidth
-                                    variant="standard" />
-                            </div>)
+                            return (
+                                <div key={index}>
+                                    <DialogContentText className="extra-medium" sx={dialogContentTextStyle}>
+                                        {`${infosTitle[index]}`}
+                                    </DialogContentText>
+                                    <TextField
+                                        name={key}
+                                        value={values[index]}
+                                        onChange={(event) => handleInputChange(event, index)}
+                                        autoFocus
+                                        margin="dense"
+                                        id={key}
+                                        type="text"
+                                        fullWidth
+                                        variant="standard"
+                                    />
+                                </div>
+                            );
                         })}
                     </DialogContent>
                     <div style={buttonStylePosition}>
-                        <Button onClick={handleDelete} variant="outline-pending" style={deleteStyle}>Delete</Button>
-                        <Button type="submit" >Submit</Button>
+                        <Button onClick={handleDelete} variant="outline-pending" style={deleteStyle}>
+                            Delete
+                        </Button>
+                        <Button type="submit">Submit</Button>
                     </div>
                 </form>
             </Dialog>
         </React.Fragment>
     );
 }
-

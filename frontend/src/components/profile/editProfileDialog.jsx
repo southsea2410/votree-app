@@ -58,27 +58,22 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
               ]
             : ['fullName', 'dateOfBirth', 'gender', 'phoneNumber', 'email', 'address', 'interest'];
 
-    const infosTitle = (profileInfoFromRedux.role === 'seller') ? [
-        'full Name',
-        'date Of Birth',
-        'gender',
-        'phone Number',
-        'email',
-        'address',
-        'interest',
-        'store Name',
-        'store Location',
-        'store Email',
-        'store Phone Number'
-    ] : [
-        'full Name *',
-        'date Of Birth',
-        'gender',
-        'phone Number',
-        'email',
-        'address',
-        'interest'
-    ];
+    const infosTitle =
+        profileInfoFromRedux.role === 'seller'
+            ? [
+                  'full Name',
+                  'date Of Birth',
+                  'gender',
+                  'phone Number',
+                  'email',
+                  'address',
+                  'interest',
+                  'store Name',
+                  'store Location',
+                  'store Email',
+                  'store Phone Number'
+              ]
+            : ['full Name *', 'date Of Birth', 'gender', 'phone Number', 'email', 'address', 'interest'];
 
     const [latestValues, setLatestValues] = React.useState(
         profileInfoFromRedux.role === 'seller'

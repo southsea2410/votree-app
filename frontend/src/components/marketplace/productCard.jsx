@@ -19,7 +19,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
     const [temp, setTemp] = useState(false);
     const stars = [...Array(5).keys()];
 
-    useEffect(()=> setTemp(true), [props.price]);
+    useEffect(() => setTemp(true), [props.price]);
 
     return (
         <Card
@@ -87,12 +87,11 @@ export default function ProductCard({ variant = 'product', ...props }) {
                         bottom: 10,
                         right: 12
                     }}>
-                    {
-                        navBarState === 2 && (!id || id === '') ?
+                    {navBarState === 2 && (!id || id === '') ? (
                         <EditProductInfoDialog variant="cart" className={'product-card-edit'} productId={props._id}>
                             <BorderColorIcon style={{ color: colors.green4 }} />
                         </EditProductInfoDialog>
-                        :
+                    ) : (
                         <Button
                             productid={props._id}
                             sellerid={props.sellerId}
@@ -101,7 +100,7 @@ export default function ProductCard({ variant = 'product', ...props }) {
                             color={variant === 'product' ? 'secondary' : 'primary'}>
                             {variant === 'edit' ? <BorderColorIcon style={{ color: colors.green4 }} /> : '+'}
                         </Button>
-                    }
+                    )}
                 </div>
             </div>
         </Card>

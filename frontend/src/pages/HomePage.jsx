@@ -56,7 +56,7 @@ export default function HomePage() {
                 if (profile) {
                     const { productsData } = await fetchUserProducts();
                     for (let i = 0; i < productsData.length; ++i) {
-                        dispatch(addProduct({id: productsData[i]._id, product: productsData[i]}));
+                        dispatch(addProduct({ id: productsData[i]._id, product: productsData[i] }));
                     }
                     dispatch(updateProfileInfo(profile));
                     dispatch(updateIsLoggedIn(true));

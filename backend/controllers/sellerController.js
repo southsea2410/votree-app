@@ -38,7 +38,7 @@ exports.getAllSellerProducts = async (req, res, next) => {
         path: 'userInfo',
         select: 'fullName', // Select only the fullName field from the User document
       },
-    });;
+    });
 
     res.status(200).json({
       status: 'success',

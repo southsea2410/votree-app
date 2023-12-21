@@ -54,7 +54,7 @@ export const fetchUserProducts = async (id = '') => {
             },
             credentials: 'include'
         });
-        
+
         // Update Redux
         const arr = await data.json();
         // console.log(arr);
@@ -72,14 +72,13 @@ export const fetchUserProducts = async (id = '') => {
     }
 };
 
-
 export const fetchProductInfo = async (id = '') => {
     try {
         const data = await fetch('/api/v1/sellers/products/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
+            }
             // credentials: 'include'
         });
 

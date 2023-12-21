@@ -87,7 +87,7 @@ exports.getProduct = async (req, res) => {
     //   'reviews',
     // );
     // checkInvidualPermissions(req.user.userId, product.sellerId);
-    const products = await Product.find().populate({
+    const products = await Product.findById(req.params.id).populate({
       path: 'sellerInfo',
       populate: {
         path: 'userInfo',
