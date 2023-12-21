@@ -89,15 +89,16 @@ export default function UserProfile() {
     const storeInfoFromRedux = useSelector(selectStoreInfo);
     const [isLoggedIn, setIsLoggedIn] = useState(useSelector(selectIsLoggedIn));
 
-    const productsData = useSelector(selectProducts);
-    const productsArray = Object.values(productsData);
-    const [products, setProducts] = useState(null);
+    // const [productsData, setProductsData] = useState(useSelector(selectProducts));
+    const [productsArray, setProductsArray] = useState(Object.values(useSelector(selectProducts)));
+    const [products, setProducts] = useState([1]);
     // console.log(1);
     // console.log(products);
 
     const [summary, setSummary] = useState({});
 
-    const [profileInfo, setProfileInfo] = useState(null);
+    const [profileInfo, setProfileInfo] = useState(profileInfoFromRedux);
+    console.log(products, profileInfo, 1);
     const [storeInfo, setStoreInfo] = useState(storeInfoFromRedux);
 
     const { id } = useParams();
@@ -131,7 +132,8 @@ export default function UserProfile() {
                         navigate('/');
                     }
                 } else {
-                    setSummary({ fullName: profile.fullName, role: profile.role.toLowerCase() });
+                    setSummary({ fullName: profileInfo.fullName, role: profileInfo.role.toLowerCase() });
+                    setProducts(productsArray);
                 }
             } else {
                 const data = await fetch('/api/v1/userInfo/' + id, {
@@ -303,7 +305,7 @@ export default function UserProfile() {
                         />
                     }
                     <CardContent>
-                        {products && profileInfo && (
+                        {products.length !== 1 && profileInfo.fullName !== '' && (
                             <ProductsContainer
                                 id={id || profileInfo._id}
                                 isYourProfile={isYourProfile}

@@ -121,7 +121,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
 
     const handleDelete = async () => {
         try {
-            const response = await fetch('api/v1/sellers/' + id.seller + '/products/' + id.product, {
+            const response = await fetch('api/v1/sellers/products/' + props.productId, {
                 method: 'DELETE'
             });
 
@@ -169,7 +169,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
         // console.log(jsonData);
 
         try {
-            const response = await fetch('/api/v1/marketplace/products/' + id, {
+            const response = await fetch('/api/v1/sellers/products/' + props.productId, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -182,27 +182,25 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
 
                 if (productsData) {
                     const id_tmp = props.productId;
-                    let i = 0;
-                    for (i = 0; i < productsData.length; ++i) {
+                    for (let i = 0; i < productsData.length; ++i) {
                         if (id_tmp === productsData[i]._id) {
+                            setLatestValues([
+                                productsData[i].name,
+                                productsData[i].price,
+                                productsData[i].discountPrice,
+                                productsData[i].quantity,
+                                productsData[i].description,
+                                productsData[i].active,
+                                productsData[i].type,
+                                productsData[i].suitEnvironment,
+                                productsData[i].suitClimate
+                            ]);
                             dispatch(updateProduct({id: id_tmp, updatedProduct: productsData[i]}))
                             break;
                         }
                     }
 
                 }
-
-                setLatestValues([
-                    productsData[i].name,
-                    productsData[i].price,
-                    productsData[i].discountPrice,
-                    productsData[i].quantity,
-                    productsData[i].description,
-                    productsData[i].active,
-                    productsData[i].type,
-                    productsData[i].suitEnvironment,
-                    productsData[i].suitClimate
-                ]);
 
                 alert('Update successful!');
 
