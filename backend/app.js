@@ -9,7 +9,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 
 const app = express();
 
-var whitelist = ['http://localhost:5173' /** other domains if any */];
+var whitelist = ['https://votreecommunity.web.app' /** other domains if any */];
 var corsOptions = {
   credentials: true,
   origin: whitelist,
@@ -22,6 +22,7 @@ app.use(function (req, res, next) {
     'Origin, X-Requested-With, Content-Type, Accept',
   );
   res.header('Cross-Origin-Resource-Policy', 'same-site');
+  res.header('Cache-Control', 'private');
   next();
 });
 
