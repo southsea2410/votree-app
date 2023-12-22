@@ -59,6 +59,7 @@ export const fetchUserProducts = async () => {
         const arr = await data.json();
         // console.log(arr);
         const info = arr.data?.products;
+        console.log('info', info)
         if (info) {
             const productsData = info;
 
