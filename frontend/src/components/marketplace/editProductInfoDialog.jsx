@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 // Redux
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { selectProducts } from '../../redux/features/product/productsSlice';
+import { deleteProduct, selectProducts } from '../../redux/features/product/productsSlice';
 import { updateProduct } from '../../redux/features/product/productsSlice';
 
 const buttonStylePosition = {
@@ -118,6 +118,7 @@ export default function EditProductInfoDialog({ variant = 'filled', ...props }) 
             });
 
             if (response.ok) {
+                deleteProduct({ id: props.productId }); // Redux delete
                 alert('Delete successful!');
             } else {
                 alert(`Delete failed: ${response.statusText}`);
