@@ -38,14 +38,14 @@ function ProductsContainer({ id, isYourProfile, isLoggedIn, products }) {
     const [list, setList] = useState('');
     // const [data, setData] = useState([]);
     // const [listProductsId, setListProductsId] = useState([]);
-    
-    // console.log(products);
 
-    const productsStructure = products.map((product, index) => {
+    
+    const productsStructure = products.map((product) => {
         return <ProductCard key={product._id} variant={(isYourProfile && isLoggedIn) ? 'edit' : 'product'} {...product} />;
     });
+    // console.log('ProductStructure', productsStructure);
 
-    setList(productsStructure);
+    // setList(productsStructure);
 
 
     // async function fetchSalePosts() {
@@ -114,9 +114,8 @@ export default function UserProfile() {
     const productsData = useSelector(selectProducts);
     const productsArray = Object.values(productsData);
     const [products, setProducts] = useState(productsArray);
-    // console.log(1);
-    // console.log(products);
 
+    
     const [fullName, setFullName] = useState('Your full name');
     const [role, setRole] = useState('Your role');
 
@@ -133,9 +132,10 @@ export default function UserProfile() {
                     const { profile, store } = await fetchUserInfo();
                     if (profile) {
                         const { productsData } = await fetchUserProducts();
-                        console.log(productsData);
+                        // console.log('arr', productsData[0]?.sellerInfo[0]?.userInfo[0]?.fullName);
                         for (let i = 0; i < productsData.length; ++i) {
                             dispatch(addProduct({id: productsData[i]._id, product: productsData[i]}));
+                            // console.log(productsData[i])
                         }
                         dispatch(updateProfileInfo(profile));
                         dispatch(updateIsLoggedIn(true));
