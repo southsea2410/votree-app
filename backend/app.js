@@ -9,7 +9,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 
 const app = express();
 
-var whitelist = ['https://votreecommunity.web.app', 'https://votreecommunity.firebaseapp.com', 'https://votree2.web.app/', 'https://votree2.firebaseapp.com/' /** other domains if any */];
+var whitelist = ['https://votreecommunity.web.app', 'https://votreecommunity.firebaseapp.com', 'https://votree2.web.app', 'https://votree2.firebaseapp.com', 'https://votreecommunity.netlify.app' /** other domains if any */];
 var corsOptions = {
   credentials: true,
   origin: whitelist,
@@ -22,7 +22,6 @@ app.use(function (req, res, next) {
     'Origin, X-Requested-With, Content-Type, Accept',
   );
   res.header('Cross-Origin-Resource-Policy', 'same-site');
-  // res.header('Cache-Control', 'private');
   res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
   res.set('Vary', 'Accept-Encoding, cookie, authorization');
 
