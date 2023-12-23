@@ -6,16 +6,15 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+  "rewrites": [ {
+    "source": "/api/**",
+    "function": "app"
+  } ]
   },
   "functions": [
     {
       "source": "backend",
+      "runtime": "nodejs18",
       "codebase": "default",
       "ignore": [
         "node_modules",
