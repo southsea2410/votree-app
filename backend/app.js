@@ -22,9 +22,6 @@ app.use(function (req, res, next) {
     'Origin, X-Requested-With, Content-Type, Accept',
   );
   res.header('Cross-Origin-Resource-Policy', 'same-site');
-  res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
-  res.set('Vary', 'Accept-Encoding, cookie, authorization');
-
   next();
 });
 
