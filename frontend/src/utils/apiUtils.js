@@ -45,9 +45,9 @@ export const fetchUserInfo = async (id = '') => {
     }
 };
 
-export const fetchUserProducts = async () => {
+export const fetchUserProducts = async (id = '') => {
     try {
-        const data = await fetch('/api/v1/sellers/products', {
+        const data = await fetch('/api/v1/sellers/products/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ export const fetchUserProducts = async () => {
 
         return {};
     } catch (error) {
-        console.error('Error fetching user information:', error);
+        console.error('Error fetching user products:', error);
         return {};
     }
 };

@@ -38,7 +38,6 @@ const cartStyle = {
 const hoverStyle = {
     cursor: 'pointer'
 };
-let cart = ''
 function CartListBody({ cart }) {
     // Use this to check the format of cart object
     // console.log(cart);
@@ -77,7 +76,7 @@ export default function CartList() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const Navigate = useNavigate();
-
+    const [cart, setCart] = useState('')
     const purchaseNavigate = () => {
         Navigate('/orderproducts');
     };
@@ -139,7 +138,7 @@ export default function CartList() {
                     throw 'Not Found cart With this user';
                 }
                 if (cartArr[i].user == userId) {
-                    cart = (cartArr[i]);
+                    setCart(cartArr[i]);
                     console.log('Found cart with this user', cartArr[i]);
                     return;
                 }
@@ -164,7 +163,7 @@ export default function CartList() {
             method: 'DELETE'
         });
         if (res.ok) {
-            cart = ('');
+            setCart('');
             setOpen(false);
         }
     }
@@ -185,21 +184,21 @@ export default function CartList() {
             if (cart == '') await getCart(event);
 
             // useEffect(() => {
-                console.log('Add product to ', cart);
-                const productId = event.target.getAttribute('productId');
-                fetch(`/api/v1/marketplace/carts/${cart._id}`, {
-                    method: 'PATCH',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        productId: productId,
-                        count: 1
-                    })
-                }).then((res) => {
-                    if (res.ok) window.alert('Added to cart successfully!');
-                })
+                // console.log('Add product to ', cart);
+                // const productId = event.target.getAttribute('productId');
+                // fetch(`/api/v1/marketplace/carts/${cart._id}`, {
+                //     method: 'PATCH',
+                //     headers: {
+                //         Accept: 'application/json',
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify({
+                //         productId: productId,
+                //         count: 1
+                //     })
+                // }).then((res) => {
+                //     if (res.ok) window.alert('Added to cart successfully!');
+                // })
             // }, [cart]);
             
         }

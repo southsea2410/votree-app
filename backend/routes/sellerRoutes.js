@@ -25,12 +25,12 @@ router
 router
   .route('/products')
   .post(sellerController.addProduct)
-  .get(sellerController.getAllSellerProducts);
-
-router
-  .route('/products/:productId')
-  .delete(sellerController.deleteSellerProduct)
-  .patch(productController.updateProduct)
-  .get(productController.getProduct);
+  .get(sellerController.getAllSellerProducts);  // Here someId is null
+  
+  router
+  .route('/products/:someId') // productId or sellerId
+  .delete(sellerController.deleteSellerProduct) // productID
+  .patch(productController.updateProduct) // productID
+  .get(sellerController.getAllSellerProducts);  // Here someId is sellerId
 
 module.exports = router;

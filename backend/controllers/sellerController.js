@@ -30,7 +30,8 @@ exports.addProduct = async (req, res) => {
 // Get all products of a seller
 exports.getAllSellerProducts = async (req, res, next) => {
   try {
-    const sellerId = req.user.userId;
+    const userId = req.params.someId;
+    const sellerId = userId || req.user.userId; // UserID mà không gửi kèm request thì userID sẽ là Id profile hiện tại
 
     const products = await Product.find({ sellerId: sellerId }).populate({
       path: 'sellerInfo',
@@ -60,7 +61,7 @@ exports.deleteSellerProduct = async (req, res, next) => {
     const sellerId = req.user.userId;
     const seller = await Seller.findById(sellerId);
 
-    const product = await Product.findByIdAndDelete(req.params.productId);
+    const product = await Product.findByIdAndDelete(req.params.someId);
     if (!product) {
       return res.status(404).json({
         status: 'fail',

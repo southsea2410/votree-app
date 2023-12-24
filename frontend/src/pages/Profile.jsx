@@ -35,26 +35,23 @@ const salePostsContainer = {
 };
 
 function ProductsContainer({ ...props }) {
-    const [list, setList] = useState('');
-    console.log('Props at Products Container', props);
-    if (props.products === undefined) {
-        return <Box sx={salePostsContainer}>No products</Box>;
-    }
-    useEffect(() => {
-        const productsStructure = props.products.map((product) => {
-            return (
-                <ProductCard
-                    key={product._id}
-                    variant={props.isYourProfile && props.isLoggedIn ? 'edit' : 'product'}
-                    {...product}
-                />
-            );
-        });
 
-        // console.log(list);
+    const list = props.products.map((product) => {
 
-        setList(productsStructure);
-    }, [JSON.stringify(props.products)]);
+        // Ở chỗ này nếu lấy từ Redux thì product sẽ có dạng product = {id: {thông tin trong này}}
+        // Lấy từ fetch thì sẽ có dạng product = {thông tin trong này}
+        // If ở dưới tạm để xử lý 2 case trên
+        const temp = Object.values(product)
+        if (temp.length < 2) product = Object.values(product)[0];
+
+        return (
+            <ProductCard
+                key={product._id}
+                variant={props.isYourProfile && props.isLoggedIn ? 'edit' : 'product'}
+                {...product}
+            />
+        );
+    });
 
     return <Box sx={salePostsContainer}>{list}</Box>;
 }
@@ -80,53 +77,46 @@ export default function UserProfile() {
     const storeInfoFromRedux = useSelector(selectStoreInfo);
     const [isLoggedIn, setIsLoggedIn] = useState(useSelector(selectIsLoggedIn));
 
-    // const [productsData, setProductsData] = useState(useSelector(selectProducts));
-    // const [productsArray, setProductsArray] = useState(Object.values(useSelector(selectProducts)));
-    const [products, setProducts] = useState(Object.values(useSelector(selectProducts)));
-
-    // console.log(1);
-    // console.log(products);
-
+    
     const [summary, setSummary] = useState({});
-
+    
     const [profileInfo, setProfileInfo] = useState(profileInfoFromRedux);
     // console.log(products, profileInfo, 1);
     const [storeInfo, setStoreInfo] = useState(storeInfoFromRedux);
-
+    
     const { id } = useParams();
     const isYourProfile = id === undefined || id === '';
 
+    const [products, setProducts] = useState(null);
+    
     useEffect(() => {
         async function fetchProfileInfo() {
             if (isYourProfile) {
-                if (!isLoggedIn) {
-                    const { profile, store } = await fetchUserInfo();
-                    if (profile) {
-                        const { productsData } = await fetchUserProducts();
-                        // console.log(1, productsData);
-                        for (let i = 0; i < productsData.length; ++i) {
-                            dispatch(addProduct({ id: productsData[i]._id, product: productsData[i] }));
-                        }
-                        dispatch(updateProfileInfo(profile));
-                        dispatch(updateIsLoggedIn(true));
-                        setProducts(productsData);
 
-                        setIsLoggedIn(true);
-                        setSummary({ fullName: profile.fullName, role: profile.role.toLowerCase() });
-                        setProfileInfo(profile);
-                        if (store) {
-                            setStoreInfo(store);
-                            dispatch(updateStoreInfo(store));
-                            dispatch(updateIsSeller(true));
-                        }
-                    } else {
-                        dispatch(updateNavBarState(0));
-                        navigate('/');
+                // Fetch mỗi khi vào Profile
+                // Redux chỉ dùng cho Navbar và Edit Product Info Dialog mà thôi
+                const { profile, store } = await fetchUserInfo();
+                if (profile) {
+                    const { productsData } = await fetchUserProducts();
+                    console.log("This user Product fetched", productsData);
+                    for (let i = 0; i < productsData.length; ++i) {
+                        dispatch(addProduct({ id: productsData[i]._id, product: productsData[i] }));
+                    }
+                    dispatch(updateProfileInfo(profile));
+                    dispatch(updateIsLoggedIn(true));
+                    setProducts(productsData);
+
+                    setIsLoggedIn(true);
+                    setSummary({ fullName: profile.fullName, role: profile.role.toLowerCase() });
+                    setProfileInfo(profile);
+                    if (store) {
+                        setStoreInfo(store);
+                        dispatch(updateStoreInfo(store));
+                        dispatch(updateIsSeller(true));
                     }
                 } else {
-                    setSummary({ fullName: profileInfo.fullName, role: profileInfo.role.toLowerCase() });
-                    // setProducts(productsArray);
-                    console.log(222, products);
+                    dispatch(updateNavBarState(0));
+                    navigate('/');
                 }
             } else {
                 const data = await fetch('/api/v1/userInfo/' + id, {
@@ -162,6 +152,9 @@ export default function UserProfile() {
                 } else {
                     navigate('/profile');
                 }
+
+                // Nhân chưa xử lý lấy product từ 1 profile bất kỳ nha
+                await fetchUserProducts(id).then(({ productsData }) => setProducts(productsData));
             }
         }
         fetchProfileInfo();
@@ -241,7 +234,7 @@ export default function UserProfile() {
                                         );
                                     })}
                             </Box>
-                            <EditProfileDialog variant="filled">Edit Profile</EditProfileDialog>
+                            {isYourProfile && <EditProfileDialog variant="filled">Edit Profile</EditProfileDialog>}
                         </Box>
                         <Divider variant="slighter"></Divider>
                         <Box>
@@ -298,15 +291,14 @@ export default function UserProfile() {
                         />
                     }
                     <CardContent>
-                        {products.length !== 1 && profileInfo.fullName !== '' && (
+                        {products != null &&
                             <ProductsContainer
                                 id={id || profileInfo._id}
                                 isYourProfile={isYourProfile}
                                 isLoggedIn={isLoggedIn}
                                 products={products}
-                            />
-                        )}
-                        <CartList />
+                            />}
+                        {isYourProfile &&<CartList />}
                     </CardContent>
                 </Card>
                 <Card sx={{ width: '100%' }}>

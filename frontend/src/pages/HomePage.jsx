@@ -51,13 +51,9 @@ export default function HomePage() {
     useEffect(() => {
         async function fetchData() {
             // Fetch data
-            if (!isLoggedIn) {
                 const { profile, store } = await fetchUserInfo();
                 if (profile) {
-                    const { productsData } = await fetchUserProducts();
-                    for (let i = 0; i < productsData.length; ++i) {
-                        dispatch(addProduct({ id: productsData[i]._id, product: productsData[i] }));
-                    }
+                    // Fetch prodct mỗi khi mở profile nên bỏ ở đây
                     dispatch(updateProfileInfo(profile));
                     dispatch(updateIsLoggedIn(true));
                     setIsLoggedIn(true);
@@ -71,10 +67,9 @@ export default function HomePage() {
                     dispatch(updateNavBarState(0));
                     navigate('/');
                 }
-            }
         }
         fetchData();
-    }, [isLoggedIn]);
+    }, []);
 
     return (
         <Box
