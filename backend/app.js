@@ -9,7 +9,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 
 const app = express();
 
-var whitelist = ['http://localhost:5173' /** other domains if any */];
+var whitelist = ['https://votreecommunity.web.app', 'https://votreecommunity.firebaseapp.com', 'https://votree2.web.app', 'https://votree2.firebaseapp.com', 'https://votreecommunity.netlify.app' /** other domains if any */];
 var corsOptions = {
   credentials: true,
   origin: whitelist,

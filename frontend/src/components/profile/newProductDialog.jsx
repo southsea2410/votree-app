@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton, TextareaAutosize } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { colors } from '../../styles';
+import { addProduct } from '../../redux/features/product/productsSlice';
 
 // Redux
 const dialogContentTextStyle = {
@@ -48,7 +49,7 @@ export default function AddProductDialog({ variant = 'filled', ...props }) {
         });
 
         try {
-            const response = await fetch('/api/v1/marketplace/products', {
+            const response = await fetch('/api/v1/sellers/products', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -57,6 +58,7 @@ export default function AddProductDialog({ variant = 'filled', ...props }) {
             });
             console.log('Submitted');
             if (response.ok) {
+                addProduct({ id: jsonData.id, product: jsonData});
                 alert('Add product successful!');
                 window.location.reload();
             } else {

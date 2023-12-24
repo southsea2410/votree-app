@@ -73,7 +73,7 @@ export default function EditProfileDialog({ variant = 'filled', ...props }) {
                   'store Email',
                   'store Phone Number'
               ]
-            : ['full Name', 'date Of Birth', 'gender', 'phone Number', 'email', 'address', 'interest'];
+            : ['full Name *', 'date Of Birth', 'gender', 'phone Number', 'email', 'address', 'interest'];
 
     const [latestValues, setLatestValues] = React.useState(
         profileInfoFromRedux.role === 'seller'

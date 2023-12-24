@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { CartList, NavBar } from '../components';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Box, Button, Container, Divider, GlobalStyles } from '@mui/material';
 import { useEffect } from 'react';
 import { BackIcon, StarIcon } from '../assets/icons';
@@ -23,8 +23,8 @@ export default function Product() {
         });
 
         const data = await res.json();
-        const product = data.data.product;
-
+        const product = data.data.products;
+        console.log(product);
         setProductInfos(product);
     }
 
@@ -36,7 +36,7 @@ export default function Product() {
 
     useEffect(() => {
         fetchProductInfos();
-        console.log(productInfos);
+        // console.log(productInfos);
     }, [JSON.stringify(productInfos)]);
     if (productInfos == null) return null;
     return (
@@ -53,9 +53,9 @@ export default function Product() {
                     alignItems: 'center',
                     paddingBottom: '100px'
                 }}>
-                <Link to="/marketplace">
+                <div onClick={() => window.history.back()} style={{ cursor: 'pointer' }}>
                     <BackIcon fontSize="60px" className="back-icon" />
-                </Link>
+                </div>
                 <Container maxWidth="xs">
                     <img src={productInfos.image} style={{ maxWidth: '100%', borderRadius: '10px' }} />
                 </Container>

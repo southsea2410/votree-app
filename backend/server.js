@@ -18,7 +18,15 @@ mongoose
   })
   .then(() => console.log('DB connection successful!'));
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`App running on port ${port}`);
-});
+if (process.env.NODE_ENV === 'development') {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`App running on port ${port}`);
+  });
+}
+else{
+  const { setGlobalOptions } = require("firebase-functions/v2/options");
+  setGlobalOptions({maxInstances: 10});
+  const {onRequest} = require("firebase-functions/v2/https");
+  exports.app = onRequest(app);
+}

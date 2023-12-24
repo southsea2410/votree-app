@@ -33,7 +33,7 @@ sellerSchema.virtual('Product', {
 
 sellerSchema.virtual('userInfo', {
   ref: 'User',
-  localField: '_id', 
+  localField: '_id',
   foreignField: 'sellerDetails',
 });
 
