@@ -19,6 +19,7 @@ function App() {
         <Router>
             <ScrollToTop />
             <Routes>
+                <Route path='*' element={<HomePage />}/>
                 <Route path="/">
                     <Route index element={<HomePage />} />
                     <Route path="login" element={<Login />} />
@@ -36,12 +37,11 @@ function App() {
                         <Route path=":id" element={<UserProfile />} />
                     </Route>
                     <Route path="orderproducts">
-                        <Route index element={<AfterPurchase />} />
+                        <Route index element={<OrderProducts />} />
                         <Route path="success" element={<AfterPurchase variant="success" />} />
                         <Route path="fail" element={<AfterPurchase variant="fail" />} />
                     </Route>
                     <Route path="changepassword" element={<ChangePassword />} />
-                    {/* <Route path='*' element={<Navigate replace to='/'/>}/> */}
                 </Route>
             </Routes>
         </Router>
