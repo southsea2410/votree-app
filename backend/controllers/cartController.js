@@ -94,7 +94,6 @@ exports.updateCart = async (req, res) => {
     const cart = await cartModel.findById(req.params.cartId);
 
     // Check if new product dont belongs to current seller
-    // const product = await productModel.findById(productId);
     const seller = await sellerModel.findById(cart.seller);
     const sellerOfProduct = await productModel
       .findById(productId)

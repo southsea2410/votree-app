@@ -80,12 +80,12 @@ export default function Marketplace() {
 
             // Remove unnecessary data
             data = data.data?.products;
-            console.log('data', data)
+
             // Create list of products
             const products = data.map((product) => {
                 return <ProductCard key={product._id} {...product} />;
             });
-            console.log('productS', products)
+
             // Create list of hot
             const hotPick = data.map((product) => {
                 if (product.isHotPick == true) return <ProductCard key={product._id} {...product} />;

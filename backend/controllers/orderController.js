@@ -17,8 +17,9 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
     // success_url: `${req.protocol}://${req.get(
     //   'host',
     // )}/success?session_id={CHECKOUT_SESSION_ID}`,
-    success_url: `https://votreecommunity.web.app/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${req.protocol}://${req.get('host')}/cancel`,
+    // success_url: `https://votreecommunity.web.app/success?session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `http://localhost:5173/orderproducts/success`,
+    cancel_url: `http://localhost:5173/orderproducts/cancel`,
     customer_email: user.email,
     client_reference_id: req.params.cartId,
     line_items: cart.products.map((item) => {
